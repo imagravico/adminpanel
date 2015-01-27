@@ -6,13 +6,14 @@
  */
 
 return [
-	'username'  => $faker->firstName,
+	'username'  => $faker->userName,
 	'firstname' => $faker->firstName,
 	'lastname'  => $faker->lastName,
 	'email'     => $faker->email,
 	'password'  => '$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy',
 	'token'     => Yii::$app->getSecurity()->generateRandomString(),
 	'active'    => $faker->boolean,
+	'auth_key'  => Yii::$app->getSecurity()->generateRandomString(),
 ];
 
 ?>

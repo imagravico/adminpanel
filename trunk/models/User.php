@@ -7,14 +7,6 @@ use yii\db\ActiveRecord;
 
 class User extends ActiveRecord implements \yii\web\IdentityInterface
 {
-    /*public $id;
-    public $username;
-    public $email;
-    public $password;
-    public $authKey;
-    public $accessToken;*/
-    //public $password_repeat;
-
     public static function tableName() 
     { 
         return 'user'; 
@@ -57,7 +49,6 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
 
             ['password', 'string', 'length' => [6, 128]],
             //[['password'], 'required', 'on' => 'register'],
-
             //['password_repeat','safe'],
             //['password_repeat', 'compare', 'compareAttribute' => 'password']
         ];
@@ -92,15 +83,15 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      */
     public function getAuthKey()
     {
-        return $this->authKey;
+        return $this->auth_key;
     }
 
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function validateAuthKey($auth_key)
     {
-        return $this->authKey === $authKey;
+        return $this->auth_key === $auth_key;
     }
 
     /**

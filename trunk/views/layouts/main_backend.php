@@ -1,4 +1,3 @@
-
 <?php
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -11,425 +10,430 @@ use app\assets\AppAsset;
 /* @var $content string */
 mdm\admin\AdminAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<!-- BEGIN HEAD -->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if IE 9]>         <html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--> 
+<html class="no-js"> 
+<!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
 
-<!-- Mirrored from thevectorlab.net/metrolab/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 May 2014 07:53:10 GMT -->
-<head>
-   <meta charset="utf-8" />
-   <title>Metro Lab</title>
-   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-   <meta content="" name="description" />
-   <meta content="Mosaddek" name="author" />
-    <?= Html::csrfMetaTags() ?>
-   <?php
-		$this->registerCssFile("http://instagrambotlc.com/backend/assets/bootstrap/css/bootstrap.min.css");
-   ?>
-   <link href="/web/backend/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-   
-   <link href="/web/backend/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
-   <link href="/web/backend/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
-   <link href="/web/backend/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
-   <link href="/web/backend/css/style.css" rel="stylesheet" />
-   <link href="/web/backend/css/style-responsive.css" rel="stylesheet" />
-   <link href="/web/backend/css/style-default.css" rel="stylesheet" id="style_color" />
-   <link href="/web/backend/assets/fullcalendar/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
-   <link href="/web/backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.css" rel="stylesheet" type="text/css" media="screen"/>
+        <title>AdminPanel</title>
 
-   <link href="/web/backend/css/custom.css" rel="stylesheet" />
+        <meta name="description" content="">
+        <meta name="author" content="Berg Informatik">
+        <meta name="robots" content="noindex, nofollow">
+
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1.0">
+
+        <!-- Icons -->
+        <!-- The following icons can be replaced with your own, they are used by desktop and mobile browsers -->
+        <link rel="shortcut icon" href="img/favicon.png">
+        <link rel="apple-touch-icon" href="img/icon57.png" sizes="57x57">
+        <link rel="apple-touch-icon" href="img/icon72.png" sizes="72x72">
+        <link rel="apple-touch-icon" href="img/icon76.png" sizes="76x76">
+        <link rel="apple-touch-icon" href="img/icon114.png" sizes="114x114">
+        <link rel="apple-touch-icon" href="img/icon120.png" sizes="120x120">
+        <link rel="apple-touch-icon" href="img/icon144.png" sizes="144x144">
+        <link rel="apple-touch-icon" href="img/icon152.png" sizes="152x152">
+        <link rel="apple-touch-icon" href="img/icon180.png" sizes="180x180">
+        <!-- END Icons -->
+
+        <!-- Stylesheets -->
+        <!-- Bootstrap is included in its original form, unaltered -->
+        <link rel="stylesheet" href="/web/backend/css/bootstrap.min.css">
+
+        <!-- Related styles of various icon packs and plugins -->
+        <link rel="stylesheet" href="/web/backend/css/plugins.css">
+
+        <!-- The main stylesheet of this template. All Bootstrap overwrites are defined in here -->
+        <link rel="stylesheet" href="/web/backend/css/main.css">
+
+        <!-- Include a specific file here from css/themes/ folder to alter the default theme of the template -->
+        <link id="theme-link" rel="stylesheet" href="/web/backend/css/themes/night.css">
+        <!-- The themes stylesheet of this template (for using specific theme color in individual elements - must included last) -->
+        <link rel="stylesheet" href="/web/backend/css/themes.css">
+        <!-- END Stylesheets -->
+        <link rel="stylesheet" href="/web/backend/css/bootstrap-vertical-tabs-master/bootstrap.vertical-tabs.min.css">
+
+        <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
+        <script src="/web/backend/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+    </head>
+<body>
+<!-- Page Wrapper -->
+<!-- In the PHP version you can set the following options from inc/config file -->
+<!--
+    Available classes:
+
+    'page-loading'      enables page preloader
+-->
+<div id="page-wrapper">
+    <!-- Preloader -->
+    <!-- Preloader functionality (initialized in js/app.js) - pageLoading() -->
+    <!-- Used only if page preloader is enabled from inc/config (PHP version) or the class 'page-loading' is added in #page-wrapper element (HTML version) -->
+    <div class="preloader themed-background">
+        <h1 class="push-top-bottom text-light text-center"><strong>Pro</strong>UI</h1>
+        <div class="inner">
+            <h3 class="text-light visible-lt-ie9 visible-lt-ie10"><strong>Loading..</strong></h3>
+            <div class="preloader-spinner hidden-lt-ie9 hidden-lt-ie10"></div>
+        </div>
+    </div>
+    <!-- END Preloader -->
+
+    <!-- Page Container -->
+    <!-- In the PHP version you can set the following options from inc/config file -->
+    <!--
+        Available #page-container classes:
+
+        '' (None)                                       for a full main and alternative sidebar hidden by default (> 991px)
+
+        'sidebar-visible-lg'                            for a full main sidebar visible by default (> 991px)
+        'sidebar-partial'                               for a partial main sidebar which opens on mouse hover, hidden by default (> 991px)
+        'sidebar-partial sidebar-visible-lg'            for a partial main sidebar which opens on mouse hover, visible by default (> 991px)
+        'sidebar-mini sidebar-visible-lg-mini'          for a mini main sidebar with a flyout menu, enabled by default (> 991px + Best with static layout)
+        'sidebar-mini sidebar-visible-lg'               for a mini main sidebar with a flyout menu, disabled by default (> 991px + Best with static layout)
+
+        'sidebar-alt-visible-lg'                        for a full alternative sidebar visible by default (> 991px)
+        'sidebar-alt-partial'                           for a partial alternative sidebar which opens on mouse hover, hidden by default (> 991px)
+        'sidebar-alt-partial sidebar-alt-visible-lg'    for a partial alternative sidebar which opens on mouse hover, visible by default (> 991px)
+
+        'sidebar-partial sidebar-alt-partial'           for both sidebars partial which open on mouse hover, hidden by default (> 991px)
+
+        'sidebar-no-animations'                         add this as extra for disabling sidebar animations on large screens (> 991px) - Better performance with heavy pages!
+
+        'style-alt'                                     for an alternative main style (without it: the default style)
+        'footer-fixed'                                  for a fixed footer (without it: a static footer)
+
+        'disable-menu-autoscroll'                       add this to disable the main menu auto scrolling when opening a submenu
+
+        'header-fixed-top'                              has to be added only if the class 'navbar-fixed-top' was added on header.navbar
+        'header-fixed-bottom'                           has to be added only if the class 'navbar-fixed-bottom' was added on header.navbar
+    -->
+        <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
+
+        <!-- Main Sidebar -->
+        <div id="sidebar">
+            <!-- Wrapper for scrolling functionality -->
+            <div id="sidebar-scroll">
+                <!-- Sidebar Content -->
+                <div class="sidebar-content">
+                    <!-- Brand -->
+                    <a href="index.php" class="sidebar-brand">
+                        <i class="gi gi-flash"></i>
+                        <span class="sidebar-nav-mini-hide"><strong>Admin</strong>Panel</span>
+                    </a>
+                    <!-- END Brand -->
+
+                    <!-- User Info -->
+                    <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
+                        <div class="sidebar-user-avatar">
+                            <a href="page_ready_user_profile.php">
+                                <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                            </a>
+                        </div>
+                        <div class="sidebar-user-name">First Last Name</div>
+                        <div class="sidebar-user-links">
+                            <a href="#modal-user-settings" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>
+                            <a href="login.php" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                        </div>
+                    </div>
+                    <!-- END User Info -->
+
+                                        <!-- Sidebar Navigation -->
+                    <ul class="sidebar-nav">
+                        <li>
+                            <a href="index.php" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                        </li>
+                        <li>
+                            <a href="panel_client.php"><i class="gi gi-user sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">Clients</span></a>
+                        </li>
+                        <li>
+                            <a href="panel_website.php"><i class="gi gi-globe sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">Websites</span></a>
+                        </li>
+                        <li>
+                            <a href="panel_checklist.php"><i class="fa fa-list sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">Checklists</span></a>
+                        </li>
+                        <li>
+                            <a href="panel_message.php"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span></a>
+                        </li>
+                        <li>
+                            <a href="panel_setting.php"><i class="fa fa-cogs sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">Settings</span></a>
+                        </li>
+                        <li>
+                            <a href="/ProUI 3.0 by pixelcave/01 - ProUI Backend Template (PHP)"><i class="gi gi-leaf sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">ProUI Backend</span></a>
+                        </li>
+                        <li>
+                            <a href="/ProUI 3.0 by pixelcave/05 - ProUI Email Templates"><i class="gi gi-leaf sidebar-nav-icon"></i> 
+                            <span class="sidebar-nav-mini-hide">ProUI E-Mail</span></a>
+                        </li>
+                    </ul>
+                    <!-- END Sidebar Navigation -->
+                </div>
+                <!-- END Sidebar Content -->
+            </div>
+            <!-- END Wrapper for scrolling functionality -->
+        </div>
+        <!-- END Main Sidebar -->
+
+        <!-- Main Container -->
+        <div id="main-container">
+            <!-- Header -->
+            <!-- In the PHP version you can set the following options from inc/config file -->
+            <!--
+                Available header.navbar classes:
+
+                'navbar-default'            for the default light header
+                'navbar-inverse'            for an alternative dark header
+
+                'navbar-fixed-top'          for a top fixed header (fixed sidebars with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar())
+                    'header-fixed-top'      has to be added on #page-container only if the class 'navbar-fixed-top' was added
+
+                'navbar-fixed-bottom'       for a bottom fixed header (fixed sidebars with scroll will be auto initialized, functionality can be found in js/app.js - handleSidebar()))
+                    'header-fixed-bottom'   has to be added on #page-container only if the class 'navbar-fixed-bottom' was added
+            -->
+            <header class="navbar navbar-default">
+                                <!-- Left Header Navigation -->
+                <ul class="nav navbar-nav-custom">
+                    <!-- Main Sidebar Toggle Button -->
+                    <li>
+                        <a href="javascript:void(0)" onclick="App.sidebar('toggle-sidebar');">
+                            <i class="fa fa-bars fa-fw"></i>
+                        </a>
+                    </li>
+                    <!-- END Main Sidebar Toggle Button -->
+                </ul>
+                <!-- END Left Header Navigation -->
+
+                <!-- Search Form -->
+                <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search">
+                    <div class="form-group">
+                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
+                    </div>
+                </form>
+                <!-- END Search Form -->
+
+                <!-- Right Header Navigation -->
+                <ul class="nav navbar-nav-custom pull-right">
+
+                    <!-- User Dropdown -->
+                    <li class="dropdown">
+                        <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                            <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar"> <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
+                            <li>
+                                <a href="#modal-user-settings" data-toggle="modal"><i class="fa fa-cog fa-fw pull-right"></i>Settings</a>
+                                <a href="login.php"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- END User Dropdown -->
+                </ul>
+                <!-- END Right Header Navigation -->
+                            </header>
+            <!-- END Header -->
+
+<!-- Page content -->
+<div id="page-content">
+    <!-- Dashboard Header -->
+    <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
+    <div class="content-header content-header-media">
+        <div class="header-section">
+            <div class="row">
+                <!-- Main Title (hidden on small devices for the statistics to fit) -->
+                <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
+                    <h1>Welcome <strong>First Last Name</strong><br><small>27. January 2015</small></h1>
+                </div>
+                <!-- END Main Title -->
+            </div>
+        </div>
+        <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
+        <img src="/web/backend/img/placeholders/headers/dashboard_header.jpg" alt="header image" class="animation-pulseSlow">
+    </div>
+    <!-- END Dashboard Header -->
+
+    <!-- Mini Top Stats Row -->
+    <div class="row">
+        <div class="col-sm-6 col-lg-3">
+            <!-- Widget -->
+            <a href="panel_client.php" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
+                        <i class="fa fa-user"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        12 <strong>Clients</strong>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <!-- Widget -->
+            <a href="page_comp_gallery.php" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
+                        <i class="fa fa-globe"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        6 <strong>Websites</strong>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <!-- Widget -->
+            <a href="panel_settings_checklists.php" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
+                        <i class="fa fa-file-text"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        5 <strong>Checklists</strong>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+        
+        <div class="col-sm-6 col-lg-3">
+            <!-- Widget -->
+            <a href="panel_settings_messages.php" class="widget widget-hover-effect1">
+                <div class="widget-simple">
+                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
+                        <i class="gi gi-envelope"></i>
+                    </div>
+                    <h3 class="widget-content text-right animation-pullDown">
+                        9 <strong>Messages</strong>
+                    </h3>
+                </div>
+            </a>
+            <!-- END Widget -->
+        </div>
+    </div>
+    <!-- END Mini Top Stats Row -->
+
+</div>
+<!-- END Page Content -->
+
+            <!-- Footer -->
+            <footer class="clearfix">
+                <div class="pull-right">
+                    Made with <i class="fa fa-heart"></i></a>
+                </div>
+                <div class="pull-left">
+                    <span id="year-copy"></span> &copy; <a href="http://www.berginformatik.ch" target="_blank">Berg Informatik</a>
+                </div>
+            </footer>
+            <!-- END Footer -->
+        </div>
+        <!-- END Main Container -->
+    </div>
+    <!-- END Page Container -->
+</div>
+<!-- END Page Wrapper -->
+
+<!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
+<a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
+<div id="modal-user-settings" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center themed-background">
+                <h2 class="modal-title gi-white"><i class="fa fa-pencil"></i> Settings</h2>
+            </div>
+            <!-- END Modal Header -->
+
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form action="index.php" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
+                    <fieldset>
+                        <legend>Vital Info</legend>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label">Username</label>
+                            <div class="col-md-8">
+                                <p class="form-control-static">Admin</p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="user-settings-email">Email</label>
+                            <div class="col-md-8">
+                                <input type="email" id="user-settings-email" name="user-settings-email" class="form-control" value="admin@example.com">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="user-settings-notifications">Email Notifications</label>
+                            <div class="col-md-8">
+                                <label class="switch switch-primary">
+                                    <input type="checkbox" id="user-settings-notifications" name="user-settings-notifications" value="1" checked>
+                                    <span></span>
+                                </label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset>
+                        <legend>Password Update</legend>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="user-settings-password">New Password</label>
+                            <div class="col-md-8">
+                                <input type="password" id="user-settings-password" name="user-settings-password" class="form-control" placeholder="Please choose a complex one..">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-4 control-label" for="user-settings-repassword">Confirm New Password</label>
+                            <div class="col-md-8">
+                                <input type="password" id="user-settings-repassword" name="user-settings-repassword" class="form-control" placeholder="..and confirm it!">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="form-group form-actions">
+                        <div class="col-xs-12 text-right">
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+<!-- END User Settings -->
+
+<!-- Remember to include excanvas for IE8 chart support -->
+<!--[if IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
 
 
-</head>
-<!-- END HEAD -->
-<!-- BEGIN BODY -->
-<body class="fixed-top">
-   <!-- BEGIN HEADER -->
-   <div id="header" class="navbar navbar-inverse navbar-fixed-top">
-	   <!-- BEGIN TOP NAVIGATION BAR -->
-	   <div class="navbar-inner">
-		   <div class="container-fluid">
-			   <!--BEGIN SIDEBAR TOGGLE-->
-			   <div class="sidebar-toggle-box hidden-phone">
-				   <div class="icon-reorder tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-			   </div>
-			   <!--END SIDEBAR TOGGLE-->
-			   <!-- BEGIN LOGO -->
-			   <a class="brand" href="index-2.html">
-				   <img src="/web/backend/img/logo.png" alt="Metro Lab" />
-			   </a>
-			   <!-- END LOGO -->
-			   <!-- BEGIN RESPONSIVE MENU TOGGLER -->
-			   <a class="btn btn-navbar collapsed" id="main_menu_trigger" data-toggle="collapse" data-target=".nav-collapse">
-				   <span class="icon-bar"></span>
-				   <span class="icon-bar"></span>
-				   <span class="icon-bar"></span>
-				   <span class="arrow"></span>
-			   </a>
-			   <!-- END RESPONSIVE MENU TOGGLER -->
-			   <div id="top_menu" class="nav notify-row">
-				   <!-- BEGIN NOTIFICATION -->
-				   <ul class="nav top-menu">
-					   <!-- BEGIN SETTINGS -->
-					   <li class="dropdown">
-						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							   <i class="icon-tasks"></i>
-							   <span class="badge badge-important">6</span>
-						   </a>
-						   <ul class="dropdown-menu extended tasks-bar">
-							   <li>
-								   <p>You have 6 pending tasks</p>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <div class="task-info">
-										 <div class="desc">Dashboard v1.3</div>
-										 <div class="percent">44%</div>
-									   </div>
-									   <div class="progress progress-striped active no-margin-bot">
-										   <div class="bar" style="width: 44%;"></div>
-									   </div>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <div class="task-info">
-										   <div class="desc">Database Update</div>
-										   <div class="percent">65%</div>
-									   </div>
-									   <div class="progress progress-striped progress-success active no-margin-bot">
-										   <div class="bar" style="width: 65%;"></div>
-									   </div>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <div class="task-info">
-										   <div class="desc">Iphone Development</div>
-										   <div class="percent">87%</div>
-									   </div>
-									   <div class="progress progress-striped progress-info active no-margin-bot">
-										   <div class="bar" style="width: 87%;"></div>
-									   </div>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <div class="task-info">
-										   <div class="desc">Mobile App</div>
-										   <div class="percent">33%</div>
-									   </div>
-									   <div class="progress progress-striped progress-warning active no-margin-bot">
-										   <div class="bar" style="width: 33%;"></div>
-									   </div>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <div class="task-info">
-										   <div class="desc">Dashboard v1.3</div>
-										   <div class="percent">90%</div>
-									   </div>
-									   <div class="progress progress-striped progress-danger active no-margin-bot">
-										   <div class="bar" style="width: 90%;"></div>
-									   </div>
-								   </a>
-							   </li>
-							   <li class="external">
-								   <a href="#">See All Tasks</a>
-							   </li>
-						   </ul>
-					   </li>
-					   <!-- END SETTINGS -->
-					   <!-- BEGIN INBOX DROPDOWN -->
-					   <li class="dropdown" id="header_inbox_bar">
-						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							   <i class="icon-envelope-alt"></i>
-							   <span class="badge badge-important">5</span>
-						   </a>
-						   <ul class="dropdown-menu extended inbox">
-							   <li>
-								   <p>You have 5 new messages</p>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="photo"><img src="/web/backend/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jonathan Smith</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-										Hello, this is an example msg.
-									</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="photo"><img src="/web/backend/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jhon Doe</span>
-									<span class="time">10 mins</span>
-									</span>
-									<span class="message">
-									 Hi, Jhon Doe Bhai how are you ?
-									</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="photo"><img src="/web/backend/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jason Stathum</span>
-									<span class="time">3 hrs</span>
-									</span>
-									<span class="message">
-										This is awesome dashboard.
-									</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="photo"><img src="/web/backend/img/avatar-mini.png" alt="avatar" /></span>
-									<span class="subject">
-									<span class="from">Jondi Rose</span>
-									<span class="time">Just now</span>
-									</span>
-									<span class="message">
-										Hello, this is metrolab
-									</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">See all messages</a>
-							   </li>
-						   </ul>
-					   </li>
-					   <!-- END INBOX DROPDOWN -->
-					   <!-- BEGIN NOTIFICATION DROPDOWN -->
-					   <li class="dropdown" id="header_notification_bar">
-						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script>!window.jQuery && document.write(decodeURI('%3Cscript src="js/vendor/jquery-1.11.1.min.js"%3E%3C/script%3E'));</script>
 
-							   <i class="icon-bell-alt"></i>
-							   <span class="badge badge-warning">7</span>
-						   </a>
-						   <ul class="dropdown-menu extended notification">
-							   <li>
-								   <p>You have 7 new notifications</p>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="label label-important"><i class="icon-bolt"></i></span>
-									   Server #3 overloaded.
-									   <span class="small italic">34 mins</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="label label-warning"><i class="icon-bell"></i></span>
-									   Server #10 not respoding.
-									   <span class="small italic">1 Hours</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="label label-important"><i class="icon-bolt"></i></span>
-									   Database overloaded 24%.
-									   <span class="small italic">4 hrs</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="label label-success"><i class="icon-plus"></i></span>
-									   New user registered.
-									   <span class="small italic">Just now</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">
-									   <span class="label label-info"><i class="icon-bullhorn"></i></span>
-									   Application error.
-									   <span class="small italic">10 mins</span>
-								   </a>
-							   </li>
-							   <li>
-								   <a href="#">See all notifications</a>
-							   </li>
-						   </ul>
-					   </li>
-					   <!-- END NOTIFICATION DROPDOWN -->
+<!-- Bootstrap.js, Jquery plugins and Custom JS code -->
+<script src="/web/backend/js/vendor/bootstrap.min.js"></script>
+<script src="/web/backend/js/x-editable-master/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+<script src="/web/backend/js/shawnchin-jquery-cron-78118ba/cron/jquery-cron-min.js"></script>
+<script src="/web/backend/js/jquery_chained-master/jquery.chained.min.js"></script>
+<script src="/web/backend/js/plugins.js"></script>
+<script src="/web/backend/js/app.js"></script>
 
-				   </ul>
-			   </div>
-			   <!-- END  NOTIFICATION -->
-			   <div class="top-nav ">
-				   <ul class="nav pull-right top-menu" >
-					   <!-- BEGIN SUPPORT -->
-					   <li class="dropdown mtop5">
+<!-- Google Maps API + Gmaps Plugin, must be loaded in the page you would like to use maps (Remove 'http:' if you have SSL) -->
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+<script src="/web/backend/js/helpers/gmaps.min.js"></script>
 
-						   <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Chat">
-							   <i class="icon-comments-alt"></i>
-						   </a>
-					   </li>
-					   <li class="dropdown mtop5">
-						   <a class="dropdown-toggle element" data-placement="bottom" data-toggle="tooltip" href="#" data-original-title="Help">
-							   <i class="icon-headphones"></i>
-						   </a>
-					   </li>
-					   <!-- END SUPPORT -->
-					   <!-- BEGIN USER LOGIN DROPDOWN -->
-					   <li class="dropdown">
-						   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							   <img src="/web/backend/img/avatar1_small.jpg" alt="">
-							   <span class="username">
-									<?php 
-										if (!\Yii::$app->user->isGuest) {
-											echo \Yii::$app->user->identity->email;
-										}
-									?>
-							   </span>
-							   <b class="caret"></b>
-						   </a>
-						   <ul class="dropdown-menu extended logout">
-							   <li><a href="#"><i class="icon-user"></i> My Profile</a></li>
-							   <li><a href="#"><i class="icon-cog"></i> My Settings</a></li>
-							   <li><a href="/site/logout"  data-method="post"><i class="icon-key"></i> Log Out</a></li>
-						   </ul>
-					   </li>
-					   <!-- END USER LOGIN DROPDOWN -->
-				   </ul>
-				   <!-- END TOP NAVIGATION MENU -->
-			   </div>
-		   </div>
-	   </div>
-	   <!-- END TOP NAVIGATION BAR -->
-   </div>
-   <!-- END HEADER -->
-   <!-- BEGIN CONTAINER -->
-   <div id="container" class="row-fluid">
-	  <!-- BEGIN SIDEBAR -->
-	  <div class="sidebar-scroll">
-		<div id="sidebar" class="nav-collapse collapse">
+<!-- Load and execute javascript code used only in this page -->
+<script src="/web/backend/js/pages/index.js"></script>
+<script>$(function(){ Index.init(); });</script>
 
-		 <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
-		 <div class="navbar-inverse">
-			<form class="navbar-search visible-phone">
-			   <input type="text" class="search-query" placeholder="Search" />
-			</form>
-		 </div>
-		 <!-- END RESPONSIVE QUICK SEARCH FORM -->
-		 <!-- BEGIN SIDEBAR MENU -->
-		 <?php
-			//$this->renderPartial('sidebar');
-
-		 ?>
-			<ul class="sidebar-menu">
-				<li class="sub-menu active">
-					<a class="" href="index-2.html">
-						<i class="icon-dashboard"></i>
-						<span>Dashboard</span>
-					</a>
-				</li>
-				<li class="sub-menu open">
-					<a href="javascript:;" class="">
-						<i class="icon-user"></i>
-						<span>Authorization</span>
-						<span class="arrow"></span>
-					</a>
-					<ul class="sub" style="">
-						<li><a class="" href="/admin/assignment">Assignment</a></li>
-						<li><a class="" href="/admin/role">Roles</a></li>
-                        <li><a class="" href="/admin/permission">Permissions</a></li>
-                        <li><a class="" href="/admin/route">Routes</a></li>
-                        <li><a class="" href="/admin/rule">Rules</a></li>
-                        <li><a class="" href="/admin/menu">Menus</a></li>
-					</ul>
-				</li>
-			</ul>
-		 <!-- END SIDEBAR MENU -->
-	  </div>
-	  </div>
-	  <!-- END SIDEBAR -->
-	  <!-- BEGIN PAGE -->  
-	  <div id="main-content">
-		 <!-- BEGIN PAGE CONTAINER-->
-		 <div class="container-fluid">
-			<!-- BEGIN PAGE HEADER-->   
-			<div class="row-fluid">
-			   <div class="span12">
-				   <!-- BEGIN THEME CUSTOMIZER-->
-				   <div id="theme-change" class="hidden-phone">
-					   <i class="icon-cogs"></i>
-						<span class="settings">
-							<span class="text">Theme Color:</span>
-							<span class="colors">
-								<span class="color-default" data-style="default"></span>
-								<span class="color-green" data-style="green"></span>
-								<span class="color-gray" data-style="gray"></span>
-								<span class="color-purple" data-style="purple"></span>
-								<span class="color-red" data-style="red"></span>
-							</span>
-						</span>
-				   </div>
-				   <!-- END THEME CUSTOMIZER-->
-				  <!-- BEGIN PAGE TITLE & BREADCRUMB-->
-				   <h3 class="page-title">
-					 Dashboard
-				   </h3>
-				    <?= Breadcrumbs::widget([
-						'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-					]) ?>
-				   <!-- END PAGE TITLE & BREADCRUMB-->
-			   </div>
-			</div>
-			<!-- END PAGE HEADER-->
-			<!-- BEGIN PAGE CONTENT-->
-			<div class="main-container">
-				<?php echo $content; ?>
-			</div>
-			<!-- END PAGE CONTENT-->         
-		 </div>
-		 <!-- END PAGE CONTAINER-->
-	  </div>
-	  <!-- END PAGE -->  
-   </div>
-   <!-- END CONTAINER -->
-
-   <!-- BEGIN FOOTER -->
-   <div id="footer">
-	   2013 &copy; Metro Lab Dashboard.
-   </div>
-   <!-- END FOOTER -->
-
-   <!-- BEGIN JAVASCRIPTS -->
-   <!-- Load javascripts at bottom, this will reduce page load time -->
-   <script src="/web/backend/js/jquery-1.8.3.min.js"></script>
-   <script src="/web/backend/js/jquery.nicescroll.js" type="text/javascript"></script>
-   <script type="text/javascript" src="/web/backend/assets/jquery-slimscroll/jquery-ui-1.9.2.custom.min.js"></script>
-   <script type="text/javascript" src="/web/backend/assets/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-   <script src="/web/backend/assets/fullcalendar/fullcalendar/fullcalendar.min.js"></script>
-   <script src="/web/backend/assets/bootstrap/js/bootstrap.min.js"></script>
-
-   <!-- ie8 fixes -->
-   <!--[if lt IE 9]>
-   <script src="js/excanvas.js"></script>
-   <script src="js/respond.js"></script>
-   <![endif]-->
-
-   <script src="/web/backend/assets/jquery-easy-pie-chart/jquery.easy-pie-chart.js" type="text/javascript"></script>
-   <script src="/web/backend/js/jquery.sparkline.js" type="text/javascript"></script>
-   <script src="/web/backend/assets/chart-master/Chart.js"></script>
-   <script src="/web/backend/js/jquery.scrollTo.min.js"></script>
-   <!--common script for all pages-->
-   <script src="/web/backend/js/common-scripts.js"></script>
-
-   <!-- END JAVASCRIPTS -->   
-   <?php $this->endBody() ?>
-</body>
-<!-- END BODY -->
-
-<!-- Mirrored from thevectorlab.net/metrolab/ by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 30 May 2014 07:53:53 GMT -->
+    </body>
 </html>
-<?php $this->endPage() ?>   
