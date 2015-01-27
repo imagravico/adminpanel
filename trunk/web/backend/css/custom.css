@@ -1,0 +1,20 @@
+.help-block{
+	color:red;
+}
+.sideelementopen{
+	display:block;
+}
+
+.grid-view .glyphicon{
+	font-family: FontAwesome;
+}
+
+.grid-view .glyphicon.glyphicon-eye-open:before{
+	content: "\f06e";
+}
+.grid-view .glyphicon.glyphicon-trash:before{
+	content: "\f00d";
+}
+.grid-view .glyphicon.glyphicon-pencil:before{
+	content: "\f044";
+}
