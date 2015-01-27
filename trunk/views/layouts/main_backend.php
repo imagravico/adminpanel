@@ -140,37 +140,64 @@ mdm\admin\AdminAsset::register($this);
                     </div>
                     <!-- END User Info -->
 
-                                        <!-- Sidebar Navigation -->
+                    <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
                         <li>
-                            <a href="index.php" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Dashboard</span></a>
+                            <a href="index.php" class=" active">
+                                <i class="gi gi-stopwatch sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Dashboard</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="panel_client.php"><i class="gi gi-user sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">Clients</span></a>
+                            <a href="#" data-target="#userMenu" data-toggle="collapse">
+                                <i class="gi gi-user sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Authorization</span>
+                            </a>
+                            <ul style="list-style: none;" class="collapse in" id="userMenu">
+                                <li class="active">
+                                    <a href="/admin/assignment">
+                                        <i class="icon-home"></i>Assignments
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="/admin/role">
+                                        <i class="icon-envelope-alt"></i>Roles 
+                                    </a>
+                                </li>
+                                <li><a href="/admin/permission"><i class="icon-cogs"></i>Permissions</a></li>
+                                <li><a href="/admin/route"><i class="icon-comment"></i>Routes</a></li>
+                                <li><a href="/admin/rule"><i class="icon-user"></i>Rule</a></li>
+                              </ul>
                         </li>
                         <li>
-                            <a href="panel_website.php"><i class="gi gi-globe sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">Websites</span></a>
+                            <a href="panel_client.php">
+                                <i class="gi gi-user sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Clients</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="panel_checklist.php"><i class="fa fa-list sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">Checklists</span></a>
+                            <a href="panel_website.php">
+                                <i class="gi gi-globe sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Websites</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="panel_message.php"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span></a>
+                            <a href="panel_checklist.php">
+                                <i class="fa fa-list sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Checklists</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="panel_setting.php"><i class="fa fa-cogs sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">Settings</span></a>
+                            <a href="panel_message.php">
+                                <i class="fa fa-envelope sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Messages</span>
+                            </a>
                         </li>
                         <li>
-                            <a href="/ProUI 3.0 by pixelcave/01 - ProUI Backend Template (PHP)"><i class="gi gi-leaf sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">ProUI Backend</span></a>
-                        </li>
-                        <li>
-                            <a href="/ProUI 3.0 by pixelcave/05 - ProUI Email Templates"><i class="gi gi-leaf sidebar-nav-icon"></i> 
-                            <span class="sidebar-nav-mini-hide">ProUI E-Mail</span></a>
+                            <a href="panel_setting.php">
+                                <i class="fa fa-cogs sidebar-nav-icon"></i> 
+                                <span class="sidebar-nav-mini-hide">Settings</span>
+                            </a>
                         </li>
                     </ul>
                     <!-- END Sidebar Navigation -->
@@ -239,91 +266,11 @@ mdm\admin\AdminAsset::register($this);
                             </header>
             <!-- END Header -->
 
-<!-- Page content -->
-<div id="page-content">
-    <!-- Dashboard Header -->
-    <!-- For an image header add the class 'content-header-media' and an image as in the following example -->
-    <div class="content-header content-header-media">
-        <div class="header-section">
-            <div class="row">
-                <!-- Main Title (hidden on small devices for the statistics to fit) -->
-                <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
-                    <h1>Welcome <strong>First Last Name</strong><br><small>27. January 2015</small></h1>
-                </div>
-                <!-- END Main Title -->
+            <!-- Page content -->
+            <div id="page-content">
+                <?= $content; ?>
             </div>
-        </div>
-        <!-- For best results use an image with a resolution of 2560x248 pixels (You can also use a blurred image with ratio 10:1 - eg: 1000x100 pixels - it will adjust and look great!) -->
-        <img src="/web/backend/img/placeholders/headers/dashboard_header.jpg" alt="header image" class="animation-pulseSlow">
-    </div>
-    <!-- END Dashboard Header -->
-
-    <!-- Mini Top Stats Row -->
-    <div class="row">
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="panel_client.php" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
-                        <i class="fa fa-user"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        12 <strong>Clients</strong>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="page_comp_gallery.php" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
-                        <i class="fa fa-globe"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        6 <strong>Websites</strong>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="panel_settings_checklists.php" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
-                        <i class="fa fa-file-text"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        5 <strong>Checklists</strong>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-        
-        <div class="col-sm-6 col-lg-3">
-            <!-- Widget -->
-            <a href="panel_settings_messages.php" class="widget widget-hover-effect1">
-                <div class="widget-simple">
-                    <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
-                        <i class="gi gi-envelope"></i>
-                    </div>
-                    <h3 class="widget-content text-right animation-pullDown">
-                        9 <strong>Messages</strong>
-                    </h3>
-                </div>
-            </a>
-            <!-- END Widget -->
-        </div>
-    </div>
-    <!-- END Mini Top Stats Row -->
-
-</div>
-<!-- END Page Content -->
+            <!-- END Page Content -->
 
             <!-- Footer -->
             <footer class="clearfix">
@@ -435,5 +382,9 @@ mdm\admin\AdminAsset::register($this);
 <script src="/web/backend/js/pages/index.js"></script>
 <script>$(function(){ Index.init(); });</script>
 
-    </body>
+ <!-- END JAVASCRIPTS -->   
+   <?php $this->endBody() ?>
+</body>
+<!-- END BODY -->
 </html>
+<?php $this->endPage() ?>   
