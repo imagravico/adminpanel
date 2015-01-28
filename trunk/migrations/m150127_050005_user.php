@@ -7,7 +7,7 @@ class m150127_050005_user extends Migration
 {
     public function up()
     {
-    	$this->createTable('user', [
+    	$this->createTable('users', [
 			'id'         => 'pk',
 			'username'   => Schema::TYPE_STRING . ' NOT NULL',
 			'email'      => Schema::TYPE_STRING . ' NOT NULL',
@@ -23,6 +23,6 @@ class m150127_050005_user extends Migration
 
     public function down()
     {
-        $this->dropTable('user');
+        $this->dropTable('users');
     }
 }
