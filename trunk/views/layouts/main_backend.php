@@ -59,6 +59,7 @@ mdm\admin\AdminAsset::register($this);
         <?= Html::csrfMetaTags() ?>
         <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
         <script src="/web/backend/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
+        <?php $this->head() ?>
     </head>
 <body>
 <!-- Page Wrapper -->
