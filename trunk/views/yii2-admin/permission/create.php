@@ -10,8 +10,11 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Permissions')
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-create">
-
-	<h1><?= Html::encode($this->title) ?></h1>
+	<div class="content-header">
+        <div class="header-section">
+            <h1><?= Html::encode($this->title) ?></h1>
+        </div>
+    </div>
 
 	<?php echo $this->render('_form', [
         'model' => $model,

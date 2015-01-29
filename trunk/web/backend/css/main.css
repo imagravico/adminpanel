@@ -90,6 +90,7 @@ body {
     color: #394263;
     font-size: 13px;
     background-color: #222222;
+    padding: 0px!important;
 }
 
 #page-container,
@@ -166,6 +167,9 @@ body {
 }
 
 /* Sidebar + Fixed Header */
+.navbar {
+    border-radius: 0!important;
+}
 .header-fixed-top #sidebar,
 .header-fixed-bottom #sidebar {
     position: fixed;

@@ -244,7 +244,7 @@ mdm\admin\AdminAsset::register($this);
             <!-- END Header -->
 
             <!-- Page content -->
-            <div id="page-content">
+            <div id="page-content" style="float:left;width:100%">
                 <?= $content; ?>
             </div>
             <!-- END Page Content -->

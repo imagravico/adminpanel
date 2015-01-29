@@ -40,11 +40,13 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => Yii::t('rbac-admin', 'Description'),
             ],
             ['class' => 'yii\grid\ActionColumn',],
+
+        ],
+        'panel' => [
+            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Create', ['create'], ['class' => 'btn btn-success']),
+            'footer' => false
         ],
     ]);
     Pjax::end();
     ?>
-    <div class="panel-footer">
-        <?= Html::a(Yii::t('rbac-admin', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
-    </div>
 </div>

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\grid\GridView;
+use kartik\grid\GridView;
 use yii\widgets\Pjax;
 
 /* @var $this yii\web\View */
@@ -12,8 +12,11 @@ $this->title = Yii::t('rbac-admin', 'Permission');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="role-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="content-header">
+        <div class="header-section">
+            <h1><?= Html::encode($this->title) ?></h1>
+        </div>
+    </div>
 
     <p>
         <?= Html::a(Yii::t('rbac-admin', 'Create Permission'), ['create'], ['class' => 'btn btn-success']) ?>
@@ -26,6 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
     echo GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'export' => false,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [

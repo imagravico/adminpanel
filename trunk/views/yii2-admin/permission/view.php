@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\DetailView;
+use kartik\detail\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model mdm\admin\models\AuthItem */
@@ -11,8 +11,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Permissions', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="auth-item-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+    <div class="content-header">
+        <div class="header-section">
+            <h1><?= Html::encode($this->title) ?></h1>
+        </div>
+    </div>
 
     <p>
         <?= Html::a(Yii::t('rbac-admin', 'Update'), ['update', 'id' => $model->name], ['class' => 'btn btn-primary']) ?>
@@ -37,15 +40,21 @@ $this->params['breadcrumbs'][] = $this->title;
     ]);
     ?>
     <div class="col-lg-5">
-        <?= Yii::t('rbac-admin', 'Avaliable') ?>:
-        <?php
-        echo Html::textInput('search_av', '', ['class' => 'role-search', 'data-target' => 'avaliable']) . '<br>';
-        echo Html::listBox('roles', '', $avaliable, [
-            'id' => 'avaliable',
-            'multiple' => true,
-            'size' => 20,
-            'style' => 'width:100%']);
-        ?>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="example-text-input"><?= Yii::t('rbac-admin', 'Avaliable') ?>
+            </label>
+            <div class="col-md-9">
+                <?php
+                    echo Html::textInput('search_av', '', ['class' => 'role-search form-control', 'data-target' => 'avaliable']) . '<br>';
+                    echo Html::listBox('roles', '', $avaliable, [
+                        'id' => 'avaliable',
+                        'multiple' => true,
+                        'size' => 20,
+                        'style' => 'width:100%']);
+                ?>
+            </div>
+        </div>
+        
     </div>
     <div class="col-lg-1">
         &nbsp;<br><br>
@@ -55,15 +64,20 @@ $this->params['breadcrumbs'][] = $this->title;
         ?>
     </div>
     <div class="col-lg-5">
-        <?= Yii::t('rbac-admin', 'Assigned') ?>:
-        <?php
-        echo Html::textInput('search_asgn', '', ['class' => 'role-search','data-target' => 'assigned']) . '<br>';
-        echo Html::listBox('roles', '', $assigned, [
-            'id' => 'assigned',
-            'multiple' => true,
-            'size' => 20,
-            'style' => 'width:100%']);
-        ?>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="example-text-input"><?= Yii::t('rbac-admin', 'Avaliable') ?>
+            </label>
+            <div class="col-md-9">
+                <?php
+                    echo Html::textInput('search_asgn', '', ['class' => 'role-search form-control','data-target' => 'assigned']) . '<br>';
+                    echo Html::listBox('roles', '', $assigned, [
+                        'id' => 'assigned',
+                        'multiple' => true,
+                        'size' => 20,
+                        'style' => 'width:100%']);
+                ?>
+            </div>
+        </div>
     </div>
 </div>
 <?php

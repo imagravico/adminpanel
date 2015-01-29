@@ -12,8 +12,11 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id
 $this->params['breadcrumbs'][] = Yii::t('rbac-admin', 'Update');
 ?>
 <div class="auth-item-update">
-
-	<h1><?= Html::encode($this->title) ?></h1>
+	<div class="content-header">
+        <div class="header-section">
+			<h1><?= Html::encode($this->title) ?></h1>
+        </div>
+    </div>
 	<?php
     echo $this->render('_form', [
         'model' => $model,

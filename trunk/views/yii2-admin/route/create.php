@@ -13,7 +13,11 @@ $this->title = Yii::t('rbac-admin', 'Create Route');
 $this->params['breadcrumbs'][] = ['label' => Yii::t('rbac-admin', 'Routes'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<h1><?= Yii::t('rbac-admin', 'Create Route') ?></h1>
+<div class="content-header">
+    <div class="header-section">
+		<h1><?= Yii::t('rbac-admin', 'Create Route') ?></h1>
+    </div>
+</div>
 
 <div class="create">
 
