@@ -240,7 +240,10 @@ body {
 .footer-fixed.header-fixed-bottom #page-content + footer {
     bottom: 50px;
 }
-
+#main-container footer {
+    float: left!important;
+    width: 100%!important;
+}
 /*
 =================================================================
 (#m02hds) HEADER

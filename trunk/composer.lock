@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cb95018499d3b17f41620b55bc3a92b4",
+    "hash": "a98784183d580962673fb8eee5cd2dc6",
     "packages": [
         {
             "name": "bower-asset/bootstrap",
@@ -523,56 +523,6 @@
                 "yii2"
             ],
             "time": "2015-01-25 16:21:06"
-        },
-        {
-            "name": "mdmsoft/yii2-admin",
-            "version": "1.0.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/mdmsoft/yii2-admin.git",
-                "reference": "2908e58089c629e1e8e9856e54fc8d9afca5bdd5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/mdmsoft/yii2-admin/zipball/2908e58089c629e1e8e9856e54fc8d9afca5bdd5",
-                "reference": "2908e58089c629e1e8e9856e54fc8d9afca5bdd5",
-                "shasum": ""
-            },
-            "require": {
-                "yiisoft/yii2": "~2.0",
-                "yiisoft/yii2-jui": "~2.0"
-            },
-            "suggest": {
-                "yiisoft/yii2-bootstrap": "Used when using layout 'left-menu', 'right-menu' or 'top-menu'"
-            },
-            "type": "yii2-extension",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "mdm\\admin\\": ""
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Misbahul Munir",
-                    "email": "misbahuldmunir@gmail.com"
-                }
-            ],
-            "description": "Auth manager for Yii2 ",
-            "keywords": [
-                "admin",
-                "auth",
-                "yii"
-            ],
-            "time": "2014-12-08 08:03:11"
         },
         {
             "name": "swiftmailer/swiftmailer",

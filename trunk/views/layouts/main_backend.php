@@ -8,7 +8,7 @@ use app\assets\AppAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
-mdm\admin\AdminAsset::register($this);
+app\modules\admin\AdminAsset::register($this);
 ?>
 <!DOCTYPE html>
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
@@ -171,7 +171,7 @@ mdm\admin\AdminAsset::register($this);
                               </ul>
                         </li>
                         <li>
-                            <a href="admin/user">
+                            <a href="/admin/user">
                                 <i class="gi gi-user sidebar-nav-icon"></i> 
                                 <span class="sidebar-nav-mini-hide">Users</span>
                             </a>
