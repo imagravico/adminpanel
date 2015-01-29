@@ -56,7 +56,7 @@ mdm\admin\AdminAsset::register($this);
         <link rel="stylesheet" href="/web/backend/css/themes.css">
         <!-- END Stylesheets -->
         <link rel="stylesheet" href="/web/backend/css/bootstrap-vertical-tabs-master/bootstrap.vertical-tabs.min.css">
-
+        <?= Html::csrfMetaTags() ?>
         <!-- Modernizr (browser feature detection library) & Respond.js (Enable responsive CSS code on browsers that don't support it, eg IE8) -->
         <script src="/web/backend/js/vendor/modernizr-2.7.1-respond-1.4.2.min.js"></script>
     </head>
@@ -170,33 +170,9 @@ mdm\admin\AdminAsset::register($this);
                               </ul>
                         </li>
                         <li>
-                            <a href="panel_client.php">
+                            <a href="admin/user">
                                 <i class="gi gi-user sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Clients</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="panel_website.php">
-                                <i class="gi gi-globe sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Websites</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="panel_checklist.php">
-                                <i class="fa fa-list sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Checklists</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="panel_message.php">
-                                <i class="fa fa-envelope sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Messages</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="panel_setting.php">
-                                <i class="fa fa-cogs sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Settings</span>
+                                <span class="sidebar-nav-mini-hide">Users</span>
                             </a>
                         </li>
                     </ul>
