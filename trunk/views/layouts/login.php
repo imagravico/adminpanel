@@ -65,8 +65,6 @@
     <!-- Login Block -->
     <div class="block push-bit">
         <?= $content; ?>
-
-        
     </div>
     <!-- END Login Block -->
 </div>

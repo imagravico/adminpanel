@@ -9,42 +9,6 @@ use yii\bootstrap\ActiveForm;
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>Please fill out the following fields to login:</p>
-
-    <?php $form = ActiveForm::begin([
-        'id' => 'login-form',
-        'options' => ['class' => 'form-horizontal'],
-        'fieldConfig' => [
-            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 control-label'],
-        ],
-    ]); ?>
-
-    <?= $form->field($model, 'username') ?>
-
-    <?= $form->field($model, 'password')->passwordInput() ?>
-
-    <?= $form->field($model, 'rememberMe', [
-        'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-    ])->checkbox() ?>
-
-    <div class="form-group">
-        <div class="col-lg-offset-1 col-lg-11">
-            <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-        </div>
-    </div>
-
-
-    <div class="col-lg-offset-1" style="color:#999;">
-        You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
-        To modify the username/password, please check out the code <code>app\models\User::$users</code>.
-    </div>
-</div>
-
-
 <!-- Login Form -->
 <?php 
     $form = ActiveForm::begin([
@@ -52,30 +16,31 @@ $this->params['breadcrumbs'][] = $this->title;
         'options' => ['class' => 'form-horizontal form-bordered form-control-borderless'],
     ]); 
 ?>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
-                    <input type="text" id="login-email" name="login-email" class="form-control input-lg" placeholder="Email">
-                </div>
+        <div class="col-xs-12">
+            <div class="input-group">
+                <span class='input-group-addon'><i class='fa fa-user'></i></span>
+                <?= $form->field($model, 'username', [
+                      'template' => "{input}\n{hint}\n{error}",
+                    ])
+                    ->textInput((array('placeholder' => 'Username', 'class' => 'form-control col-xs-8'))); ?>
             </div>
         </div>
-        <div class="form-group">
-            <div class="col-xs-12">
-                <div class="input-group">
-                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
-                    <input type="password" id="login-password" name="login-password" class="form-control input-lg" placeholder="Password">
-                </div>
+        <div class="col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                <?= $form->field($model, 'password', [
+                      'template' => "{input}\n{hint}\n{error}"
+                    ])->textInput((array('placeholder' => 'Password', 'class' => 'form-control col-xs-8')))->passwordInput(); ?>
             </div>
         </div>
-        <div class="form-group form-actions">
-            <div class="col-xs-4">
+        <div class="form-group form-actions row">
+            <div class="col-xs-4" style="margin-top:10px;">
                 <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
-                    <input type="checkbox" id="login-remember-me" name="login-remember-me" checked>
+                    <input type="checkbox" id="login-remember-me" name="LoginForm[rememberMe]" value="0">
                     <span></span>
                 </label>
             </div>
-            <div class="col-xs-8 text-right">
+            <div class="col-xs-8 text-right" style="margin-top:10px;">
                 <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
             </div>
         </div>
