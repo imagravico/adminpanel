@@ -37,10 +37,76 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    <?php ActiveForm::end(); ?>
 
     <div class="col-lg-offset-1" style="color:#999;">
         You may login with <strong>admin/admin</strong> or <strong>demo/demo</strong>.<br>
         To modify the username/password, please check out the code <code>app\models\User::$users</code>.
     </div>
 </div>
+
+
+<!-- Login Form -->
+<?php 
+    $form = ActiveForm::begin([
+        'id' => 'login-form',
+        'options' => ['class' => 'form-horizontal form-bordered form-control-borderless'],
+    ]); 
+?>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                    <input type="text" id="login-email" name="login-email" class="form-control input-lg" placeholder="Email">
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="gi gi-asterisk"></i></span>
+                    <input type="password" id="login-password" name="login-password" class="form-control input-lg" placeholder="Password">
+                </div>
+            </div>
+        </div>
+        <div class="form-group form-actions">
+            <div class="col-xs-4">
+                <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
+                    <input type="checkbox" id="login-remember-me" name="login-remember-me" checked>
+                    <span></span>
+                </label>
+            </div>
+            <div class="col-xs-8 text-right">
+                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Login to Dashboard</button>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-12 text-center">
+                <a href="javascript:void(0)" id="link-reminder-login"><small>Forgot password?</small></a>
+            </div>
+        </div>
+<?php ActiveForm::end(); ?>
+<!-- END Login Form -->
+
+<!-- Reminder Form -->
+<form action="login.php#reminder" method="post" id="form-reminder" class="form-horizontal form-bordered form-control-borderless display-none">
+    <div class="form-group">
+        <div class="col-xs-12">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="gi gi-envelope"></i></span>
+                <input type="text" id="reminder-email" name="reminder-email" class="form-control input-lg" placeholder="Email">
+            </div>
+        </div>
+    </div>
+    <div class="form-group form-actions">
+        <div class="col-xs-12 text-right">
+            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-angle-right"></i> Reset Password</button>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-xs-12 text-center">
+            <small>Did you remember your password?</small> <a href="javascript:void(0)" id="link-reminder"><small>Login</small></a>
+        </div>
+    </div>
+</form>
+<!-- END Reminder Form -->
+
