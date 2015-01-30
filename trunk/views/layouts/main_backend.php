@@ -5,7 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use yii\bootstrap\BootstrapAsset;
 use app\assets\AppAsset;
-
+use app\models\User;
 /* @var $this \yii\web\View */
 /* @var $content string */
 app\modules\admin\AdminAsset::register($this);
@@ -112,7 +112,6 @@ app\modules\admin\AdminAsset::register($this);
         'header-fixed-bottom'                           has to be added only if the class 'navbar-fixed-bottom' was added on header.navbar
     -->
         <div id="page-container" class="sidebar-partial sidebar-visible-lg sidebar-no-animations">
-
         <!-- Main Sidebar -->
         <div id="sidebar">
             <!-- Wrapper for scrolling functionality -->
@@ -133,7 +132,7 @@ app\modules\admin\AdminAsset::register($this);
                                 <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar">
                             </a>
                         </div>
-                        <div class="sidebar-user-name">First Last Name</div>
+                        <div class="sidebar-user-name"><?=  User::getRealName();?></div>
                         <div class="sidebar-user-links">
                             <a href="#modal-user-settings" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>
                             <a href="login.php" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
@@ -143,35 +142,36 @@ app\modules\admin\AdminAsset::register($this);
 
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
-                        <li>
-                            <a href="index.php" class=" active">
-                                <i class="gi gi-stopwatch sidebar-nav-icon"></i> 
-                                <span class="sidebar-nav-mini-hide">Dashboard</span>
-                            </a>
-                        </li>
+                        <?php $current_controller = \Yii::$app->controller->id;?>
                         <li>
                             <a href="#" data-target="#userMenu" data-toggle="collapse">
-                                <i class="gi gi-user sidebar-nav-icon"></i> 
+                                <i class="fa fa-shield sidebar-nav-icon"></i> 
                                 <span class="sidebar-nav-mini-hide">Authorization</span>
                             </a>
-                            <ul style="list-style: none;" class="collapse in" id="userMenu">
-                                <li class="active">
+                            <ul style="list-style: none;" class="collapse <?php if ($current_controller == 'assignment' || $current_controller == 'permission' || $current_controller == 'route' || $current_controller == 'role' || $current_controller == 'rule') echo 'in'; ?>" id="userMenu">
+                                <li class="<?php if ($current_controller == 'assignment') echo 'active'; ?>">
                                     <a href="/admin/assignment">
                                         <i class="icon-home"></i>Assignments
                                     </a>
                                 </li>
-                                <li>
+                                <li class="<?php if ($current_controller == 'role') echo 'active'; ?>">
                                     <a href="/admin/role">
                                         <i class="icon-envelope-alt"></i>Roles 
                                     </a>
                                 </li>
-                                <li><a href="/admin/permission"><i class="icon-cogs"></i>Permissions</a></li>
-                                <li><a href="/admin/route"><i class="icon-comment"></i>Routes</a></li>
-                                <li><a href="/admin/rule"><i class="icon-user"></i>Rule</a></li>
+                                <li class="<?php if ($current_controller == 'permission') echo 'active'; ?>">
+                                    <a href="/admin/permission"><i class="icon-cogs"></i>Permissions</a>
+                                </li>
+                                <li class="<?php if ($current_controller == 'route') echo 'active'; ?>">
+                                    <a href="/admin/route"><i class="icon-comment"></i>Routes</a>
+                                </li>
+                                <li class="<?php if ($current_controller == 'rule') echo 'active'; ?>">
+                                    <a href="/admin/rule"><i class="icon-user"></i>Rule</a>
+                                </li>
                               </ul>
                         </li>
-                        <li>
-                            <a href="/admin/user">
+                        <li class="<?php if ($current_controller == 'users') echo 'active'; ?>">
+                            <a href="/admin/users">
                                 <i class="gi gi-user sidebar-nav-icon"></i> 
                                 <span class="sidebar-nav-mini-hide">Users</span>
                             </a>
@@ -224,7 +224,6 @@ app\modules\admin\AdminAsset::register($this);
 
                 <!-- Right Header Navigation -->
                 <ul class="nav navbar-nav-custom pull-right">
-
                     <!-- User Dropdown -->
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
@@ -232,7 +231,6 @@ app\modules\admin\AdminAsset::register($this);
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li>
-                                <a href="#modal-user-settings" data-toggle="modal"><i class="fa fa-cog fa-fw pull-right"></i>Settings</a>
                                 <a href="login.php"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
                             </li>
                         </ul>
@@ -240,7 +238,7 @@ app\modules\admin\AdminAsset::register($this);
                     <!-- END User Dropdown -->
                 </ul>
                 <!-- END Right Header Navigation -->
-                            </header>
+            </header>
             <!-- END Header -->
 
             <!-- Page content -->

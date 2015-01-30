@@ -19,8 +19,6 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
     </div>
 
-    
-
     <?php
     Pjax::begin([
         'enablePushState'=>false,

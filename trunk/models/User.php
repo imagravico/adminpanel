@@ -3,13 +3,43 @@
 namespace app\models;
 
 use Yii;
-use yii\db\ActiveRecord;
 
-class User extends ActiveRecord implements \yii\web\IdentityInterface
+/**
+ * This is the model class for table "users".
+ *
+ * @property integer $id
+ * @property string $username
+ * @property string $lastname
+ * @property string $firstname
+ * @property string $email
+ * @property string $password
+ * @property string $token
+ * @property string $auth_key
+ * @property integer $active
+ * @property string $created_at
+ * @property string $updated_at
+ */
+class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public static function tableName() 
-    { 
-        return 'users'; 
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'users';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            [['username', 'email', 'password'], 'required'],
+            [['active'], 'integer'],
+            [['created_at', 'updated_at'], 'safe'],
+            [['username', 'lastname', 'firstname', 'email', 'password', 'token', 'auth_key'], 'string', 'max' => 255]
+        ];
     }
 
     /**
@@ -18,39 +48,17 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'email' => 'Email',
-            'password_repeat' => 'Re-type Password',
-        ];
-    }
-    /**
-    * Hash password before Save
-    */
-    public function beforeSave($insert)
-    {
-        if (parent::beforeSave($insert)) {
-            if ($this->isNewRecord) {
-                $this->authKey = Yii::$app->getSecurity()->generateRandomString();
-            }
-            if(isset($this->password)) {
-                $this->setPassword($this->password);
-            }
-            return true;
-        } 
-        return false;
-    }
-
-    public function rules(){
-        return [
-            ['email', 'filter', 'filter' => 'trim'],
-            ['email', 'unique'],
-            [['email'], 'required'],
-            ['email', 'email'],
-
-            ['password', 'string', 'length' => [6, 128]],
-            //[['password'], 'required', 'on' => 'register'],
-            //['password_repeat','safe'],
-            //['password_repeat', 'compare', 'compareAttribute' => 'password']
+            'id'         => 'ID',
+            'username'   => 'Username',
+            'lastname'   => 'Lastname',
+            'firstname'  => 'Firstname',
+            'email'      => 'Email',
+            'password'   => 'Password',
+            'token'      => 'Token',
+            'auth_key'   => 'Auth Key',
+            'active'     => 'Active',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 
@@ -110,7 +118,14 @@ class User extends ActiveRecord implements \yii\web\IdentityInterface
      * @param  string  $password password to validate
      * @return boolean if password provided is valid for current user
      */
-    public function validatePassword($password){
+    public function validatePassword($password) 
+    {
         return \Yii::$app->getSecurity()->validatePassword($password, $this->password);
+    }
+
+    public static function getRealName() 
+    {
+        $user = self::findOne(Yii::$app->user->id);
+        return $user->firstname . ' ' . $user->lastname;
     }
 }
