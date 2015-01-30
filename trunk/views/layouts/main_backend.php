@@ -135,7 +135,7 @@ app\modules\admin\AdminAsset::register($this);
                         <div class="sidebar-user-name"><?=  User::getRealName();?></div>
                         <div class="sidebar-user-links">
                             <a href="#modal-user-settings" data-toggle="modal" class="enable-tooltip" data-placement="bottom" title="Settings"><i class="gi gi-cogwheel"></i></a>
-                            <a href="login.php" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
+                            <a href="/admin/auth/logout" data-toggle="tooltip" data-placement="bottom" title="Logout"><i class="gi gi-exit"></i></a>
                         </div>
                     </div>
                     <!-- END User Info -->
@@ -231,7 +231,7 @@ app\modules\admin\AdminAsset::register($this);
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li>
-                                <a href="login.php"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
+                                <a href="/admin/auth/logout"><i class="fa fa-sign-out fa-fw pull-right"></i> Logout</a>
                             </li>
                         </ul>
                     </li>
