@@ -93,46 +93,9 @@ use yii\helpers\Url;
 						]) 
 					->label('Groups')
          		?>
+				<button type="submit">Submit</button>
+	        </form>
 	        <!-- END General Data Content -->
 	    </div>
-	</div> 
-	<!-- END col-lg-8 -->
-
-	<div class="col-lg-4">
-		<div class="block">
-            <!-- Actions Title -->
-            <div class="block-title">
-                <h2><i class="fa fa-pencil"></i> Actions</h2>
-            </div>
-            <!-- END Actions Title -->
-
-			<!-- Info Content -->
-            <table class="table table-borderless table-striped">
-                <tbody>
-                    <tr>
-                        <td><strong>Created</strong></td>
-                        <td><a href="javascript:void(0)">John Doe<br>5. February 2015</a></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Updated</strong></td>
-                        <td><a href="javascript:void(0)">John Doe<br>12. February 2015</a></td>
-                    </tr>
-                </tbody>
-            </table>
-            <!-- END Info Content -->
-			
-            <!-- Actions Content -->
-            <div class="form-group form-actions">
-                <div class="col-md-6 text-left">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Update</button>
-					<button type="reset" class="btn btn-sm btn-primary"><i class="fa fa-times"></i> Cancel</button>
-                </div>
-				<div class="col-md-6 text-right">
-					<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
-				</div>
-            </div>
-            <?php ActiveForm::end(); ?>
-            <!-- END Actions Content -->
-        </div>
 	</div>
 </div>

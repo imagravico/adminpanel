@@ -87,7 +87,17 @@ class Client extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes) 
     {
+        
     }   
+
+    public function afterFind()
+    {
+        if ($this->birthday) {
+            $date = \DateTime::createFromFormat('Y-m-d', $this->birthday);
+            $this->birthday = $date->format('m/d/Y');
+        }
+        parent::afterFind();
+    }
 
     public function getGroups()
     {

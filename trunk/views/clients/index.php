@@ -59,7 +59,11 @@ use yii\helpers\Url;
 							<div class="widget">
 								<div class="widget-simple">
 									<a href="#">
-										<img src="web/backend/img/placeholders/avatars/avatar11.jpg" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn">
+										<?php if (isset($client->avatar)) { ?>
+										<img width="64" height="64" src="web/upload/avatar/<?= $client->avatar?>" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn">
+										<?php } else { ?>
+										<img width="64" height="64" src="web/upload/avatar/avatar11.jpg" alt="avatar" class="widget-image img-circle pull-left animation-fadeIn">
+										<?php } ?>
 									</a>
 									<h4 class="widget-content text-right">
 										<a href="panel_client_edit.php"><strong><?= $client->company;?></strong></a><br>
