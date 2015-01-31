@@ -21,7 +21,7 @@
         "kartik-v/yii2-grid": "*",
         "kartik-v/yii2-detail-view": "*",
         "yiisoft/yii2-jui": "*",
-        "2amigos/yii2-file-upload-widget" : "*"
+        "kartik-v/yii2-widget-fileinput": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

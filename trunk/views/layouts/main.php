@@ -331,30 +331,11 @@ AppAsset::register($this);
 </div>
 <!-- END User Settings -->
 
-<!-- Remember to include excanvas for IE8 chart support -->
-<!--[if IE 8]><script src="js/helpers/excanvas.min.js"></script><![endif]-->
-
-
-<!-- Include Jquery library from Google's CDN but if something goes wrong get Jquery from local file (Remove 'http:' if you have SSL) -->
-
-<!-- Bootstrap.js, Jquery plugins and Custom JS code -->
-<script src="/web/backend/js/vendor/bootstrap.min.js"></script>
-<script src="/web/backend/js/x-editable-master/dist/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
-<script src="/web/backend/js/shawnchin-jquery-cron-78118ba/cron/jquery-cron-min.js"></script>
-<script src="/web/backend/js/jquery_chained-master/jquery.chained.min.js"></script>
-<script src="/web/backend/js/plugins.js"></script>
-<script src="/web/backend/js/app.js"></script>
-
-<!-- Google Maps API + Gmaps Plugin, must be loaded in the page you would like to use maps (Remove 'http:' if you have SSL) -->
+ <!-- END JAVASCRIPTS -->   
+<?php $this->endBody() ?>
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 <script src="/web/backend/js/helpers/gmaps.min.js"></script>
-
-<!-- Load and execute javascript code used only in this page -->
-<script src="/web/backend/js/pages/index.js"></script>
 <script>$(function(){ Index.init(); });</script>
-
- <!-- END JAVASCRIPTS -->   
-   <?php $this->endBody() ?>
 </body>
 <!-- END BODY -->
 </html>

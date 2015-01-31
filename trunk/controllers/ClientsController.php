@@ -23,9 +23,12 @@ class ClientsController extends \yii\web\Controller
 		$groups_clients = new GroupClient();
 
         if ($client->load(Yii::$app->request->post()) && $client->validate()) {
+            // get post variable of GroupClient
     		$list_groups = Yii::$app->request->post()['GroupClient']['groups_id'];
     		if (!empty($list_groups)) {
+                // save client table first
     			$client->save();
+                // each group will be saved with a corresponding client which be saved before
     			foreach ($list_groups as $key => $group) {
 					$groups_clients = new GroupClient();
     				$groups_clients->clients_id = $client->id;
@@ -33,7 +36,7 @@ class ClientsController extends \yii\web\Controller
     				$groups_clients->save();
     			}
     			if (empty($groups_clients->getErrors())) {
-    				return $this->redirect(['/clients']);
+    				// return $this->redirect(['/clients']);
     			}
     		}
     		else {

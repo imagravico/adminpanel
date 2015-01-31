@@ -3,7 +3,8 @@
 namespace app\models;
 
 use Yii;
-
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 /**
  * This is the model class for table "clients".
  *
@@ -28,6 +29,19 @@ class Client extends \yii\db\ActiveRecord
         return 'clients';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+
     /**
      * @inheritdoc
      */
@@ -36,6 +50,7 @@ class Client extends \yii\db\ActiveRecord
         return [
             [['company', 'firstname', 'lastname', 'email', 'birthday'], 'required'],
             [['birthday', 'created_at', 'updated_at'], 'safe'],
+            [['email'], 'unique'],
             [['active'], 'integer'],
             [['company', 'firstname', 'lastname', 'email', 'avatar'], 'string', 'max' => 255]
         ];

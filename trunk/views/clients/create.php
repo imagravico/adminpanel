@@ -3,7 +3,8 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use app\models\Group;
-use dosamigos\fileupload\FileUpload;
+use kartik\file\FileInput;
+use yii\helpers\Url;
 ?>
 
 <div class="content-header">
@@ -41,17 +42,18 @@ use dosamigos\fileupload\FileUpload;
 						)
                         ->label('Active?', ['class' => 'col-md-3 control-label']); 
 				?>
-				
-				<div class="form-group">
-	                <label class="col-xs-3 control-label">
-	                    <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar" class="img-circle">
-	                </label>
-	                <div class="col-xs-9">
-	                    <i class="fa fa-fw fa-upload"></i> <a href="javascript:void(0)">Upload New Avatar</a><br>
-	                    <i class="fa fa-fw fa-picture-o"></i> <a href="javascript:void(0)">Choose from Library</a><br><br>
-	                    <i class="fa fa-fw fa-times"></i> <a href="javascript:void(0)" class="text-danger">Remove Avatar</a>
-	                </div>
-	            </div>
+
+				<?php 
+					echo $form->field($client, 'avatar')->widget(FileInput::classname(), [
+					    'options' => [
+					    	'accept' => 'image/*'
+					    ],
+					    'pluginOptions' => [
+					    	'previewFileType' => 'image',
+					    	'showUpload' => false,
+					    ]
+					]);
+				?>	
 
 				<?= $form->field($client, 'company', [
                       	'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
