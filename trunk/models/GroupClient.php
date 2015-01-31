@@ -27,7 +27,7 @@ class GroupClient extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['clients_id', 'groups_id'], 'integer']
+            [['clients_id', 'groups_id'], 'required'],
         ];
     }
 

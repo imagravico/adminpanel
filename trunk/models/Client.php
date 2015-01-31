@@ -34,7 +34,7 @@ class Client extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['company', 'firstname', 'lastname', 'email'], 'required'],
+            [['company', 'firstname', 'lastname', 'email', 'birthday'], 'required'],
             [['birthday', 'created_at', 'updated_at'], 'safe'],
             [['active'], 'integer'],
             [['company', 'firstname', 'lastname', 'email', 'avatar'], 'string', 'max' => 255]
@@ -59,4 +59,24 @@ class Client extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function beforeSave($insert) 
+    {
+        // convert format birthday
+        if ($this->birthday) {
+            $date = \DateTime::createFromFormat('m/d/Y', $this->birthday);
+            $this->birthday = $date->format('Y-m-d');
+        }
+        return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes) 
+    {
+    }   
+
+    public function getGroups()
+    {
+        return $this->hasMany(GroupClient::className(), ['clients_id' => 'id']);
+    }
+
 }
