@@ -19,6 +19,7 @@ class AppAsset extends AssetBundle
     public $baseUrl = '@web';
     public $css = [
         'web/css/site.css',
+        'web/css/custom.css'
     ];
     public $js = [
         'web/backend/js/vendor/bootstrap.min.js',
@@ -28,6 +29,7 @@ class AppAsset extends AssetBundle
         'web/backend/js/plugins.js',
         'web/backend/js/app.js',
         'web/backend/js/pages/index.js',
+        'web/js/custom.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

@@ -42,4 +42,10 @@ class Group extends \yii\db\ActiveRecord
             'alias' => 'Alias',
         ];
     }
+
+    public function getGroupsClients()
+    {
+        // Group has_many GroupClient via GroupClient.groups_id -> id
+        return $this->hasMany(GroupClient::className(), ['groups_id' => 'id']);
+    }
 }

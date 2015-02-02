@@ -152,11 +152,11 @@ AppAsset::register($this);
                             </a>
                         </li>
                         <li>
-                            <a href="panel_client.php"><i class="gi gi-user sidebar-nav-icon"></i> 
+                            <a href="/clients"><i class="gi gi-user sidebar-nav-icon"></i> 
                             <span class="sidebar-nav-mini-hide">Clients</span></a>
                         </li>
                         <li>
-                            <a href="panel_website.php"><i class="gi gi-globe sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Websites</span></a>
+                            <a href="/websites"><i class="gi gi-globe sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Websites</span></a>
                         </li>
                         <li>
                             <a href="panel_checklist.php"><i class="fa fa-list sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Checklists</span></a>

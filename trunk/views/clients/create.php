@@ -5,6 +5,7 @@ use yii\bootstrap\ActiveForm;
 use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
+use app\models\User;
 ?>
 
 <div class="content-header">
@@ -75,13 +76,18 @@ use yii\helpers\Url;
 
 				<?= $form->field($client, 'birthday', [
                       'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-                    ])->textInput((array('placeholder' => 'Birthday', 'class' => 'form-control input-datepicker'))); ?>	
+                    ])->textInput((array(
+							'placeholder'      => 'dd/mm/yyyy', 
+							'class'            => 'form-control input-datepicker',
+							'data-date-format' => 'dd/mm/yyyy'
+                    	)
+                    )); ?>	
 		        
 		        <?php 
 		        	$dataList = ArrayHelper::map(Group::find()->asArray()->all(), 'id', 'name'); 
 		        ?>
 				<?= 
-					$form->field($groups_clients, 'groups_id', [
+					$form->field($groups, 'id', [
                       'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
 					])
 					->listBox($dataList, [
@@ -98,8 +104,8 @@ use yii\helpers\Url;
 	</div> 
 	<!-- END col-lg-8 -->
 
-	<div class="col-lg-4">
-		<div class="block">
+	<div class="col-lg-4 col-xs-12">
+		<div class="block clearfix">
             <!-- Actions Title -->
             <div class="block-title">
                 <h2><i class="fa fa-pencil"></i> Actions</h2>
@@ -111,25 +117,31 @@ use yii\helpers\Url;
                 <tbody>
                     <tr>
                         <td><strong>Created</strong></td>
-                        <td><a href="javascript:void(0)">John Doe<br>5. February 2015</a></td>
+                        <td>
+                        	<a href="javascript:void(0)">
+                        		<?= User::getRealName();?><br>
+                        		<?= date('j. F Y', $client->created_at) ?>
+                        	</a>
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Updated</strong></td>
-                        <td><a href="javascript:void(0)">John Doe<br>12. February 2015</a></td>
+                        <td>
+                        	<a href="javascript:void(0)">
+                        		<?= User::getRealName();?><br><?= date('j. F Y', $client->updated_at) ?>
+                        	</a>
+                    	</td>
                     </tr>
                 </tbody>
             </table>
             <!-- END Info Content -->
 			
             <!-- Actions Content -->
-            <div class="form-group form-actions">
+            <div class="form-group form-actions clearfix">
                 <div class="col-md-6 text-left">
-                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Update</button>
+                    <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Create</button>
 					<button type="reset" class="btn btn-sm btn-primary"><i class="fa fa-times"></i> Cancel</button>
                 </div>
-				<div class="col-md-6 text-right">
-					<button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</button>
-				</div>
             </div>
             <?php ActiveForm::end(); ?>
             <!-- END Actions Content -->
