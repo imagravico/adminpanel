@@ -58,7 +58,6 @@ var Action = function() {
 				data: form.serializeArray(),
 				success: function (res) 
 				{
-					
 					updateRes(update, res);
 				},
 				error: function (res) 
