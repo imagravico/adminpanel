@@ -7,23 +7,74 @@ var Action = function() {
 
 	var actionForm = function () 
 	{
-		var cancel = $('.form-actions .cancel');
-		var del    = $('.form-actions .del');
+		var form   = $('.form-actions'),
+		    cancel = form.find('.cancel'),
+			del    = form.find('.del'),
+			add    = form.find('.add'),
+			edit   = form.find('.edit'),
+			body   = $(document.body);
+
+		// cancel
 		cancel.click(function (e) 
 		{
 			e.preventDefault();
-			window.location.href = "/clients";
+			window.location.href = cancel.data('redirect');
 		});
 
-		del.click(function (e) 
+		// delete
+		body.on('click', '.form-actions .del', function (e) 
 		{
 			e.preventDefault();
-			var id = del.data('id');
 			if (confirm('Are you sure to delete it?')) 
 			{
-				window.location.href = "/clients/delete/" + id;
+				$.ajax({
+					url: $(this).data('url'),
+					success: function(res) {
+						if (res.errors != '' && del.data('redirect') != undefined) {
+							window.location.href = del.data('redirect');
+						}
+
+						if (res.errors != '' && del.data('update')) {
+							updateRes($(del.data('update')), res);
+						}
+					},
+					error: function(res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					} 
+				})
 			}
 		});
+
+		// add new 
+		body.on('click', '.form-actions .add', function (e) 
+		{
+			e.preventDefault();
+			var form   = $(add.data('form')),
+				update = $(add.data('update'));
+
+			$.ajax({
+				url: add.data('to'),
+				type: 'POST',
+				data: form.serializeArray(),
+				success: function (res) 
+				{
+					
+					updateRes(update, res);
+				},
+				error: function (res) 
+				{
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+		});
+
+
+		var updateRes =  function (obj, res) {
+			if (obj != undefined) {
+				obj.empty();
+				obj.html(res);
+			}
+		}
 	}
 
 	return {

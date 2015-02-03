@@ -146,10 +146,10 @@ use app\models\User;
             <div class="form-group form-actions clearfix">
                 <div class="col-md-6 text-left">
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Update</button>
-					<button class="btn btn-sm btn-primary cancel"><i class="fa fa-times"></i> Cancel</button>
+					<button class="btn btn-sm btn-primary cancel" data-redirect="/clients"><i class="fa fa-times"></i> Cancel</button>
                 </div>
 				<div class="col-md-6 text-right">
-					<button class="btn btn-sm btn-danger del" data-id="<?= $client->id ?>"><i class="fa fa-trash"></i> Delete</button>
+					<button class="btn btn-sm btn-danger del" data-url="/clients/delete/<?= $client->id ?>" data-redirect="/clients"><i class="fa fa-trash"></i> Delete</button>
 				</div>
             </div>
             <?php ActiveForm::end(); ?>

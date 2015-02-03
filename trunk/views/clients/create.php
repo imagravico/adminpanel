@@ -10,7 +10,7 @@ use app\models\User;
 
 <div class="content-header">
     <div class="header-section">
-        <h1><i class="fa fa-user" style="margin:-14px 0 0 0;"></i>Edit Client</h1>
+        <h1><i class="fa fa-user" style="margin:-14px 0 0 0;"></i>Add Client</h1>
     </div>
 </div>
 <div class="row">
@@ -140,7 +140,7 @@ use app\models\User;
             <div class="form-group form-actions clearfix">
                 <div class="col-md-6 text-left">
                     <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Create</button>
-					<button type="reset" class="btn btn-sm btn-primary"><i class="fa fa-times"></i> Cancel</button>
+					<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/clients"><i class="fa fa-times"></i> Cancel</button>
                 </div>
             </div>
             <?php ActiveForm::end(); ?>

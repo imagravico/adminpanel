@@ -6,6 +6,7 @@ use app\models\Client;
 use app\models\Group;
 use app\models\GroupClient;
 use yii\web\UploadedFile;
+use yii\web\NotFoundHttpException;
 
 class ClientsController extends \yii\web\Controller
 {
@@ -131,7 +132,8 @@ class ClientsController extends \yii\web\Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['/clients']);
+        echo json_encode(['errors' => '']);
+        exit();
     }
 
     /**

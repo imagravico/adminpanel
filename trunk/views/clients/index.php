@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Url;
-
+use app\components\widgets\GroupsWidget;
 ?>
 <!-- Forms General Header -->
 <div class="content-header">
@@ -111,3 +111,5 @@ use yii\helpers\Url;
 	<!-- END Stats Block -->
 </div>
 <!-- END Main Row -->
+<?php echo GroupsWidget::widget(); ?>
+
