@@ -90,26 +90,12 @@ use app\components\widgets\GroupsWidget;
 			</div>
 			
 			<div class="col-lg-12">
-				<div class="block full">
-					<div class="block-title">
-						<h2><i class="fa fa-users"></i> Groups</h2>
-						<div class="block-options pull-right">
-							<a class="btn btn-sm btn-alt btn-default" href="#modal-groups-edit" data-toggle="modal"><i class="fa fa-cogs"></i></a>
-						</div>
-					</div>
-					<ul class="nav nav-pills nav-stacked">
-						<li class="active"><a href="javascript:void(0)"><span class="badge pull-right">271</span>All</a></li>
-						<li><hr></li>
-						<li><a href="javascript:void(0)"><span class="badge pull-right">56</span>Business</a></li>
-						<li><a href="javascript:void(0)"><span class="badge pull-right">60</span>Freelancer</a></li>
-						<li><a href="javascript:void(0)"><span class="badge pull-right">75</span>Private</a></li>
-					</ul>
-				</div>
+				<?php echo GroupsWidget::widget(); ?>
 			</div>
 		</div>
     </div>
 	<!-- END Stats Block -->
 </div>
 <!-- END Main Row -->
-<?php echo GroupsWidget::widget(); ?>
+
 

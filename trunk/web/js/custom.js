@@ -46,8 +46,7 @@ var Action = function() {
 		});
 
 		// add new 
-		body.on('click', '.form-actions .add', function (e) 
-		{
+		body.on('click', '.form-actions .add', function (e) {
 			e.preventDefault();
 			var form   = $(add.data('form')),
 				update = $(add.data('update'));
@@ -56,12 +55,10 @@ var Action = function() {
 				url: add.data('to'),
 				type: 'POST',
 				data: form.serializeArray(),
-				success: function (res) 
-				{
+				success: function (res) {
 					updateRes(update, res);
 				},
-				error: function (res) 
-				{
+				error: function (res) {
 					alert('Opp oh! There are something wrong. Try again..')
 				}
 			});
@@ -76,12 +73,10 @@ var Action = function() {
 				url: $(this).data('to'),
 				type: 'POST',
 				data: {'name' : name}, 
-				success: function (res) 
-				{
+				success: function (res) {
 					updateRes(update, res);
 				},
-				error: function (res) 
-				{
+				error: function (res) {
 					alert('Opp oh! There are something wrong. Try again..')
 				}
 			});

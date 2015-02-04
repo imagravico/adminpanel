@@ -28,6 +28,7 @@ class Group extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
+            [['name', 'alias'], 'unique'],
             [['name', 'alias'], 'string', 'max' => 255]
         ];
     }
