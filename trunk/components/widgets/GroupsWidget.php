@@ -9,7 +9,6 @@ use app\models\GroupClient;
 
 class GroupsWidget extends Widget
 {
-	public $insuser;
 	public function init() 
 	{
 		parent::init();

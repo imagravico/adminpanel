@@ -16,7 +16,7 @@ class NotesWidget extends Widget
 	
 	public function run() {
 
-		return $this->render('groups/index', [
+		return $this->render('notes/index', [
 				
 			]);
 	}
