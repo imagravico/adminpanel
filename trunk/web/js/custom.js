@@ -1,19 +1,19 @@
 
 // cancle button in action area (editing client page, create page)
 var Action = function() {
+	
+	var body   = $(document.body);
 	var uiInit = function () {
 		actionForm();
+		actionGroup();
 	}
 
 	var actionForm = function () 
 	{
 		var form   = $('.form-actions'),
 		    cancel = form.find('.cancel'),
-			del    = form.find('.del'),
-			add    = form.find('.add'),
-			edit   = form.find('.edit'),
-			body   = $(document.body);
-
+			del    = form.find('.del');
+			
 		// cancel
 		cancel.click(function (e) 
 		{
@@ -44,6 +44,13 @@ var Action = function() {
 				})
 			}
 		});
+	}
+
+	var actionGroup = function () {
+
+		var	group = $('#form-add-group'),
+			edit   = group.find('.form-actions .edit'),
+			add    = group.find('.form-actions .add');
 
 		// add new 
 		body.on('click', '.form-actions .add', function (e) {
@@ -69,6 +76,7 @@ var Action = function() {
 			e.preventDefault();
 			var update = $(edit.data('update')),
 				name = $($(this).data('input')).val();
+
 			$.ajax({
 				url: $(this).data('to'),
 				type: 'POST',
@@ -81,14 +89,15 @@ var Action = function() {
 				}
 			});
 		});
+	}
 
-		var updateRes =  function (obj, res) {
+	var updateRes =  function (obj, res) {
 			if (obj != undefined) {
 				obj.empty();
 				obj.html(res);
 			}
 		}
-	}
+
 
 	return {
         init: function() {

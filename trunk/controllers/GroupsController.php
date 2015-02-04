@@ -49,7 +49,6 @@ class GroupsController extends \yii\web\Controller
         $group = $this->findModel($id);
         $group->name = Yii::$app->request->post()['name'];
         $group->save();
-        
 
         return $this->renderPartial('@widget/views/groups/_add'); 
     }
