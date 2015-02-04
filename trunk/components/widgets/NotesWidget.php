@@ -15,9 +15,9 @@ class NotesWidget extends Widget
 	}
 	
 	public function run() {
-
+		$notes = Note::find()->all();
 		return $this->render('notes/index', [
-				
+				'notes' => $notes
 			]);
 	}
 }

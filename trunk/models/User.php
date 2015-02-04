@@ -21,6 +21,8 @@ use Yii;
  */
 class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+
+    public $fullname;
     /**
      * @inheritdoc
      */
@@ -123,9 +125,27 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return \Yii::$app->getSecurity()->validatePassword($password, $this->password);
     }
 
+    public function afterFind() 
+    {
+        $this->fullname = $this->getFullName();
+    }
+
+    /**
+     * set full name of particular user
+     * @param  integer $id
+     * @return string
+     */
+    public function getFullName() 
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
+
+
     public static function getRealName() 
     {
         $user = self::findOne(Yii::$app->user->id);
         return $user->firstname . ' ' . $user->lastname;
     }
+
+
 }
