@@ -67,6 +67,25 @@ var Action = function() {
 			});
 		});
 
+		// edit, in this case it is only for editting group
+		body.on('click', '.form-actions .edit', function (e) {
+			e.preventDefault();
+			var update = $(edit.data('update')),
+				name = $($(this).data('input')).val();
+			$.ajax({
+				url: $(this).data('to'),
+				type: 'POST',
+				data: {'name' : name}, 
+				success: function (res) 
+				{
+					updateRes(update, res);
+				},
+				error: function (res) 
+				{
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+		});
 
 		var updateRes =  function (obj, res) {
 			if (obj != undefined) {

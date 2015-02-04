@@ -39,15 +39,19 @@ class GroupsController extends \yii\web\Controller
             ]); 
     }
 
+    /**
+     * Edit an existing Group model
+     * @param  integer $id
+     * @return mixed
+     */
     public function actionEdit($id) 
     {
         $group = $this->findModel($id);
-        if ($group->load(Yii::$app->request->post()) && $group->save())
-        {
-            return $this->renderPartial('@widget/views/groups/_add', [
-                'group' => $group
-            ]); 
-        }
+        $group->name = Yii::$app->request->post()['name'];
+        $group->save();
+        
+
+        return $this->renderPartial('@widget/views/groups/_add'); 
     }
     /**
      * Finds the User model based on its primary key value.
