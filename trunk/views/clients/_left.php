@@ -43,9 +43,19 @@ use app\components\widgets\NotesWidget;
     <!-- Actions Content -->
     <div class="form-group form-actions clearfix">
         <div class="col-md-6 text-left">
-            <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Create</button>
+            <button type="submit" class="btn btn-sm btn-primary">
+                <i class="fa fa-floppy-o"></i> 
+                <?php echo ($client->isNewRecord) ? "Create" : "Update";?>
+            </button>
 			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/clients"><i class="fa fa-times"></i> Cancel</button>
         </div>
+        <?php 
+                if (!$client->isNewRecord) {
+            ?>
+                    <div class="col-md-6 text-right">
+                        <button type="reset" class="btn btn-sm btn-danger del" data-redirect="/clients" data-to="/clients/delete/<?= $client->id?>"><i class="fa fa-trash"></i> Delete</button>
+                    </div>
+            <?php } ?>
     </div>
     <?php ActiveForm::end(); ?>
     <!-- END Actions Content -->

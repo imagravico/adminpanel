@@ -15,7 +15,7 @@ class NotesWidget extends Widget
 	}
 	
 	public function run() {
-		$notes = Note::find()->all();
+		$notes = Note::find()->orderBy('id DESC')->all();
 		return $this->render('notes/index', [
 				'notes' => $notes
 			]);

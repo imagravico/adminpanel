@@ -45,7 +45,7 @@ use yii\bootstrap\ActiveForm;
                                     <i class="fa fa-pencil"></i> Edit
                                 </a>
                                 <!-- Delete Button -->
-                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default del" data-update="#update-group" data-url="/groups/delete/<?= $group->id?>">
+                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default del" data-update="#update-group" data-to="/groups/delete/<?= $group->id?>">
                                     <i class="fa fa-times"></i> Delete
                                 </a>
 

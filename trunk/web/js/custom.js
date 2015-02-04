@@ -6,6 +6,7 @@ var Action = function() {
 	var uiInit = function () {
 		actionForm();
 		actionGroup();
+		actionNote();
 	}
 
 	var actionForm = function () 
@@ -28,7 +29,7 @@ var Action = function() {
 			if (confirm('Are you sure to delete it?')) 
 			{
 				$.ajax({
-					url: $(this).data('url'),
+					url: $(this).data('to'),
 					success: function(res) {
 						if (res.errors != '' && del.data('redirect') != undefined) {
 							window.location.href = del.data('redirect');
@@ -88,6 +89,53 @@ var Action = function() {
 					alert('Opp oh! There are something wrong. Try again..')
 				}
 			});
+		});
+	}
+
+	var actionNote = function () {
+		var form   = $('#form-note'),
+			update = $(form.data('update')),
+			edit   = $('.notes-list .btn-edit-note'),
+			url    = '/notes/create';
+
+		body.on('click', '.notes-list .btn-edit-note', function (e) {
+			url = $(this).data('to');
+		});
+
+		// delete
+		body.on('click', '.notes-list .btn-del-note', function (e) 
+		{
+			e.preventDefault();
+			if (confirm('Are you sure to delete it?')) 
+			{
+				$.ajax({
+					url: $(this).data('to'),
+					success: function(res) {
+						updateRes($('.notes-list'), res);
+					},
+					error: function(res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					} 
+				})
+			}
+		});
+
+		form.submit(function (e) {
+			e.preventDefault();
+
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: form.serializeArray(), 
+				success: function (res) {
+					updateRes(update, res);
+					form.find('.btn-close').trigger('click');
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+
 		});
 	}
 

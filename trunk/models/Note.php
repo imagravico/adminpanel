@@ -3,6 +3,8 @@
 namespace app\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "notes".
@@ -23,6 +25,17 @@ class Note extends \yii\db\ActiveRecord
         return 'notes';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
     /**
      * @inheritdoc
      */
@@ -48,6 +61,12 @@ class Note extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        $this->users_id = Yii::$app->user->id;
+        return parent::beforeSave($insert);
     }
 
     public function getUser() 

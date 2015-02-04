@@ -1,3 +1,7 @@
+<?php 
+use app\models\Group;
+use yii\bootstrap\ActiveForm;
+?>
 <!-- Notes, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
 <div id="modal-note-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
@@ -10,16 +14,27 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <form action="index.php" method="post" enctype="multipart/form-data" class="form-horizontal form-bordered" onsubmit="return false;">
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <textarea id="textarea-wysiwyg" name="textarea-wysiwyg" rows="10" class="form-control textarea-editor"></textarea>
-                        </div>
-                    </div>
-                    
+                <?php 
+                    $form = ActiveForm::begin([
+                        'id'      => 'form-note',
+                        'action' => '#',
+                        'options' => [
+                            'class'   => 'form-horizontal form-bordered',
+                            'data-update' => '.notes-list'
+                        ],
+                        'fieldConfig' => [
+                            'horizontalCssClasses' => [
+                                'label' => 'control-label',
+                            ],
+                        ],
+                    ]); 
+                ?>
+                <?=
+                    $form->field($note, 'content')->textArea(['rows' => '6', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg'])
+                ?>
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                         </div>
                     </div>
