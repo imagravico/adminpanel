@@ -5,7 +5,7 @@
     ?>
                 <li class="media clearfix">
                     <a href="page_ready_user_profile.php" class="pull-left">
-                        <img src="/web/upload/avatar/noavatar.jpg" alt="Avatar" class="img-circle">
+                        <img src="/web/upload/avatar/<?= $note->user->avatar ?>" width="64" height="64" alt="Avatar" class="img-circle">
                     </a>
                     <div class="media-body">
                         <span class="text-muted text-right pull-right link-hover">
