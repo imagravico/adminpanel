@@ -129,7 +129,7 @@ app\modules\admin\AdminAsset::register($this);
                     <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                         <div class="sidebar-user-avatar">
                             <a href="page_ready_user_profile.php">
-                                <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                                <img src="/web/upload/avatar/<?= User::getAvatar(); ?>" alt="avatar">
                             </a>
                         </div>
                         <div class="sidebar-user-name"><?=  User::getRealName();?></div>
@@ -227,7 +227,7 @@ app\modules\admin\AdminAsset::register($this);
                     <!-- User Dropdown -->
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar"> <i class="fa fa-angle-down"></i>
+                            <img src="/web/upload/avatar/<?= User::getAvatar(); ?>" alt="avatar"> <i class="fa fa-angle-down"></i>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li>

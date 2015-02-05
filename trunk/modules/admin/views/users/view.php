@@ -6,7 +6,7 @@ use kartik\detail\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 
-$this->title = $model->id;
+$this->title = $model->username;
 $this->params['breadcrumbs'][] = ['label' => 'Users', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'lastname',
             'firstname',
             'email:email',
-            'password',
             'token',
             'auth_key',
             'active',

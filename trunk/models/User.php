@@ -215,5 +215,10 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return $user->firstname . ' ' . $user->lastname;
     }
 
+    public static function getAvatar()
+    {
+        $user = self::findOne(Yii::$app->user->id);
+        return $user->avatar;
+    }
 
 }
