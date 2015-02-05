@@ -7,6 +7,7 @@ var Action = function() {
 		actionForm();
 		actionGroup();
 		actionNote();
+		actionActivity();
 	}
 
 	var actionForm = function () 
@@ -136,6 +137,53 @@ var Action = function() {
 				}
 			});
 
+		});
+	}
+
+	/**
+	 * control all behaviours of activity
+	 * @return mixed
+	 */
+	var actionActivity = function () {
+
+		var form = $('#form-add-activities'),
+			url  = form.data('url'),
+			update = $(form.data('update')),
+			more = 2;
+
+		form.submit(function (e) {
+			e.preventDefault();
+			$.ajax({
+				url: url,
+				type: 'POST',
+				data: form.serializeArray(), 
+				success: function (res) {
+					updateRes(update, res);
+					form.find('.btn-close').trigger('click');
+					form.trigger("reset");
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+
+		});
+
+		body.on('click', '#activities-list .view-more', function (e) {
+			e.preventDefault();
+			var url = $(this).data('to');
+			$.ajax({
+				url: url + more,
+				type: 'POST',
+				data: form.serializeArray(), 
+				success: function (res) {
+					updateRes(update, res);
+					more = more + 1;
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
 		});
 	}
 

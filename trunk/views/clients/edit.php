@@ -6,6 +6,8 @@ use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\models\User;
+use app\components\widgets\ActivitiesWidget;
+
 ?>
 
 <div class="content-header">
@@ -19,6 +21,7 @@ use app\models\User;
 				'client' => $client,
 				'groups' => $groups
 		]); ?>
+		<?= ActivitiesWidget::widget();?>
 	</div>
 
 	<div class="col-lg-4 col-xs-12">
@@ -27,3 +30,7 @@ use app\models\User;
 		]); ?>
 	</div>
 </div>
+
+<!-- Load some popup -->
+
+<?= $this->render('@widget/views/activities/_form');?>

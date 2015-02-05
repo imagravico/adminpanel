@@ -98,5 +98,3 @@ use app\components\widgets\GroupsWidget;
 	<!-- END Stats Block -->
 </div>
 <!-- END Main Row -->
-
-

@@ -5,7 +5,7 @@ use yii\bootstrap\ActiveForm;
 use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
-
+use app\components\widgets\ActivitiesWidget;
 
 ?>
 
@@ -20,6 +20,7 @@ use yii\helpers\Url;
 				'client' => $client,
 				'groups' => $groups
 		]); ?>
+		<?= ActivitiesWidget::widget();?>
 	</div> 
 	<!-- END col-lg-8 -->
 	
@@ -30,3 +31,6 @@ use yii\helpers\Url;
 		]); ?>
 	</div>
 </div>
+<!-- Load some popup -->
+
+<?= $this->render('@widget/views/activities/_form');?>
