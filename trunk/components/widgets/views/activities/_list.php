@@ -5,7 +5,7 @@
             foreach ($activities as $key => $activity) {
                 $i++;
     ?>   
-                <li class="<?php echo ($i % 2 == 0 ) ? 'active' : ''?>">
+                <li class="<?php echo ($i % 2 == 0 ) ? 'active' : ''?> clearfix">
                     <div class="timeline-icon"><i class="fa fa-info"></i></div>
                     <div class="timeline-time">
                         <?php if ($activity->reminder) {?>

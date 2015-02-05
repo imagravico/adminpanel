@@ -149,6 +149,7 @@ var Action = function() {
 		var form = $('#form-add-activities'),
 			url  = form.data('url'),
 			update = $(form.data('update')),
+			activityList = $('#activities-list'), 
 			more = 2;
 
 		form.submit(function (e) {
@@ -159,6 +160,8 @@ var Action = function() {
 				data: form.serializeArray(), 
 				success: function (res) {
 					updateRes(update, res);
+					// get image src
+					addWrap();
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
 				},
@@ -185,6 +188,14 @@ var Action = function() {
 				}
 			});
 		});
+
+		// add wrapper to image in activity
+		var addWrap =  function () {
+			var src = activityList.find('.timeline-content img').attr('src');
+			activityList.find('.timeline-content img').wrap('<div clas="row push"><div class="col-sm-6 col-md-4"><a href="' + src + '" data-toggle="lightbox-image"></a></div></div>');
+		}
+		// run
+		addWrap();
 	}
 
 	var updateRes =  function (obj, res) {
