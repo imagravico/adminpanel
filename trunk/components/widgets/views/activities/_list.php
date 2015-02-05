@@ -8,8 +8,9 @@
                 <li class="<?php echo ($i % 2 == 0 ) ? 'active' : ''?>">
                     <div class="timeline-icon"><i class="fa fa-info"></i></div>
                     <div class="timeline-time">
-                        <?php if ($activity->reminder) ?>
+                        <?php if ($activity->reminder) {?>
                             <i class="fa fa-bell"></i>
+                        <?php } ?>
                         <?= date('j. F Y', strtotime($activity->come_date));?><br>
                         <small>by <?= $activity->user->fullname ?></small>
                     </div>
