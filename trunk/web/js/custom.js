@@ -49,7 +49,7 @@ var Action = function() {
 
 	var actionGroup = function () {
 
-		var	group = $('#form-add-group'),
+		var	group  = $('#form-add-group'),
 			edit   = group.find('.form-actions .edit'),
 			add    = group.find('.form-actions .add');
 

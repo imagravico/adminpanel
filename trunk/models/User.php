@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use yii\web\UploadedFile;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "users".
@@ -31,6 +34,18 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return 'users';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class'              => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value'              => new Expression('NOW()'),
+            ],
+        ];
+    }
+
     /**
      * @inheritdoc
      */
@@ -38,6 +53,8 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', 'email', 'password'], 'required'],
+            [['email'], 'email'],
+            [['email'], 'unique'],
             [['active'], 'integer'],
             [['created_at', 'updated_at'], 'safe'],
             [['username', 'lastname', 'firstname', 'email', 'password', 'token', 'auth_key'], 'string', 'max' => 255]
@@ -62,6 +79,41 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    /**
+     * set something before save db
+     * @param  mixed $insert
+     * @return mixed
+     */
+    public function beforeSave($insert) 
+    {
+        // encode password
+        $this->setPassword($this->password);
+        // making token
+        $this->setToken();
+        // set auth_key 
+        $this->setAuthKey();
+
+        // save avatar
+        $image = UploadedFile::getInstance($this, 'avatar');
+        if (isset($image))
+        {
+            $ext = end((explode(".", $image->name)));
+            // generate a unique file name
+            $this->avatar = Yii::$app->security->generateRandomString().".{$ext}";
+            // the path to save file, you can set an uploadPath
+            // in Yii::$app->params (as used in example below)
+            $path = Yii::$app->params['uploadAvatarPath'] . $this->avatar;
+            $image->saveAs($path);
+        }
+        // in the editing case, if user doesn't change avatar, then set it with old avatar
+        else if (!empty($this->oldAttributes) && !empty($this->oldAttributes['avatar']))
+        {
+            $this->avatar = $this->oldAttributes['avatar'];
+        }
+
+        return parent::beforeSave($insert);
     }
 
     /**
@@ -112,6 +164,22 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function setPassword($password)
     {
         $this->password = \Yii::$app->getSecurity()->generatePasswordHash($password);
+    }
+
+    /**
+     * generates token 
+     */
+    public function setToken()
+    {
+        $this->token = Yii::$app->security->generateRandomString();
+    }
+
+    /**
+     * generates auth_key
+     */
+    public function setAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
     }
 
     /**
