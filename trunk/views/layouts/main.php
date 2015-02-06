@@ -159,20 +159,14 @@ AppAsset::register($this);
                             <a href="/websites"><i class="gi gi-globe sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Websites</span></a>
                         </li>
                         <li>
-                            <a href="panel_checklist.php"><i class="fa fa-list sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Checklists</span></a>
+                            <a href="/checklists"><i class="fa fa-list sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Checklists</span></a>
                         </li>
                         <li>
-                            <a href="panel_message.php"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span>
+                            <a href="/messages"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span>
                             </a>
                         </li>
                         <li>
-                            <a href="panel_setting.php"><i class="fa fa-cogs sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Settings</span></a>
-                        </li>
-                        <li>
-                            <a href="/ProUI 3.0 by pixelcave/01 - ProUI Backend Template (PHP)"><i class="gi gi-leaf sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">ProUI Backend</span></a>
-                        </li>
-                        <li>
-                            <a href="/ProUI 3.0 by pixelcave/05 - ProUI Email Templates"><i class="gi gi-leaf sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">ProUI E-Mail</span></a>
+                            <a href="/settings"><i class="fa fa-cogs sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Settings</span></a>
                         </li>
                     </ul>
                     <!-- END Sidebar Navigation -->

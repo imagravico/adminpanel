@@ -73,7 +73,6 @@ class Website extends \yii\db\ActiveRecord
 
     public function beforeSave($insert) 
     {
-
         // convert format birthday
         if ($this->online_date) {
             $date = \DateTime::createFromFormat('m/d/Y', $this->online_date);
