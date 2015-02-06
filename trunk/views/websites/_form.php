@@ -20,7 +20,6 @@ use app\models\User;
 			'layout'  => 'horizontal',
 			'options' => [
 				'class'   => 'form-horizontal form-bordered',
-				'enctype' => 'multipart/form-data'
 	        ],
 	        'fieldConfig' => [
 		        'horizontalCssClasses' => [
