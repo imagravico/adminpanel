@@ -80,6 +80,7 @@ class ClientsController extends \yii\web\Controller
         {
             $selected[] = $value->group->id;
         }
+        
         // assign all selected values so they may show in edit page
         $groups->id = $selected;
 

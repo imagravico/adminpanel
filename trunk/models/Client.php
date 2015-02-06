@@ -23,6 +23,7 @@ use yii\web\UploadedFile;
  */
 class Client extends \yii\db\ActiveRecord
 {
+    public $fullname;
     /**
      * @inheritdoc
      */
@@ -121,6 +122,8 @@ class Client extends \yii\db\ActiveRecord
             $date = \DateTime::createFromFormat('Y-d-m', $this->birthday);
             $this->birthday = $date->format('d/m/Y');
         }
+        // set full name for current client
+        $this->fullname = $this->getFullName();
         parent::afterFind();
     }
 
@@ -129,6 +132,14 @@ class Client extends \yii\db\ActiveRecord
         return $this->hasMany(GroupClient::className(), ['clients_id' => 'id']);
     }
 
+    public function getWebsites()
+    {
+        return $this->hasMany(Website::classname(), ['clients_id' => 'id']);
+    }
 
 
+    public function getFullName()
+    {
+        return $this->firstname . ' ' . $this->lastname;
+    }
 }

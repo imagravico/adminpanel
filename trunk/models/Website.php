@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use app\models\Client;
+use yii\behaviors\TimestampBehavior;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "websites".
@@ -25,13 +28,27 @@ class Website extends \yii\db\ActiveRecord
         return 'websites';
     }
 
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'createdAtAttribute' => 'created_at',
+                'updatedAtAttribute' => 'updated_at',
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+
+
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['domain'], 'required'],
+            [['domain', 'clients_id', 'online_date'], 'required'],
             [['online_date', 'created_at', 'updated_at'], 'safe'],
             [['active', 'clients_id'], 'integer'],
             [['domain'], 'string', 'max' => 255]
@@ -52,5 +69,31 @@ class Website extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'clients_id' => 'Clients ID',
         ];
+    }
+
+    public function beforeSave($insert) 
+    {
+
+        // convert format birthday
+        if ($this->online_date) {
+            $date = \DateTime::createFromFormat('m/d/Y', $this->online_date);
+            $this->online_date = $date->format('Y-m-d');
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    public function afterFind()
+    {
+        // convert current format of birthday to d/m/Y
+        if ($this->online_date) {
+            $date = \DateTime::createFromFormat('Y-d-m', $this->online_date);
+            $this->online_date = $date->format('d/m/Y');
+        }
+    }
+    
+    public function getClient() 
+    {
+        return $this->hasOne(Client::classname(), ['id' => 'clients_id']);
     }
 }
