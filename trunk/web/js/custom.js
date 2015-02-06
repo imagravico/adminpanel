@@ -192,7 +192,7 @@ var Action = function() {
 		// add wrapper to image in activity
 		var addWrap =  function () {
 			var src = activityList.find('.timeline-content img').attr('src');
-			activityList.find('.timeline-content img').wrap('<div clas="row push"><div class="col-sm-6 col-md-4"><a href="' + src + '" data-toggle="lightbox-image"></a></div></div>');
+			activityList.find('.timeline-content img').wrap('<div clas="row push"><div class="col-sm-6 col-md-4"><a href="' + src + '" data-toggle="lightbox-image" id="lightbox-image"></a></div></div>');
 		}
 		// run
 		addWrap();

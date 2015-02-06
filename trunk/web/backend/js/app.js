@@ -67,6 +67,11 @@ var App = function() {
         // Initialize single image lightbox
         $('[data-toggle="lightbox-image"]').magnificPopup({type: 'image', image: {titleSrc: 'title'}});
 
+        $(document.body).on('click', '#lightbox-image', function (e) {
+            e.preventDefault();
+            $(this).magnificPopup({type: 'image', image: {titleSrc: 'title'}});
+        });
+
         // Initialize image gallery lightbox
         $('[data-toggle="lightbox-gallery"]').magnificPopup({
             delegate: 'a.gallery-link',
