@@ -52,6 +52,7 @@ class ActivitiesController extends \yii\web\Controller
 			exit();
 		}
     }
+    
     /**
      * Finds the Activity model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
