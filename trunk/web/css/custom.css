@@ -2,3 +2,13 @@
 #activities-list .no-more {
 	padding:10px 20px;
 }
+#form-add-group .form-control{
+	height: 30px;
+}
+.table.table-vcenter td.text-left111{
+	vertical-align: top;
+}
+#web-form .help-block-error{
+	display: inline-block;
+	margin-left: 200px;
+}

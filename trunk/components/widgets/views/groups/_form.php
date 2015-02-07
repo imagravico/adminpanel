@@ -7,7 +7,7 @@ use yii\bootstrap\ActiveForm;
         'id'      => 'form-add-group',
         'action' => '#',
         'options' => [
-            'class'   => 'form-horizontal form-bordered',
+            'class'   => 'form-bordered',
         ],
         'fieldConfig' => [
             'horizontalCssClasses' => [
@@ -38,7 +38,7 @@ use yii\bootstrap\ActiveForm;
                     {
                 ?>
                         <tr>
-                            <td><?= $group->name ?></td>
+                            <td class="text-left111"><?= $group->name ?></td>
                             <td class="text-right">
                                  <!-- Edit Button -->
                                 <a data-toggle="collapse" href="javascript:void(0)" class="btn btn-xs btn-default" id="edit-group" data-target="#edit-input-<?= $group->id ?>">
@@ -49,7 +49,7 @@ use yii\bootstrap\ActiveForm;
                                     <i class="fa fa-times"></i> Delete
                                 </a>
 
-                                 <div id="edit-input-<?= $group->id ?>" class="collapse">
+                                 <div id="edit-input-<?= $group->id ?>" class="collapse" style="margin-top:6px">
                                     <div class="input-group">
                                         <input type="text" id="edit-group-input-<?= $group->id ?>" class="form-control" value="">
                                         <span class="input-group-btn">
