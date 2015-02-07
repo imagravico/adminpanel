@@ -56,12 +56,12 @@ use app\models\User;
 			
             <!-- Actions Content -->
             <form action="page_ecom_product_edit.php" method="post" class="form-horizontal form-bordered" onsubmit="return false;">
-                <div class="form-group form-actions">
-                    <div class="col-md-6 text-left">
+                <div class="form-group form-actions" style="overflow:hidden">
+                    <div class="col-md-8 text-left">
                         <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-floppy-o"></i> Save</button>
 						<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/"><i class="fa fa-times"></i> Cancel</button>
                     </div>
-					<div class="col-md-6 text-right"></div>
+					<div class="col-md-4 text-right"></div>
                 </div>
             </form>
             <!-- END Actions Content -->

@@ -19,7 +19,7 @@ use yii\bootstrap\ActiveForm;
                         'id'      => 'form-note',
                         'action' => '#',
                         'options' => [
-                            'class'   => 'form-horizontal form-bordered',
+                            'class'   => 'form-bordered',
                             'data-update' => '.notes-list'
                         ],
                         'fieldConfig' => [
@@ -31,8 +31,9 @@ use yii\bootstrap\ActiveForm;
                 ?>
                 <?=
                     $form->field($note, 'content')->textArea(['rows' => '6', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg'])
+                    ->label(false)
                 ?>
-                    <div class="form-group form-actions">
+                    <div class="form-group form-actions" style="overflow:hidden">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>

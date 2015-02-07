@@ -90,7 +90,6 @@ body {
     color: #394263;
     font-size: 13px;
     background-color: #222222;
-    padding: 0px!important;
 }
 
 #page-container,
@@ -167,9 +166,6 @@ body {
 }
 
 /* Sidebar + Fixed Header */
-.navbar {
-    border-radius: 0!important;
-}
 .header-fixed-top #sidebar,
 .header-fixed-bottom #sidebar {
     position: fixed;
@@ -240,10 +236,7 @@ body {
 .footer-fixed.header-fixed-bottom #page-content + footer {
     bottom: 50px;
 }
-#main-container footer {
-    float: left!important;
-    width: 100%!important;
-}
+
 /*
 =================================================================
 (#m02hds) HEADER

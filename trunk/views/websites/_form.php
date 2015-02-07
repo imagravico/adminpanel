@@ -37,7 +37,7 @@ use app\models\User;
 		?>
 
 		<?= $form->field($website, 'domain', [
-              	'template' => "{label}<div class='col-md-9'>{input}<span class='input-group-addon'><i class='gi gi-globe'></i></span></div>\n{hint}\n{error}"
+              	'template' => "{label}<div class='col-md-9'><div class='input-group'>{input}<span class='input-group-addon'><i class='gi gi-globe'></i></span></div></div>\n{hint}\n{error}"
             ])->textInput((array('placeholder' => 'Domain', 'class' => 'form-control'))); ?>	
 	
 		<?= $form->field($website, 'online_date', [
