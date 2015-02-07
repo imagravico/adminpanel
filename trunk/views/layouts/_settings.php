@@ -78,7 +78,7 @@ use yii\bootstrap\ActiveForm;
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
-                            <?= Html::submitButton('Save Changes', ['class'=> 'btn btn-primary']) ;?>
+                            <?= Html::submitButton('Save Changes', ['class'=> 'btn btn-primary save_changes']) ;?>
                         </div>
                     </div>
                 </form>
