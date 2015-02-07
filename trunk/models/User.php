@@ -26,6 +26,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
 
     public $fullname;
+    public $repassword;
     /**
      * @inheritdoc
      */
@@ -53,6 +54,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             [['username', 'email', 'password'], 'required'],
+            ['repassword', 'compare', 'compareAttribute' => 'password'],
             [['email'], 'email'],
             [['email'], 'unique'],
             [['active'], 'integer'],
@@ -116,6 +118,12 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         return parent::beforeSave($insert);
     }
 
+    public function afterFind()
+    {
+        $this->repassword = $this->password;
+        $this->fullname = $this->getFullName();
+        return parent::afterFind();
+    }
     /**
      * @inheritdoc
      */
@@ -191,11 +199,6 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function validatePassword($password) 
     {
         return \Yii::$app->getSecurity()->validatePassword($password, $this->password);
-    }
-
-    public function afterFind() 
-    {
-        $this->fullname = $this->getFullName();
     }
 
     /**
