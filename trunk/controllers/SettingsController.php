@@ -20,6 +20,9 @@ class SettingsController extends \yii\web\Controller
         	]);
     }
 
-    public function 
+    public function actionChange()
+    {
+        
+    }
 
 }
