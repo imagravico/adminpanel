@@ -90,6 +90,7 @@ body {
     color: #394263;
     font-size: 13px;
     background-color: #222222;
+    padding-top: 0!important;
 }
 
 #page-container,
