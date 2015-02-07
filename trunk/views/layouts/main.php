@@ -232,7 +232,7 @@ AppAsset::register($this);
             <!-- END Header -->
 
             <!-- Page content -->
-            <div id="page-content" style="float:left;width:100%">
+            <div id="page-content" style="float:left;width:100%;min-height:572px">
                 <?= $content; ?>
             </div>
             <!-- END Page Content -->
