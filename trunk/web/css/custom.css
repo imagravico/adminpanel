@@ -8,10 +8,14 @@
 .table.table-vcenter td.text-left111{
 	vertical-align: top;
 }
-#web-form .help-block-error{
+#web-form .help-block-error,
+#login-form .help-block-error{
 	display: inline-block;
 	margin-left: 200px;
 }
 .notes-list ul.media-list li.media div.media-body{
 	width: auto;
+}
+.widget .widget-simple{
+	min-height: 112px;
 }
