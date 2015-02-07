@@ -20,6 +20,7 @@ class AdminAsset extends \yii\web\AssetBundle
      */
     public $css = [
         'main.css',
+        'custom.css',
     ];
 
 }
