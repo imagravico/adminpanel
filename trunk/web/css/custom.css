@@ -22,3 +22,6 @@
 .save_changes{
 	padding: 4px 12px;
 }
+#page-wrapper .sidebar-partial{
+	min-height: 645px;
+}
