@@ -91,7 +91,7 @@
 
 			                        <!-- Widget Main -->
 			                        <div class="widget-main ">
-			                            <a href="panel_website_edit.php" class="widget-image-container animation-fadeIn">
+			                            <a href="/websites/edit/<?= $website->id ?>" class="widget-image-container animation-fadeIn">
 			                                <span class="widget-icon <?= $class_icons[$i] ?>"><i class="fa fa-globe"></i></span>
 			                            </a>
 			                        </div>

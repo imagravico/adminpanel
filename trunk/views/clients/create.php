@@ -26,7 +26,7 @@ use app\components\widgets\ActivitiesWidget;
 	
 	<!-- LEFT -->
 	<div class="col-lg-4 col-xs-12">
-		<?php echo $this->render('_left', [
+		<?php echo $this->render('_right', [
 				'client' => $client
 		]); ?>
 	</div>
