@@ -229,7 +229,6 @@ var Action = function() {
 			}
 		}
 
-
 	return {
         init: function() {
             uiInit(); // Initialize UI Code
