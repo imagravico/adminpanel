@@ -256,7 +256,7 @@ AppAsset::register($this);
 
 <!-- Scroll to top link, initialized in js/app.js - scrollToTop() -->
 <a href="#" id="to-top"><i class="fa fa-angle-double-up"></i></a>
-<?= $this->render('_settings', ['user' => User::findOne(Yii::$app->user->id)]); ?>
+<?= $this->render('/settings/_change', ['user' => User::findOne(Yii::$app->user->id)]); ?>
 
 <!-- END JAVASCRIPTS -->   
 <?php $this->endBody() ?>

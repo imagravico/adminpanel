@@ -8,6 +8,7 @@ var Action = function() {
 		actionGroup();
 		actionNote();
 		actionActivity();
+		actionSetting();
 	}
 
 	var actionForm = function () 
@@ -196,6 +197,29 @@ var Action = function() {
 		}
 		// run
 		addWrap();
+	}
+
+	var actionSetting = function () {
+		var form = $('#settings-change');
+
+		form.submit(function (e) {
+			e.preventDefault();
+			$.ajax({
+				url: form.data('url'),
+				type: 'POST',
+				data: form.serializeArray(), 
+				success: function (res) {
+					if (res.success) 
+					{
+						form.find('.btn-close').trigger('click');
+					}
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+
+		});
 	}
 
 	var updateRes =  function (obj, res) {

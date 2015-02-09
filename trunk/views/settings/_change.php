@@ -18,15 +18,13 @@ use yii\bootstrap\ActiveForm;
             <div class="modal-body">
                 <?php 
                     $form = ActiveForm::begin([
-                        'id' => 'settings-form',
+                        'id' => 'settings-change',
                         'layout' => 'horizontal',
-                        'action' => '/settings/change',
                         'enableClientValidation' => true,
                         'validateOnSubmit' => true,
-                        'validateOnChange' => true,
-                        'validateOnType' => true,   
                         'options' => [
                             'class'   => 'form-horizontal form-bordered',
+                            'data-url' => '/settings/change'
                         ],
                         'fieldConfig' => [
                             'horizontalCssClasses' => [
@@ -77,11 +75,11 @@ use yii\bootstrap\ActiveForm;
                     </fieldset>
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
                             <?= Html::submitButton('Save Changes', ['class'=> 'btn btn-primary save_changes']) ;?>
                         </div>
                     </div>
-                </form>
+                <?php ActiveForm::end(); ?>
             </div>
             <!-- END Modal Body -->
         </div>

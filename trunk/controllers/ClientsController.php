@@ -45,7 +45,8 @@ class ClientsController extends \yii\web\Controller
                     $groups_clients->save();
     			}
                 // everything is ok, redirect to clients list page
-    			if (empty($groups_clients->getErrors())) 
+                $errors = $groups_clients->getErrors();
+    			if (empty($errors)) 
                 {
     				return $this->redirect(['/clients']);
     			}
@@ -105,7 +106,8 @@ class ClientsController extends \yii\web\Controller
                     $groups_clients->save();
                 }
                 // everything is ok, redirect to clients list page
-                if (empty($groups_clients->getErrors())) 
+                $errors = $groups_clients->getErrors();
+                if (empty($errors)) 
                 {
                     return $this->redirect(['/clients']);
                 }
