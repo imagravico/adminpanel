@@ -21,10 +21,12 @@ use yii\helpers\Url;
             	<?php 
                     $model = isset($model) ? $model : new MessageSchedule();
                     $form = ActiveForm::begin([
-                        'id'      => 'form-add-message-schedule',
-                        'action' => '#',
+                        'id' => 'form-add-message-schedule',
+                        'enableClientValidation' => true,
+                        'validateOnSubmit' => true,
                         'options' => [
                             'class'   => 'form-bordered',
+                            'data-url' => '/mschedules/create'
                         ],
                         'fieldConfig' => [
                             'horizontalCssClasses' => [
@@ -35,20 +37,23 @@ use yii\helpers\Url;
                 ?>
                 <?= $form->field($model, 'descriptions', [
 			          	'template' => "<div class='col-md-3'>{label}</div><div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-			        	])->textInput((array('placeholder' => 'Birthday Message', 'class' => 'form-control'))); 
+			        	])->textInput((array('placeholder' => 'Descriptions', 'class' => 'form-control'))); 
 			        ?>
 
                 <?php 
                     $items_rel = $model->rel_list;
                     echo $form->field($model, 'relation', [
-                    		'template' => "<div class='col-md-3'>{label}</div><div class='col-md-9'>{input}</div>\n{hint}\n{error}"
+                    		'template' => "<div class='col-md-3'>{label}</div><div class='col-md-9'>{input}</div>\n{hint}\n{error}",
+                            'selectors' => ['input' => '#relation']
                     	])
                         ->dropDownList(
                             $items_rel,          
                             ['prompt'=>'--', 'id' => 'relation']    
                         );
                 ?>
-
+                <?php
+                    echo $form->field($model, 'type')->hiddenInput(['value' => 1])->label(false);
+                ?>
 					<div class="form-group">
 						<div class="col-xs-3">
 							<ul class="nav nav-tabs tabs-left">
@@ -62,7 +67,9 @@ use yii\helpers\Url;
 							<div class="tab-content">
 								<div class="tab-pane active" id="tab-event-based">
                                     <?php
-                                        echo $form->field($model, 'event')->widget(DepDrop::classname(), [
+                                        echo $form->field($model, 'event', [
+                                                'selectors' => ['input' => '#which-event']
+                                            ])->widget(DepDrop::classname(), [
                                                 'options' => ['id' => 'which-event'],
                                                 'pluginOptions' => [
                                                     'depends' => ['relation'],
@@ -73,7 +80,9 @@ use yii\helpers\Url;
                                     ?>
                                     
                                     <?php
-                                        echo $form->field($model, 'send_on')->widget(DepDrop::classname(), [
+                                        echo $form->field($model, 'send_on', [
+                                                'selectors' => ['input' => '#send-on']
+                                            ])->widget(DepDrop::classname(), [
                                                 'options' => ['id' => 'send-on'],
                                                 'pluginOptions' => [
                                                     'depends' => ['which-event'],
@@ -96,7 +105,7 @@ use yii\helpers\Url;
                             <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                         </div>
                     </div>
-                </form>
+                <?php ActiveForm::end() ?>
             </div>
             <!-- END Modal Body -->
         </div>

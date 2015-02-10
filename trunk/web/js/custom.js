@@ -9,6 +9,7 @@ var Action = function() {
 		actionNote();
 		actionActivity();
 		actionSetting();
+		actionMSchedule();
 	}
 
 	var actionForm = function () 
@@ -201,6 +202,30 @@ var Action = function() {
 
 	var actionSetting = function () {
 		var form = $('#settings-change');
+
+		form.submit(function (e) {
+			e.preventDefault();
+			$.ajax({
+				url: form.data('url'),
+				type: 'POST',
+				data: form.serializeArray(), 
+				success: function (res) {
+					console.log(res);
+					if (res.success) 
+					{
+						form.find('.btn-close').trigger('click');
+					}
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
+
+		});
+	}
+
+	var actionMSchedule = function () {
+		var form = $('#form-add-message-schedule');
 
 		form.submit(function (e) {
 			e.preventDefault();

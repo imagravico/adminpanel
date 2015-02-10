@@ -53,7 +53,11 @@ class MessageSchedule extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['relation', 'type', 'event', 'send_on', 'type_periodically'], 'integer'],
+            [['descriptions', 'relation'], 'required'],
+            [['event', 'send_on'], 'required', 'when' => function ($model) {
+                return $model->type == 1;
+            }],
+            [['relation', 'type', 'event', 'type_periodically'], 'integer'],
             [['descriptions', 'time_periodically'], 'string', 'max' => 255]
         ];
     }
