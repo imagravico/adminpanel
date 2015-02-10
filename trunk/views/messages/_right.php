@@ -6,7 +6,9 @@ use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\models\User;
+use app\models\MessageSchedule;
 use app\components\widgets\NotesWidget;
+use app\components\widgets\MschedulesWidget;
 
 ?>
 <div class="block clearfix">
@@ -60,6 +62,10 @@ use app\components\widgets\NotesWidget;
     <?php ActiveForm::end(); ?>
     <!-- END Actions Content -->
 </div>
+<!-- messages schedules -->
 
+<?php 
+    echo MschedulesWidget::widget(); 
+?>
 <!-- Notes widget -->
 <?php echo NotesWidget::widget(); ?>

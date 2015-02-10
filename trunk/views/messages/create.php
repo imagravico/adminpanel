@@ -21,7 +21,7 @@
 	</div>
 	<div class="col-lg-4 col-xs-12">
 		<?php echo $this->render('_right', [
-				'message' => $message
+				'message' => $message,
 		]); ?>
 	</div>
 </div>

@@ -1,7 +1,7 @@
 <!-- Forms General Header -->
 <div class="content-header">
     <div class="header-section">
-        <h1><i class="fa fa-globe" style="margin:-14px 0 0 0;"></i>Websites</h1>
+        <h1><i class="fa fa-globe" style="margin:-14px 0 0 0;"></i>Messages</h1>
     </div>
 </div>
 <!-- END Forms General Header -->

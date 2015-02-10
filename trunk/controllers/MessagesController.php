@@ -4,10 +4,12 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Message;
+use app\models\MessageSchedule;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\helpers\Json;
 
 /**
  * MessagesController implements the CRUD actions for Message model.
@@ -88,6 +90,39 @@ class MessagesController extends Controller
         exit();
     }
 
+    public function actionGetevent() 
+    {
+        $out = [];
+        $mSchedule = new MessageSchedule();
+
+        if (isset($_POST['depdrop_parents']) && $_POST['depdrop_parents'][0] != '') 
+        {
+            $relation = $_POST['depdrop_parents'][0];
+            if ($relation == 1) {
+                $out = $mSchedule->client_event; 
+                
+            } 
+            elseif ($relation == 2) {
+                $out = $mSchedule->website_event; 
+            }
+            echo Json::encode(['output' => $out, 'selected' => '']);
+            return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
+    }
+
+    public function actionGetsendtype() 
+    {
+        $mSchedule = new MessageSchedule();
+
+        if (isset($_POST['depdrop_parents']) && $_POST['depdrop_parents'][0] != '') 
+        {
+            $out = $mSchedule->send_on;
+            echo Json::encode(['output' => $out, 'selected' => '']);
+            return;
+        }
+        echo Json::encode(['output' => '', 'selected' => '']);
+    }
     /**
      * Finds the Message model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
