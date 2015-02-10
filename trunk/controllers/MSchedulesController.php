@@ -17,14 +17,26 @@ class MSchedulesController extends \yii\web\Controller
     public function actionCreate()
     {
     	$mschedule = new MessageSchedule();
+    	if (null !== Yii::$app->request->post('MessageSchedule')['type'] && Yii::$app->request->post('MessageSchedule')['type'] == 2)
+    	{
+			$mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
+			$mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
+			$mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
 
-    	if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
-    		echo Json::encode(['success' => True]);
-    		exit();
+    		if ($mschedule->save()) {
+    			Yii::$app->response->format = 'json';
+	    		return ['successful' => "true", 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    	}
+	    	
     	}
-    	else {
-    		echo "<pre>"; var_dump($mschedule->getErrors()); die('$mschedule->getErrors()');
+    	elseif (null !== Yii::$app->request->post('MessageSchedule')['type'] && Yii::$app->request->post('MessageSchedule')['type'] == 1) {
+    		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
+
+    			Yii::$app->response->format = 'json';
+	    		return ['successful' => "true", 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    	}
     	}
+    	
     }
 
 }

@@ -210,7 +210,6 @@ var Action = function() {
 				type: 'POST',
 				data: form.serializeArray(), 
 				success: function (res) {
-					console.log(res);
 					if (res.success) 
 					{
 						form.find('.btn-close').trigger('click');
@@ -225,7 +224,8 @@ var Action = function() {
 	}
 
 	var actionMSchedule = function () {
-		var form = $('#form-add-message-schedule');
+		var form = $('#form-add-message-schedule'),
+			update = $(form.data('update'));
 
 		form.submit(function (e) {
 			e.preventDefault();
@@ -234,9 +234,13 @@ var Action = function() {
 				type: 'POST',
 				data: form.serializeArray(), 
 				success: function (res) {
-					if (res.success) 
+					console.log(res);
+					console.log(res.successful);
+					if (res.successful == 'true') 
 					{
+						updateRes(update, res.data);
 						form.find('.btn-close').trigger('click');
+						form.trigger("reset");
 					}
 				},
 				error: function (res) {
