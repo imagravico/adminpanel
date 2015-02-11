@@ -31,6 +31,7 @@ var Action = function() {
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
+				
 				$.ajax({
 					url: $(this).data('to'),
 					success: function(res) {
