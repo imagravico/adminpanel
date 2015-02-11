@@ -12,25 +12,24 @@ class ActivitiesController extends \yii\web\Controller
     public function actionCreate()
     {
     	$activity   =  new Activity();
-    	$activities = Activity::find()
-    		->orderBy('id DESC')
-    		->limit(5)
-			->offset(0)
-    		->all();
 
     	if ($activity->load(Yii::$app->request->post()) && $activity->save()) {
 
-    		return $this->renderPartial('@widget/views/activities/_list', [
-    				'errors' => '', 
-    				'activities' => $activities
-    			]);
+            $activities = Activity::find()
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->offset(0)
+                ->all();
+
+            Yii::$app->response->format = 'json';
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/activities/_list', [
+                        'activities' => $activities
+                    ])
+            ];
     	}
-    	else {
-    		return $this->renderPartial('@widget/views/activities/_list', [
-				'errors'     => $activity->getErrors() , 
-				'activities' => $activities
-    		]);
-    	}
+    	
     }
 
     public function actionMore($page = 1)
@@ -40,16 +39,23 @@ class ActivitiesController extends \yii\web\Controller
 			->limit(5)
 			->offset(($page - 1) * 5)
 			->all();
+        
+        Yii::$app->response->format = 'json';
 
 		if (!empty($activities)) {
-			return $this->renderPartial('@widget/views/activities/_list', [
-    				'errors' => '', 
-    				'activities' => $activities
-    			]);
+			
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/activities/_list', [
+                        'activities' => $activities
+                    ])
+            ];
 		}
 		else {
-			echo "<p class='no-more'>No activity is available</p>";
-			exit();
+            return [
+                'errors' => '',
+                'data'   => "<p class='no-more'>No activity is available</p>"
+            ];
 		}
     }
     

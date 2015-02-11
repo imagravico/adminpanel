@@ -17,9 +17,13 @@ class NotesController extends \yii\web\Controller
     	$note->save();
 
     	$notes = Note::find()->orderBy('id DESC')->all();
-		return $this->renderPartial('@widget/views/notes/_list', [
-			'notes' => $notes
-		]);	
+        Yii::$app->response->format = 'json';
+        return [
+            'errors' => '',
+            'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                'notes' => $notes
+            ])
+        ];
     }
 
     public function actionEdit($id) {
@@ -27,11 +31,15 @@ class NotesController extends \yii\web\Controller
     	$note = $this->findModel($id);
 		$note->load(Yii::$app->request->post());
     	$note->save();
-
     	$notes = Note::find()->orderBy('id DESC')->all();
-    		return $this->renderPartial('@widget/views/notes/_list', [
-				'notes' => $notes
-			]);	    	
+
+        Yii::$app->response->format = 'json';
+        return [
+            'errors' => '',
+            'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                'notes' => $notes
+            ])
+        ];
     }
 
     /**
@@ -45,10 +53,14 @@ class NotesController extends \yii\web\Controller
         $this->findModel($id)->delete();
         
         $notes = Note::find()->orderBy('id DESC')->all();
-        return $this->renderPartial('@widget/views/notes/_list', [
+
+        Yii::$app->response->format = 'json';
+        return [
+            'errors' => '',
+            'data'   => $this->renderPartial('@widget/views/notes/_list', [
                 'notes'  => $notes,
-                'errors' => ''
-            ]); 
+            ])
+        ];
     }
 
     /**

@@ -11,15 +11,24 @@ class GroupsController extends \yii\web\Controller
     public function actionCreate()
     {
     	$group = new Group();
+        Yii::$app->response->format = 'json';
+
     	if ($group->load(Yii::$app->request->post()) && $group->save())
     	{
-    		return $this->renderPartial('@widget/views/groups/_add', [
-				'group' => $group
-			]);	
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/groups/_add', [
+                        'group' => $group
+                    ])
+            ];
     	}
-    	return $this->renderPartial('@widget/views/groups/_add', [
-				'group' => $group
-			]);	
+
+    	return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/groups/_add', [
+                        'group' => $group
+                    ])
+            ];	
     }
 
     /**
@@ -34,7 +43,10 @@ class GroupsController extends \yii\web\Controller
         $group = new Group();
         
         Yii::$app->response->format = 'json';
-        return ['errors' => '', 'data' => $this->renderPartial('@widget/views/groups/_add')];
+        return [
+                'errors' => '', 
+                'data' => $this->renderPartial('@widget/views/groups/_add')
+            ];
     }
 
     /**
@@ -48,7 +60,11 @@ class GroupsController extends \yii\web\Controller
         $group->name = Yii::$app->request->post()['name'];
         $group->save();
 
-        return $this->renderPartial('@widget/views/groups/_add'); 
+        Yii::$app->response->format = 'json';
+        return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/groups/_add')
+            ];
     }
     /**
      * Finds the User model based on its primary key value.

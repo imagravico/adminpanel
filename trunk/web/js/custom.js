@@ -37,9 +37,9 @@ var Action = function() {
 						if (res.errors == '' && del.data('redirect') != undefined) {
 							window.location.href = del.data('redirect');
 						}
-
+						console.log(res.errors);
 						if (res.errors == '' && del.data('update')) {
-							updateRes($(del.data('update')), res);
+							updateRes($(del.data('update')), res.data);
 						}
 					},
 					error: function(res) {
@@ -62,17 +62,8 @@ var Action = function() {
 			var form   = $(add.data('form')),
 				update = $(add.data('update'));
 
-			$.ajax({
-				url: add.data('to'),
-				type: 'POST',
-				data: form.serializeArray(),
-				success: function (res) {
-					updateRes(update, res);
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
+			postData(add.data('to'), form.serializeArray(), update, function () {
+				});	
 		});
 
 		// edit, in this case it is only for editting group
@@ -81,17 +72,9 @@ var Action = function() {
 			var update = $(edit.data('update')),
 				name = $($(this).data('input')).val();
 
-			$.ajax({
-				url: $(this).data('to'),
-				type: 'POST',
-				data: {'name' : name}, 
-				success: function (res) {
-					updateRes(update, res);
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
+			postData($(this).data('to'), {'name' : name}, update, function () {
+				});
+
 		});
 	}
 
@@ -111,34 +94,16 @@ var Action = function() {
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
-				$.ajax({
-					url: $(this).data('to'),
-					success: function(res) {
-						updateRes($('.notes-list'), res);
-					},
-					error: function(res) {
-						alert('Opp oh! There are something wrong. Try again..')
-					} 
-				})
+				postData($(this).data('to'), {}, update, function () {
+				});
 			}
 		});
 
 		form.submit(function (e) {
 			e.preventDefault();
-
-			$.ajax({
-				url: url,
-				type: 'POST',
-				data: form.serializeArray(), 
-				success: function (res) {
-					updateRes(update, res);
+			postData(url, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
-
+				});
 		});
 	}
 
@@ -148,47 +113,29 @@ var Action = function() {
 	 */
 	var actionActivity = function () {
 
-		var form = $('#form-add-activities'),
-			url  = form.data('url'),
-			update = $(form.data('update')),
+		var form         = $('#form-add-activities'),
+			url          = form.data('url'),
+			update       = $(form.data('update')),
 			activityList = $('#activities-list'), 
-			more = 2;
+			more         = 2;
 
 		form.submit(function (e) {
 			e.preventDefault();
-			$.ajax({
-				url: url,
-				type: 'POST',
-				data: form.serializeArray(), 
-				success: function (res) {
-					updateRes(update, res);
-					// get image src
+			postData(url, form.serializeArray(), update, function () {
 					addWrap();
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
-
+				});
+			
 		});
 
 		body.on('click', '#activities-list .view-more', function (e) {
 			e.preventDefault();
-			var url = $(this).data('to');
-			$.ajax({
-				url: url + more,
-				type: 'POST',
-				data: form.serializeArray(), 
-				success: function (res) {
-					updateRes(update, res);
+			var url = $(this).data('to') + more;
+			postData(url, form.serializeArray(), update, function () {
 					more = more + 1;
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
+				});
+			
 		});
 
 		// add wrapper to image in activity
@@ -256,6 +203,24 @@ var Action = function() {
 				obj.html(res);
 			}
 		}
+
+	var postData = function (to, data, update, sCallback) 
+	{
+		$.ajax({
+			url: to,
+			type: 'POST',
+			data: data,
+			success: function (res) {
+				if (update != '' && res.errors == '') {
+					updateRes(update, res.data);
+				}
+				sCallback();
+			},
+			error: function (res) {
+				alert('Opp oh! There are something wrong. Try again..')
+			}
+		});
+	}
 
 	return {
         init: function() {
