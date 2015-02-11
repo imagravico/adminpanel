@@ -3,8 +3,6 @@
 	$.fn.actionForm = function (options) {
 		var dfOptions = {},
 			opts = $.extend({}, dfOptions, options),
-			// define it to handles on method on()
-			body = $(document.body),
 			form = this;
 
 		var cancel = function () {
@@ -41,56 +39,76 @@
 
 	$.fn.actionAjaxForm = function (options) {
 
-		var dfOptions = {},
+		var dfOptions = {
+				'close' : false,
+				'resetForm': true
+			},
+
 			opts = $.extend({}, dfOptions, options),
 			// define it to handles on method on()
 			body = $(document.body)
-			form = $(this);
+			form = this,
+			close = $('.btn-close');
 
 		var add = function () {
+			// add new 
+			form.submit(function (e) {
+				e.preventDefault();
+				var data = form.serializeArray();
 
+				postData(opts.ajaxTo, data, $(opts.update), function (update, res) {
+					// close popup after saving database
+					if (opts.close) 
+						close.trigger('click');
+					if (options.resetForm)
+						form.trigger('reset');
+
+					updateContent(update, res);
+				});
+			});
 		}
 
 		var edit = function () {
-
+			
 		}
 
 		var remove = function () {
-
+			
 		}
 
-		var updateContent = function () {
-
+		var updateContent =  function (obj, res) {
+			if (obj != undefined) {
+				obj.empty();
+				obj.html(res);
+			}
 		}
 
-		var postData = function () {
-
+		var postData = function (to, data, update, upCallback) {
+			$.ajax({
+				url: to,
+				type: 'POST',
+				data: data,
+				success: function (res) {
+					upCallback(update, res); 
+				},
+				error: function (res) {
+					alert('Opp oh! There are something wrong. Try again..')
+				}
+			});
 		}
-
 
 		var uiInit = function () {
 			// initializing
-			if (opts.cancel) {
-				cancel();
-			}
-
-			if (opts.del) {
-				del();
-			}
-
-			if (opts.add) {
-				add();
-			}
-
-			if (opts.edit) {
-				edit();
-			}
+			add();			
 		}
-
 		uiInit();
+
 	}
 })(jQuery);	
 
 $('.form-actions').actionForm({'cancel': true, 'del': true})
-$('#client-form').actionAjaxForm();
+$('#form-add-group').actionAjaxForm({
+	'update' : '#list-group',
+	'ajaxTo' : 'groups/create',
+});
 
