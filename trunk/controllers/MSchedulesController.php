@@ -17,7 +17,9 @@ class MSchedulesController extends \yii\web\Controller
     public function actionCreate()
     {
     	$mschedule = new MessageSchedule();
-    	if (null !== Yii::$app->request->post('MessageSchedule')['type'] && Yii::$app->request->post('MessageSchedule')['type'] == 2)
+        $type = isset(Yii::$app->request->post('MessageSchedule')['type']) ? Yii::$app->request->post('MessageSchedule')['type'] : NULL;
+
+    	if (null !== $type  && $type == 2)
     	{
 			$mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
 			$mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
@@ -29,7 +31,7 @@ class MSchedulesController extends \yii\web\Controller
 	    	}
 	    	
     	}
-    	elseif (null !== Yii::$app->request->post('MessageSchedule')['type'] && Yii::$app->request->post('MessageSchedule')['type'] == 1) {
+    	elseif (null !== $type && $type == 1) {
     		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
 
     			Yii::$app->response->format = 'json';

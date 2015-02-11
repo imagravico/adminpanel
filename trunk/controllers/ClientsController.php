@@ -7,6 +7,7 @@ use app\models\Group;
 use app\models\GroupClient;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
+use app\models\Website;
 
 class ClientsController extends \yii\web\Controller
 {
@@ -134,9 +135,10 @@ class ClientsController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-
-        echo json_encode(['errors' => '']);
-        exit();
+        // delete all websites related to this client
+        Website::deleteAll(['clients_id' => $id]);
+        
+        return $this->redirect(['/clients']);
     }
 
     /**

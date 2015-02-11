@@ -16,7 +16,7 @@ use app\models\User;
     <!-- General Data Content -->
     <?php 
 	    $form = ActiveForm::begin([
-			'id'      => 'login-form',
+			'id'      => 'client-form',
 			'layout'  => 'horizontal',
 			'options' => [
 				'class'   => 'form-horizontal form-bordered',

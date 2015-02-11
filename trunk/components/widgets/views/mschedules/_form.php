@@ -25,7 +25,7 @@ use yii\helpers\Url;
                         'enableClientValidation' => true,
                         'validateOnSubmit' => true,
                         'options' => [
-                            'class'   => 'form-bordered',
+                            'class'   => 'form-horizontal form-bordered',
                             'data-url' => '/mschedules/create',
                             'data-update' => '#list-mschedules'
                         ],
@@ -53,7 +53,9 @@ use yii\helpers\Url;
                         );
                 ?>
                 <?php
-                    echo $form->field($model, 'type')->hiddenInput(['value' => 1])->label(false);
+                    echo $form->field($model, 'type', [
+                            'wrapperOptions' => ['style' => 'display:none']
+                        ])->hiddenInput(['value' => 1])->label(false);
                 ?>
 					<div class="form-group">
 						<div class="col-xs-3">

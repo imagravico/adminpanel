@@ -234,13 +234,12 @@ var Action = function() {
 				type: 'POST',
 				data: form.serializeArray(), 
 				success: function (res) {
-					console.log(res);
-					console.log(res.successful);
 					if (res.successful == 'true') 
 					{
 						updateRes(update, res.data);
 						form.find('.btn-close').trigger('click');
 						form.trigger("reset");
+						$('#form-add-message-schedule').yiiActiveForm('resetForm');
 					}
 				},
 				error: function (res) {
