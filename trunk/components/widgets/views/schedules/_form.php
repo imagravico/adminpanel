@@ -25,9 +25,14 @@ use yii\helpers\Url;
                         'enableClientValidation' => true,
                         'validateOnSubmit' => true,
                         'options' => [
+<<<<<<< HEAD:trunk/components/widgets/views/mschedules/_form.php
                             'class'   => 'form-horizontal form-bordered',
                             'data-url' => '/mschedules/create',
                             'data-update' => '#list-mschedules'
+=======
+                            'class'   => 'form-bordered',
+                            'data-url' => '/mschedules/create'
+>>>>>>> parent of 471f3d3... finish add schedules for messages:trunk/components/widgets/views/schedules/_form.php
                         ],
                         'fieldConfig' => [
                             'horizontalCssClasses' => [
@@ -83,7 +88,7 @@ use yii\helpers\Url;
                                     ?>
                                     
                                     <?php
-                                        echo $form->field($model, 'sendon', [
+                                        echo $form->field($model, 'send_on', [
                                                 'selectors' => ['input' => '#send-on']
                                             ])->widget(DepDrop::classname(), [
                                                 'options' => ['id' => 'send-on'],
@@ -104,7 +109,7 @@ use yii\helpers\Url;
 					</div>
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
-                            <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                         </div>
                     </div>

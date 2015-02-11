@@ -22,7 +22,7 @@ class MSchedulesWidget extends Widget
 			->offset(0)
     		->all();
 
-		return $this->render('mschedules/index', [
+		return $this->render('schedules/index', [
 				'schedules' => $schedules
 			]);
 	}

@@ -54,11 +54,11 @@ class MessageSchedule extends \yii\db\ActiveRecord
     {
         return [
             [['descriptions', 'relation'], 'required'],
-            [['event', 'sendon'], 'required', 'when' => function ($model) {
+            [['event', 'send_on'], 'required', 'when' => function ($model) {
                 return $model->type == 1;
             }],
             [['relation', 'type', 'event', 'type_periodically'], 'integer'],
-            [['descriptions', 'time_periodically'], 'string', 'max' => 255],
+            [['descriptions', 'time_periodically'], 'string', 'max' => 255]
         ];
     }
 
@@ -73,42 +73,9 @@ class MessageSchedule extends \yii\db\ActiveRecord
             'relation' => 'Relation',
             'type' => 'Type',
             'event' => 'Event',
-            'sendon' => 'Send On',
+            'send_on' => 'Send On',
             'type_periodically' => 'Type Periodically',
             'time_periodically' => 'Time Periodically',
         ];
     }
-
-    public function beforeSave($insert)
-    {
-        if ($this->type == 2)
-        {
-            $this->type_periodically = Yii::$app->request->post('cron-period');
-            switch (trim($this->type_periodically)) {
-                case 'hour':
-                    $this->time_periodically = Yii::$app->request->post('cron-mins');
-                    break;
-
-                case 'day':
-                    $this->time_periodically = Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
-                    break;
-
-                case 'week':
-                    $this->time_periodically = Yii::$app->request->post('cron-dow') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
-                    break;
-
-                case 'month':
-                    $this->time_periodically = Yii::$app->request->post('cron-dom') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
-                    break;
-
-                case 'year':
-                    $this->time_periodically = Yii::$app->request->post('cron-dom') . '-' . Yii::$app->request->post('cron-month') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
-                    break;
-            }
-        }
-        return parent::beforeSave($insert);
-    }   
-
-
-
 }
