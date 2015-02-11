@@ -235,6 +235,7 @@ var Action = function() {
 				data: form.serializeArray(), 
 				success: function (res) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 					if (res.successful == 'true') 
 =======
 					if (res.success) 
@@ -245,6 +246,11 @@ var Action = function() {
 						form.trigger("reset");
 						$('#form-add-message-schedule').yiiActiveForm('resetForm');
 =======
+>>>>>>> parent of 471f3d3... finish add schedules for messages
+=======
+					if (res.success) 
+					{
+						form.find('.btn-close').trigger('click');
 >>>>>>> parent of 471f3d3... finish add schedules for messages
 					}
 				},

@@ -31,7 +31,7 @@ class AppAsset extends AssetBundle
         'web/backend/js/plugins.js',
         'web/backend/js/app.js',
         'web/backend/js/pages/index.js',
-        'web/js/custom2.js',
+        'web/js/custom.js',
         // 'web/js/switch_schedules.js'
     ];
     public $depends = [

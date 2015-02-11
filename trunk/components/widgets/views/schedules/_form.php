@@ -25,10 +25,15 @@ use yii\helpers\Url;
                         'enableClientValidation' => true,
                         'validateOnSubmit' => true,
                         'options' => [
+<<<<<<< HEAD:trunk/components/widgets/views/schedules/_form.php
 <<<<<<< HEAD:trunk/components/widgets/views/mschedules/_form.php
                             'class'   => 'form-horizontal form-bordered',
                             'data-url' => '/mschedules/create',
                             'data-update' => '#list-mschedules'
+=======
+                            'class'   => 'form-bordered',
+                            'data-url' => '/mschedules/create'
+>>>>>>> parent of 471f3d3... finish add schedules for messages:trunk/components/widgets/views/schedules/_form.php
 =======
                             'class'   => 'form-bordered',
                             'data-url' => '/mschedules/create'

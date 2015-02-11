@@ -18,6 +18,7 @@ class MSchedulesController extends \yii\web\Controller
     {
     	$mschedule = new MessageSchedule();
 <<<<<<< HEAD
+<<<<<<< HEAD
         $type = isset(Yii::$app->request->post('MessageSchedule')['type']) ? Yii::$app->request->post('MessageSchedule')['type'] : NULL;
 
     	if (null !== $type  && $type == 2)
@@ -27,11 +28,14 @@ class MSchedulesController extends \yii\web\Controller
 			$mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
 =======
 >>>>>>> parent of 471f3d3... finish add schedules for messages
+=======
+>>>>>>> parent of 471f3d3... finish add schedules for messages
 
     	if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
     		echo Json::encode(['success' => True]);
     		exit();
     	}
+<<<<<<< HEAD
 <<<<<<< HEAD
     	elseif (null !== $type && $type == 1) {
     		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
@@ -39,6 +43,10 @@ class MSchedulesController extends \yii\web\Controller
     			Yii::$app->response->format = 'json';
 	    		return ['successful' => "true", 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
 	    	}
+=======
+    	else {
+    		echo "<pre>"; var_dump($mschedule->getErrors()); die('$mschedule->getErrors()');
+>>>>>>> parent of 471f3d3... finish add schedules for messages
 =======
     	else {
     		echo "<pre>"; var_dump($mschedule->getErrors()); die('$mschedule->getErrors()');
