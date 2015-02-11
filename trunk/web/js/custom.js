@@ -210,7 +210,6 @@ var Action = function() {
 				type: 'POST',
 				data: form.serializeArray(), 
 				success: function (res) {
-					console.log(res);
 					if (res.success) 
 					{
 						form.find('.btn-close').trigger('click');
@@ -225,7 +224,8 @@ var Action = function() {
 	}
 
 	var actionMSchedule = function () {
-		var form = $('#form-add-message-schedule');
+		var form = $('#form-add-message-schedule'),
+			update = $(form.data('update'));
 
 		form.submit(function (e) {
 			e.preventDefault();
@@ -234,24 +234,12 @@ var Action = function() {
 				type: 'POST',
 				data: form.serializeArray(), 
 				success: function (res) {
-<<<<<<< HEAD
-<<<<<<< HEAD
 					if (res.successful == 'true') 
-=======
-					if (res.success) 
->>>>>>> parent of 471f3d3... finish add schedules for messages
 					{
+						updateRes(update, res.data);
 						form.find('.btn-close').trigger('click');
-<<<<<<< HEAD
 						form.trigger("reset");
 						$('#form-add-message-schedule').yiiActiveForm('resetForm');
-=======
->>>>>>> parent of 471f3d3... finish add schedules for messages
-=======
-					if (res.success) 
-					{
-						form.find('.btn-close').trigger('click');
->>>>>>> parent of 471f3d3... finish add schedules for messages
 					}
 				},
 				error: function (res) {
