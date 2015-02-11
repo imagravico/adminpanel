@@ -53,7 +53,7 @@ use app\components\widgets\NotesWidget;
                 if (!$client->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <button type="reset" class="btn btn-sm btn-danger del" data-redirect="/clients/delete/<?= $client->id?>"><i class="fa fa-trash"></i> Delete</button>
+                        <button type="reset" class="btn btn-sm btn-danger del" data-to="/clients/delete/<?= $client->id?>" data-redirect="/clients"><i class="fa fa-trash"></i> Delete</button>
                     </div>
             <?php } ?>
     </div>

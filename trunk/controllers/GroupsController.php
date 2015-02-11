@@ -33,10 +33,8 @@ class GroupsController extends \yii\web\Controller
         $this->findModel($id)->delete();
         $group = new Group();
         
-        return $this->renderPartial('@widget/views/groups/_add', [
-                'group'  => $group,
-                'errors' => ''
-            ]); 
+        Yii::$app->response->format = 'json';
+        return ['errors' => '', 'data' => $this->renderPartial('@widget/views/groups/_add')];
     }
 
     /**

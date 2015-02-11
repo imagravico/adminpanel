@@ -34,11 +34,11 @@ var Action = function() {
 				$.ajax({
 					url: $(this).data('to'),
 					success: function(res) {
-						if (res.errors != '' && del.data('redirect') != undefined) {
+						if (res.errors == '' && del.data('redirect') != undefined) {
 							window.location.href = del.data('redirect');
 						}
 
-						if (res.errors != '' && del.data('update')) {
+						if (res.errors == '' && del.data('update')) {
 							updateRes($(del.data('update')), res);
 						}
 					},

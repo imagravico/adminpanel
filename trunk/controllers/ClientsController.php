@@ -138,7 +138,8 @@ class ClientsController extends \yii\web\Controller
         // delete all websites related to this client
         Website::deleteAll(['clients_id' => $id]);
         
-        return $this->redirect(['/clients']);
+        Yii::$app->response->format = 'json';
+        return  ['errors' => ''];
     }
 
     /**
