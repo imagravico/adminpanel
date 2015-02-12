@@ -13,26 +13,19 @@ class NotesController extends \yii\web\Controller
     public function actionCreate() {
 
     	$note = new Note();
-        $notes = Note::find()->orderBy('id DESC')->all();
-        
         Yii::$app->response->format = 'json';
-
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
-            $notes = Note::find()->orderBy('id DESC')->all();
+            
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                    'notes' => $notes
-                ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list')
             ];
 
         }
         else {
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                    'notes' => $notes
-                ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list')
             ];
         }
     }
@@ -40,17 +33,22 @@ class NotesController extends \yii\web\Controller
     public function actionEdit($id) {
 
     	$note = $this->findModel($id);
-		$note->load(Yii::$app->request->post());
-    	$note->save();
-    	$notes = Note::find()->orderBy('id DESC')->all();
-
         Yii::$app->response->format = 'json';
-        return [
-            'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                'notes' => $notes
-            ])
-        ];
+
+        if ($note->load(Yii::$app->request->post()) && $note->save()) {
+            
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/notes/_list')
+            ];
+
+        }
+        else {
+            return [
+                'errors' => $note->getErrors(),
+                'data'   => $this->renderPartial('@widget/views/notes/_list')
+            ];
+        }
     }
 
     /**
