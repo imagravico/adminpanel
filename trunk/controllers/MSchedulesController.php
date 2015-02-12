@@ -27,7 +27,7 @@ class MSchedulesController extends \yii\web\Controller
 
     		if ($mschedule->save()) {
     			Yii::$app->response->format = 'json';
-	    		return ['successful' => "true", 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    		return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
 	    	}
 	    	
     	}
@@ -35,7 +35,7 @@ class MSchedulesController extends \yii\web\Controller
     		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
 
     			Yii::$app->response->format = 'json';
-	    		return ['successful' => "true", 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    		return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
 	    	}
     	}
     	

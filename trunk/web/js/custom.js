@@ -174,27 +174,15 @@ var Action = function() {
 	var actionMSchedule = function () {
 		var form = $('#form-add-message-schedule'),
 			update = $(form.data('update'));
-
+		
 		form.submit(function (e) {
 			e.preventDefault();
-			$.ajax({
-				url: form.data('url'),
-				type: 'POST',
-				data: form.serializeArray(), 
-				success: function (res) {
-					if (res.successful == 'true') 
-					{
-						updateRes(update, res.data);
-						form.find('.btn-close').trigger('click');
-						form.trigger("reset");
-						$('#form-add-message-schedule').yiiActiveForm('resetForm');
-					}
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
 
+			postData(form.data('url'), form.serializeArray(), update, function () {
+					form.find('.btn-close').trigger('click');
+					form.trigger("reset");
+					$('#form-add-message-schedule').yiiActiveForm('resetForm');
+				});
 		});
 	}
 

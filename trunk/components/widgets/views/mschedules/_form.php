@@ -24,6 +24,7 @@ use yii\helpers\Url;
                         'id' => 'form-add-message-schedule',
                         'enableClientValidation' => true,
                         'validateOnSubmit' => true,
+                        'enableAjaxValidation' => false,
                         'options' => [
                             'class'   => 'form-horizontal form-bordered',
                             'data-url' => '/mschedules/create',
@@ -104,7 +105,7 @@ use yii\helpers\Url;
 					</div>
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
-                            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-sm btn-primary">Save Changes</button>
                         </div>
                     </div>

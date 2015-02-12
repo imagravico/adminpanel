@@ -21,6 +21,7 @@ $config = [
             // Disable r      = routes
             'enablePrettyUrl' => true,
             'rules' => array(
+                'activities/more/<page:\d+>'             => 'activities/more',
                 '<controller:\w+>/<id:\d+>'              => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'          => '<controller>/<action>',
@@ -65,15 +66,36 @@ $config = [
                 ],
             ],
         ],
+        // 'view' => [
+        //     'theme' => [
+        //         'pathMap' => [
+        //             '@app/modules/admin/views' => '@app/views/yii2-admin', 
+        //         ],
+        //     ],
+        // ],
+        // 'assetManager' => [
+        //     'bundles' => [
+        //         'yii\web\JqueryAsset' => [
+        //             'js'=>[]
+        //         ],
+        //         'yii\bootstrap\BootstrapPluginAsset' => [
+        //             'js'=>[]
+        //         ],
+        //         'yii\bootstrap\BootstrapAsset' => [
+        //             'css' => [],
+        //         ],
+
+        //     ],
+        // ],
     ],
     'modules' => [
         'admin' => [
-            'class' => 'mdm\admin\Module',
+            'class' => 'app\modules\admin\Module',
             'layout' => '@app/views/layouts/main_backend', // avaliable value 'left-menu', 'right-menu' and 'top-menu'
             // 'layout' => 'left-menu', // avaliable value 'left-menu', 'right-menu' and 'top-menu'
             'controllerMap' => [
                  'assignment' => [
-                    'class'         => 'mdm\admin\controllers\AssignmentController',
+                    'class'         => 'app\modules\admin\controllers\AssignmentController',
                     'userClassName' => 'app\models\User',
                     'idField'       => 'id'
                 ]
@@ -86,25 +108,42 @@ $config = [
                     'label' => 'Route'
                 ], // disable menu
             ],
+        ],
+        'gii' => 'yii\gii\Module',
+        'gridview' =>  [
+            'class' => '\kartik\grid\Module'
+            // enter optional module parameters below - only if you need to  
+            // use your own export download action or custom translation 
+            // message source
+            // 'downloadAction' => 'gridview/export/download',
+            // 'i18n' => []
         ]
     ],
     'as access' => [
-        'class' => 'mdm\admin\components\AccessControl',
+        'class' => 'app\modules\admin\components\AccessControl',
         'allowActions' => [
             // 'admin/*', // add or remove allowed actions to this list
             'site/index',
+            'site/error',
             'site/about',
             'site/login',
-            'site/contact'
+            'site/contact',
+            'admin/auth/login',
+            'gii/*',
+            'debug/*'
         ]
     ],
     'params' => $params,
+    'defaultRoute' => 'site/login',
+    'aliases' => [
+        '@widget' => '@app/components/widgets',
+    ],
 ];
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
-    $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = 'yii\debug\Module';
+    //$config['bootstrap'][] = 'debug';
+    // $config['modules']['debug'] = 'yii\debug\Module';
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = 'yii\gii\Module';

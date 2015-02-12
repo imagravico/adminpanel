@@ -11,7 +11,9 @@
 	<span class="help-block">The AdminPanel sends automatically an email reminder to the Sysadmin in the defined cycle.</span>
 	
     <!-- Reminder Content -->
-    <?php echo $this->render('_list') ?>
+    <div id="list-mschedules">
+        <?php echo $this->render('_list') ?>
+    </div>
     <!-- END Reminder Content -->
 </div>
 <?=
