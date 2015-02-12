@@ -84,7 +84,7 @@ use yii\helpers\Url;
                                     ?>
                                     
                                     <?php
-                                        echo $form->field($model, 'send_on', [
+                                        echo $form->field($model, 'sendon', [
                                                 'selectors' => ['input' => '#send-on']
                                             ])->widget(DepDrop::classname(), [
                                                 'options' => ['id' => 'send-on'],
