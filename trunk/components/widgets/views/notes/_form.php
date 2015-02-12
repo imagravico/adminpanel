@@ -18,6 +18,9 @@ use yii\bootstrap\ActiveForm;
                     $form = ActiveForm::begin([
                         'id'      => 'form-note',
                         'action' => '#',
+                        'enableClientValidation' => true,
+                        'validateOnSubmit' => true,
+                        'enableAjaxValidation' => false,
                         'options' => [
                             'class'   => 'form-bordered',
                             'data-update' => '.notes-list'

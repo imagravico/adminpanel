@@ -13,17 +13,28 @@ class NotesController extends \yii\web\Controller
     public function actionCreate() {
 
     	$note = new Note();
-    	$note->load(Yii::$app->request->post());
-    	$note->save();
-
-    	$notes = Note::find()->orderBy('id DESC')->all();
+        $notes = Note::find()->orderBy('id DESC')->all();
+        
         Yii::$app->response->format = 'json';
-        return [
-            'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                'notes' => $notes
-            ])
-        ];
+
+        if ($note->load(Yii::$app->request->post()) && $note->save()) {
+            $notes = Note::find()->orderBy('id DESC')->all();
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                    'notes' => $notes
+                ])
+            ];
+
+        }
+        else {
+            return [
+                'errors' => $note->getErrors(),
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                    'notes' => $notes
+                ])
+            ];
+        }
     }
 
     public function actionEdit($id) {
@@ -64,10 +75,10 @@ class NotesController extends \yii\web\Controller
     }
 
     /**
-     * Finds the User model based on its primary key value.
+     * Finds the Note model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return User the loaded model
+     * @return Note the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

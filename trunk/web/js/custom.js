@@ -173,15 +173,31 @@ var Action = function() {
 
 	var actionMSchedule = function () {
 		var form = $('#form-add-message-schedule'),
-			update = $(form.data('update'));
-		
+			update = $(form.data('update')),
+			url    = '/mschedules/create';
+
+		body.on('click', '#list-mschedules .btn-edit-mschedule', function (e) {
+			url = $(this).data('to');
+		});
+
+		// delete
+		body.on('click', '#list-mschedules .btn-del-mschedule', function (e) 
+		{
+			e.preventDefault();
+			if (confirm('Are you sure to delete it?')) 
+			{
+				postData($(this).data('to'), {}, update, function () {
+				});
+			}
+		});
+
 		form.submit(function (e) {
 			e.preventDefault();
 
-			postData(form.data('url'), form.serializeArray(), update, function () {
+			postData(url, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
-					$('#form-add-message-schedule').yiiActiveForm('resetForm');
+					form.yiiActiveForm('resetForm');
 				});
 		});
 	}
@@ -203,7 +219,9 @@ var Action = function() {
 				if (update != '' && res.errors == '') {
 					updateRes(update, res.data);
 				}
-				sCallback();
+
+				if (res.errors == '')
+					sCallback();
 			},
 			error: function (res) {
 				alert('Opp oh! There are something wrong. Try again..')
