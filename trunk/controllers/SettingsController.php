@@ -31,7 +31,7 @@ class SettingsController extends \yii\web\Controller
                 \Yii::$app->response->format = 'json';
 
             return [
-                'success' => true,
+                'errors' => '',
             ];
         }
 

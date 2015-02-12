@@ -19,9 +19,12 @@ use yii\bootstrap\ActiveForm;
 				    $form = ActiveForm::begin([
 				        'id'      => 'form-add-activities',
 				        'action' => '#',
+				        'enableClientValidation' => true,
+                        'validateOnSubmit' => true,
+                        'enableAjaxValidation' => false,
 				        'options' => [
 				            'class'   => 'form-horizontal form-bordered',
-				            'data-url' => '/activities/create',
+				            'data-to' => '/activities/create',
 				            'data-update' => '#activities-list'
 				        ],
 				        'fieldConfig' => [

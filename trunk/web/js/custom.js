@@ -111,14 +111,14 @@ var Action = function() {
 	var actionActivity = function () {
 
 		var form         = $('#form-add-activities'),
-			url          = form.data('url'),
+			to           = form.data('to'),
 			update       = $(form.data('update')),
 			activityList = $('#activities-list'), 
 			more         = 2;
 
 		form.submit(function (e) {
 			e.preventDefault();
-			postData(url, form.serializeArray(), update, function () {
+			postData(to, form.serializeArray(), update, function () {
 					addWrap();
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
@@ -128,8 +128,8 @@ var Action = function() {
 
 		body.on('click', '#activities-list .view-more', function (e) {
 			e.preventDefault();
-			var url = $(this).data('to') + more;
-			postData(url, form.serializeArray(), update, function () {
+			var to = $(this).data('to') + more;
+			postData(to, form.serializeArray(), update, function () {
 					more = more + 1;
 				});
 			
@@ -149,20 +149,10 @@ var Action = function() {
 
 		form.submit(function (e) {
 			e.preventDefault();
-			$.ajax({
-				url: form.data('url'),
-				type: 'POST',
-				data: form.serializeArray(), 
-				success: function (res) {
-					if (res.success) 
-					{
-						form.find('.btn-close').trigger('click');
-					}
-				},
-				error: function (res) {
-					alert('Opp oh! There are something wrong. Try again..')
-				}
-			});
+
+			postData(form.data('to'), form.serializeArray(), update, function () {
+					form.find('.btn-close').trigger('click');
+				});
 
 		});
 	}
@@ -170,10 +160,10 @@ var Action = function() {
 	var actionMSchedule = function () {
 		var form = $('#form-add-message-schedule'),
 			update = $(form.data('update')),
-			url    = '/mschedules/create';
+			to    = '/mschedules/create';
 
 		body.on('click', '#list-mschedules .btn-edit-mschedule', function (e) {
-			url = $(this).data('to');
+			to = $(this).data('to');
 		});
 
 		// delete
@@ -189,7 +179,7 @@ var Action = function() {
 		form.submit(function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			postData(url, form.serializeArray(), update, function () {
+			postData(to, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
 					form.yiiActiveForm('resetForm');

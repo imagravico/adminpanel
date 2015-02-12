@@ -24,7 +24,7 @@ use yii\bootstrap\ActiveForm;
                         'validateOnSubmit' => true,
                         'options' => [
                             'class'   => 'form-horizontal form-bordered',
-                            'data-url' => '/settings/change'
+                            'data-to' => '/settings/change'
                         ],
                         'fieldConfig' => [
                             'horizontalCssClasses' => [

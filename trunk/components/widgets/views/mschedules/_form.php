@@ -5,7 +5,9 @@ use yii\bootstrap\ActiveForm;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
 
+$this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\AppAsset::className()]]);
 ?>
+
 <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
 <div id="modal-schedules-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
