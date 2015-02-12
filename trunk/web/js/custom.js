@@ -38,10 +38,6 @@ var Action = function() {
 						if (res.errors == '' && del.data('redirect') != undefined) {
 							window.location.href = del.data('redirect');
 						}
-						console.log(res.errors);
-						if (res.errors == '' && del.data('update')) {
-							updateRes($(del.data('update')), res.data);
-						}
 					},
 					error: function(res) {
 						alert('Opp oh! There are something wrong. Try again..')
@@ -181,8 +177,7 @@ var Action = function() {
 		});
 
 		// delete
-		body.on('click', '#list-mschedules .btn-del-mschedule', function (e) 
-		{
+		body.on('click', '#list-mschedules .btn-del-mschedule', function (e) {
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
