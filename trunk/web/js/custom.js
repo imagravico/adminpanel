@@ -188,7 +188,7 @@ var Action = function() {
 
 		form.submit(function (e) {
 			e.preventDefault();
-
+			e.stopImmediatePropagation();
 			postData(url, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
