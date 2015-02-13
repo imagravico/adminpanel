@@ -59,7 +59,7 @@ class MessageSchedule extends \yii\db\ActiveRecord
             }],
             [['relation', 'type', 'event'], 'integer'],
             [['descriptions', 'time_periodically'], 'string', 'max' => 255],
-            [['message_id'], 'safe']
+            [['messages_id'], 'safe']
         ];
     }
 
@@ -109,7 +109,4 @@ class MessageSchedule extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }   
-
-
-
 }
