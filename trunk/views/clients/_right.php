@@ -62,4 +62,4 @@ use app\components\widgets\NotesWidget;
 </div>
 
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(); ?>
+<?php echo NotesWidget::widget(['area' => 0]); ?>

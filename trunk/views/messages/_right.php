@@ -70,4 +70,4 @@ use app\components\widgets\MschedulesWidget;
     }
 ?>
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(); ?>
+<?php echo NotesWidget::widget(['area' => 2]); ?>

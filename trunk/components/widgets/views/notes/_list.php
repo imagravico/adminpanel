@@ -5,7 +5,7 @@ use app\models\Note;
 ?>
 <ul class="media-list">
     <?php 
-        $notes = Note::find()->orderBy('id DESC')->all();
+        $notes = Note::find()->where(['type_area' => $area])->orderBy('id DESC')->all();
         if (!empty($notes)):
             foreach ($notes as $key => $note):
     ?>
@@ -31,5 +31,10 @@ use app\models\Note;
                         <p><?= $note->content ?></p>
                     </div>
                 </li>
-    <?php endforeach; endif; ?>
+    <?php endforeach; ?>
+
+    <?php 
+        else: 
+            echo "No note is available";
+    endif; ?>
 </ul>

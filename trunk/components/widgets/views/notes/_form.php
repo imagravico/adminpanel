@@ -1,6 +1,7 @@
 <?php 
 use app\models\Group;
 use yii\bootstrap\ActiveForm;
+use yii\helpers\Html;
 ?>
 
 <?php 
@@ -24,7 +25,14 @@ use yii\bootstrap\ActiveForm;
 <?=
     $form->field($note, 'content')->textArea(['rows' => '6', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg'])
     ->label(false)
+
 ?>
+<?php
+    echo Html::activeHiddenInput($note, 'type_area', [
+                'value' => $area
+        ]);
+?>
+
     <div class="form-group form-actions" style="overflow:hidden">
         <div class="col-xs-12 text-right">
             <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>

@@ -18,14 +18,18 @@ class NotesController extends \yii\web\Controller
             
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list')
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                        'area' => Yii::$app->request->post('Note')['type_area']
+                    ])
             ];
 
         }
         else {
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list')
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                        'area' => Yii::$app->request->post('Note')['type_area']
+                    ])
             ];
         }
     }
@@ -38,14 +42,18 @@ class NotesController extends \yii\web\Controller
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list')
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                        'area' => Yii::$app->request->post('Note')['type_area']
+                    ])
             ];
 
         }
         else {
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list')
+                'data'   => $this->renderPartial('@widget/views/notes/_list', [
+                        'area' => Yii::$app->request->post('Note')['type_area']
+                    ])
             ];
         }
 

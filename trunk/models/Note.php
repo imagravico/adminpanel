@@ -17,6 +17,11 @@ use yii\db\Expression;
  */
 class Note extends \yii\db\ActiveRecord
 {
+    const TYPE_AREA_CLIENT = 0;
+    const TYPE_AREA_WEB    = 1;
+    const TYPE_AREA_MES    = 2;
+    const TYPE_AREA_CLIST  = 3;
+
     /**
      * @inheritdoc
      */
@@ -45,7 +50,7 @@ class Note extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['content'], 'required'],
             [['users_id'], 'integer'],
-            [['created_at', 'updated_at'], 'safe']
+            [['created_at', 'updated_at', 'type_area'], 'safe']
         ];
     }
 

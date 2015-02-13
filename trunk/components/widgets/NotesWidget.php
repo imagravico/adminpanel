@@ -9,15 +9,16 @@ use app\models\Note;
 
 class NotesWidget extends Widget
 {
+	public $area;
+
 	public function init() 
 	{
 		parent::init();
 	}
 	
 	public function run() {
-		$notes = Note::find()->orderBy('id DESC')->all();
 		return $this->render('notes/index', [
-				'notes' => $notes
+				'area'  => $this->area
 			]);
 	}
 }
