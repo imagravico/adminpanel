@@ -24,11 +24,15 @@ class MSchedulesController extends \yii\web\Controller
 			$mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
 			$mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
 			$mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
-            $mschedule->message_id   = Yii::$app->request->post('MessageSchedule')['message_id'];
+            $mschedule->messages_id   = Yii::$app->request->post('MessageSchedule')['messages_id'];
 
     		if ($mschedule->save()) {
     			Yii::$app->response->format = 'json';
-	    		return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    		return [
+                        'errors' => '', 
+                        'data'   => $this->renderPartial('@widget/views/mschedules/_list', 
+                            ['message_id' => $mschedule->messages_id])
+                    ];
 	    	}
 	    	
     	}
@@ -36,7 +40,11 @@ class MSchedulesController extends \yii\web\Controller
     		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
 
     			Yii::$app->response->format = 'json';
-	    		return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+	    		return [
+                        'errors' => '', 
+                        'data'   => $this->renderPartial('@widget/views/mschedules/_list', 
+                            ['message_id' => $mschedule->messages_id])
+                    ];
 	    	}
     	}
     	
@@ -53,11 +61,15 @@ class MSchedulesController extends \yii\web\Controller
             $mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
             $mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
             $mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
-            $mschedule->message_id   = Yii::$app->request->post('MessageSchedule')['message_id'];
+            $mschedule->messages_id   = Yii::$app->request->post('MessageSchedule')['messages_id'];
 
             if ($mschedule->save()) {
                 Yii::$app->response->format = 'json';
-                return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+                return [
+                        'errors' => '', 
+                        'data'   => $this->renderPartial('@widget/views/mschedules/_list', 
+                            ['message_id' => $mschedule->messages_id])
+                    ];
             }
             
         }
@@ -65,7 +77,11 @@ class MSchedulesController extends \yii\web\Controller
             if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
 
                 Yii::$app->response->format = 'json';
-                return ['errors' => '', 'data' => $this->renderPartial('@widget/views/mschedules/_list')];
+                return [
+                        'errors' => '', 
+                        'data'   => $this->renderPartial('@widget/views/mschedules/_list', 
+                            ['message_id' => $mschedule->messages_id])
+                    ];
             }
         }
         

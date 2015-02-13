@@ -10,7 +10,7 @@ use app\models\Message;
 
 class MSchedulesWidget extends Widget
 {
-	public $message;
+	public $message_id;
 	public function init() 
 	{
 		parent::init();
@@ -18,15 +18,8 @@ class MSchedulesWidget extends Widget
 	
 	public function run() {
 
-		$schedules = MessageSchedule::find()
-    		->orderBy('id DESC')
-    		->limit(5)
-			->offset(0)
-    		->all();
-
 		return $this->render('mschedules/index', [
-				'schedules' => $schedules,
-				'message'   => $this->message
+					'message_id'   => $this->message_id
 			]);
 	}
 }

@@ -12,12 +12,16 @@
 	
     <!-- Reminder Content -->
     <div id="list-mschedules">
-        <?php echo $this->render('_list') ?>
+        <?php 
+            echo $this->render('_list', [
+                'message_id' => $message_id
+            ]) 
+        ?>
     </div>
     <!-- END Reminder Content -->
 </div>
 <?=
 	$this->render('_form', [
-            'message' => $message
+            'message_id' => $message_id
         ])
 ?>

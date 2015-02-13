@@ -58,7 +58,7 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                 ?>
                 <?php
                     echo Html::activeHiddenInput($model, 'messages_id', [
-                                'value' => $message->id
+                                'value' => $message_id
                         ]);
                 ?>
                 <?php

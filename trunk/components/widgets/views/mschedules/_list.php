@@ -6,7 +6,13 @@ use app\models\MessageSchedule;
  <table class="table table-striped table-vcenter">
     <tbody>
     <?php 
-        $mschedules = MessageSchedule::find()->all();
+        $mschedules = MessageSchedule::find()
+            ->where(['messages_id' => $message_id])
+            ->orderBy('id DESC')
+            // ->limit(5)
+            // ->offset(0)
+            ->all();
+
         if (!empty($mschedules)) {
             foreach ($mschedules as $key => $mschedule) {
 
