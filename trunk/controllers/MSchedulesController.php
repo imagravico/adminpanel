@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\MessageSchedule;
 use yii\helpers\Json;
+use yii\web\NotFoundHttpException;
 
 
 class MSchedulesController extends \yii\web\Controller
@@ -96,17 +97,16 @@ class MSchedulesController extends \yii\web\Controller
      */
     public function actionDelete($id)
     {
+        $messages_id = $this->findModel($id)->messages_id;
         $this->findModel($id)->delete();
-        
-        $mschedules = MessageSchedule::find()->orderBy('id DESC')->all();
-
         Yii::$app->response->format = 'json';
+
         return [
-            'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/mschedules/_list', [
-                'mschedules'  => $mschedules,
-            ])
-        ];
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/mschedules/_list', [
+                        'message_id' => $messages_id
+                    ])
+            ];
     }
 
     /**

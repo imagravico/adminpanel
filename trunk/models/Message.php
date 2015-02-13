@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use app\models\MessageSchedule;
 
 /**
  * This is the model class for table "messages".
@@ -18,6 +19,7 @@ use yii\db\Expression;
  */
 class Message extends \yii\db\ActiveRecord
 {
+    public $belongText;
     /**
      * @inheritdoc
      */
@@ -69,4 +71,37 @@ class Message extends \yii\db\ActiveRecord
             'active' => 'Active',
         ];
     }
+
+    public function getMschedule() 
+    {
+        return $this->hasMany(MessageSchedule::className(), ['messages_id' => 'id']);
+    }
+
+    public function afterFind()
+    {
+        $this->belongText = $this->getBelongText();
+        return parent::afterFind();
+    }
+
+
+    public function getBelongText()
+    {
+        $text = '';
+        $mschedules = $this->mschedule;
+
+        if (count($mschedules) > 1) {
+            foreach ($mschedules as $key => $schedule) {
+                if (isset($mschedules[$key + 1]) && $schedule->relation != $mschedules[$key + 1]->relation)
+                    $text = 'CLIENT, WEBSITE';
+            }
+        }
+        elseif (!empty($mschedules)) {
+            if ($mschedules[0]->relation == 1)
+                $text = 'CLIENT';
+            else 
+                $text = 'WEBSITE';
+        }
+        return $text;
+    }
+
 }

@@ -84,7 +84,7 @@
                                         <div class="widget-options"></div>
                                         <h3 class="widget-content-light">
                                             <a href="/messages/edit/<?= $message->id ?>" class="<?= $class_colors[$i]?>"><?= $message->subject ?></a><br>
-                                            <small><?= "LOREM IPSLUM" ?></small>
+                                            <small><?= $message->belongText; ?></small>
                                         </h3>
                                     </div>
                                     <!-- END Widget Header -->
