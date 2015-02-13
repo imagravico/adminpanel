@@ -5,10 +5,12 @@ use yii\base\Widget;
 use yii\helpers\Html;
 use app\models\User;
 use app\models\MessageSchedule;
+use app\models\Message;
 
 
 class MSchedulesWidget extends Widget
 {
+	public $message;
 	public function init() 
 	{
 		parent::init();
@@ -23,7 +25,8 @@ class MSchedulesWidget extends Widget
     		->all();
 
 		return $this->render('mschedules/index', [
-				'schedules' => $schedules
+				'schedules' => $schedules,
+				'message'   => $this->message
 			]);
 	}
 }

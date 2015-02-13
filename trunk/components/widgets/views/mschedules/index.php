@@ -17,5 +17,7 @@
     <!-- END Reminder Content -->
 </div>
 <?=
-	$this->render('_form')
+	$this->render('_form', [
+            'message' => $message
+        ])
 ?>

@@ -4,6 +4,7 @@ use app\models\MessageSchedule;
 use yii\bootstrap\ActiveForm;
 use kartik\depdrop\DepDrop;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\AppAsset::className()]]);
 ?>
@@ -56,9 +57,14 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                         );
                 ?>
                 <?php
-                    echo $form->field($model, 'type', [
-                            'wrapperOptions' => ['style' => 'display:none']
-                        ])->hiddenInput(['value' => 1])->label(false);
+                    echo Html::activeHiddenInput($model, 'message_id', [
+                                'value' => $message->id
+                        ]);
+                ?>
+                <?php
+                    echo Html::activeHiddenInput($model, 'type', [
+                                'value' => 1
+                        ]);
                 ?>
 					<div class="form-group">
 						<div class="col-xs-3">

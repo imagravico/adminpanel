@@ -57,8 +57,9 @@ class MessageSchedule extends \yii\db\ActiveRecord
             [['event', 'sendon'], 'required', 'when' => function ($model) {
                 return $model->type == 1;
             }],
-            [['relation', 'type', 'event', 'type_periodically'], 'integer'],
+            [['relation', 'type', 'event'], 'integer'],
             [['descriptions', 'time_periodically'], 'string', 'max' => 255],
+            [['message_id'], 'safe']
         ];
     }
 

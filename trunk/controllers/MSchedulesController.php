@@ -24,6 +24,7 @@ class MSchedulesController extends \yii\web\Controller
 			$mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
 			$mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
 			$mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
+            $mschedule->message_id   = Yii::$app->request->post('MessageSchedule')['message_id'];
 
     		if ($mschedule->save()) {
     			Yii::$app->response->format = 'json';
@@ -52,6 +53,7 @@ class MSchedulesController extends \yii\web\Controller
             $mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
             $mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
             $mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
+            $mschedule->message_id   = Yii::$app->request->post('MessageSchedule')['message_id'];
 
             if ($mschedule->save()) {
                 Yii::$app->response->format = 'json';

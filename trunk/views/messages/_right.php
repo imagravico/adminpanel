@@ -65,7 +65,9 @@ use app\components\widgets\MschedulesWidget;
 <!-- messages schedules -->
 
 <?php 
-    echo MschedulesWidget::widget(); 
+    if (!$message->isNewRecord) {
+        echo MschedulesWidget::widget(['message' => $message]); 
+    }
 ?>
 <!-- Notes widget -->
 <?php echo NotesWidget::widget(); ?>
