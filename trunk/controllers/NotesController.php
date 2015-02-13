@@ -36,7 +36,6 @@ class NotesController extends \yii\web\Controller
         Yii::$app->response->format = 'json';
 
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
-            
             return [
                 'errors' => '',
                 'data'   => $this->renderPartial('@widget/views/notes/_list')
@@ -49,6 +48,13 @@ class NotesController extends \yii\web\Controller
                 'data'   => $this->renderPartial('@widget/views/notes/_list')
             ];
         }
+
+    }
+
+    public function actionLoad($id)
+    {
+        $note = $this->findModel($id);
+        return $this->renderPartial('@widget/views/notes/_form', ['note' => $note]);
     }
 
     /**

@@ -79,10 +79,13 @@ var Action = function() {
 		var form   = $('#form-note'),
 			update = $(form.data('update')),
 			edit   = $('.notes-list .btn-edit-note'),
-			url    = '/notes/create';
+			url    = '/notes/create',
+			wrap   = $('#wrap-form-note');
 
 		body.on('click', '.notes-list .btn-edit-note', function (e) {
 			url = $(this).data('to');
+			// var loadUrl = $(this).data('load');
+			// wrap.load(loadUrl);
 		});
 
 		// delete
@@ -213,6 +216,7 @@ var Action = function() {
 			}
 		});
 	}
+
 
 	return {
         init: function() {

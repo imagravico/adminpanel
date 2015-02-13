@@ -25,7 +25,25 @@ use app\models\Note;
     </div>
     <!-- END Notes Content -->
 </div>
-<?php echo $this->render('_form', [
-        'note' => new Note()
-]) ?>
+<!-- Notes, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
+<div id="modal-note-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center themed-background">
+                <h2 class="modal-title gi-white"><i class="fa fa-quote-right"></i> Note</h2>
+            </div>
+            <!-- END Modal Header -->
+
+            <!-- Modal Body -->
+            <div class="modal-body" id="wrap-form-note">
+                <?php echo $this->render('_form', [
+                        'note' => new Note()
+                ]) ?>
+             </div>
+        <!-- END Modal Body -->
+        </div>
+    </div>
+</div>
+
 
