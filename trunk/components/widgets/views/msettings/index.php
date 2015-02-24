@@ -1,6 +1,6 @@
 <?php
 use app\models\Message;
-
+use app\models\MSetting;
 
 ?>
 <div class="block">
@@ -20,12 +20,18 @@ use app\models\Message;
                 foreach ($messages as $key => $message) {
                     if (!empty($message->mschedule)) {
 
+                        $checked = FALSE;
+                        $msetting = MSetting::find()
+                                    ->where(['clients_or_webs_id' => $idcow, 'belong_to' => $belong_to, 'messages_id' => $message->id])
+                                    ->one();
+                        if (isset($msetting))
+                            $checked = TRUE;
         ?>
                         <div class="form-group">
                             <label class="col-md-6 control-label"><?= $message->subject ?></label>
                             <div class="col-md-6">
                                 <label class="switch switch-primary">
-                                    <input type="checkbox" id="product-status mswitch-<?php echo $message->id?>" name="product-status" class="switch-action" data-messages-id="<?php echo $message->id?>" data-belong-to="<?php echo $belong_to ?>"><span></span>
+                                    <input type="checkbox" id="product-status mswitch-<?php echo $message->id?>" name="product-status" class="switch-action" data-messages-id="<?php echo $message->id?>" data-belong-to="<?php echo $belong_to ?>" <?php if ($checked) echo 'checked'?>><span></span>
                                 </label>
                             </div>
                         </div>

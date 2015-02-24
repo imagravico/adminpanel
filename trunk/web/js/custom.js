@@ -222,9 +222,24 @@ var Action = function() {
 		var switchButton = $('.switch-action');
 
 		switchButton.change(function () {
-			if ($(this).is(':checked'))
-			{
+			if ($(this).is(':checked')) {
 				var to = '/msettings/create',
+					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
+			}
+			else {
+				var to = '/msettings/remove',
 					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
 
 				$.ajax({

@@ -6,6 +6,9 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
+use app\models\Msetting;
+use  yii\web\Session;
+
 
 /**
  * This is the model class for table "clients".
@@ -108,6 +111,22 @@ class Client extends \yii\db\ActiveRecord
 
     public function afterSave($insert, $changedAttributes) 
     {
+        $session = Yii::$app->session;
+        $msetting_session = $session->get('msetting');
+
+        // save messages configruation for this client
+        if (!empty($msetting_session)) {
+            foreach ($msetting_session as $key => $value) {
+                $msetting              = new Msetting;
+                $msetting->messages_id = $value['messages_id'];
+                $msetting->belong_to   = $value['belong_to'];
+                $msetting->clients_or_webs_id = $this->id;
+                $msetting->save();
+            }
+        }
+        // remove session after saving to db
+        $session->remove('msetting');
+
         return parent::afterSave($insert, $changedAttributes);
     }   
 
@@ -137,6 +156,12 @@ class Client extends \yii\db\ActiveRecord
         return $this->hasMany(Website::classname(), ['clients_id' => 'id']);
     }
 
+    public function getMsetting()
+    {
+        return $this->hasMany(Msetting::className(), ['clients_or_webs_id' => 'id'])
+            ->where('belong_to > :belong_to', [':belong_to' => 1])
+            ->orderBy('id');
+    }
 
     public function getFullName()
     {

@@ -8,9 +8,12 @@ use app\models\GroupClient;
 use yii\web\UploadedFile;
 use yii\web\NotFoundHttpException;
 use app\models\Website;
+use  yii\web\Session;
+
 
 class ClientsController extends \yii\web\Controller
 {
+
     public function actionIndex()
     {
     	$clients = Client::find()->all();

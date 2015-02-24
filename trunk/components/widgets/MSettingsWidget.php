@@ -1,8 +1,11 @@
 <?php
 namespace app\components\widgets;
 
+use Yii;
 use yii\base\Widget;
 use app\models\Message;
+use yii\web\Request;
+use app\models\MSetting;
 
 class MSettingsWidget extends Widget
 {
@@ -15,6 +18,7 @@ class MSettingsWidget extends Widget
 	}
 	
 	public function run() {
-		return $this->render('msettings/index', ['belong_to' => $this->belong_to]);
+		$idcow = Yii::$app->request->get('id');
+		return $this->render('msettings/index', ['belong_to' => $this->belong_to, 'idcow' => $idcow]);
 	}
 }

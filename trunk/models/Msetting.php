@@ -44,4 +44,6 @@ class Msetting extends \yii\db\ActiveRecord
             'clients_or_webs_id' => 'Clients Or Webs ID',
         ];
     }
+
+    
 }
