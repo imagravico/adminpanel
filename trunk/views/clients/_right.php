@@ -7,6 +7,7 @@ use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\models\User;
 use app\components\widgets\NotesWidget;
+use app\components\widgets\MSettingsWidget;
 
 ?>
 <div class="block clearfix">
@@ -60,6 +61,6 @@ use app\components\widgets\NotesWidget;
     <?php ActiveForm::end(); ?>
     <!-- END Actions Content -->
 </div>
-
+<?php echo MSettingsWidget::widget(['belong_to' => 1]); ?>
 <!-- Notes widget -->
 <?php echo NotesWidget::widget(['area' => 0]); ?>

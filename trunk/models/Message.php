@@ -104,4 +104,16 @@ class Message extends \yii\db\ActiveRecord
         return $text;
     }
 
+    public static function getMessageBelong($relation)
+    {
+        $messages = self::find()
+            ->where(['active' => 1])
+            ->with([
+                'mschedule' => function($query) use ($relation) {
+                    $query->andWhere('relation=' . $relation);
+                },
+            ])->all();
+        return $messages;
+    }
+
 }

@@ -53,7 +53,7 @@ class MSchedulesController extends \yii\web\Controller
 
     public function actionEdit($id)
     {
-        $mschedule = $this->findModel($id);
+        $mschedule = $this->findModel($id); 
 
         $type = isset(Yii::$app->request->post('MessageSchedule')['type']) ? Yii::$app->request->post('MessageSchedule')['type'] : NULL;
 
@@ -88,6 +88,10 @@ class MSchedulesController extends \yii\web\Controller
         
     }
 
+    public function actionSetactive($messages_id)
+    {
+
+    }
 
     /**
      * Deletes an existing MessageSchedule model.
