@@ -16,6 +16,9 @@ class ClientsController extends \yii\web\Controller
 
     public function actionIndex()
     {
+        // remove session 'msetting'
+        Yii::$app->session->remove('msetting');
+
     	$clients = Client::find()->all();
         return $this->render('index', [
         		'clients' => $clients

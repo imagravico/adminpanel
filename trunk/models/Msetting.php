@@ -38,12 +38,19 @@ class Msetting extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'messages_id' => 'Messages ID',
-            'belong_to' => 'Belong To',
+            'id'                 => 'ID',
+            'messages_id'        => 'Messages ID',
+            'belong_to'          => 'Belong To',
             'clients_or_webs_id' => 'Clients Or Webs ID',
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function beforeSave($insert)
+    {
+        return parent::beforeSave($insert);
+    }
     
 }

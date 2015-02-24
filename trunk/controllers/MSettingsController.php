@@ -3,7 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use  yii\web\Session;
+use yii\web\Session;
+use Msetting;
 
 
 class MSettingsController extends \yii\web\Controller
@@ -25,8 +26,11 @@ class MSettingsController extends \yii\web\Controller
 			array_push($settings, Yii::$app->request->post('Msetting'));
 
 		$session->set('msetting', $settings);
+
+		echo "<pre>"; var_dump($session->get('msetting')); die('111');
 	}
 
+	
 	public function actionRemove()
 	{
 		$session = Yii::$app->session;
@@ -38,8 +42,11 @@ class MSettingsController extends \yii\web\Controller
 			$msetting_session = $this->array_recursive_diff($msetting_session, $msetting_post);
 			$session->set('msetting', $msetting_session);
 		}
+
+		echo "<pre>"; var_dump($session->get('msetting')); die('111');
 	}
 	
+
 	public function array_recursive_diff($arr_1, $arr_2) 
 	{
 	  	$arr_return = array();

@@ -7,7 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
 use app\models\Msetting;
-use  yii\web\Session;
+use yii\web\Session;
 
 
 /**
@@ -81,6 +81,9 @@ class Client extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function beforeSave($insert) 
     {
         // save avatar
@@ -109,29 +112,47 @@ class Client extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
 
+    /**
+     * @inheritdoc
+     */
     public function afterSave($insert, $changedAttributes) 
     {
         $session = Yii::$app->session;
         $msetting_session = $session->get('msetting');
-
         // save messages configruation for this client
         if (!empty($msetting_session)) {
+            $one_time = FALSE;
             foreach ($msetting_session as $key => $value) {
                 $msetting              = new Msetting;
                 $msetting->messages_id = $value['messages_id'];
                 $msetting->belong_to   = $value['belong_to'];
                 $msetting->clients_or_webs_id = $this->id;
+
+                // remove all current msettings 
+                if (!$one_time)
+                    Msetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
+                
+                $one_time = TRUE;
                 $msetting->save();
             }
         }
+        else {
+            Msetting::deleteAll(['clients_or_webs_id' => $this->id]);
+        }
+
         // remove session after saving to db
         $session->remove('msetting');
 
         return parent::afterSave($insert, $changedAttributes);
     }   
 
+    /**
+     * @inheritdoc
+     */
     public function afterFind()
     {
+        $session = Yii::$app->session;
+
         // convert created_at and updated_at to date not datetime
         $this->updated_at = strtotime($this->updated_at);   
         $this->created_at = strtotime($this->created_at);
@@ -143,6 +164,24 @@ class Client extends \yii\db\ActiveRecord
         }
         // set full name for current client
         $this->fullname = $this->getFullName();
+
+        // get all msettings
+        $id_param = Yii::$app->request->get('id');
+        if (isset($id_param)) {
+            $msettings = Msetting::find()
+                    ->where(['belong_to' => 1, 'clients_or_webs_id' => $this->id])
+                    ->all();
+
+            if (!empty($msettings) && empty($session->get('msetting'))) {
+                $tmp = [];
+                foreach ($msettings as $key => $msetting) {
+                    array_push($tmp, ['messages_id' => $msetting->messages_id, 'belong_to' => $msetting->belong_to]);
+                }
+                // assign $tmp to session 'msetting'
+                $session->set('msetting', $tmp);
+            }
+        }
+        
         parent::afterFind();
     }
 
