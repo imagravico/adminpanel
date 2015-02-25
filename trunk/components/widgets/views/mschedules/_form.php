@@ -63,7 +63,8 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                 ?>
                 <?php
                     echo Html::activeHiddenInput($model, 'type', [
-                                'value' => 1
+                                'value' => 1,
+                                'id' => 'schedule-type'
                         ]);
                 ?>
 					<div class="form-group">

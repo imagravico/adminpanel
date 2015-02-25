@@ -11,6 +11,7 @@ var Action = function() {
 		actionSetting();
 		actionMSchedule();
 		actionSwitch();
+		actionCSchedule();
 	}
 
 	var actionForm = function () 
@@ -190,6 +191,37 @@ var Action = function() {
 				});
 		});
 	}
+
+	var actionCSchedule =  function () {
+		var form = $('#form-add-checklists-schedule'),
+			update = $(form.data('update')),
+			to    = '/cschedules/create';
+
+		body.on('click', '#list-cschedules .btn-edit-cschedules', function (e) {
+			to = $(this).data('to');
+		});
+
+		// delete
+		body.on('click', '#list-cschedules .btn-del-cschedules', function (e) {
+			e.preventDefault();
+			if (confirm('Are you sure to delete it?')) 
+			{
+				postData($(this).data('to'), {}, update, function () {
+				});
+			}
+		});
+
+		form.submit(function (e) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			postData(to, form.serializeArray(), update, function () {
+					form.find('.btn-close').trigger('click');
+					form.trigger("reset");
+					form.yiiActiveForm('resetForm');
+				});
+		});
+	}
+
 
 	var updateRes =  function (obj, res) {
 			if (obj != undefined) {

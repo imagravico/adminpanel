@@ -129,19 +129,15 @@ $(document).ready(function() {
 	$("[href=#tab-periodically]").click(function () {
 		$('#which-event').val('').attr('disabled', 'disabled');
 		$('#send-on').val('').attr('disabled', 'disabled');
-		$('#messageschedule-type').val(2);
+		$('#schedule-type').val(2);
 	});
 
 
 	$("[href=#tab-event-based]").click(function () { 
 		$('#which-event').val('').removeAttr('disabled');
 		$('#send-on').val('').removeAttr('disabled');
-		$('#messageschedule-type').val(1);
+		$('#schedule-type').val(1);
 	});
-
-
-
-
 
 
 

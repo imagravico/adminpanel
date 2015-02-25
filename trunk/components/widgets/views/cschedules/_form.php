@@ -10,7 +10,7 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
 ?>
 
 <!-- User Settings, modal which opens from Settings link (found in top right user menu) and the Cog link (found in sidebar user info) -->
-<div id="modal-schedules-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+<div id="modal-schedules-checklist-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <!-- Modal Header -->
@@ -30,7 +30,6 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                         'enableAjaxValidation' => false,
                         'options' => [
                             'class'   => 'form-horizontal form-bordered',
-                            'data-url' => '/cschedules/create',
                             'data-update' => '#list-cschedules',
                         ],
                         'fieldConfig' => [
@@ -54,7 +53,7 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                 
                 <?= $form->field($model, 'message', [
                         'template' => "<div class='col-md-3'>{label}</div><div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-                        ])->textArea((array('placeholder' => 'Message', 'class' => 'form-control'))); 
+                        ])->textArea((array('placeholder' => 'Message', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg'))); 
                     ?>
 
 
@@ -76,7 +75,8 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                 ?>
                 <?php
                     echo Html::activeHiddenInput($model, 'type', [
-                                'value' => 1
+                                'value' => 1,
+                                'id' => 'schedule-type'
                         ]);
                 ?>
 					<div class="form-group">

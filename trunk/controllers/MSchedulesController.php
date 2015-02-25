@@ -88,11 +88,6 @@ class MSchedulesController extends \yii\web\Controller
         
     }
 
-    public function actionSetactive($messages_id)
-    {
-
-    }
-
     /**
      * Deletes an existing MessageSchedule model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
