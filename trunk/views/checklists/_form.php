@@ -4,15 +4,15 @@ use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Message */
+/* @var $model app\models\Checklist */
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="message-form">
+<div class="checklist-form">
 
     <?php 
         $form = ActiveForm::begin([
-                'id'      => 'message-form',
+                'id'      => 'checklist-form',
                 'layout'  => 'horizontal',
                 'options' => [
                     'class'   => 'form-horizontal form-bordered',
@@ -25,25 +25,17 @@ use yii\bootstrap\ActiveForm;
             ]); 
     ?>
     <?= 
-        $form->field($message, 'active')
+        $form->field($checklist, 'active')
             ->checkbox([
                 'template' => "{label}<div class='col-md-9'><label class='switch switch-primary'>{input}<span></span></label></div>\n"]
             )
             ->label('Active?', ['class' => 'col-md-3 control-label']); 
     ?>
-    <?= $form->field($message, 'subject', [
+    <?= $form->field($checklist, 'title', [
                 'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-            ])->textInput((array('placeholder' => 'Happy Birthday {firstname} {lastname}', 'class' => 'form-control'))); ?>  
-    <?= $form->field($message, 'from_name', [
+            ])->textInput((array('placeholder' => 'Monthly Report', 'class' => 'form-control'))); ?>  
+    <?= $form->field($checklist, 'subtitle', [
                 'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-            ])->textInput((array('placeholder' => 'From Name', 'class' => 'form-control'))); ?>  
+            ])->textInput((array('placeholder' => 'Berg Informatik', 'class' => 'form-control'))); ?>  
 
-     <?= $form->field($message, 'from_email', [
-                'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-            ])->textInput((array('placeholder' => 'From Email', 'class' => 'form-control'))); ?>
-    
-    <?= $form->field($message, 'content', [
-                'template' => "{label}<div class='col-md-9'>{input}</div>\n{hint}\n{error}"
-            ])->textArea((array('placeholder' => 'Message', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg', 'rows' => 10))); ?>
-    
 </div>
