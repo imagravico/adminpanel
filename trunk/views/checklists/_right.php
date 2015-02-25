@@ -8,7 +8,7 @@ use yii\helpers\Url;
 use app\models\User;
 use app\models\MessageSchedule;
 use app\components\widgets\NotesWidget;
-use app\components\widgets\MschedulesWidget;
+use app\components\widgets\CSchedulesWidget;
 
 ?>
 <div class="block clearfix">
@@ -62,5 +62,11 @@ use app\components\widgets\MschedulesWidget;
     <?php ActiveForm::end(); ?>
     <!-- END Actions Content -->
 </div>
+<?php 
+    if (!$checklist->isNewRecord) {
+        echo CSchedulesWidget::widget(['checklists_id' => $checklist->id]); 
+    }
+?>
+
 <!-- Notes widget -->
 <?php echo NotesWidget::widget(['area' => 3]); ?>
