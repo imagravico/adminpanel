@@ -119,6 +119,7 @@ class Client extends \yii\db\ActiveRecord
     {
         $session = Yii::$app->session;
         $msetting_session = $session->get('msetting');
+        
         // save messages configruation for this client
         if (!empty($msetting_session)) {
             $one_time = FALSE;
@@ -128,10 +129,10 @@ class Client extends \yii\db\ActiveRecord
                 $msetting->belong_to   = $value['belong_to'];
                 $msetting->clients_or_webs_id = $this->id;
 
-                // remove all current msettings 
+                // remove all current msettings only one time by $one_time flag
                 if (!$one_time)
                     Msetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
-                
+
                 $one_time = TRUE;
                 $msetting->save();
             }
@@ -140,8 +141,9 @@ class Client extends \yii\db\ActiveRecord
             Msetting::deleteAll(['clients_or_webs_id' => $this->id]);
         }
 
-        // remove session after saving to db
+        // remove session of message settings after saving to db
         $session->remove('msetting');
+        $session->remove('msetting_default');
 
         return parent::afterSave($insert, $changedAttributes);
     }   
@@ -172,13 +174,15 @@ class Client extends \yii\db\ActiveRecord
                     ->where(['belong_to' => 1, 'clients_or_webs_id' => $this->id])
                     ->all();
 
-            if (!empty($msettings) && empty($session->get('msetting'))) {
+            if (!empty($msettings) && empty($session->get('msetting_default'))) {
                 $tmp = [];
                 foreach ($msettings as $key => $msetting) {
                     array_push($tmp, ['messages_id' => $msetting->messages_id, 'belong_to' => $msetting->belong_to]);
                 }
                 // assign $tmp to session 'msetting'
+                // the same as assigning 'msetting' by 'msetting_default'
                 $session->set('msetting', $tmp);
+                $session->set('msetting_default', $tmp);
             }
         }
         

@@ -26,8 +26,6 @@ class MSettingsController extends \yii\web\Controller
 			array_push($settings, Yii::$app->request->post('Msetting'));
 
 		$session->set('msetting', $settings);
-
-		echo "<pre>"; var_dump($session->get('msetting')); die('111');
 	}
 
 	
@@ -42,8 +40,6 @@ class MSettingsController extends \yii\web\Controller
 			$msetting_session = $this->array_recursive_diff($msetting_session, $msetting_post);
 			$session->set('msetting', $msetting_session);
 		}
-
-		echo "<pre>"; var_dump($session->get('msetting')); die('111');
 	}
 	
 
