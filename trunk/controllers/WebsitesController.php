@@ -11,6 +11,9 @@ class WebsitesController extends \yii\web\Controller
 {
     public function actionIndex()
     {
+        // remove all sessions when come back list page
+        Yii::$app->session->removeAll();
+
     	$websites = Website::find()
     			->orderBy('id DESC')
     			->all();

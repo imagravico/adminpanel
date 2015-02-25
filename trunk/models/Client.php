@@ -167,23 +167,10 @@ class Client extends \yii\db\ActiveRecord
         // set full name for current client
         $this->fullname = $this->getFullName();
 
-        // get all msettings
+        // get all msettings in 'edit' a client case only
         $id_param = Yii::$app->request->get('id');
         if (isset($id_param)) {
-            $msettings = Msetting::find()
-                    ->where(['belong_to' => 1, 'clients_or_webs_id' => $this->id])
-                    ->all();
-
-            if (!empty($msettings) && empty($session->get('msetting_default'))) {
-                $tmp = [];
-                foreach ($msettings as $key => $msetting) {
-                    array_push($tmp, ['messages_id' => $msetting->messages_id, 'belong_to' => $msetting->belong_to]);
-                }
-                // assign $tmp to session 'msetting'
-                // the same as assigning 'msetting' by 'msetting_default'
-                $session->set('msetting', $tmp);
-                $session->set('msetting_default', $tmp);
-            }
+            Msetting::getCurrentMSettings(1, $this->id);
         }
         
         parent::afterFind();

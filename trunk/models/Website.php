@@ -71,6 +71,9 @@ class Website extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function beforeSave($insert) 
     {
         // convert format birthday
@@ -79,15 +82,62 @@ class Website extends \yii\db\ActiveRecord
             $this->online_date = $date->format('Y-m-d');
         }
 
+
         return parent::beforeSave($insert);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes) 
+    {
+        $session = Yii::$app->session;
+        $msetting_session = $session->get('msetting');
+        
+        // save messages configruation for this client
+        if (!empty($msetting_session)) {
+            $one_time = FALSE;
+            foreach ($msetting_session as $key => $value) {
+                $msetting              = new Msetting;
+                $msetting->messages_id = $value['messages_id'];
+                $msetting->belong_to   = $value['belong_to'];
+                $msetting->clients_or_webs_id = $this->id;
+
+                // remove all current msettings only one time by $one_time flag
+                if (!$one_time)
+                    Msetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
+
+                $one_time = TRUE;
+                $msetting->save();
+            }
+        }
+        else {
+            Msetting::deleteAll(['clients_or_webs_id' => $this->id]);
+        }
+
+        // remove session of message settings after saving to db
+        $session->remove('msetting');
+        $session->remove('msetting_default');
+
+        return parent::afterSave($insert, $changedAttributes);
+    }   
+
+
+    /**
+     * @inheritdoc
+     */
     public function afterFind()
     {
         // convert current format of birthday to d/m/Y
         if ($this->online_date) {
             $date = \DateTime::createFromFormat('Y-d-m', $this->online_date);
             $this->online_date = $date->format('d/m/Y');
+        }
+
+        // get all msettings in 'edit' a website case only
+        $id_param = Yii::$app->request->get('id');
+        if (isset($id_param)) {
+            Msetting::getCurrentMSettings(2, $this->id);
         }
     }
     

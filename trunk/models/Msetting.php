@@ -53,4 +53,29 @@ class Msetting extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
     
+    /**
+     * get all current messages settings of specific client or website
+     * @param  integer $belong_to =1 for client and =2 for website
+     * @param  integer $id id of the client or website
+     * @return assign the settings for session 'msetting_default' and 'msetting'
+     */
+    public static function getCurrentMSettings($belong_to, $id)
+    {
+        $session = Yii::$app->session;
+
+        $msettings = self::find()
+                    ->where(['belong_to' => $belong_to, 'clients_or_webs_id' => $id])
+                    ->all();
+
+        if (!empty($msettings) && empty($session->get('msetting_default'))) {
+            $tmp = [];
+            foreach ($msettings as $key => $msetting) {
+                array_push($tmp, ['messages_id' => $msetting->messages_id, 'belong_to' => $msetting->belong_to]);
+            }
+            // assign $tmp to session 'msetting'
+            // the same as assigning 'msetting' by 'msetting_default'
+            $session->set('msetting', $tmp);
+            $session->set('msetting_default', $tmp);
+        }
+    }
 }
