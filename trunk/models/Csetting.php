@@ -71,5 +71,4 @@ class Csetting extends \yii\db\ActiveRecord
         }
     }
 
-
 }

@@ -9,6 +9,58 @@ use app\models\Csetting;
 
 class MCSettingsController extends \yii\web\Controller
 {
+	public function create($model)
+	{
+		if ($model === 'Csetting') {
+			$session_name = 'csetting';
+			$field        = 'checklists_id';
+		}
+		elseif ($model === 'Msetting') {
+			$session_name = 'msetting';
+			$field        = 'messages_id';
+		}
+
+		$session = Yii::$app->session;
+
+		if (empty($session->get($session_name))) {
+			$settings = [];
+		}
+		else {
+			$settings = $session->get($session_name);
+		}
+		
+		$csetting_post = Yii::$app->request->post($model);
+
+		if (!empty($csetting_post) && !$this->in_array_r($csetting_post[$field], $settings)) 
+			array_push($settings, Yii::$app->request->post($model));
+
+		$session->set($session_name, $settings);
+
+	}
+
+	public function remove($model)
+	{
+		if ($model === 'Csetting') {
+			$session_name = 'csetting';
+			$field        = 'checklists_id';
+		}
+		elseif ($model === 'Msetting') {
+			$session_name = 'msetting';
+			$field        = 'messages_id';
+		}
+
+		$session = Yii::$app->session;
+
+		$csetting_post    = Yii::$app->request->post($model);
+		$csetting_session = $session->get($session_name);
+
+		if (!empty($csetting_post) && !empty($csetting_session) && $this->in_array_r($csetting_post[$field], $csetting_session)) {
+			$csetting_session = $this->array_recursive_diff($csetting_session, $csetting_post, $field);
+			$session->set($session_name, $csetting_session);
+		}
+
+	}
+
 	public function array_recursive_diff($arr_1, $arr_2, $offset) 
 	{
 	  	$arr_return = array();

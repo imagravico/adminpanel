@@ -9,7 +9,7 @@ use yii\web\UploadedFile;
 use app\models\Msetting;
 use app\models\Csetting;
 use yii\web\Session;
-
+use app\models\MCSetting;
 
 /**
  * This is the model class for table "clients".
@@ -121,53 +121,17 @@ class Client extends \yii\db\ActiveRecord
         $session = Yii::$app->session;
         $msetting_session = $session->get('msetting');
         $csetting_session = $session->get('csetting');
-        
+
         // save messages configruation for this client
-        if (!empty($msetting_session)) {
-            $one_time = FALSE;
-            foreach ($msetting_session as $key => $value) {
-                $msetting              = new Msetting;
-                $msetting->messages_id = $value['messages_id'];
-                $msetting->belong_to   = $value['belong_to'];
-                $msetting->clients_or_webs_id = $this->id;
-
-                // remove all current msettings only one time by $one_time flag
-                if (!$one_time)
-                    Msetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
-
-                $one_time = TRUE;
-                $msetting->save();
-            }
-        }
-        else {
-            Msetting::deleteAll(['clients_or_webs_id' => $this->id]);
-        }
+        MCSetting::saveSettingsChanged($msetting_session, new Msetting, $this->id);
 
         // remove session of message settings after saving to db
         $session->remove('msetting');
         $session->remove('msetting_default');
 
         // save checklist configruatiion for this client
-        if (!empty($csetting_session)) {
-            $one_time = FALSE;
-            foreach ($csetting_session as $key => $value) {
-                $msetting              = new Csetting;
-                $msetting->checklists_id = $value['checklists_id'];
-                $msetting->belong_to   = $value['belong_to'];
-                $msetting->clients_or_webs_id = $this->id;
-
-                // remove all current msettings only one time by $one_time flag
-                if (!$one_time)
-                    Csetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
-
-                $one_time = TRUE;
-                $msetting->save();
-            }
-        }
-        else {
-            Csetting::deleteAll(['clients_or_webs_id' => $this->id]);
-        }
-
+        MCSetting::saveSettingsChanged($csetting_session, new Csetting, $this->id);
+        
         // remove session of message settings after saving to db
         $session->remove('csetting');
         $session->remove('csetting_default');
@@ -200,7 +164,7 @@ class Client extends \yii\db\ActiveRecord
             Msetting::getCurrentMSettings(1, $this->id);
             Csetting::getCurrentCSettings(1, $this->id);
         }
-
+        
         parent::afterFind();    
     }
 
