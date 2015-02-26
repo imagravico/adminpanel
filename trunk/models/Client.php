@@ -7,6 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use yii\web\UploadedFile;
 use app\models\Msetting;
+use app\models\Csetting;
 use yii\web\Session;
 
 
@@ -119,6 +120,7 @@ class Client extends \yii\db\ActiveRecord
     {
         $session = Yii::$app->session;
         $msetting_session = $session->get('msetting');
+        $csetting_session = $session->get('csetting');
         
         // save messages configruation for this client
         if (!empty($msetting_session)) {
@@ -144,6 +146,31 @@ class Client extends \yii\db\ActiveRecord
         // remove session of message settings after saving to db
         $session->remove('msetting');
         $session->remove('msetting_default');
+
+        // save checklist configruatiion for this client
+        if (!empty($csetting_session)) {
+            $one_time = FALSE;
+            foreach ($csetting_session as $key => $value) {
+                $msetting              = new Csetting;
+                $msetting->checklists_id = $value['checklists_id'];
+                $msetting->belong_to   = $value['belong_to'];
+                $msetting->clients_or_webs_id = $this->id;
+
+                // remove all current msettings only one time by $one_time flag
+                if (!$one_time)
+                    Csetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
+
+                $one_time = TRUE;
+                $msetting->save();
+            }
+        }
+        else {
+            Csetting::deleteAll(['clients_or_webs_id' => $this->id]);
+        }
+
+        // remove session of message settings after saving to db
+        $session->remove('csetting');
+        $session->remove('csetting_default');
 
         return parent::afterSave($insert, $changedAttributes);
     }   
@@ -171,9 +198,10 @@ class Client extends \yii\db\ActiveRecord
         $id_param = Yii::$app->request->get('id');
         if (isset($id_param)) {
             Msetting::getCurrentMSettings(1, $this->id);
+            Csetting::getCurrentCSettings(1, $this->id);
         }
-        
-        parent::afterFind();
+
+        parent::afterFind();    
     }
 
     public function getGroups()

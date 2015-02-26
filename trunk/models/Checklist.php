@@ -80,11 +80,13 @@ class Checklist extends \yii\db\ActiveRecord
     public static function getChecklistBelong($relation)
     {
         $checklists = self::find()
+            ->where(['active' => 1])
             ->with([
                 'cschedule' => function($query) use ($relation) {
                     $query->andWhere('relation=' . $relation . ' AND active=' . 1);
                 },
             ])->all();
+            
         return $checklists;
     }
 }

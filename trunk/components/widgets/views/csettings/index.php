@@ -30,7 +30,7 @@ use app\models\CSetting;
                     <label class="col-md-6 control-label"><?= $checklist->title ?></label>
                     <div class="col-md-6">
                         <label class="switch switch-primary">
-                            <input type="checkbox" id="product-status" name="product-status" class="switch-action" <?php if ($checked) echo 'checked'?>><span></span>
+                            <input type="checkbox" id="product-status" name="product-status" class="switch-action" <?php if ($checked) echo 'checked'?> data-checklists-id="<?= $checklist->id ?>" data-belong-to="<?= $belong_to ?>"><span></span>
                         </label>
                     </div>
                 </div>

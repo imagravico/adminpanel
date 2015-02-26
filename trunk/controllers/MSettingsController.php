@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\web\Session;
-use Msetting;
+use app\models\Msetting;
 
 
 class MSettingsController extends \yii\web\Controller

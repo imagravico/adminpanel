@@ -93,6 +93,7 @@ class Website extends \yii\db\ActiveRecord
     {
         $session = Yii::$app->session;
         $msetting_session = $session->get('msetting');
+        $csetting_session = $session->get('csetting');
         
         // save messages configruation for this client
         if (!empty($msetting_session)) {
@@ -119,6 +120,27 @@ class Website extends \yii\db\ActiveRecord
         $session->remove('msetting');
         $session->remove('msetting_default');
 
+        // save checklist configruatiion for this client
+        if (!empty($csetting_session)) {
+            $one_time = FALSE;
+            foreach ($csetting_session as $key => $value) {
+                $msetting              = new Csetting;
+                $msetting->checklists_id = $value['checklists_id'];
+                $msetting->belong_to   = $value['belong_to'];
+                $msetting->clients_or_webs_id = $this->id;
+
+                // remove all current msettings only one time by $one_time flag
+                if (!$one_time)
+                    Csetting::deleteAll(['clients_or_webs_id' => $msetting->clients_or_webs_id, 'belong_to' => $msetting->belong_to]);
+
+                $one_time = TRUE;
+                $msetting->save();
+            }
+        }
+        else {
+            Csetting::deleteAll(['clients_or_webs_id' => $this->id]);
+        }
+
         return parent::afterSave($insert, $changedAttributes);
     }   
 
@@ -137,6 +159,7 @@ class Website extends \yii\db\ActiveRecord
         // get all msettings in 'edit' a website case only
         $id_param = Yii::$app->request->get('id');
         if (isset($id_param)) {
+            Csetting::getCurrentCSettings(1, $this->id);
             Msetting::getCurrentMSettings(2, $this->id);
         }
     }

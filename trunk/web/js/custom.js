@@ -295,8 +295,8 @@ var Action = function() {
 
 		switchButton.change(function () {
 			if ($(this).is(':checked')) {
-				var to = '/msettings/create',
-					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+				var to = '/csettings/create',
+					data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 
 				$.ajax({
 					url: to,
@@ -311,8 +311,8 @@ var Action = function() {
 				});
 			}
 			else {
-				var to = '/msettings/remove',
-					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+				var to = '/csettings/remove',
+					data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 
 				$.ajax({
 					url: to,

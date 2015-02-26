@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use app\models\User;
 use app\components\widgets\NotesWidget;
 use app\components\widgets\MSettingsWidget;
+use app\components\widgets\CSettingsWidget;
 
 ?>
 <div class="block clearfix">
@@ -46,7 +47,7 @@ use app\components\widgets\MSettingsWidget;
         <div class="col-md-6 text-left">
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-floppy-o"></i> 
-                <?php echo ($website->isNewRecord) ? "Create" : "Update";?>
+                <?= ($website->isNewRecord) ? "Create" : "Update";?>
             </button>
 			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/websites"><i class="fa fa-times"></i> Cancel</button>
         </div>
@@ -61,8 +62,10 @@ use app\components\widgets\MSettingsWidget;
     <?php ActiveForm::end(); ?>
     <!-- END Actions Content -->
 </div>
+<!-- Checklists settings -->
+<?= CSettingsWidget::widget(['belong_to' => 2]); ?>
 <!-- Messages settings -->
-<?php echo MSettingsWidget::widget(['belong_to' => 2]); ?>
+<?= MSettingsWidget::widget(['belong_to' => 2]); ?>
 
 <!-- Notes widget -->
 <?php echo NotesWidget::widget(['area' => 1]); ?>
