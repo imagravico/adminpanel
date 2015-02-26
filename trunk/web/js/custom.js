@@ -10,7 +10,8 @@ var Action = function() {
 		actionActivity();
 		actionSetting();
 		actionMSchedule();
-		actionSwitch();
+		actionMSwitch();
+		actionCSwitch();
 		actionCSchedule();
 	}
 
@@ -250,8 +251,8 @@ var Action = function() {
 		});
 	}
 
-	var actionSwitch = function () {
-		var switchButton = $('.switch-action');
+	var actionMSwitch = function () {
+		var switchButton = $('#setting-messages .switch-action');
 
 		switchButton.change(function () {
 			if ($(this).is(':checked')) {
@@ -288,6 +289,46 @@ var Action = function() {
 			}
 		})
 	}
+
+	var actionCSwitch = function () {
+		var switchButton = $('#checklists-settings .switch-action');
+
+		switchButton.change(function () {
+			if ($(this).is(':checked')) {
+				var to = '/msettings/create',
+					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
+			}
+			else {
+				var to = '/msettings/remove',
+					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
+			}
+		})
+	}
+
 
 	return {
         init: function() {

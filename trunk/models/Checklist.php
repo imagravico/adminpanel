@@ -71,4 +71,20 @@ class Checklist extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getCschedule() 
+    {
+        return $this->hasMany(ChecklistSchedule::className(), ['checklists_id' => 'id']);
+    }
+
+    public static function getChecklistBelong($relation)
+    {
+        $checklists = self::find()
+            ->with([
+                'cschedule' => function($query) use ($relation) {
+                    $query->andWhere('relation=' . $relation . ' AND active=' . 1);
+                },
+            ])->all();
+        return $checklists;
+    }
 }
