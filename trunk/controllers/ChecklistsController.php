@@ -4,10 +4,27 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Checklist;
+use yii\web\Session;
 
 
 class ChecklistsController extends \yii\web\Controller
 {
+    /**
+     * @inhericdoc
+     */
+    public function beforeAction($action) 
+    {
+        $session    = Yii::$app->session;
+        $post       = Yii::$app->request->post();
+        $cur_action = $action->id;
+
+        if (($cur_action === 'edit' && !$post) || $action === 'create' || $action === 'index') {
+            $session->remove('checklists_content');
+        }
+
+        return parent::beforeAction($action);
+    }
+
     public function actionIndex()
     {
     	$checklists = Checklist::find()
@@ -38,6 +55,7 @@ class ChecklistsController extends \yii\web\Controller
      */
     public function actionEdit($id)
     {
+
     	$checklist = $this->findModel($id);
 
         if ($checklist->load(Yii::$app->request->post()) && $checklist->save()) {
@@ -63,6 +81,16 @@ class ChecklistsController extends \yii\web\Controller
         return  ['errors' => ''];
     }
     
+
+    public function actionPrechecklist()
+    {
+        $session = Yii::$app->session;
+        $post = Yii::$app->request->post('checklist_content');
+
+        if ($post) {
+            $session->set('checklists_content', $post);
+        }
+    }
     /**
      * Finds the Checklist model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

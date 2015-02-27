@@ -9,6 +9,12 @@ use app\models\Csetting;
 
 class MCSettingsController extends \yii\web\Controller
 {
+	/**
+	 * create a session queue when switch button of each item in messages list
+	 * or checklist to on
+	 * @param  string $model name of corresponding model
+	 * @return mix
+	 */
 	public function create($model)
 	{
 		if ($model === 'Csetting') {
@@ -38,6 +44,12 @@ class MCSettingsController extends \yii\web\Controller
 
 	}
 
+	/**
+	 * remove a session item in queue when switch button of each item in messages list
+	 * or checklist to off
+	 * @param  string $model name of corresponding model
+	 * @return mix
+	 */
 	public function remove($model)
 	{
 		if ($model === 'Csetting') {
@@ -58,7 +70,6 @@ class MCSettingsController extends \yii\web\Controller
 			$csetting_session = $this->array_recursive_diff($csetting_session, $csetting_post, $field);
 			$session->set($session_name, $csetting_session);
 		}
-
 	}
 
 	public function array_recursive_diff($arr_1, $arr_2, $offset) 
@@ -80,7 +91,6 @@ class MCSettingsController extends \yii\web\Controller
 	            return true;
 	        }
 	    }
-
 	    return false;
 	}
 }

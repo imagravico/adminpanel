@@ -315,7 +315,7 @@ var Action = function() {
 					data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 
 				$.ajax({
-					url: to,
+					url: to,	
 					type: 'POST',
 					data: data,
 					success: function (res) {

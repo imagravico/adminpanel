@@ -22,6 +22,7 @@ use app\components\widgets\ActivitiesWidget;
 				'groups' => $groups
 		]); ?>
 		<?= ActivitiesWidget::widget();?>
+		
 	</div>
 
 	<div class="col-lg-4 col-xs-12">

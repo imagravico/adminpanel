@@ -72,6 +72,17 @@ class Checklist extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterSave($insert, $changedAttributes) 
+    {
+        $session = Yii::$app->session;
+        $session->remove('checklists_content');
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
     public function getCschedule() 
     {
         return $this->hasMany(ChecklistSchedule::className(), ['checklists_id' => 'id']);

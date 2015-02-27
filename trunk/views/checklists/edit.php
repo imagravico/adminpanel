@@ -16,7 +16,6 @@
             <!-- Message Data Content -->
             <?= $this->render('_form', ['checklist' => $checklist]) ?>
             <!-- END Message Data Content -->
-        </div>
         <!-- END Message Data Block -->
     </div>
     <div class="col-lg-4 col-xs-12">

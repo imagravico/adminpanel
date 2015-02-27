@@ -6,6 +6,7 @@ use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\models\User;
+
 ?>
 <div class="block">
     <!-- General Data Title -->

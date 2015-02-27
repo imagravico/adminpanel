@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
+use app\components\widgets\EditableChecklistsWidget;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Checklist */
@@ -39,3 +40,6 @@ use yii\bootstrap\ActiveForm;
             ])->textInput((array('placeholder' => 'Berg Informatik', 'class' => 'form-control'))); ?>  
 
 </div>
+</div>
+
+<?= EditableChecklistsWidget::widget(); ?>

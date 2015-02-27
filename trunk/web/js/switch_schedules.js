@@ -28,6 +28,8 @@ $(document).ready(function() {
 	var clTextarea = $('#cl-textarea');
 	var clTextareaCount = 0;
 
+	var saveCl = $('.save-cl');
+
 	$(InputsWrapper).sortable();  		// to make added fields sortable
 				
 	/*------------------------------------------------
@@ -120,6 +122,33 @@ $(document).ready(function() {
 
 		return true;
 	});
+
+	/*------------------------------------------------
+	 make content of checklist
+	 -------------------------------------------------*/
+	saveCl.click(function () {
+		preCl();
+	});
+
+	function preCl()
+	{
+		var preCls = $(InputsWrapper).html();
+		$.ajax({
+			url: '/checklists/prechecklist',
+			type: 'POST',
+			data: {'checklist_content' : preCls},
+			success: function (res) {
+
+			},
+			error: function (res) {
+
+			}
+
+		})
+	}
+
+
+
 
 	/*------------------------------------------------
 	 Tab
