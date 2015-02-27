@@ -9,6 +9,7 @@ use app\models\User;
 use app\components\widgets\ActivitiesWidget;
 use app\components\widgets\ChecklistsWidget;
 
+
 ?>
 
 <div class="content-header">

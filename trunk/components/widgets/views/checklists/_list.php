@@ -23,7 +23,7 @@ use app\models\Checklist;
 				<div class="checklist-buttons">
 					<a data-toggle="modal" href="#modal-send-edit" class="btn btn-xs btn-default"><i class="fa fa-mail-forward"></i> Send to Client</a>
 					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
-					<a data-toggle="modal" href="#modal-website-edit" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i> Edit</a>
+					<a data-toggle="modal" href="#modal-checklist-edit" class="btn btn-xs btn-default edit-checklist" data-checklist-id="<?= $checklist->id ?>"><i class="fa fa-pencil"></i> Edit</a>
 					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-times"></i> Delete</a>
 				</div>
             </td>

@@ -84,6 +84,9 @@ class Checklist extends \yii\db\ActiveRecord
             $this->content = $session->get('checklists_content');
         }
 
+        // assigning id of current user to users_id field
+        $this->users_id = Yii::$app->user->id;
+        
         return parent::beforeSave($insert);
     }
 

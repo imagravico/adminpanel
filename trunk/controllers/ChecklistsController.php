@@ -91,6 +91,33 @@ class ChecklistsController extends \yii\web\Controller
             $session->set('checklists_content', $post);
         }
     }
+
+    public function actionGetcontent() 
+    {
+        $id = Yii::$app->request->post('id');
+        if ($id) {
+            $checklist = Checklist::findOne($id);
+            Yii::$app->response->format = 'json';
+            return  ['errors' => '', 'data' => $checklist->content];
+        }
+    }
+
+    public function actionSavecontent() 
+    {
+        $id = Yii::$app->request->post('id');
+        $content = Yii::$app->request->post('content');
+
+        if ($id) {
+            $checklist = Checklist::findOne($id);
+            $checklist->content = $content;
+
+            if ($checklist->save()) {
+                Yii::$app->response->format = 'json';
+                return  ['errors' => '', 'data' => $checklist->content];
+            }
+        }
+        return;
+    }
     /**
      * Finds the Checklist model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

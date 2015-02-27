@@ -13,7 +13,6 @@ var Action = function() {
 		actionMSwitch();
 		actionCSwitch();
 		actionCSchedule();
-		actionChecklist();
 	}
 
 	var actionForm = function () 
@@ -251,68 +250,85 @@ var Action = function() {
 			}
 		});
 	}
-	var actionMCSwitch = function (options) {
-		var switchButton = options.button,
-			toAdd = options.toAdd,
-			toRe = options.toRe,
-			data = options.data;
+
+	var actionMSwitch = function () {
+		var switchButton = $('#setting-messages .switch-action');
 
 		switchButton.change(function () {
 			if ($(this).is(':checked')) {
-				postData(toAdd, data, '', function () {});
+				var to = '/msettings/create',
+					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
 			}
 			else {
-				postData(toRe, data, '', function () {});
-				
+				var to = '/msettings/remove',
+					data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
 			}
 		})
-	}
-
-	var actionMSwitch = function () {
-		var button = $('#setting-messages .switch-action'),
-			urlAdd = '/msettings/create',
-			urlRe  = '/msettings/remove',
-			data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
-
-		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, data: data});
 	}
 
 	var actionCSwitch = function () {
+		var switchButton = $('#checklists-settings .switch-action');
 
-		var button = $('#checklists-settings .switch-action'),
-			urlAdd = '/csettings/create',
-			urlRe  = '/csettings/remove',
-			data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
+		switchButton.change(function () {
+			if ($(this).is(':checked')) {
+				var to = '/csettings/create',
+					data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 
-		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, data: data});
-	}
+				$.ajax({
+					url: to,
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
+			}
+			else {
+				var to = '/csettings/remove',
+					data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 
-	var actionChecklist = function () {
-		// define
-		var edit = $('.edit-checklist'),
-			get = '/checklists/getcontent',
-			update = $('#InputsWrapper'),
-			saveChange = $('.save-checklist'),
-			post = '/checklists/savecontent',
-			id;
-		// edit
-		edit.click(function () {
-			id = $(this).data('checklistId');
-			var data = {'id': id};
-				
-			postData(get, data, update, function () {
-				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
-			});
-		});
-
-		saveChange.click(function () {
-			var data = {'id': id, 'content': update.html()};
-			
-			postData(post, data, '', function () {
-				$('.btn-cl-close').trigger('click');
-			});
+				$.ajax({
+					url: to,	
+					type: 'POST',
+					data: data,
+					success: function (res) {
+						
+					},
+					error: function (res) {
+						alert('Opp oh! There are something wrong. Try again..')
+					}
+				});
+			}
 		})
 	}
+
 
 	return {
         init: function() {
