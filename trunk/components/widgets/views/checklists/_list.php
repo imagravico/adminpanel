@@ -5,9 +5,12 @@ use app\models\Checklist;
 <table id="checklist" class="table table-striped table-vcenter">
     <tbody>
     	<?php
+    		
             $checklists = Checklist::getChecklistBelong($belong_to);
-            foreach ($checklists as $key => $checklist) {
-                if (!empty($checklist->cschedule)) {
+            if ($checklists) {
+
+	            foreach ($checklists as $key => $checklist) {
+	                if (!empty($checklist->cschedule)) {
 
         ?>
         <tr>
@@ -23,8 +26,8 @@ use app\models\Checklist;
 				<div class="checklist-buttons">
 					<a data-toggle="modal" href="#modal-send-edit" class="btn btn-xs btn-default"><i class="fa fa-mail-forward"></i> Send to Client</a>
 					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
-					<a data-toggle="modal" href="#modal-checklist-edit" class="btn btn-xs btn-default edit-checklist" data-checklist-id="<?= $checklist->id ?>"><i class="fa fa-pencil"></i> Edit</a>
-					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-times"></i> Delete</a>
+					<a data-toggle="modal" href="#modal-checklist-edit" class="btn btn-xs btn-default btn-edit-checklist" data-checklist-id="<?= $checklist->id ?>"><i class="fa fa-pencil"></i> Edit</a>
+					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default btn-del-checklist" data-to="/checklists/delete/<?= $checklist->id ?>" data-belong-to=<?= $belong_to ?> ><i class="fa fa-times"></i> Delete</a>
 				</div>
             </td>
         </tr>
@@ -32,6 +35,10 @@ use app\models\Checklist;
         <?php
                     }
                 }
+            } 
+            else {
+            	echo "No checklist is available";
+            }
         ?>
     </tbody>
 </table>

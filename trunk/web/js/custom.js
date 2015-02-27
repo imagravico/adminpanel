@@ -239,6 +239,11 @@ var Action = function() {
 			type: 'POST',
 			data: data,
 			success: function (res) {
+				if (res.errors != '') 
+				{
+					alert('Opp oh! There are something wrong. Try again..');
+				}
+
 				if (update != '' && res.errors == '') {
 					updateRes(update, res.data);
 				}
@@ -251,6 +256,7 @@ var Action = function() {
 			}
 		});
 	}
+
 	var actionMCSwitch = function (options) {
 		var switchButton = options.button,
 			toAdd = options.toAdd,
@@ -289,14 +295,17 @@ var Action = function() {
 
 	var actionChecklist = function () {
 		// define
-		var edit = $('.edit-checklist'),
+		var edit = $('.btn-edit-checklist'),
 			get = '/checklists/getcontent',
 			update = $('#InputsWrapper'),
 			saveChange = $('.save-checklist'),
 			post = '/checklists/savecontent',
 			id;
+
+
 		// edit
-		edit.click(function () {
+		body.on('click', '#checklist .btn-edit-checklist', function (e) 
+		{
 			id = $(this).data('checklistId');
 			var data = {'id': id};
 				
@@ -305,9 +314,23 @@ var Action = function() {
 			});
 		});
 
+		// delete
+		body.on('click', '#checklist .btn-del-checklist', function (e) 
+		{
+			var update = $('#cl-list'),
+				belongTo = $(this).data('belongTo');
+
+			e.preventDefault();
+			if (confirm('Are you sure to delete it?')) 
+			{
+				postData($(this).data('to'), {'belong_to': belongTo}, update, function () {
+				});
+			}
+		});
+
 		saveChange.click(function () {
 			var data = {'id': id, 'content': update.html()};
-			
+
 			postData(post, data, '', function () {
 				$('.btn-cl-close').trigger('click');
 			});

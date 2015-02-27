@@ -16,8 +16,9 @@
 		#checklist tr td .checklist-buttons {display:none;}
 		#checklist tr:hover td .checklist-buttons {display:initial;}
 	</style>
-	
-    <?= $this->render('_list', ['belong_to' => $belong_to]);?>
+	<div id="cl-list">
+        <?= $this->render('_list', ['belong_to' => $belong_to]);?>
+    </div>
 </div>
 <!-- checklist edition modal -->
 <div id="modal-checklist-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
