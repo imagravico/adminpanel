@@ -1,3 +1,6 @@
+<?php
+	$this->registerJsFile('/web/js/editable-checklist.js', ['depends' => [app\assets\AppAsset::className()]]);
+?>
 <!-- Message Block -->
 <div class="block">
     <!-- Message Title -->
@@ -15,7 +18,9 @@
 	<a href="javascript:void(0)" id="cl-switch" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Switch</a>
 	<a href="javascript:void(0)" id="cl-rating" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Rating</a>
 
-	<div id="InputsWrapper"></div>
+	<div id="InputsWrapper">
+		<?= $checklist->content; ?>		
+	</div>
 
 
 	<button class="save-cl btn btn-sm btn-primary" style="margin:15px;" type="button">Save</button>

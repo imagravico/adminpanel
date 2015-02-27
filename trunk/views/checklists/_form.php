@@ -42,4 +42,4 @@ use app\components\widgets\EditableChecklistsWidget;
 </div>
 </div>
 
-<?= EditableChecklistsWidget::widget(); ?>
+<?= EditableChecklistsWidget::widget(['checklist' => $checklist]); ?>

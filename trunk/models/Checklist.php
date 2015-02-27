@@ -75,6 +75,21 @@ class Checklist extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public function beforeSave($insert) 
+    {
+        $session = Yii::$app->session;
+        $content = $session->get('checklists_content');
+
+        if (isset($content)) {
+            $this->content = $session->get('checklists_content');
+        }
+
+        return parent::beforeSave($insert);
+    }
+
+    /**
+     * @inheritdoc
+     */
     public function afterSave($insert, $changedAttributes) 
     {
         $session = Yii::$app->session;
