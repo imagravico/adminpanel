@@ -43,7 +43,7 @@ class WebsitesController extends \yii\web\Controller
 
     		return $this->redirect(['/websites']);
     	}
-    	return $this->render('create', [
+    	return $this->render('edit', [
     			'website' => $website
     		]);
     }

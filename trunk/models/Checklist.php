@@ -98,6 +98,14 @@ class Checklist extends \yii\db\ActiveRecord
         return parent::afterSave($insert, $changedAttributes);
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function afterFind()
+    {
+        parent::afterFind();    
+    }
+
     public function getCschedule() 
     {
         return $this->hasMany(ChecklistSchedule::className(), ['checklists_id' => 'id']);

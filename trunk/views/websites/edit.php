@@ -6,6 +6,8 @@ use app\models\Group;
 use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\components\widgets\ActivitiesWidget;
+use app\components\widgets\ChecklistsWidget;
+
 
 ?>
 
@@ -19,6 +21,7 @@ use app\components\widgets\ActivitiesWidget;
 		<?php echo $this->render('_form', [
 				'website' => $website,
 		]); ?>
+		<?= ChecklistsWidget::widget(['belong_to' => 2]);?>
 	</div> 
 	<!-- END col-lg-8 -->
 	

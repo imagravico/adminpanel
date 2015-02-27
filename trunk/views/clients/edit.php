@@ -7,6 +7,7 @@ use kartik\file\FileInput;
 use yii\helpers\Url;
 use app\models\User;
 use app\components\widgets\ActivitiesWidget;
+use app\components\widgets\ChecklistsWidget;
 
 ?>
 
@@ -22,7 +23,7 @@ use app\components\widgets\ActivitiesWidget;
 				'groups' => $groups
 		]); ?>
 		<?= ActivitiesWidget::widget();?>
-		
+		<?= ChecklistsWidget::widget(['belong_to' => 1]);?>
 	</div>
 
 	<div class="col-lg-4 col-xs-12">
