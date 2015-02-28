@@ -295,18 +295,18 @@ var Action = function() {
 
 	var actionChecklist = function () {
 		// define
-		var edit = $('.btn-edit-checklist'),
-			get = '/checklists/getcontent',
-			update = $('#InputsWrapper'),
+		var edit       = $('.btn-edit-checklist'),
+			get        = '/checklists/getcontent',
+			update     = $('#InputsWrapper'),
 			saveChange = $('.save-checklist'),
-			post = '/checklists/savecontent',
+			post       = '/checklists/savecontent',
 			id;
 
 
 		// edit
 		body.on('click', '#checklist .btn-edit-checklist', function (e) 
 		{
-			id = $(this).data('checklistId');
+			id       = $(this).data('checklistId');
 			var data = {'id': id};
 				
 			postData(get, data, update, function () {
@@ -317,7 +317,7 @@ var Action = function() {
 		// delete
 		body.on('click', '#checklist .btn-del-checklist', function (e) 
 		{
-			var update = $('#cl-list'),
+			var update   = $('#cl-list'),
 				belongTo = $(this).data('belongTo');
 
 			e.preventDefault();
@@ -328,6 +328,30 @@ var Action = function() {
 			}
 		});
 
+		// send email
+		$('.btn-send-email').click(function () {
+			var form = $('#modal-send-email-edit #sendmail-form'),
+				// id of checklist
+				idCls   = $(this).data('checklistId');
+				belongTo = $(this).data('belongTo');
+
+			// assign idCls to cowid
+			form.find('#checklists_id').val(idCls);
+			form.find('#belong_to').val(belongTo);
+
+			// send
+			form.submit(function (e) {
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				// re-assign post url
+				post = '/checklists/sendmail';
+				data = form.serializeArray();
+				postData(post, data, '', function () {
+					$('.btn-cl-close').trigger('click');
+				});
+			})
+		})
+
 		saveChange.click(function () {
 			var data = {'id': id, 'content': update.html()};
 
@@ -336,6 +360,7 @@ var Action = function() {
 			});
 		})
 	}
+
 
 	return {
         init: function() {

@@ -37,3 +37,5 @@ use app\components\widgets\ChecklistsWidget;
 <!-- Load some popup -->
 
 <?= $this->render('@widget/views/activities/_form');?>
+<?= $this->render('@widget/views/checklists/_sendmail_modal_form');?>
+

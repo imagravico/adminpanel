@@ -66,8 +66,8 @@ class Msetting extends \yii\db\ActiveRecord
         $msettings = self::find()
                     ->where(['belong_to' => $belong_to, 'clients_or_webs_id' => $id])
                     ->all();
-
-        if (!empty($msettings) && empty($session->get('msetting_default'))) {
+        $msetting_default = $session->get('msetting_default');
+        if (!empty($msettings) && empty($msetting_default)) {
             $tmp = [];
             foreach ($msettings as $key => $msetting) {
                 array_push($tmp, ['messages_id' => $msetting->messages_id, 'belong_to' => $msetting->belong_to]);

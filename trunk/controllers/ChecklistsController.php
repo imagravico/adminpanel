@@ -5,6 +5,9 @@ namespace app\controllers;
 use Yii;
 use app\models\Checklist;
 use yii\web\Session;
+use app\models\Client;
+use app\models\Website;
+use app\models\SendmailForm;
 
 
 class ChecklistsController extends \yii\web\Controller
@@ -88,6 +91,33 @@ class ChecklistsController extends \yii\web\Controller
         ];
     }
     
+    public function actionSendmail() 
+    {
+        $post = Yii::$app->request->post('SendmailForm');
+        Yii::$app->response->format = 'json';
+        $sm_form = new SendmailForm();
+
+        if ($sm_form->load(Yii::$app->request->post()) && $sm_form->validate()) {
+            if ($post['belong_to'] == 1) {
+                $cow = Client::findOne($post['cowid']);
+            }
+            elseif ($post['belong_to'] == 2) {
+                $cow = Website::findOne($post['cowid']);
+            }
+            // send mail
+            Yii::$app->mailer->compose()
+                ->setFrom('admin@panel.com')
+                ->setTo($cow->email)
+                ->setSubject($post['subject'])
+                ->setTextBody($post['content'])
+                ->send();
+
+            return ['errors' => ''];
+        }
+        else {
+            return ['errors' => 'Something is wrong.'];
+        }
+    }
 
     public function actionPrechecklist()
     {

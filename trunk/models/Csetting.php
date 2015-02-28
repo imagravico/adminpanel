@@ -58,8 +58,8 @@ class Csetting extends \yii\db\ActiveRecord
         $csettings = self::find()
                     ->where(['belong_to' => $belong_to, 'clients_or_webs_id' => $id])
                     ->all();
-
-        if (!empty($csettings) && empty($session->get('csetting_default'))) {
+        $csetting_default = $session->get('csetting_default');
+        if (!empty($csettings) && empty($csetting_default)) {
             $tmp = [];
             foreach ($csettings as $key => $csetting) {
                 array_push($tmp, ['checklists_id' => $csetting->checklists_id, 'belong_to' => $csetting->belong_to]);
