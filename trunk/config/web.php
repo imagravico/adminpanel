@@ -42,7 +42,7 @@ $config = [
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'useFileTransport' => true
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
@@ -137,6 +137,7 @@ $config = [
     'defaultRoute' => 'site/login',
     'aliases' => [
         '@widget' => '@app/components/widgets',
+        '@web'    => '@app/web'
     ],
 ];
 
