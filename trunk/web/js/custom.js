@@ -312,7 +312,7 @@ var Action = function() {
 
 
 		// edit
-		body.on('click', '#checklist .btn-edit-checklist', function (e) 
+		body.on('click', '#checklist .btn-edit-checklist, #choose-checklists .btn-edit-checklist', function (e) 
 		{
 			id       = $(this).data('checklistId');
 			var data = {'id': id};
