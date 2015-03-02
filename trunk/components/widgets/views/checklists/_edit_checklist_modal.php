@@ -10,9 +10,9 @@
 
             <!-- Modal Body -->
             <div class="modal-body">
-                <div class="checklist-content">
-                
-                    <div class="control">
+                <div class="checklist-content form-horizontal form-bordered">
+                    
+                    <div class="form-group control">
                         <a href="javascript:void(0)" id="cl-title" class="btn btn-alt btn-default"><i class="fa fa-header"></i> Title</a>
                         <a href="javascript:void(0)" id="cl-subtitle" class="btn btn-alt btn-default"><i class="fa fa-header"></i> Subtitle</a>
                         <a href="javascript:void(0)" id="cl-text" class="btn btn-alt btn-default"><i class="fa fa-code-fork  themed-color-dark"></i> Text</a>
@@ -21,9 +21,11 @@
                         <a href="javascript:void(0)" id="cl-switch" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Switch</a>
                         <a href="javascript:void(0)" id="cl-rating" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Rating</a>
                     </div>
-                    <div id="InputsWrapper">
-                        
-                    </div>
+                    <div class="form-group">
+                        <div id="InputsWrapper">
+                            
+                        </div>
+                    </div>  
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default btn-cl-close" data-dismiss="modal">Close</button>

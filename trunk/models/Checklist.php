@@ -142,10 +142,10 @@ class Checklist extends \yii\db\ActiveRecord
             // any css to be embedded if required
             'cssInline' => '.kv-heading-1{font-size:18px}', 
              // set mPDF properties on the fly
-            'options' => ['title' => 'Krajee Report Title'],
+            'options' => ['title' => ''],
              // call mPDF methods on the fly
             'methods' => [ 
-                'SetHeader'=>['Krajee Report Header'], 
+                'SetHeader'=>[''], 
                 'SetFooter'=>['{PAGENO}'],
             ]
         ]);

@@ -66,7 +66,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text">Text</label><a href="#" class="text" data-type="text">awesome</a></div>');
+			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="text" data-type="text">Type here</a></div>');
 			returnAccess();
 			
 			clTextCount++;
@@ -82,7 +82,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text">Text</label><a href="#" class="textarea" data-type="textarea">awesome</a></div>');
+			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div>');
 			returnAccess();
 			
 			clTextareaCount++;
