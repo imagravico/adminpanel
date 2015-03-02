@@ -1,6 +1,8 @@
 <?php
 use yii\helpers\Url;
 use app\components\widgets\GroupsWidget;
+use app\components\widgets\FilterWidget;
+
 
 ?>
 <!-- Forms General Header -->
@@ -13,44 +15,14 @@ use app\components\widgets\GroupsWidget;
 
 <div class="row">
     <div class="col-lg-12">
-		
-		<!-- A-Z -->
-		<div class="block-options" style="margin:0 0 12px 0;">
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">A</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">B</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">C</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">D</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">E</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">F</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">G</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">H</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">I</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">J</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">K</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">L</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">M</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">N</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">O</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">P</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">Q</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">R</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">S</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">T</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">V</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">U</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">W</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">X</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">Y</a>
-			<a href="javascript:void(0)" class="btn btn-sm btn-alt btn-default">Z</a>
-		</div>
-		<!-- END A-Z -->
+		<?= FilterWidget::widget(['model' => 'client', 'update_selector' => 'clients-list'  ]); ?>		
 		
 	</div>
 </div>
 <!-- Main Row -->
 <div class="row">
     <div class="col-lg-10">
-		<div class="row">
+		<div class="row" id="clients-list">
 			<?php 
 				if (!empty($clients)) { 
 					foreach ($clients as $key => $client) {

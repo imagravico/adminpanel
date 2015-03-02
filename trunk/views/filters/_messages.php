@@ -1,31 +1,7 @@
-<?php
-use app\components\widgets\FilterWidget;
-
-?>
-<!-- Forms General Header -->
-<div class="content-header">
-    <div class="header-section">
-        <h1><i class="fa fa-globe" style="margin:-14px 0 0 0;"></i>Messages</h1>
-    </div>
-</div>
-<!-- END Forms General Header -->
-
-<div class="row">
-    <div class="col-lg-12">
-       <?= FilterWidget::widget(['model' => 'message', 'update_selector' => 'messages-list'  ]); ?>
-    </div>
-</div>
-
-<!-- Main Row -->
-<div class="row">
-    <div class="col-lg-10">
-        <!-- Courses Content -->
-        <div class="row" id="messages-list">
-            <!-- Course Widget -->
-            <?php 
-                if (!empty($messages)) { 
+<?php 
+                if (!empty($results)) { 
                     $i = 0;
-                    foreach ($messages as $key => $message) {
+                    foreach ($results as $key => $message) {
                         $class = [
                                 'themed-background-dark-default',
                                 'themed-background-dark-fire',
@@ -81,36 +57,3 @@ use app\components\widgets\FilterWidget;
             <?php
                 }
             ?>
-            
-            <!-- END Course Widget -->
-        </div>
-        <!-- END Courses Content -->
-    </div>
-    
-    <!-- START Stats Block -->
-    <div class="col-lg-2">
-        
-        <div class="row text-center">
-            <div class="col-xs-12">
-                <a href="/messages/create" class="widget widget-hover-effect2">
-                    <div class="widget-extra themed-background-success">
-                        <h4 class="widget-content-light"><strong>Add New</strong> Message</h4>
-                    </div>
-                    <div class="widget-extra-full"><span class="h2 text-success animation-expandOpen"><i class="fa fa-plus"></i></span></div>
-                </a>
-            </div>
-            <div class="col-xs-12">
-                <a href="javascript:void(0)" class="widget widget-hover-effect2">
-                    <div class="widget-extra themed-background-dark">
-                        <h4 class="widget-content-light">Total <strong>Messages</strong></h4>
-                    </div>
-                    <div class="widget-extra-full"><span class="h2 themed-color-dark animation-expandOpen"><?= count($messages); ?></span></div>
-                </a>
-            </div>
-        </div>
-    </div>
-    <!-- END Stats Block -->
-    
-</div>
-<!-- END Main Row -->
-            

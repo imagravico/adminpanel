@@ -14,6 +14,7 @@ var Action = function() {
 		actionCSwitch();
 		actionCSchedule();
 		actionChecklist();
+		actionFilter();
 	}
 
 	var actionForm = function () 
@@ -371,6 +372,21 @@ var Action = function() {
 		})
 	}
 
+	var actionFilter = function () {
+		var to = '/filters',
+			filter = $('#filter').find('a'),
+			update = '',
+			data = {};
+
+		filter.click(function () {
+			update = $($(this).data('update'));
+			data = {'model': $(this).data('model'), 'keyword': $(this).data('keyword')};
+			postData(to, data, update, function () {
+
+			});
+		})
+
+	}
 
 	return {
         init: function() {
