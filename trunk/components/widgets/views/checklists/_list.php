@@ -25,7 +25,7 @@ use app\models\Checklist;
             <td class="text-right">
 				<div class="checklist-buttons">
 					<a data-toggle="modal" href="#modal-send-email-edit" class="btn btn-xs btn-default btn-send-email" data-checklist-id="<?= $checklist->id ?>" data-belong-to=<?= $belong_to ?>><i class="fa fa-mail-forward"></i> Send to Client</a>
-					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
+					<a href="/checklists/download/<?= $checklist->id ?>" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
 					<a data-toggle="modal" href="#modal-checklist-edit" class="btn btn-xs btn-default btn-edit-checklist" data-checklist-id="<?= $checklist->id ?>"><i class="fa fa-pencil"></i> Edit</a>
 					<a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default btn-del-checklist" data-to="/checklists/delete/<?= $checklist->id ?>" data-belong-to=<?= $belong_to ?> ><i class="fa fa-times"></i> Delete</a>
 				</div>

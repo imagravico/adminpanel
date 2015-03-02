@@ -122,6 +122,22 @@ class ChecklistsController extends \yii\web\Controller
         }
     }
 
+    public function actionDownload($id)
+    {
+        $checklist = $this->findModel($id);
+        $path_file = Yii::$app->basePath . '/web/upload/pdf/' . $checklist->file_name;
+
+        // We'll be outputting a PDF
+        header('Content-Type: application/pdf');
+
+        // It will be called downloaded.pdf
+        header('Content-Disposition: attachment; filename="' . $checklist->file_name . '"');
+
+        // The PDF source is in original.pdf
+        readfile($path_file);
+
+    }
+
     public function actionPrechecklist()
     {
         $session = Yii::$app->session;
