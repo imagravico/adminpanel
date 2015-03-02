@@ -24,7 +24,7 @@ class ChecklistsController extends \yii\web\Controller
         if (($cur_action === 'edit' && !$post) || $action === 'create' || $action === 'index') {
             $session->remove('checklists_content');
         }
-
+        
         return parent::beforeAction($action);
     }
 
@@ -98,18 +98,21 @@ class ChecklistsController extends \yii\web\Controller
         $sm_form = new SendmailForm();
 
         if ($sm_form->load(Yii::$app->request->post()) && $sm_form->validate()) {
+
             if ($post['belong_to'] == 1) {
                 $cow = Client::findOne($post['cowid']);
             }
             elseif ($post['belong_to'] == 2) {
                 $cow = Website::findOne($post['cowid']);
             }
+            $checklist = Checklist::findOne($post['checklists_id']);
             // send mail
             Yii::$app->mailer->compose()
                 ->setFrom('admin@panel.com')
                 ->setTo($cow->email)
                 ->setSubject($post['subject'])
                 ->setTextBody($post['content'])
+                ->attach(Yii::$app->basePath . '/web/upload/pdf/' . $checklist->file_name)
                 ->send();
 
             return ['errors' => ''];

@@ -14,6 +14,7 @@ class CSettingsController extends MCSettingsController
 	public function actionCreate()
 	{
 		$this->create('Csetting');
+		
 	}
 
 	public function actionRemove()

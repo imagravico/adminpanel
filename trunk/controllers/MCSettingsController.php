@@ -42,6 +42,8 @@ class MCSettingsController extends \yii\web\Controller
 
 		$session->set($session_name, $settings);
 
+
+
 	}
 
 	/**
@@ -70,6 +72,7 @@ class MCSettingsController extends \yii\web\Controller
 			$csetting_session = $this->array_recursive_diff($csetting_session, $csetting_post, $field);
 			$session->set($session_name, $csetting_session);
 		}
+
 	}
 
 	public function array_recursive_diff($arr_1, $arr_2, $offset) 

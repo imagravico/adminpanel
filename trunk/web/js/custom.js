@@ -239,10 +239,10 @@ var Action = function() {
 			type: 'POST',
 			data: data,
 			success: function (res) {
-				if (res.errors != '') 
-				{
-					alert('Opp oh! There are something wrong. Try again..');
-				}
+				// if (res.errors != '') 
+				// {
+				// 	alert('Opp oh! There are something wrong. Try again..');
+				// }
 
 				if (update != '' && res.errors == '') {
 					updateRes(update, res.data);
@@ -261,9 +261,17 @@ var Action = function() {
 		var switchButton = options.button,
 			toAdd = options.toAdd,
 			toRe = options.toRe,
-			data = options.data;
+			dataOf = options.dataOf;
 
 		switchButton.change(function () {
+			if (dataOf == 'messages') {
+				data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+			}
+			else if (dataOf == 'checklists') {
+				data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
+			}
+			
+			console.log(data);
 			if ($(this).is(':checked')) {
 				postData(toAdd, data, '', function () {});
 			}
@@ -278,9 +286,9 @@ var Action = function() {
 		var button = $('#setting-messages .switch-action'),
 			urlAdd = '/msettings/create',
 			urlRe  = '/msettings/remove',
-			data = {'Msetting[messages_id]': $(this).data('messagesId'), 'Msetting[belong_to]': $(this).data('belongTo')};
+			dataOf = 'messages';
 
-		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, data: data});
+		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, dataOf: dataOf});
 	}
 
 	var actionCSwitch = function () {
@@ -288,9 +296,9 @@ var Action = function() {
 		var button = $('#checklists-settings .switch-action'),
 			urlAdd = '/csettings/create',
 			urlRe  = '/csettings/remove',
-			data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
+			dataOf = 'checklists';
 
-		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, data: data});
+		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, dataOf: dataOf});
 	}
 
 	var actionChecklist = function () {
@@ -348,6 +356,8 @@ var Action = function() {
 				data = form.serializeArray();
 				postData(post, data, '', function () {
 					$('.btn-cl-close').trigger('click');
+					form.trigger("reset");
+					form.yiiActiveForm('resetForm');
 				});
 			})
 		})

@@ -24,6 +24,7 @@ use app\models\CSetting;
                                     ->one();
                         if (isset($csetting))
                             $checked = TRUE;
+
         ?>
 
                 <div class="form-group">

@@ -132,6 +132,7 @@ class Client extends \yii\db\ActiveRecord
         // save checklist configruatiion for this client
         MCSetting::saveSettingsChanged($csetting_session, new Csetting, $this->id);
         
+
         // remove session of message settings after saving to db
         $session->remove('csetting');
         $session->remove('csetting_default');
