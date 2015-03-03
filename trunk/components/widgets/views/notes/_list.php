@@ -23,7 +23,7 @@ use app\models\Note;
                                 <?php } ?>
                             </small><br>
                             <a data-toggle="modal" href="#modal-note-edit" class="btn btn-xs btn-default btn-edit-note" data-to="/notes/edit/<?= $note->id ?>" data-load="/notes/load/<?= $note->id ?>"><i class="fa fa-edit"></i> Edit</a>
-                            <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" ><i class="fa fa-times" ></i> Delete</a>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" data-area=<?= $area ?>><i class="fa fa-times" ></i> Delete</a>
                         </span>
                         <a href="#">
                             <strong>n<?= $note->user->fullname; ?></strong>

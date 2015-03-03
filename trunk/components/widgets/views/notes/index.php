@@ -1,11 +1,11 @@
 <?php
 use app\models\Note;
 ?>
-<div class="block full">
+<div class="block full notes">
     <!-- Notes Title -->
     <div class="block-title">
         <div class="block-options pull-right">
-            <a class="btn btn-sm btn-alt btn-default" data-toggle="modal" href="#modal-note-edit">Add Note <i class="fa fa-plus"></i></a>
+            <a class="btn btn-sm btn-alt btn-default btn-add-note" data-toggle="modal" href="#modal-note-edit">Add Note <i class="fa fa-plus"></i></a>
         </div>
         <h2><i class="fa fa-quote-right"></i> Notes</h2>
     </div>

@@ -43,7 +43,7 @@ use app\components\widgets\MschedulesWidget;
     <!-- END Info Content -->
 	
     <!-- Actions Content -->
-    <div class="form-group form-actions clearfix">
+    <div class="form-group form-actions clearfix block-actions">
         <div class="col-md-6 text-left">
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-floppy-o"></i> 

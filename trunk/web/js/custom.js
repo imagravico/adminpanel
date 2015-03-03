@@ -4,7 +4,6 @@ var Action = function() {
 	
 	var body   = $(document.body);
 	var uiInit = function () {
-		actionForm();
 		actionGroup();
 		actionNote();
 		actionActivity();
@@ -17,89 +16,69 @@ var Action = function() {
 		actionFilter();
 	}
 
-	var actionForm = function () 
-	{
-		var form   = $('.form-actions'),
-		    cancel = form.find('.cancel'),
-			del    = form.find('.del');
-			
-		// cancel
-		cancel.click(function (e) 
-		{
-			e.preventDefault();
-			window.location.href = cancel.data('redirect');
-		});
-
-		// delete
-		body.on('click', '.form-actions .del', function (e) 
-		{
-			e.preventDefault();
-			if (confirm('Are you sure to delete it?')) 
-			{
-				
-				$.ajax({
-					url: $(this).data('to'),
-					success: function(res) {
-						if (res.errors == '' && del.data('redirect') != undefined) {
-							window.location.href = del.data('redirect');
-						}
-					},
-					error: function(res) {
-						alert('Opp oh! There are something wrong. Try again..')
-					} 
-				})
-			}
-		});
-	}
-
 	var actionGroup = function () {
 
 		var	group  = $('#form-add-group'),
+			update = $(group.data('update')),
 			edit   = group.find('.form-actions .edit'),
-			add    = group.find('.form-actions .add');
+			add    = group.find('.form-actions .add'),
+			del    = group.find('.form-actions .del');
 
 		// add new 
-		body.on('click', '.form-actions .add', function (e) {
+		body.on('click', add.selector, function (e) {
 			e.preventDefault();
-			var form   = $(add.data('form')),
-				update = $(add.data('update'));
-
-			postData(add.data('to'), form.serializeArray(), update, function () {
+			postData(add.data('to'), group.serializeArray(), update, function () {
 				});	
 		});
 
 		// edit, in this case it is only for editting group
-		body.on('click', '.form-actions .edit', function (e) {
+		body.on('click', edit.selector, function (e) {
 			e.preventDefault();
-			var update = $(edit.data('update')),
-				name = $($(this).data('input')).val();
+			var name = $($(this).data('input')).val();
 
 			postData($(this).data('to'), {'name' : name}, update, function () {
 				});
 
+		});
+
+		// edit, in this case it is only for editting group
+		body.on('click', del.selector, function (e) {
+			e.preventDefault();
+			if (confirm('Are you sure to delete it?')) 
+			{
+				postData($(this).data('to'), {}, update, function () {
+				});
+			}
 		});
 	}
 
 	var actionNote = function () {
 		var form   = $('#form-note'),
 			update = $(form.data('update')),
+			add    = $('.btn-add-note'),
 			edit   = $('.notes-list .btn-edit-note'),
+			del    = $('.notes-list .btn-del-note'),
 			url    = '/notes/create',
 			wrap   = $('#wrap-form-note');
 
-		body.on('click', '.notes-list .btn-edit-note', function (e) {
+		body.on('click', edit.selector, function (e) {
 			url = $(this).data('to');
-			// var loadUrl = $(this).data('load');
-			// wrap.load(loadUrl);
+		});
+
+		// add 
+		add.click(function () {
+			url = '/notes/create';
 		});
 
 		// delete
-		body.on('click', '.notes-list .btn-del-note', function (e) 
+		body.on('click', del.selector, function (e) 
 		{
 			e.preventDefault();
+			data = {'area': $(this).data('area')};
+
 			if (confirm('Are you sure to delete it?')) 
 			{
-				postData($(this).data('to'), {}, update, function () {
+				postData($(this).data('to'), data, update, function () {
 				});
 			}
 		});
@@ -108,6 +87,8 @@ var Action = function() {
 			e.preventDefault();
 			postData(url, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
+					form.trigger("reset");
+					form.yiiActiveForm('resetForm');
 				});
 		});
 	}
@@ -122,6 +103,7 @@ var Action = function() {
 			to           = form.data('to'),
 			update       = $(form.data('update')),
 			activityList = $('#activities-list'), 
+			viewMore     = $('#activities-list .view-more'),
 			more         = 2;
 
 		form.submit(function (e) {
@@ -134,7 +116,7 @@ var Action = function() {
 			
 		});
 
-		body.on('click', '#activities-list .view-more', function (e) {
+		body.on('click', viewMore.selector, function (e) {
 			e.preventDefault();
 			var to = $(this).data('to') + more;
 			postData(to, form.serializeArray(), update, function () {
@@ -160,6 +142,8 @@ var Action = function() {
 
 			postData(form.data('to'), form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
+					form.trigger("reset");
+					form.yiiActiveForm('resetForm');
 				});
 
 		});
@@ -240,17 +224,12 @@ var Action = function() {
 			type: 'POST',
 			data: data,
 			success: function (res) {
-				// if (res.errors != '') 
-				// {
-				// 	alert('Opp oh! There are something wrong. Try again..');
-				// }
-
-				if (update != '' && res.errors == '') {
+				if (update.length !== 0 && res.errors == '') {
 					updateRes(update, res.data);
 				}
 
 				if (res.errors == '')
-					sCallback();
+					sCallback(res);
 			},
 			error: function (res) {
 				alert('Opp oh! There are something wrong. Try again..')

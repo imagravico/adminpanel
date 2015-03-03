@@ -8,6 +8,7 @@ use yii\web\Session;
 use app\models\Client;
 use app\models\Website;
 use app\models\SendmailForm;
+use yii\web\NotFoundHttpException;
 
 
 class ChecklistsController extends \yii\web\Controller

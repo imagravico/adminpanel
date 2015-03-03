@@ -74,14 +74,12 @@ class NotesController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        
-        $notes = Note::find()->orderBy('id DESC')->all();
-
         Yii::$app->response->format = 'json';
+        
         return [
             'errors' => '',
             'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                'notes'  => $notes,
+                'area'  => Yii::$app->request->post('area'),
             ])
         ];
     }

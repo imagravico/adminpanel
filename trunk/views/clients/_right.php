@@ -49,13 +49,13 @@ use app\components\widgets\CSettingsWidget;
                 <i class="fa fa-floppy-o"></i> 
                 <?php echo ($client->isNewRecord) ? "Create" : "Update";?>
             </button>
-			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/clients"><i class="fa fa-times"></i> Cancel</button>
+			<a href="/clients" class="btn btn-sm btn-primary cancel" ><i class="fa fa-times"></i> Cancel</a>
         </div>
         <?php 
                 if (!$client->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <button type="reset" class="btn btn-sm btn-danger del" data-to="/clients/delete/<?= $client->id?>" data-redirect="/clients"><i class="fa fa-trash"></i> Delete</button>
+                        <a href="/clients/delete/<?= $client->id ?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                     </div>
             <?php } ?>
     </div>

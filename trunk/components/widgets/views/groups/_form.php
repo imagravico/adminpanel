@@ -8,6 +8,7 @@ use yii\bootstrap\ActiveForm;
         'action' => '#',
         'options' => [
             'class'   => 'form-bordered',
+            'data-update' => '#update-group'
         ],
         'fieldConfig' => [
             'horizontalCssClasses' => [
@@ -45,7 +46,7 @@ use yii\bootstrap\ActiveForm;
                                     <i class="fa fa-pencil"></i> Edit
                                 </a>
                                 <!-- Delete Button -->
-                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default del" data-update="#update-group" data-to="/groups/delete/<?= $group->id?>">
+                                <a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default del" data-to="/groups/delete/<?= $group->id?>">
                                     <i class="fa fa-times"></i> Delete
                                 </a>
 
@@ -53,7 +54,7 @@ use yii\bootstrap\ActiveForm;
                                     <div class="input-group">
                                         <input type="text" id="edit-group-input-<?= $group->id ?>" class="form-control" value="">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-sm btn-primary edit" data-input="#edit-group-input-<?= $group->id ?>" data-to="/groups/edit/<?= $group->id?>" data-update="#update-group">
+                                            <button class="btn btn-sm btn-primary edit" data-input="#edit-group-input-<?= $group->id ?>" data-to="/groups/edit/<?= $group->id?>">
                                                 <i class="fa fa-plus"></i> Edit
                                             </button>
                                         </span>

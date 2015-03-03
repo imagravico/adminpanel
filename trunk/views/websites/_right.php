@@ -43,19 +43,19 @@ use app\components\widgets\CSettingsWidget;
     <!-- END Info Content -->
 	
     <!-- Actions Content -->
-    <div class="form-group form-actions clearfix">
+    <div class="form-group form-actions block-actions clearfix">
         <div class="col-md-6 text-left">
             <button type="submit" class="btn btn-sm btn-primary">
                 <i class="fa fa-floppy-o"></i> 
                 <?= ($website->isNewRecord) ? "Create" : "Update";?>
             </button>
-			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/websites"><i class="fa fa-times"></i> Cancel</button>
+			<a href="/websites" class="btn btn-sm btn-primary" data-redirect="/websites"><i class="fa fa-times"></i> Cancel</a>
         </div>
         <?php 
                 if (!$website->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <button type="reset" class="btn btn-sm btn-danger del" data-to="/websites/delete/<?= $website->id?>" data-redirect="/websites"><i class="fa fa-trash"></i> Delete</button>
+                        <a href="/websites/delete/<?= $website->id?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
                     </div>
             <?php } ?>
     </div>

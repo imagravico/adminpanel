@@ -57,8 +57,7 @@ class WebsitesController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->response->format = 'json';
-        return  ['errors' => ''];
+        return $this->redirect(['/websites']);
     }
 
     /**

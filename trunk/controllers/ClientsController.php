@@ -131,7 +131,6 @@ class ClientsController extends \yii\web\Controller
             ]);
     }
 
-
     /**
      * Deletes an existing Client model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -141,11 +140,7 @@ class ClientsController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        // delete all websites related to this client
-        Website::deleteAll(['clients_id' => $id]);
-        
-        Yii::$app->response->format = 'json';
-        return  ['errors' => ''];
+        return $this->redirect(['/clients']);
     }
 
     /**
