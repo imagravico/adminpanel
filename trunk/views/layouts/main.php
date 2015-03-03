@@ -268,4 +268,4 @@ AppAsset::register($this);
 </html>
 <?php $this->endPage() ?>   
 
-
+<div class="modal-loading"><!-- Place at bottom of page --></div>
