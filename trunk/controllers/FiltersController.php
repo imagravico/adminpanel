@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -8,7 +7,6 @@ use app\models\Client;
 use app\models\Checklist;
 use app\models\Message;
 use app\models\Website;
-
 
 
 class FiltersController extends \yii\web\Controller
