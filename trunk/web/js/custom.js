@@ -62,7 +62,16 @@ var Action = function() {
 			wrap   = $('#wrap-form-note');
 
 		body.on('click', edit.selector, function (e) {
-			url = $(this).data('to');
+			url     = $(this).data('to');
+			loadUrl = $(this).data('load');
+			update  = $('#wrap-form-note');
+
+
+			postData(loadUrl, {'area': $(this).data('area')}, update, function () {
+        		$('.textarea-editor').wysihtml5();
+
+			});
+
 		});
 
 		// add 

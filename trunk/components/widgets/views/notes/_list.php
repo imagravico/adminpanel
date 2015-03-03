@@ -22,7 +22,7 @@ use app\models\Note;
                                 <em><?= $note->timeAgo(strtotime($note->created_at)) ?></em>
                                 <?php } ?>
                             </small><br>
-                            <a data-toggle="modal" href="#modal-note-edit" class="btn btn-xs btn-default btn-edit-note" data-to="/notes/edit/<?= $note->id ?>" data-load="/notes/load/<?= $note->id ?>"><i class="fa fa-edit"></i> Edit</a>
+                            <a data-toggle="modal" href="#modal-note-edit" class="btn btn-xs btn-default btn-edit-note" data-to="/notes/edit/<?= $note->id ?>" data-load="/notes/load/<?= $note->id ?>"><i class="fa fa-edit" data-area=<?= $area ?> ></i> Edit</a>
                             <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" data-area=<?= $area ?>><i class="fa fa-times" ></i> Delete</a>
                         </span>
                         <a href="#">

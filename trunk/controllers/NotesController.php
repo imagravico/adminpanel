@@ -62,7 +62,15 @@ class NotesController extends \yii\web\Controller
     public function actionLoad($id)
     {
         $note = $this->findModel($id);
-        return $this->renderPartial('@widget/views/notes/_form', ['note' => $note]);
+        Yii::$app->response->format = 'json';
+
+        return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/notes/_form', [
+                    'note' => $note,
+                    'area' => Yii::$app->request->post('area')
+                ])
+            ];
     }
 
     /**
