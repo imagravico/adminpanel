@@ -164,13 +164,6 @@ var Action = function() {
 
 		body.on('click', '#list-mschedules .btn-edit-mschedule', function (e) {
 			to = $(this).data('to');
-			// loadUrl = $(this).data('load');
-			// update = $('#wrap-mschedules-form');
-			// data = {message_id: $(this).data('messageId')};
-
-			// postData(loadUrl, data, update, function() {
-
-			// });
 		});
 
 		add.click(function () {
