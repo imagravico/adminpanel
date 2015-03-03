@@ -88,6 +88,20 @@ class MSchedulesController extends \yii\web\Controller
         
     }
 
+
+    public function actionLoad($id)
+    {
+        $model = $this->findModel($id);
+        Yii::$app->response->format = 'json';
+
+        return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/mschedules/_form', [
+                    'model' => $model,
+                    'message_id' => Yii::$app->request->post('message_id')
+                ])
+            ];
+    }
     /**
      * Deletes an existing MessageSchedule model.
      * If deletion is successful, the browser will be redirected to the 'index' page.

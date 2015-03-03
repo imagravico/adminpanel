@@ -159,12 +159,23 @@ var Action = function() {
 	var actionMSchedule = function () {
 		var form = $('#form-add-message-schedule'),
 			update = $(form.data('update')),
+			add = $('.btn-add-mschedule'),
 			to    = '/mschedules/create';
 
 		body.on('click', '#list-mschedules .btn-edit-mschedule', function (e) {
 			to = $(this).data('to');
+			// loadUrl = $(this).data('load');
+			// update = $('#wrap-mschedules-form');
+			// data = {message_id: $(this).data('messageId')};
+
+			// postData(loadUrl, data, update, function() {
+
+			// });
 		});
 
+		add.click(function () {
+			to = '/mschedules/create';
+		})
 		// delete
 		body.on('click', '#list-mschedules .btn-del-mschedule', function (e) {
 			e.preventDefault();
@@ -175,9 +186,10 @@ var Action = function() {
 			}
 		});
 
-		form.submit(function (e) {
+		body.on('submit', '#form-add-message-schedule', function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			form = $('#form-add-message-schedule');
 			postData(to, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
