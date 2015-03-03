@@ -64,14 +64,11 @@ var Action = function() {
 		body.on('click', edit.selector, function (e) {
 			url     = $(this).data('to');
 			loadUrl = $(this).data('load');
-			update  = $('#wrap-form-note');
+			data    = {'area': $(this).data('area')};
 
-
-			postData(loadUrl, {'area': $(this).data('area')}, update, function () {
-        		$('.textarea-editor').wysihtml5();
-
-			});
-
+			postData(loadUrl, data, wrap, function () {
+				$('#form-note .textarea-editor').wysihtml5();
+			})
 		});
 
 		// add 
@@ -92,8 +89,9 @@ var Action = function() {
 			}
 		});
 
-		form.submit(function (e) {
+		body.on('submit', '#form-note', function (e) {
 			e.preventDefault();
+			form = $('#form-note');
 			postData(url, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
 					form.trigger("reset");
