@@ -61,8 +61,18 @@ class MessageSchedule extends Schedule
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function beforeSave($insert)
     {
         return parent::beforeSave($insert);
-    }   
+    }  
+
+    public function getMsettings() 
+    {
+        return $this->hasMany(Msetting::className(), ['messages_id' => 'messages_id']);
+    }
+
+    
 }

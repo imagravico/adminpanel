@@ -3,6 +3,9 @@
 namespace app\models;
 
 use Yii;
+use app\models\Client;
+use app\models\Website;
+
 
 /**
  * This is the model class for table "msettings".
@@ -53,6 +56,18 @@ class Msetting extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
     
+    /**
+     * @establish a relationship with client or website model
+     */
+    public function getCow()
+    {
+        if ($this->belong_to == 1) {
+            return $this->hasOne(Client::className(), ['id' => 'clients_or_webs_id']);
+        }
+        elseif ($this->belong_to == 2) {
+            return $this->hasOne(Website::className(), ['id' => 'clients_or_webs_id']);
+        }
+    }
     /**
      * get all current messages settings of specific client or website
      * @param  integer $belong_to =1 for client and =2 for website
