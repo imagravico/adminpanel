@@ -6,6 +6,11 @@ use Yii;
 use app\models\Client;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
+use app\models\Msetting;
+use app\models\Csetting;
+use yii\web\Session;
+use app\models\MCSetting;
+
 
 /**
  * This is the model class for table "websites".
@@ -132,6 +137,19 @@ class Website extends \yii\db\ActiveRecord
         }
     }
     
+    /**
+     * @inheritdoc
+     */
+    public function afterDelete()
+    {
+        // remove all messages settings 
+        Msetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 2]);
+
+        Csetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 2]);
+
+        parent::afterDelete();
+    }
+
     public function getClient() 
     {
         return $this->hasOne(Client::classname(), ['id' => 'clients_id']);

@@ -169,6 +169,17 @@ class Client extends \yii\db\ActiveRecord
         parent::afterFind();    
     }
 
+    public function afterDelete()
+    {
+        // remove all messages settings 
+        Msetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 1]);
+
+        Csetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 1]);
+
+        parent::afterDelete();
+    }
+
+
     public function getGroups()
     {
         return $this->hasMany(GroupClient::className(), ['clients_id' => 'id']);
