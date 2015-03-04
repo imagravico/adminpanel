@@ -2,7 +2,7 @@
     <!-- Reminder Title -->
    <div class="block-title">
         <div class="block-options pull-right">
-			<a class="btn btn-sm btn-alt btn-default" data-toggle="modal" href="#modal-schedules-edit">Add Schedule <i class="fa fa-plus"></i></a>
+			<a class="btn btn-sm btn-alt btn-default btn-add-mschedule" data-toggle="modal" href="#modal-schedules-edit">Add Schedule <i class="fa fa-plus"></i></a>
         </div>
         <h2><i class="fa fa-bell-o"></i> Schedules</h2>
     </div>
