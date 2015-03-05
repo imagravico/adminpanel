@@ -211,7 +211,7 @@ class Client extends \yii\db\ActiveRecord
      * @param  integer $type 
      * @return string
      */
-    public function getTimeSend($type) 
+    public function getTimeSend($type_time, $type) 
     {
         switch ($type) {
             case 1:

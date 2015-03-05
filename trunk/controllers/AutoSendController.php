@@ -14,6 +14,8 @@ class AutoSendController extends \yii\web\Controller
 	
 	public $cur_setting;
 	public $event;
+	public $type_time;
+	public $cur_mschedule;
 
 	/**
 	 * this action will trigger every minute
@@ -24,15 +26,13 @@ class AutoSendController extends \yii\web\Controller
 		// send message
 		$mschedules = MessageSchedule::find()
 					->all();
-		// echo "<pre>"; var_dump($mschedules->msettings); die('$mschedules->msettings->cow');
-		// foreach ($mschedules->msettings as $key => $setting) {
-		// 	echo "<pre>"; print_r($setting->cow); die('$setting->cow');
-		// }
 		if ($mschedules) {
 			foreach ($mschedules as $key => $mschedule) {
 
-				$settings = $mschedule->msettings;
-				$this->event = $mschedule->event;
+				$settings            = $mschedule->msettings;
+				$this->event         = $mschedule->event;
+				$this->type_time     = $mschedule->type;
+				$this->cur_mschedule = $mschedule;
 
 				if ($settings) {
 					foreach ($settings as $key => $setting) {
@@ -42,13 +42,10 @@ class AutoSendController extends \yii\web\Controller
 						}
 					}
 				}
-				
-				
 			}
 		}
-		
+		// send checklist
 	}
-
 	/**
 	 * parse 
 	 * @param  [type] $id [description]
@@ -56,7 +53,6 @@ class AutoSendController extends \yii\web\Controller
 	 */
 	private function _parseTime() 
 	{
-		
 		// if ($this->schedule->type == 1) {
 			
 		// }
@@ -64,7 +60,6 @@ class AutoSendController extends \yii\web\Controller
 		// 	$this->_getTimeSend()
 		// }
 	}
-
 	/**
 	 * check current time and schedule time of specific message or checklist
 	 * @param  mix checklist's and message's object
@@ -73,7 +68,6 @@ class AutoSendController extends \yii\web\Controller
 	private function _check() 
 	{
 		$time_send = 0;
-		echo "<pre>"; print_r($this->_getTimeSend()); die('$this->_getTimeSend()');
 		return $this->_compare($this->_getTimeSend(), time());
 	}
 
@@ -84,10 +78,15 @@ class AutoSendController extends \yii\web\Controller
 
 	private function _getTimeSend()
 	{
-		if ($this->cur_setting) {
-			$cur_user = $this->cur_setting->cow;
-			return $cur_user->getTimeSend($this->event);
+		if ($this->type_time == 1) {
+			if ($this->cur_setting) {
+				$cur_user = $this->cur_setting->cow;
+				return $cur_user->getTimeSend($this->event);
+			}
+		} else {
+
 		}
+		
 	}
 
 	private function _compare($needed, $current)

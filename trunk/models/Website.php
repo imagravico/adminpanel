@@ -165,7 +165,7 @@ class Website extends \yii\db\ActiveRecord
     {
         switch ($type) {
             case 1:
-                return $this->birthday;
+                return $this->online_date;
                 break;
             
             case 2:
