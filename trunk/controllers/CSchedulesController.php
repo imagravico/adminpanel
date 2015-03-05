@@ -8,7 +8,7 @@ use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 
 
-class CSchedulesController extends \yii\web\Controller
+class CschedulesController extends \yii\web\Controller
 {
     public function actionIndex()
     {
