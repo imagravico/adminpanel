@@ -68,12 +68,12 @@ class AutoSendController extends \yii\web\Controller
 	private function _check() 
 	{
 		$time_send = 0;
-		return $this->_compare($this->_getTimeSend(), time());
+		return $this->_compare($this->_getTimeSend(), date('Y/m/d'));
 	}
 
 	private function _send()
 	{
-
+		echo "<pre>"; var_dump("ok"); die('"ok"');
 	}
 
 	private function _getTimeSend()
@@ -84,9 +84,8 @@ class AutoSendController extends \yii\web\Controller
 				return $cur_user->getTimeSend($this->event);
 			}
 		} else {
-
+			if ()
 		}
-		
 	}
 
 	private function _compare($needed, $current)
