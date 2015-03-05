@@ -72,6 +72,13 @@ class ChecklistSchedule extends Schedule
      */
     public function beforeSave($insert)
     {
+        if ($this->type == 1) {
+            $this->type_periodically = $this->time_periodically  =NULL;
+        }
+        else {
+            $this->event = $this->sendon  =NULL;
+        }
+        
         return parent::beforeSave($insert);
     }   
 }

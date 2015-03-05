@@ -168,7 +168,10 @@ class Client extends \yii\db\ActiveRecord
         
         parent::afterFind();    
     }
-
+    
+    /**
+     * @inheritdoc
+     */
     public function afterDelete()
     {
         // remove all messages settings 

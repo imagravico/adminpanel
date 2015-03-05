@@ -42,7 +42,14 @@ class AutoSendController extends \yii\web\Controller
 	 */
 	private function _parseTime($model) 
 	{
+		$time_send = 0;
 		// in the case type == 1
+		if ($model->type == 1) {
+			$this->_getTimeSend($model->event)
+		}
+		else {
+			$this->_getTimeSend($model->type_periodically)
+		}
 		
 	}
 
@@ -61,5 +68,10 @@ class AutoSendController extends \yii\web\Controller
 
 	}
 
+
+	public function _getTimeSend($type_time_send)
+	{
+		
+	}
 
 }

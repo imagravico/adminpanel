@@ -66,6 +66,13 @@ class MessageSchedule extends Schedule
      */
     public function beforeSave($insert)
     {
+        if ($this->type == 1) {
+            $this->type_periodically = $this->time_periodically  =NULL;
+        }
+        else {
+            $this->event = $this->sendon  =NULL;
+        }
+        
         return parent::beforeSave($insert);
     }  
 
@@ -74,5 +81,5 @@ class MessageSchedule extends Schedule
         return $this->hasMany(Msetting::className(), ['messages_id' => 'messages_id']);
     }
 
-    
+
 }
