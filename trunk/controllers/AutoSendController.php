@@ -11,6 +11,10 @@ use app\models\MessageSchedule;
 
 class AutoSendController extends \yii\web\Controller 
 {
+	
+	public $cur_setting;
+	public $event;
+
 	/**
 	 * this action will trigger every minute
 	 * @return avoid
@@ -18,18 +22,28 @@ class AutoSendController extends \yii\web\Controller
 	public function actionIndex()
 	{
 		// send message
-		$mschedules = MessageSchedule::findOne(1);
+		$mschedules = MessageSchedule::find()
+					->all();
 		// echo "<pre>"; var_dump($mschedules->msettings); die('$mschedules->msettings->cow');
 		// foreach ($mschedules->msettings as $key => $setting) {
 		// 	echo "<pre>"; print_r($setting->cow); die('$setting->cow');
 		// }
-
-
 		if ($mschedules) {
 			foreach ($mschedules as $key => $mschedule) {
-				if ($this->_check($mschedule)) {
-					$this->_send();
+
+				$settings = $mschedule->msettings;
+				$this->event = $mschedule->event;
+
+				if ($settings) {
+					foreach ($settings as $key => $setting) {
+						$this->cur_setting = $setting;
+						if ($this->_check()) {
+							$this->_send();
+						}
+					}
 				}
+				
+				
 			}
 		}
 		
@@ -40,17 +54,15 @@ class AutoSendController extends \yii\web\Controller
 	 * @param  [type] $id [description]
 	 * @return [type]     [description]
 	 */
-	private function _parseTime($model) 
+	private function _parseTime() 
 	{
-		$time_send = 0;
-		// in the case type == 1
-		if ($model->type == 1) {
-			$this->_getTimeSend($model->event)
-		}
-		else {
-			$this->_getTimeSend($model->type_periodically)
-		}
 		
+		// if ($this->schedule->type == 1) {
+			
+		// }
+		// else {
+		// 	$this->_getTimeSend()
+		// }
 	}
 
 	/**
@@ -58,20 +70,31 @@ class AutoSendController extends \yii\web\Controller
 	 * @param  mix checklist's and message's object
 	 * @return bool 
 	 */
-	private function _check($model) 
+	private function _check() 
 	{
-		return $this->_parseTime($model);
+		$time_send = 0;
+		echo "<pre>"; print_r($this->_getTimeSend()); die('$this->_getTimeSend()');
+		return $this->_compare($this->_getTimeSend(), time());
 	}
 
-	public function _send()
+	private function _send()
 	{
 
 	}
 
-
-	public function _getTimeSend($type_time_send)
+	private function _getTimeSend()
 	{
-		
+		if ($this->cur_setting) {
+			$cur_user = $this->cur_setting->cow;
+			return $cur_user->getTimeSend($this->event);
+		}
 	}
 
+	private function _compare($needed, $current)
+	{
+		if ($needed === $current)
+			return true;
+		else
+			return false;
+	}
 }

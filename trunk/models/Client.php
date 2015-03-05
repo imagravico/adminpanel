@@ -204,4 +204,27 @@ class Client extends \yii\db\ActiveRecord
     {
         return $this->firstname . ' ' . $this->lastname;
     }
+
+    /**
+     * return date responding to each $type with Y/m/d format. this function 
+     * will be used in autosend controller
+     * @param  integer $type 
+     * @return string
+     */
+    public function getTimeSend($type) 
+    {
+        switch ($type) {
+            case 1:
+                return $this->birthday;
+                break;
+            
+            case 2:
+                return date('Y/m/d', $this->created_at);
+                break;
+
+            case 3:
+                return $date('Y/m/d', $this->updated_at);
+                break;
+        }
+    }
 }

@@ -19,9 +19,9 @@ class Schedule extends \yii\db\ActiveRecord
     ];
 
     public $website_event = [
-        ['id' => 4, 'name' => 'Website Online Date'],
-        ['id' => 5, 'name' => 'Website Date Created'],
-        ['id' => 6, 'name' => 'Website Date Updated'],
+        ['id' => 1, 'name' => 'Website Online Date'],
+        ['id' => 2, 'name' => 'Website Date Created'],
+        ['id' => 3, 'name' => 'Website Date Updated'],
     ];
 
     public $send_on = [
@@ -59,5 +59,8 @@ class Schedule extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }   
+
+
+    
 
 }
