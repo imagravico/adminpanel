@@ -1,7 +1,9 @@
 $(document).ready(function() {
 			
 	/* cron select */
-	$('.cron-select').cron();
+	$('.cron-select').cron({
+		initial: "00 00 * * *",
+	});
 	
 	/* chained select */
 	// $("#series").chained("#mark");
