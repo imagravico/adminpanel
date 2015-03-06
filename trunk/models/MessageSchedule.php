@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\Schedule;
+use app\models\Msetting;
 
 /**
  * This is the model class for table "message_schedules".

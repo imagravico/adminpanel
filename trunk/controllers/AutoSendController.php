@@ -15,7 +15,7 @@ class AutoSendController extends \yii\web\Controller
 	public $cur_setting;
 	public $event;
 	public $type_time;
-	public $cur_mschedule;
+	public $cur_schedule;
 
 	/**
 	 * this action will trigger every minute
@@ -26,74 +26,68 @@ class AutoSendController extends \yii\web\Controller
 		// send message
 		$mschedules = MessageSchedule::find()
 					->all();
-		if ($mschedules) {
-			foreach ($mschedules as $key => $mschedule) {
+		$this->_run($mschedules);
+		// send checklist
+		$cschedules = ChecklistSchedule::find()
+					->all();
+		$this->_run($cschedules);
 
-				$settings            = $mschedule->msettings;
-				$this->event         = $mschedule->event;
-				$this->type_time     = $mschedule->type;
-				$this->cur_mschedule = $mschedule;
+	}
+
+	private function _run($schedules)
+	{
+		if ($schedules) {
+			foreach ($schedules as $key => $schedule) {
+				if ($schedule instanceof MessageSchedule)
+					$settings = $schedule->msettings;
+				else
+					$settings = $schedule->csettings;
+
+				$this->event        = $schedule->event;
+				$this->type_time    = $schedule->type;
+				$this->cur_schedule = $schedule;
 
 				if ($settings) {
-					if ($mschedule->type == 1) {
+					if ($schedule->type == 1) {
 						foreach ($settings as $key => $setting) {
 							$this->cur_setting = $setting;
 							$cur_cow = $this->cur_setting->cow;
 
 							// get time setting from db and merge with at_time in schedule table
-							$time_set = $cur_cow->getTimeSend($this->event) . ' ' . $mschedule->at_time;
+							$time_set = $cur_cow->getTimeSend($this->event) . ' ' . $schedule->at_time;
 							$time_compare = date('m/d H:i');
-							if ($this->_compare($time_set, $time_compare)) {
+							$time_send = [$time_set, $time_compare];
+
+							if ($this->_compare($time_send)) {
 								$this->_send();
 							}
 						}
 					}
-					elseif ($mschedule->type == 2) {
-						switch ($mschedule->type_periodically) {
-							case 'day':
-								$time_set     = $mschedule->time_periodically;
-								$time_compare = date('H:i');
-								break;
-
-							case 'week':
-								$time_set     = $mschedule->time_periodically;
-								$time_compare = date('w H:i');
-								break;
-
-							case 'month':
-								$time_set     = $mschedule->time_periodically;
-								$time_compare = date('j H:i');
-								break;
-
-							case 'year':
-								$time_set     = $mschedule->time_periodically;
-								$time_compare = date('j n H:i');
-								break;
-						}
-
+					elseif ($schedule->type == 2) {
+						$time_send = $schedule->parseTime($schedule);
 						// send email including messages information
-						if ($this->_compare($time_set, $time_compare)) {
+						if ($this->_compare($time_send)) {
 							$this->_send();
 						}
-
 					}
-					
 				}
 			}
 		}
-		// send checklist
 	}
 
-	private function _compare($needed, $compare)
+	private function _compare($time)
 	{
-		if ($needed === $compare)
-			return true;
-		else
-			return false;
+		if (is_array($time) && $time) {
+			if ($time[0] === $time[1])
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 	private function _send()
 	{
-		echo "send duoc roi ne >__<"; die('123');
+		echo "<pre>"; print_r('send dc roi ne` >__< '); echo "<br/>"; die("'send dc roi ne` >__< '");
 	}
 }

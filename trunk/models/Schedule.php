@@ -113,24 +113,26 @@ class Schedule extends \yii\db\ActiveRecord
     {
         switch ($this->type_periodically) {
             case 'day':
-                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
-                return $datetime;
+                $time_set     = $this->time_periodically;
+                $time_compare = date('H:i');
                 break;
 
             case 'week':
-                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
-                return $datetime;
+                $time_set     = $this->time_periodically;
+                $time_compare = date('w H:i');
                 break;
 
-            case 'day':
-                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
-                return $datetime;
+            case 'month':
+                $time_set     = $this->time_periodically;
+                $time_compare = date('j H:i');
                 break;
 
-            case 'day':
-                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
-                return $datetime;
+            case 'year':
+                $time_set     = $this->time_periodically;
+                $time_compare = date('j n H:i');
                 break;
         }
+
+        return [$time_set, $time_compare];
     }
 }
