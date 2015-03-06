@@ -22,10 +22,10 @@ class MschedulesController extends \yii\web\Controller
 
     	if (null !== $type  && $type == 2)
     	{
-			$mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
-			$mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
-			$mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
-            $mschedule->messages_id   = Yii::$app->request->post('MessageSchedule')['messages_id'];
+            $mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
+            $mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
+            $mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
+            $mschedule->messages_id  = Yii::$app->request->post('MessageSchedule')['messages_id'];
 
     		if ($mschedule->save()) {
     			Yii::$app->response->format = 'json';
@@ -35,11 +35,10 @@ class MschedulesController extends \yii\web\Controller
                             ['message_id' => $mschedule->messages_id])
                     ];
 	    	}
-	    	
     	}
     	elseif (null !== $type && $type == 1) {
+            
     		if ($mschedule->load(Yii::$app->request->post()) && $mschedule->save()) {
-
     			Yii::$app->response->format = 'json';
 	    		return [
                         'errors' => '', 
@@ -48,7 +47,6 @@ class MschedulesController extends \yii\web\Controller
                     ];
 	    	}
     	}
-    	
     }
 
     public function actionEdit($id)

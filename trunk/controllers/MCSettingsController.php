@@ -27,8 +27,8 @@ class MCSettingsController extends \yii\web\Controller
 		}
 
 		$session = Yii::$app->session;
-
-		if (empty($session->get($session_name))) {
+		$session_value = $session->get($session_name);
+		if (empty($session_value)) {
 			$settings = [];
 		}
 		else {

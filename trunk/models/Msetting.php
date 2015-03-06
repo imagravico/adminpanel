@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use app\models\Client;
 use app\models\Website;
+use app\models\MCSetting;
 
 
 /**
@@ -15,7 +16,7 @@ use app\models\Website;
  * @property integer $belong_to
  * @property integer $clients_or_webs_id
  */
-class Msetting extends \yii\db\ActiveRecord
+class Msetting extends MCSetting
 {
     /**
      * @inheritdoc
@@ -56,18 +57,6 @@ class Msetting extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
     
-    /**
-     * @establish a relationship with client or website model
-     */
-    public function getCow()
-    {
-        if ($this->belong_to == 1) {
-            return $this->hasOne(Client::className(), ['id' => 'clients_or_webs_id']);
-        }
-        elseif ($this->belong_to == 2) {
-            return $this->hasOne(Website::className(), ['id' => 'clients_or_webs_id']);
-        }
-    }
     /**
      * get all current messages settings of specific client or website
      * @param  integer $belong_to =1 for client and =2 for website

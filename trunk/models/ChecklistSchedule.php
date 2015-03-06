@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use app\models\Schedule;
+use app\models\Csetting;
+
 /**
  * This is the model class for table "checklist_schedules".
  *
@@ -81,4 +83,9 @@ class ChecklistSchedule extends Schedule
         
         return parent::beforeSave($insert);
     }   
+
+    public function getCsettings() 
+    {
+        return $this->hasMany(Csetting::className(), ['checklists_id' => 'checklists_id']);
+    }
 }

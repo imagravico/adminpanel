@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\MCSetting;
 
 /**
  * This is the model class for table "csettings".
@@ -12,7 +13,7 @@ use Yii;
  * @property integer $belong_to
  * @property integer $clients_or_webs_id
  */
-class Csetting extends \yii\db\ActiveRecord
+class Csetting extends MCSetting
 {
     /**
      * @inheritdoc

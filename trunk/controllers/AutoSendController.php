@@ -15,7 +15,7 @@ class AutoSendController extends \yii\web\Controller
 	public $cur_setting;
 	public $event;
 	public $type_time;
-	public $cur_mschedule;
+	public $cur_schedule;
 
 	/**
 	 * this action will trigger every minute
@@ -26,73 +26,68 @@ class AutoSendController extends \yii\web\Controller
 		// send message
 		$mschedules = MessageSchedule::find()
 					->all();
-		if ($mschedules) {
-			foreach ($mschedules as $key => $mschedule) {
+		$this->_run($mschedules);
+		// send checklist
+		$cschedules = ChecklistSchedule::find()
+					->all();
+		$this->_run($cschedules);
 
-				$settings            = $mschedule->msettings;
-				$this->event         = $mschedule->event;
-				$this->type_time     = $mschedule->type;
-				$this->cur_mschedule = $mschedule;
+	}
+
+	private function _run($schedules)
+	{
+		if ($schedules) {
+			foreach ($schedules as $key => $schedule) {
+				if ($schedule instanceof MessageSchedule)
+					$settings = $schedule->msettings;
+				else
+					$settings = $schedule->csettings;
+
+				$this->event        = $schedule->event;
+				$this->type_time    = $schedule->type;
+				$this->cur_schedule = $schedule;
 
 				if ($settings) {
-					foreach ($settings as $key => $setting) {
-						$this->cur_setting = $setting;
-						if ($this->_check()) {
+					if ($schedule->type == 1) {
+						foreach ($settings as $key => $setting) {
+							$this->cur_setting = $setting;
+							$cur_cow = $this->cur_setting->cow;
+
+							// get time setting from db and merge with at_time in schedule table
+							$time_set = $cur_cow->getTimeSend($this->event) . ' ' . $schedule->at_time;
+							$time_compare = date('m/d H:i');
+							$time_send = [$time_set, $time_compare];
+
+							if ($this->_compare($time_send)) {
+								$this->_send();
+							}
+						}
+					}
+					elseif ($schedule->type == 2) {
+						$time_send = $schedule->parseTime($schedule);
+						// send email including messages information
+						if ($this->_compare($time_send)) {
 							$this->_send();
 						}
 					}
 				}
 			}
 		}
-		// send checklist
 	}
-	/**
-	 * parse 
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	private function _parseTime() 
+
+	private function _compare($time)
 	{
-		// if ($this->schedule->type == 1) {
-			
-		// }
-		// else {
-		// 	$this->_getTimeSend()
-		// }
-	}
-	/**
-	 * check current time and schedule time of specific message or checklist
-	 * @param  mix checklist's and message's object
-	 * @return bool 
-	 */
-	private function _check() 
-	{
-		$time_send = 0;
-		return $this->_compare($this->_getTimeSend(), date('Y/m/d'));
+		if (is_array($time) && $time) {
+			if ($time[0] === $time[1])
+				return true;
+			else
+				return false;
+		}
+		return false;
 	}
 
 	private function _send()
 	{
-		echo "<pre>"; var_dump("ok"); die('"ok"');
-	}
-
-	private function _getTimeSend()
-	{
-		if ($this->type_time == 1) {
-			if ($this->cur_setting) {
-				$cur_user = $this->cur_setting->cow;
-				return $cur_user->getTimeSend($this->event);
-			}
-		} else {
-			if ()
-		}
-	}
-
-	private function _compare($needed, $current)
-	{
-		if ($needed === $current)
-			return true;
-		else
-			return false;
+		echo "<pre>"; print_r('send dc roi ne` >__< '); echo "<br/>"; die("'send dc roi ne` >__< '");
 	}
 }

@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\Schedule;
+use app\models\Msetting;
 
 /**
  * This is the model class for table "message_schedules".
@@ -19,7 +20,7 @@ use app\models\Schedule;
  */
 class MessageSchedule extends Schedule
 {
-    
+
     /**
      * @inheritdoc
      */
@@ -40,7 +41,7 @@ class MessageSchedule extends Schedule
             }],
             [['relation', 'type', 'event'], 'integer'],
             [['descriptions', 'time_periodically'], 'string', 'max' => 255],
-            [['messages_id'], 'safe']
+            [['messages_id', 'at_hour', 'at_minute'], 'safe']
         ];
     }
 
@@ -50,12 +51,12 @@ class MessageSchedule extends Schedule
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descriptions' => 'Descriptions',
-            'relation' => 'Relation',
-            'type' => 'Type',
-            'event' => 'Event',
-            'sendon' => 'Send On',
+            'id'                => 'ID',
+            'descriptions'      => 'Descriptions',
+            'relation'          => 'Relation',
+            'type'              => 'Type',
+            'event'             => 'Event',
+            'sendon'            => 'Send On',
             'type_periodically' => 'Type Periodically',
             'time_periodically' => 'Time Periodically',
         ];
@@ -67,10 +68,10 @@ class MessageSchedule extends Schedule
     public function beforeSave($insert)
     {
         if ($this->type == 1) {
-            $this->type_periodically = $this->time_periodically  =NULL;
+            $this->type_periodically = $this->time_periodically  = NULL;
         }
         else {
-            $this->event = $this->sendon  =NULL;
+            $this->event = $this->sendon = NULL;
         }
         
         return parent::beforeSave($insert);

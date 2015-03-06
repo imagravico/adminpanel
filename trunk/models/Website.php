@@ -161,11 +161,11 @@ class Website extends \yii\db\ActiveRecord
      * @param  integer $type 
      * @return string
      */
-    public function getTimeSend($type) 
+    public function getTimeSend($event) 
     {
-        switch ($type) {
+        switch ($event) {
             case 1:
-                return $this->online_date;
+                return date('m/d', strtotime($this->online_date));
                 break;
             
             case 2:

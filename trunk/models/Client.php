@@ -123,16 +123,21 @@ class Client extends \yii\db\ActiveRecord
         $csetting_session = $session->get('csetting');
 
         // save messages configruation for this client
-        MCSetting::saveSettingsChanged($msetting_session, new Msetting, $this->id);
+        // MCSetting::saveSettingsChanged($msetting_session, new Msetting, $this->id);
+        $msetting = new Msetting();
+        $msetting->saveSettingsChanged($msetting_session, $msetting, $this->id);
 
         // remove session of message settings after saving to db
         $session->remove('msetting');
         $session->remove('msetting_default');
 
         // save checklist configruatiion for this client
-        MCSetting::saveSettingsChanged($csetting_session, new Csetting, $this->id);
+        // MCSetting::saveSettingsChanged($csetting_session, new Csetting, $this->id);
         
+        $csetting = new Csetting();
+        $msetting->saveSettingsChanged($msetting_session, $csetting, $this->id);
 
+        
         // remove session of message settings after saving to db
         $session->remove('csetting');
         $session->remove('csetting_default');
@@ -196,7 +201,7 @@ class Client extends \yii\db\ActiveRecord
     public function getMsetting()
     {
         return $this->hasMany(Msetting::className(), ['clients_or_webs_id' => 'id'])
-            ->where('belong_to > :belong_to', [':belong_to' => 1])
+            ->where('belong_to =:belong_to', [':belong_to' => 1])
             ->orderBy('id');
     }
 
@@ -211,19 +216,19 @@ class Client extends \yii\db\ActiveRecord
      * @param  integer $type 
      * @return string
      */
-    public function getTimeSend($type_time, $type) 
+    public function getTimeSend($event) 
     {
-        switch ($type) {
+        switch ($event) {
             case 1:
-                return $this->birthday;
+                return date('m/d', strtotime($this->birthday));
                 break;
             
             case 2:
-                return date('Y/m/d', $this->created_at);
+                return date('m/d', $this->created_at);
                 break;
 
             case 3:
-                return $date('Y/m/d', $this->updated_at);
+                return $date('m/d', $this->updated_at);
                 break;
         }
     }

@@ -9,7 +9,7 @@ use app\models\Msetting;
 
 class MCSetting extends \yii\db\ActiveRecord
 {
- 	public static function saveSettingsChanged($settings, $model, $id)
+ 	public function saveSettingsChanged($settings, $model, $id)
     {
     	// save checklist configruatiion for this client
         if (!empty($settings)) {
@@ -37,6 +37,19 @@ class MCSetting extends \yii\db\ActiveRecord
         }
         else {
             $model->deleteAll(['clients_or_webs_id' => $id]);
+        }
+    }
+
+    /**
+     * @establish a relationship with client or website model
+     */
+    public function getCow()
+    {
+        if ($this->belong_to == 1) {
+            return $this->hasOne(Client::className(), ['id' => 'clients_or_webs_id']);
+        }
+        elseif ($this->belong_to == 2) {
+            return $this->hasOne(Website::className(), ['id' => 'clients_or_webs_id']);
         }
     }
 
