@@ -35,31 +35,28 @@ class AutoSendController extends \yii\web\Controller
 				$this->cur_mschedule = $mschedule;
 
 				if ($settings) {
-					foreach ($settings as $key => $setting) {
-						$this->cur_setting = $setting;
-						if ($this->_check()) {
-							$this->_send();
+					if ($mschedule->type == 1) {
+						foreach ($settings as $key => $setting) {
+							$this->cur_setting = $setting;
+							if ($this->_check()) {
+								$this->_send();
+							}
 						}
 					}
+					elseif ($mschedule->type == 2) {
+						if ($this->_check()) {
+							foreach ($settings as $key => $setting) {
+								$this->_send();
+							}
+						}
+					}
+					
 				}
 			}
 		}
 		// send checklist
 	}
-	/**
-	 * parse 
-	 * @param  [type] $id [description]
-	 * @return [type]     [description]
-	 */
-	private function _parseTime() 
-	{
-		// if ($this->schedule->type == 1) {
-			
-		// }
-		// else {
-		// 	$this->_getTimeSend()
-		// }
-	}
+
 	/**
 	 * check current time and schedule time of specific message or checklist
 	 * @param  mix checklist's and message's object
@@ -83,8 +80,8 @@ class AutoSendController extends \yii\web\Controller
 				$cur_user = $this->cur_setting->cow;
 				return $cur_user->getTimeSend($this->event);
 			}
-		} else {
-			if ()
+		} elseif ($this->type_time == 2) {
+			return $this->cur_mschedule->parseTime();
 		}
 	}
 

@@ -26,7 +26,7 @@ class AppAsset extends AssetBundle
     public $js = [
         'web/backend/js/vendor/bootstrap.min.js',
         'web/backend/js/x-editable-master/dist/bootstrap3-editable/js/bootstrap-editable.min.js',
-        'web/backend/js/shawnchin-jquery-cron-78118ba/cron/jquery-cron-min.js',
+        'web/backend/js/shawnchin-jquery-cron-78118ba/cron/jquery-cron.js',
         'web/backend/js/jquery_chained-master/jquery.chained.min.js',
         'web/backend/js/plugins.js',
         'web/backend/js/app.js',

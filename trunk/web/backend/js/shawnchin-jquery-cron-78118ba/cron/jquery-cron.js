@@ -99,17 +99,18 @@
     // -------  build some static data -------
 
     // options for minutes in an hour
-    var str_opt_mih = "";
-    for (var i = 0; i < 60; i++) {
-        var j = (i < 10)? "0":"";
-        str_opt_mih += "<option value='"+i+"'>" + j +  i + "</option>\n";
+    var str_opt_mih = "",
+        mins_arr = ['00', '15', '30', '45'];
+
+    for (var i = 0; i < 4; i++) {
+        str_opt_mih += "<option value='"+ mins_arr[i] +"'>" + mins_arr[i]  + "</option>\n";
     }
 
     // options for hours in a day
     var str_opt_hid = "";
     for (var i = 0; i < 24; i++) {
         var j = (i < 10)? "0":"";
-        str_opt_hid += "<option value='"+i+"'>" + j + i + "</option>\n";
+        str_opt_hid += "<option value='"+ j + i +"'>" + j + i + "</option>\n";
     }
 
     // options for days of month

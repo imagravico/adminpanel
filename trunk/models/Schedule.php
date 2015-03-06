@@ -94,13 +94,20 @@ class Schedule extends \yii\db\ActiveRecord
                     break;
             }
         }
-
-        // merge at_time from at_hour and at_minute
+        else if ($this->type == 1) {
+            // merge at_time from at_hour and at_minute
+            $this->at_time = $this->at_hour . ':' . $this->at_minute . ':00';
+        }
 
         return parent::beforeSave($insert);
     }   
 
-
-    
-
+    /**
+     * this function only apply for Periodically (corresponding to type == 2)
+     * @return [type] [description]
+     */
+    public function parseTime() 
+    {
+        
+    }
 }

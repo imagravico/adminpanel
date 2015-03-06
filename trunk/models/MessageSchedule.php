@@ -19,7 +19,7 @@ use app\models\Schedule;
  */
 class MessageSchedule extends Schedule
 {
-    
+
     /**
      * @inheritdoc
      */
@@ -40,7 +40,7 @@ class MessageSchedule extends Schedule
             }],
             [['relation', 'type', 'event'], 'integer'],
             [['descriptions', 'time_periodically'], 'string', 'max' => 255],
-            [['messages_id'], 'safe']
+            [['messages_id', 'at_hour', 'at_minute'], 'safe']
         ];
     }
 
@@ -72,9 +72,6 @@ class MessageSchedule extends Schedule
         else {
             $this->event = $this->sendon = NULL;
         }
-        
-        $this->at_time = $this->at_hour . ':' . $this->at_minute . ':00';
-
         
         return parent::beforeSave($insert);
     }  
