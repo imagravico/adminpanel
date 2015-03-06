@@ -211,19 +211,19 @@ class Client extends \yii\db\ActiveRecord
      * @param  integer $type 
      * @return string
      */
-    public function getTimeSend($type_time, $type) 
+    public function getTimeSend($event) 
     {
-        switch ($type) {
+        switch ($event) {
             case 1:
-                return $this->birthday;
+                return date('m/d', strtotime($this->birthday));
                 break;
             
             case 2:
-                return date('Y/m/d', $this->created_at);
+                return date('m/d', $this->created_at);
                 break;
 
             case 3:
-                return $date('Y/m/d', $this->updated_at);
+                return $date('m/d', $this->updated_at);
                 break;
         }
     }

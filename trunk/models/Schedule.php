@@ -71,32 +71,35 @@ class Schedule extends \yii\db\ActiveRecord
     {
         if ($this->type == 2)
         {
-            $this->type_periodically = Yii::$app->request->post('cron-period');
-            switch (trim($this->type_periodically)) {
-                case 'hour':
-                    $this->time_periodically = Yii::$app->request->post('cron-mins');
-                    break;
 
+            $this->type_periodically = Yii::$app->request->post('cron-period');
+            $mins  = Yii::$app->request->post('cron-mins');
+            $hours = Yii::$app->request->post('cron-time-hour');
+            $month = Yii::$app->request->post('cron-month');
+            $dow   = Yii::$app->request->post('cron-dow');
+            $dom   = Yii::$app->request->post('cron-dom');
+
+            switch (trim($this->type_periodically)) {
                 case 'day':
-                    $this->time_periodically = Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
+                    $this->time_periodically = $hours . ':' . $mins;
                     break;
 
                 case 'week':
-                    $this->time_periodically = Yii::$app->request->post('cron-dow') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
+                    $this->time_periodically = $dow . ' ' . $hours . ':' . $mins;
                     break;
 
                 case 'month':
-                    $this->time_periodically = Yii::$app->request->post('cron-dom') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
+                    $this->time_periodically = $dom . ' ' . $hours . ':' . $mins;
                     break;
 
                 case 'year':
-                    $this->time_periodically = Yii::$app->request->post('cron-dom') . '-' . Yii::$app->request->post('cron-month') . '-' . Yii::$app->request->post('cron-time-hour') . '-' .Yii::$app->request->post('cron-time-min');
+                    $this->time_periodically = $dom . ' ' . $month . ' ' . $hours . ':' . $mins;
                     break;
             }
         }
         else if ($this->type == 1) {
             // merge at_time from at_hour and at_minute
-            $this->at_time = $this->at_hour . ':' . $this->at_minute . ':00';
+            $this->at_time = $this->at_hour . ':' . $this->at_minute;
         }
 
         return parent::beforeSave($insert);
@@ -108,6 +111,26 @@ class Schedule extends \yii\db\ActiveRecord
      */
     public function parseTime() 
     {
-        
+        switch ($this->type_periodically) {
+            case 'day':
+                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
+                return $datetime;
+                break;
+
+            case 'week':
+                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
+                return $datetime;
+                break;
+
+            case 'day':
+                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
+                return $datetime;
+                break;
+
+            case 'day':
+                $datetime = date('Y/m/d') . ' ' . $this->time_periodically;
+                return $datetime;
+                break;
+        }
     }
 }

@@ -38,17 +38,44 @@ class AutoSendController extends \yii\web\Controller
 					if ($mschedule->type == 1) {
 						foreach ($settings as $key => $setting) {
 							$this->cur_setting = $setting;
-							if ($this->_check()) {
+							$cur_cow = $this->cur_setting->cow;
+
+							// get time setting from db and merge with at_time in schedule table
+							$time_set = $cur_cow->getTimeSend($this->event) . ' ' . $mschedule->at_time;
+							$time_compare = date('m/d H:i');
+							if ($this->_compare($time_set, $time_compare)) {
 								$this->_send();
 							}
 						}
 					}
 					elseif ($mschedule->type == 2) {
-						if ($this->_check()) {
-							foreach ($settings as $key => $setting) {
-								$this->_send();
-							}
+						switch ($mschedule->type_periodically) {
+							case 'day':
+								$time_set     = $mschedule->time_periodically;
+								$time_compare = date('H:i');
+								break;
+
+							case 'week':
+								$time_set     = $mschedule->time_periodically;
+								$time_compare = date('w H:i');
+								break;
+
+							case 'month':
+								$time_set     = $mschedule->time_periodically;
+								$time_compare = date('j H:i');
+								break;
+
+							case 'year':
+								$time_set     = $mschedule->time_periodically;
+								$time_compare = date('j n H:i');
+								break;
 						}
+
+						// send email including messages information
+						if ($this->_compare($time_set, $time_compare)) {
+							$this->_send();
+						}
+
 					}
 					
 				}
@@ -57,39 +84,16 @@ class AutoSendController extends \yii\web\Controller
 		// send checklist
 	}
 
-	/**
-	 * check current time and schedule time of specific message or checklist
-	 * @param  mix checklist's and message's object
-	 * @return bool 
-	 */
-	private function _check() 
+	private function _compare($needed, $compare)
 	{
-		$time_send = 0;
-		return $this->_compare($this->_getTimeSend(), date('Y/m/d'));
+		if ($needed === $compare)
+			return true;
+		else
+			return false;
 	}
 
 	private function _send()
 	{
-		echo "<pre>"; var_dump("ok"); die('"ok"');
-	}
-
-	private function _getTimeSend()
-	{
-		if ($this->type_time == 1) {
-			if ($this->cur_setting) {
-				$cur_user = $this->cur_setting->cow;
-				return $cur_user->getTimeSend($this->event);
-			}
-		} elseif ($this->type_time == 2) {
-			return $this->cur_mschedule->parseTime();
-		}
-	}
-
-	private function _compare($needed, $current)
-	{
-		if ($needed === $current)
-			return true;
-		else
-			return false;
+		echo "send duoc roi ne >__<"; die('123');
 	}
 }
