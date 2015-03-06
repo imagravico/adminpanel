@@ -93,6 +93,23 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                                 ]
                             ]);
                     ?>
+                    
+                    <?php 
+                        echo $form->field($model, 'at_hour', [
+                                'template' => "<div class='col-md-3'>{label}</div><div class='col-md-6'>{input}</div>\n{hint}\n{error}",
+                            ])
+                            ->dropDownList(
+                                $model->hour_list   
+                            );
+                    ?>
+                    <?php 
+                        echo $form->field($model, 'at_minute', [
+                                'template' => "<div class='col-md-3'>{label}</div><div class='col-md-6'>{input}</div>\n{hint}\n{error}",
+                            ])
+                            ->dropDownList(
+                                $model->minute_list        
+                            );
+                    ?>
 
 				</div>
 				<div class="tab-pane" id="tab-periodically">

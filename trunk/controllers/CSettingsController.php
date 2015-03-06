@@ -8,7 +8,7 @@ use app\models\Csetting;
 use app\controllers\MCSettingsController;
 
 
-class CSettingsController extends MCSettingsController
+class CsettingsController extends MCSettingsController
 {
 	
 	public function actionCreate()

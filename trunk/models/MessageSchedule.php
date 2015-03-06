@@ -50,12 +50,12 @@ class MessageSchedule extends Schedule
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'descriptions' => 'Descriptions',
-            'relation' => 'Relation',
-            'type' => 'Type',
-            'event' => 'Event',
-            'sendon' => 'Send On',
+            'id'                => 'ID',
+            'descriptions'      => 'Descriptions',
+            'relation'          => 'Relation',
+            'type'              => 'Type',
+            'event'             => 'Event',
+            'sendon'            => 'Send On',
             'type_periodically' => 'Type Periodically',
             'time_periodically' => 'Time Periodically',
         ];
@@ -67,11 +67,14 @@ class MessageSchedule extends Schedule
     public function beforeSave($insert)
     {
         if ($this->type == 1) {
-            $this->type_periodically = $this->time_periodically  =NULL;
+            $this->type_periodically = $this->time_periodically  = NULL;
         }
         else {
-            $this->event = $this->sendon  =NULL;
+            $this->event = $this->sendon = NULL;
         }
+        
+        $this->at_time = $this->at_hour . ':' . $this->at_minute . ':00';
+
         
         return parent::beforeSave($insert);
     }  
