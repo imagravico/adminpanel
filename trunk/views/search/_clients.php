@@ -7,7 +7,7 @@ use kartik\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Users';
+$this->title = 'Clients';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="user-index">
@@ -21,22 +21,15 @@ $this->params['breadcrumbs'][] = $this->title;
             'enablePushState'=>false,
         ]);
         echo GridView::widget([
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $clients,
             'export'       => false,
             'columns'      => [
                 ['class' => 'yii\grid\SerialColumn'],
                 'id',
-                'username',
+                'company',
                 'lastname',
                 'firstname',
                 'email:email',
-                // 'password',
-                // 'token',
-                // 'auth_key',
-                // 'active',
-                // 'created_at',
-                // 'updated_at',
-
                 ['class' => 'yii\grid\ActionColumn'],
             ],
             'panel' => [

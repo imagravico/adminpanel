@@ -5,6 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
+use app\components\widgets\SearchWidget;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -205,11 +206,7 @@ AppAsset::register($this);
                 <!-- END Left Header Navigation -->
 
                 <!-- Search Form -->
-                <form action="page_ready_search_results.php" method="post" class="navbar-form-custom" role="search">
-                    <div class="form-group">
-                        <input type="text" id="top-search" name="top-search" class="form-control" placeholder="Search..">
-                    </div>
-                </form>
+                <?= SearchWidget::widget();?>
                 <!-- END Search Form -->
 
                 <!-- Right Header Navigation -->

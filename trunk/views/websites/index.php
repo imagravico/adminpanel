@@ -13,7 +13,7 @@ use app\components\widgets\FilterWidget;
 <div class="row">
     <div class="col-lg-12">
 		
-		<?= FilterWidget::widget(['model' => 'website', 'update_selector' => 'websites-list'  ]); ?>
+		<?= FilterWidget::widget(['model' => 'website', 'update_selector' => 'websites-list']); ?>
 		
 	</div>
 </div>

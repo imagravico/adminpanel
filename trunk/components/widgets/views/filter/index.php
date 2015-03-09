@@ -1,5 +1,4 @@
 <!-- A-Z -->
-
 <div class="block-options" style="margin:0 0 12px 0;" id="filter">
 	<?php
 		foreach (range('A', 'Z') as $char) {

@@ -145,7 +145,8 @@ $config = [
     'defaultRoute' => 'site/login',
     'aliases' => [
         '@widget' => '@app/components/widgets',
-        '@web'    => '@app/web'
+        '@web'    => '@app/web',
+        '@views'  => '@app/views'
     ],
 ];
 
