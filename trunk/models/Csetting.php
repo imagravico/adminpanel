@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use app\models\MCSetting;
+use app\models\Checklist;
 
 /**
  * This is the model class for table "csettings".
@@ -15,6 +16,7 @@ use app\models\MCSetting;
  */
 class Csetting extends MCSetting
 {
+
     /**
      * @inheritdoc
      */
@@ -70,6 +72,37 @@ class Csetting extends MCSetting
             $session->set('csetting', $tmp);
             $session->set('csetting_default', $tmp);
         }
+    }
+    /**
+     * establish a relationship between this model and checklist model
+     * @return mix
+     */
+    public function getChecklist() 
+    {
+        return $this->hasOne(Checklist::classname(), ['id' => 'checklists_id']);
+    }
+    /**
+     * @inheritdoc
+     */
+    public function afterFind()
+    {
+        // get information that will be sent to client or website
+        $this->infor_send = $this->getInforSend();       
+    }
+
+    public function getInforSend()
+    {
+        $infor = [];
+        if ($this->cow instanceof Client) 
+            $infor['email'] = $this->cow->email;
+        elseif ($this->cow instanceof Website)
+            $infor['email'] = $this->cow->client->email;
+
+        $infor['subject'] = $this->checklist->title;
+        $infor['content'] = $this->checklist->content;
+        $infor['attach'] = Yii::$app->basePath . '/web/upload/pdf/' . $this->checklist->file_name;
+
+        return $infor;
     }
 
 }

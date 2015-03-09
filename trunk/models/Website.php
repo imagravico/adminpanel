@@ -116,8 +116,6 @@ class Website extends \yii\db\ActiveRecord
 
         return parent::afterSave($insert, $changedAttributes);
     }   
-
-
     /**
      * @inheritdoc
      */

@@ -9,6 +9,8 @@ use app\models\Msetting;
 
 class MCSetting extends \yii\db\ActiveRecord
 {
+    public $infor_send;
+
  	public function saveSettingsChanged($settings, $model, $id)
     {
     	// save checklist configruatiion for this client

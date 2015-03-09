@@ -1,6 +1,7 @@
 <?php
 namespace app\controllers;
 
+use Yii;
 use app\models\Checklist;
 use app\models\User;
 use app\models\CSetting;
@@ -40,26 +41,20 @@ class AutoSendController extends \yii\web\Controller
 			foreach ($schedules as $key => $schedule) {
 				if ($schedule instanceof MessageSchedule)
 					$settings = $schedule->msettings;
-				else
+				elseif ($schedule instanceof ChecklistSchedule)
 					$settings = $schedule->csettings;
-
-				$this->event        = $schedule->event;
-				$this->type_time    = $schedule->type;
-				$this->cur_schedule = $schedule;
 
 				if ($settings) {
 					if ($schedule->type == 1) {
 						foreach ($settings as $key => $setting) {
-							$this->cur_setting = $setting;
-							$cur_cow = $this->cur_setting->cow;
-
+							$cur_cow = $setting->cow;
 							// get time setting from db and merge with at_time in schedule table
-							$time_set = $cur_cow->getTimeSend($this->event) . ' ' . $schedule->at_time;
+							$time_set     = $cur_cow->getTimeSend($schedule->event) . ' ' . $schedule->at_time;
 							$time_compare = date('m/d H:i');
-							$time_send = [$time_set, $time_compare];
+							$time_send    = [$time_set, $time_compare];
 
 							if ($this->_compare($time_send)) {
-								$this->_send();
+								$this->_send($setting->infor_send);
 							}
 						}
 					}
@@ -67,7 +62,9 @@ class AutoSendController extends \yii\web\Controller
 						$time_send = $schedule->parseTime($schedule);
 						// send email including messages information
 						if ($this->_compare($time_send)) {
-							$this->_send();
+							foreach ($settings as $key => $setting) {
+								$this->_send($setting->infor_send);
+							}
 						}
 					}
 				}
@@ -86,8 +83,17 @@ class AutoSendController extends \yii\web\Controller
 		return false;
 	}
 
-	private function _send()
+	private function _send($infor)
 	{
-		echo "<pre>"; print_r('send dc roi ne` >__< '); echo "<br/>"; die("'send dc roi ne` >__< '");
+		$mailer = Yii::$app->mailer->compose()
+	                ->setFrom('admin@panel.com')
+	                ->setTo($infor['email'])
+	                ->setSubject($post['subject'])
+	                ->setTextBody($post['content']);
+
+	    if ($infor['attach'])
+	        $mailer->attach($infor['attach']);
+
+	    $mailer->send();
 	}
 }
