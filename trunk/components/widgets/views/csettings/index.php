@@ -1,6 +1,6 @@
 <?php
 use app\models\Checklist;
-use app\models\CSetting;
+use app\models\Csetting;
 ?>
 <div class="block">
     <!-- Reminder Title -->
@@ -19,7 +19,7 @@ use app\models\CSetting;
                 if (!empty($checklist->cschedule)) {
 
                         $checked = FALSE;
-                        $csetting = CSetting::find()
+                        $csetting = Csetting::find()
                                     ->where(['clients_or_webs_id' => $idcow, 'belong_to' => $belong_to, 'checklists_id' => $checklist->id])
                                     ->one();
                         if (isset($csetting))

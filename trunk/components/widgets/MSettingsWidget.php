@@ -5,7 +5,7 @@ use Yii;
 use yii\base\Widget;
 use app\models\Message;
 use yii\web\Request;
-use app\models\MSetting;
+use app\models\Msetting;
 
 class MSettingsWidget extends Widget
 {

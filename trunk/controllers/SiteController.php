@@ -13,17 +13,21 @@ class SiteController extends Controller
 {
     public $layout = 'login';
 
-    public function actions()
+    public function actionIndex()
     {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
+        if (!\Yii::$app->user->isGuest) {
+            return $this->redirect(['/dashboard']);
+        }
+        
+        // return [
+        //     'error' => [
+        //         'class' => 'yii\web\ErrorAction',
+        //     ],
+        //     'captcha' => [
+        //         'class' => 'yii\captcha\CaptchaAction',
+        //         'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
+        //     ],
+        // ];
     }
 
     public function actionLogin()
@@ -47,6 +51,11 @@ class SiteController extends Controller
     {
         Yii::$app->user->logout();
         return $this->redirect(['/site/login']);
+    }
+
+    public function actionError()
+    {
+
     }
     
 }

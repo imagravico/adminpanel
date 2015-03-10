@@ -4,10 +4,8 @@ namespace app\controllers;
 use Yii;
 use app\models\Checklist;
 use app\models\User;
-use app\models\CSetting;
-use app\models\MSetting;
 use app\models\MessageSchedule;
-
+use app\models\ChecklistSchedule;
 
 
 class AutoSendController extends \yii\web\Controller 
@@ -52,7 +50,6 @@ class AutoSendController extends \yii\web\Controller
 							$time_set     = $cur_cow->getTimeSend($schedule->event) . ' ' . $schedule->at_time;
 							$time_compare = date('m/d H:i');
 							$time_send    = [$time_set, $time_compare];
-
 							if ($this->_compare($time_send)) {
 								$this->_send($setting->infor_send);
 							}
@@ -86,14 +83,25 @@ class AutoSendController extends \yii\web\Controller
 	private function _send($infor)
 	{
 		$mailer = Yii::$app->mailer->compose()
-	                ->setFrom('admin@panel.com')
+	                ->setFrom('softdevelop.kt@gmail.com')
 	                ->setTo($infor['email'])
-	                ->setSubject($post['subject'])
-	                ->setTextBody($post['content']);
+	                ->setSubject($infor['subject'])
+	                ->setTextBody($infor['content']);
 
-	    if ($infor['attach'])
+	    if (isset($infor['attach']) && $infor['attach'])
 	        $mailer->attach($infor['attach']);
 
 	    $mailer->send();
+	}
+
+	public function actionSendMail()
+	{
+		Yii::$app->mailer->compose()
+		    ->setFrom('softdevelop.hn@gmail.com')
+		    ->setTo('softdevelop.kt@gmail.com')
+		    ->setSubject('Message subject')
+		    ->setTextBody('Plain text content')
+		    ->setHtmlBody('<b>HTML content</b>')
+		    ->send();
 	}
 }

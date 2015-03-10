@@ -39,18 +39,18 @@ $config = [
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
             // send all mails to a file by default. You have to set
             // 'useFileTransport' to false and configure a transport
             // for the mailer to send real emails.
-            'transport' => [
-                'class' => 'Swift_SmtpTransport',
-                'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
-                'username' => 'pscdtesting@gmail.com',
-                'password' => '123123testing',
-                'port' => '587', // Port 25 is a very common port too
-                'encryption' => 'tls', // It is often used, check your provider or mail server specs
-            ],
-            'useFileTransport' => true,
+            // 'transport' => [
+            //     'class' => 'Swift_SmtpTransport',
+            //     'host' => 'smtp.gmail.com',  // e.g. smtp.mandrillapp.com or smtp.gmail.com
+            //     'username' => 'softdevelop.hn@gmail.com',
+            //     'password' => '123123hoang',
+            //     'port' => '587', // Port 25 is a very common port too
+            //     'encryption' => 'tls', // It is often used, check your provider or mail server specs
+            // ],
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,

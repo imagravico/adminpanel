@@ -146,7 +146,7 @@ AppAsset::register($this);
                     <ul class="sidebar-nav">
                         <?php $current_controller = \Yii::$app->controller->id;?>
                         <li>
-                            <a href="index.php" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i> 
+                            <a href="/dashboard" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i> 
                             <span class="sidebar-nav-mini-hide">Dashboard</span>
                             </a>
                         </li>

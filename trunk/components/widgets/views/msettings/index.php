@@ -1,6 +1,6 @@
 <?php
 use app\models\Message;
-use app\models\MSetting;
+use app\models\Msetting;
 
 ?>
 <div class="block">
@@ -21,7 +21,7 @@ use app\models\MSetting;
                     if (!empty($message->mschedule)) {
 
                         $checked = FALSE;
-                        $msetting = MSetting::find()
+                        $msetting = Msetting::find()
                                     ->where(['clients_or_webs_id' => $idcow, 'belong_to' => $belong_to, 'messages_id' => $message->id])
                                     ->one();
                         if (isset($msetting))
