@@ -80,10 +80,11 @@ class ClientsController extends \yii\web\Controller
         $client = $this->findModel($id);
         $groups = new Group();
 
+        // find groups selecting
         $groups_clients = GroupClient::find()
                     ->where(['clients_id' => $id])
                     ->all();
-
+        $selected = [];
         foreach ($groups_clients as $key => $value) 
         {
             $selected[] = $value->group->id;
