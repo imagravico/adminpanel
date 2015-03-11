@@ -10,6 +10,7 @@ use app\models\Msetting;
 use app\models\Csetting;
 use yii\web\Session;
 use app\models\MCSetting;
+use app\models\GroupClient;
 
 /**
  * This is the model class for table "clients".
@@ -28,6 +29,7 @@ use app\models\MCSetting;
 class Client extends \yii\db\ActiveRecord
 {
     public $fullname;
+    public $filter_field;
     /**
      * @inheritdoc
      */
@@ -171,6 +173,7 @@ class Client extends \yii\db\ActiveRecord
             Csetting::getCurrentCSettings(1, $this->id);
         }
         
+        // get filter_field
         parent::afterFind();    
     }
     
@@ -184,6 +187,7 @@ class Client extends \yii\db\ActiveRecord
 
         Csetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 1]);
 
+        GroupClient::deleteAll('clients_id = :clients_id', [':clients_id' => $this->id]);
         parent::afterDelete();
     }
 

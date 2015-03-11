@@ -370,11 +370,14 @@ var Action = function() {
 			data = {};
 
 		filter.click(function () {
+			filter.removeClass('active');
 			update = $($(this).data('update'));
 			data = {'model': $(this).data('model'), 'keyword': $(this).data('keyword')};
 			postData(to, data, update, function () {
 
 			});
+			$(this).addClass('active');
+			return false;
 		})
 
 	}

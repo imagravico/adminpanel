@@ -8,7 +8,7 @@
             <div class="row">
                 <!-- Main Title (hidden on small devices for the statistics to fit) -->
                 <div class="col-md-4 col-lg-6 hidden-xs hidden-sm">
-                    <h1>Welcome <strong><?= User::getRealName();?></strong><br><small><?= date('m. F Y');?></small></h1>
+                    <h1>Welcome <strong><?= User::getRealName();?></strong><br><small><?= date('d. F Y');?></small></h1>
                 </div>
                 <!-- END Main Title -->
             </div>
@@ -28,7 +28,7 @@
                         <i class="fa fa-user"></i>
                     </div>
                     <h3 class="widget-content text-right animation-pullDown">
-                        12 <strong>Clients</strong>
+                        <?= $count['clients']?> <strong>Clients</strong>
                     </h3>
                 </div>
             </a>
@@ -43,7 +43,7 @@
                         <i class="fa fa-globe"></i>
                     </div>
                     <h3 class="widget-content text-right animation-pullDown">
-                        6 <strong>Websites</strong>
+                        <?= $count['websites']?> <strong>Websites</strong>
                     </h3>
                 </div>
             </a>
@@ -58,7 +58,7 @@
                         <i class="fa fa-file-text"></i>
                     </div>
                     <h3 class="widget-content text-right animation-pullDown">
-                        5 <strong>Checklists</strong>
+                        <?= $count['checklists']?> <strong>Checklists</strong>
                     </h3>
                 </div>
             </a>
@@ -73,7 +73,7 @@
                         <i class="gi gi-envelope"></i>
                     </div>
                     <h3 class="widget-content text-right animation-pullDown">
-                        9 <strong>Messages</strong>
+                        <?= $count['messages']?> <strong>Messages</strong>
                     </h3>
                 </div>
             </a>

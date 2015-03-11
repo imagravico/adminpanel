@@ -15,7 +15,7 @@ use yii\bootstrap\ActiveForm;
         <li class="active">
             <a href="javascript:void(0)">
             <span class="badge pull-right">
-                <?= array_sum($total); ?>
+                <?= array_sum($total);?>
             </span>All</a>
         </li>
         <li><hr></li>

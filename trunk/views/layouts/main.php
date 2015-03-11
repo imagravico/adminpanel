@@ -144,28 +144,29 @@ AppAsset::register($this);
 
                     <!-- Sidebar Navigation -->
                     <ul class="sidebar-nav">
-                        <?php $current_controller = \Yii::$app->controller->id;?>
+                        <?php $current_controller = \Yii::$app->controller->id;
+                        ?>
                         <li>
-                            <a href="/dashboard" class=" active"><i class="gi gi-stopwatch sidebar-nav-icon"></i> 
+                            <a href="/dashboard" class="<?php if ($current_controller === 'dashboard') echo 'active'?> "><i class="gi gi-stopwatch sidebar-nav-icon"></i> 
                             <span class="sidebar-nav-mini-hide">Dashboard</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/clients"><i class="gi gi-user sidebar-nav-icon"></i> 
+                            <a href="/clients" class="<?php if ($current_controller === 'clients') echo 'active'?> "><i class="gi gi-user sidebar-nav-icon"></i> 
                             <span class="sidebar-nav-mini-hide">Clients</span></a>
                         </li>
                         <li>
-                            <a href="/websites"><i class="gi gi-globe sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Websites</span></a>
+                            <a href="/websites" class="<?php if ($current_controller === 'websites') echo 'active'?> "><i class="gi gi-globe sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Websites</span></a>
                         </li>
                         <li>
-                            <a href="/checklists"><i class="fa fa-list sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Checklists</span></a>
+                            <a href="/checklists" class="<?php if ($current_controller === 'checklists') echo 'active'?> "><i class="fa fa-list sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Checklists</span></a>
                         </li>
                         <li>
-                            <a href="/messages"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span>
+                            <a href="/messages" class="<?php if ($current_controller === 'messages') echo 'active'?>"><i class="fa fa-envelope sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Messages</span>
                             </a>
                         </li>
                         <li>
-                            <a href="/settings"><i class="fa fa-cogs sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Settings</span></a>
+                            <a href="/settings" class="<?php if ($current_controller === 'settings') echo 'active'?>"><i class="fa fa-cogs sidebar-nav-icon"></i> <span class="sidebar-nav-mini-hide">Settings</span></a>
                         </li>
                     </ul>
                     <!-- END Sidebar Navigation -->
@@ -229,7 +230,7 @@ AppAsset::register($this);
             <!-- END Header -->
 
             <!-- Page content -->
-            <div id="page-content" style="float:left;width:100%;min-height:572px">
+            <div id="page-content" style="float:left;width:100%;min-height:572px!important;">
                 <?= $content; ?>
             </div>
             <!-- END Page Content -->

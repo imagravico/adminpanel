@@ -15,19 +15,10 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        if (!\Yii::$app->user->isGuest) {
+        if (!Yii::$app->user->isGuest) {
             return $this->redirect(['/dashboard']);
         }
         
-        // return [
-        //     'error' => [
-        //         'class' => 'yii\web\ErrorAction',
-        //     ],
-        //     'captcha' => [
-        //         'class' => 'yii\captcha\CaptchaAction',
-        //         'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-        //     ],
-        // ];
     }
 
     public function actionLogin()

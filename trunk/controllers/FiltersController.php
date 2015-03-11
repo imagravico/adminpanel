@@ -55,11 +55,17 @@ class FiltersController extends \yii\web\Controller
 					$model = null;
 					break;
 			}
-
-			$results = $model->find()
-				->where(['LIKE', $field_search, $post['keyword']])
-				->all();
-
+			
+			$results = [];
+			if ($post['keyword'] != 'all') {
+				$results = $model->find()
+					->where('left(' . $field_search . ', 1) = "' . $post['keyword'] . '"')
+					->all();
+			}
+			elseif ($post['keyword'] === 'all') {
+				$results = $model->find()->all();
+			}
+			
 			Yii::$app->response->format = 'json';
 
 			return [

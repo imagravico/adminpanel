@@ -31,6 +31,17 @@ class LoginForm extends Model
         ];
     }
 
+    public function beforeValidate()
+    {
+        if ($this->rememberMe == 'on') {
+            $this->rememberMe = 1;
+        }
+        else {
+            $this->rememberMe = 0;
+        }
+
+        return parent::beforeValidate();
+    }
     /**
      * Validates the password.
      * This method serves as the inline validation for password.

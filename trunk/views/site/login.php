@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="form-group form-actions row">
             <div class="col-xs-4" style="margin-top:10px;">
                 <label class="switch switch-primary" data-toggle="tooltip" title="Remember Me?">
-                    <input type="checkbox" id="login-remember-me" name="LoginForm[rememberMe]" value="0">
+                    <input type="checkbox" id="login-remember-me" name="LoginForm[rememberMe]">
                     <span></span>
                 </label>
             </div>
