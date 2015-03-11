@@ -22,10 +22,11 @@ class MschedulesController extends \yii\web\Controller
 
     	if (null !== $type  && $type == 2)
     	{
-            $mschedule->descriptions = Yii::$app->request->post('MessageSchedule')['descriptions'];
-            $mschedule->relation     = Yii::$app->request->post('MessageSchedule')['relation'];
-            $mschedule->type         = Yii::$app->request->post('MessageSchedule')['type'];
-            $mschedule->messages_id  = Yii::$app->request->post('MessageSchedule')['messages_id'];
+            $post                    = Yii::$app->request->post('MessageSchedule');
+            $mschedule->descriptions = $post['descriptions'];
+            $mschedule->relation     = $post['relation'];
+            $mschedule->type         = $post['type'];
+            $mschedule->messages_id  = $post['messages_id'];
 
     		if ($mschedule->save()) {
     			Yii::$app->response->format = 'json';

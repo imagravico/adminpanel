@@ -63,3 +63,7 @@ body.loading .modal-loading {
 #filter a.active {
     font-weight: bold;
 }
+
+.help-block {
+  padding-bottom: 10px;
+}
