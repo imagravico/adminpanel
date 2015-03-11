@@ -51,7 +51,7 @@ class AutoSendController extends \yii\web\Controller
 							$time_compare = date('m/d H:i');
 							$time_send    = [$time_set, $time_compare];
 							if ($this->_compare($time_send)) {
-								$this->_send($setting->infor_send);
+								$this->_send($setting->getInforSend());
 							}
 						}
 					}
@@ -60,7 +60,7 @@ class AutoSendController extends \yii\web\Controller
 						// send email including messages information
 						if ($this->_compare($time_send)) {
 							foreach ($settings as $key => $setting) {
-								$this->_send($setting->infor_send);
+								$this->_send($setting->getInforSend());
 							}
 						}
 					}

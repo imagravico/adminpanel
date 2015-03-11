@@ -170,11 +170,11 @@ class Client extends \yii\db\ActiveRecord
         $id_param = Yii::$app->request->get('id');
         if (isset($id_param)) {
             Msetting::getCurrentMSettings(1, $this->id);
-            Csetting::getCurrentCSettings(1, $this->id);
+            // Csetting::getCurrentCSettings(1, $this->id);
         }
         
         // get filter_field
-        parent::afterFind();    
+        return parent::afterFind();
     }
     
     /**
@@ -188,7 +188,7 @@ class Client extends \yii\db\ActiveRecord
         Csetting::deleteAll('clients_or_webs_id = :clients_or_webs_id AND belong_to = :belong_to', [':clients_or_webs_id' => $this->id, ':belong_to' => 1]);
 
         GroupClient::deleteAll('clients_id = :clients_id', [':clients_id' => $this->id]);
-        parent::afterDelete();
+        return parent::afterDelete();
     }
 
 

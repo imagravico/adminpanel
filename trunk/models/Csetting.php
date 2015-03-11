@@ -67,6 +67,9 @@ class Csetting extends MCSetting
             foreach ($csettings as $key => $csetting) {
                 array_push($tmp, ['checklists_id' => $csetting->checklists_id, 'belong_to' => $csetting->belong_to]);
             }
+            // remove session of message settings after assigning a new one
+            $session->remove('csetting');
+            $session->remove('csetting_default');
             // assign $tmp to session 'csetting'
             // the same as assigning 'csetting' by 'csetting_default'
             $session->set('csetting', $tmp);

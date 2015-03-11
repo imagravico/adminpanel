@@ -79,6 +79,10 @@ class Msetting extends MCSetting
             }
             // assign $tmp to session 'msetting'
             // the same as assigning 'msetting' by 'msetting_default'
+            // remove session of message settings after assigning a new one
+            $session->remove('msetting');
+            $session->remove('msetting_default');
+
             $session->set('msetting', $tmp);
             $session->set('msetting_default', $tmp);
         }
@@ -97,7 +101,7 @@ class Msetting extends MCSetting
     public function afterFind()
     {
         // get information that will be sent to client or website
-        $this->infor_send = $this->getInforSend();       
+        // $this->infor_send = $this->getInforSend();       
     }
 
     public function getInforSend()
