@@ -40,7 +40,7 @@ use app\components\widgets\ChecklistsWidget;
             <!-- END Modal Header -->
 
             <!-- Modal Body -->
-            <div class="modal-body">
+            <div class="modal-body" id="wrap-form-activity">
 				<?= $this->render('@widget/views/activities/_form', [
 						'model' => new Activity(),
 						'belong_to' => \Yii::$app->request->get('id')

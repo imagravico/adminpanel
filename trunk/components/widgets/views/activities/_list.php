@@ -28,6 +28,6 @@
     }
     ?>
 	<li class="media text-center">
-		<a class="btn btn-xs btn-default push view-more" data-to="/activities/more/" href="javascript:void(0)">View more..</a>
+		<a class="btn btn-xs btn-default push view-more" data-to="/activities/more/" href="javascript:void(0)" data-belong-to="<?= $belong_to ?>">View more..</a>
 	</li>
 </ul>

@@ -93,6 +93,18 @@ class Activity extends \yii\db\ActiveRecord
         return parent::beforeSave($insert);
     }
 
+    public function afterFind()
+    {
+        $arr = explode(' ', $this->come_date);
+        $this->come_date = $arr[0];
+        $come_date       = \DateTime::createFromFormat('Y-m-d', $this->come_date);
+        $this->come_date = $come_date->format('d/m/Y');
+        
+        $this->come_time = $arr[1];
+
+        return parent::afterFind();
+    }
+
     public function getUser() 
     {
         return $this->hasOne(User::classname(), ['id' => 'users_id']);

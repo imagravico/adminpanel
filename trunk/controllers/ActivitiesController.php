@@ -45,6 +45,35 @@ class ActivitiesController extends \yii\web\Controller
     	}
     }
 
+    public function actionEdit($id) 
+    {
+        $activity = $this->findModel($id);
+        Yii::$app->response->format = 'json';
+
+        if ($activity->load(Yii::$app->request->post()) && $activity->save()) {
+            $activities = Activity::find()
+                ->where(['belong_to' => $this->data_post['belong_to']])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->offset(0)
+                ->all();
+            $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
+            ];
+
+        }
+        else {
+            return [
+                'errors' => $activity->getErrors(),
+                'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
+            ];
+        }
+
+    }
+
     public function actionMore($page = 1)
     {
     	$activities = Activity::find()
@@ -52,16 +81,14 @@ class ActivitiesController extends \yii\web\Controller
 			->limit(5)
 			->offset(($page - 1) * 5)
 			->all();
-        
+        $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
         Yii::$app->response->format = 'json';
 
 		if (!empty($activities)) {
 			
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/activities/_list', [
-                        'activities' => $activities
-                    ])
+                'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
             ];
 		}
 		else {
@@ -76,15 +103,15 @@ class ActivitiesController extends \yii\web\Controller
     {
         $activity = $this->findModel($id);
         Yii::$app->response->format = 'json';
+        $this->data_post = array_merge($this->data_post, ['model' => $activity]);
 
         return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_form', 
-                        ['activity' => $activity]
+                'data'   => $this->renderPartial('@widget/views/activities/_form', 
+                        $this->data_post
                     )
             ];
     }
-
     /**
      * Deletes an existing Activity model.
      * @param integer $id

@@ -126,20 +126,29 @@ var Action = function() {
 			edit         = $('#activities-list .btn-edit-activity'),
 			del          = $('#activities-list .btn-del-activity'),
 			add          = $('#activities-list .btn-add-activity'),
+			wrap         = $('#wrap-form-activity'),
 			more         = 2;
 
 		body.on('click', edit.selector, function (e) {
-			url     = $(this).data('to');
+			to     = $(this).data('to');
 			loadUrl = $(this).data('load');
 			data    = {'Activity[belong_to]': $(this).data('belongTo')};
 			postData(loadUrl, data, wrap, function () {
 				$('#form-add-activities .textarea-editor').wysihtml5();
+
+        		// Initialize Datepicker
+				$('.input-datepicker, .input-daterange').datepicker({weekStart: 1});
+        		$('.input-datepicker-close').datepicker({weekStart: 1}).on('changeDate', function(e){ $(this).datepicker('hide'); });
+
+				// Initialize Timepicker
+		        $('.input-timepicker').timepicker({minuteStep: 1,showSeconds: true,showMeridian: true});
+		        $('.input-timepicker24').timepicker({minuteStep: 1,showSeconds: true,showMeridian: false});
 			})
 		});
 
 		// add 
 		add.click(function () {
-			url = '/activities/create';
+			to = '/activities/create';
 		});
 
 		// delete
@@ -147,7 +156,7 @@ var Action = function() {
 		{
 			e.preventDefault();
 			data    = {'Activity[belong_to]': $(this).data('belongTo')};
-			
+
 			if (confirm('Are you sure to delete it?')) 
 			{
 				postData($(this).data('to'), data, update, function () {
@@ -155,9 +164,10 @@ var Action = function() {
 			}
 		});
 
-		form.submit(function (e) {
+		body.on('submit', form.selector, function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
+			form = $('#form-add-activities');
 			postData(to, form.serializeArray(), update, function () {
 					addWrap();
 					form.find('.btn-close').trigger('click');
@@ -168,8 +178,10 @@ var Action = function() {
 
 		body.on('click', viewMore.selector, function (e) {
 			e.preventDefault();
-			var to = $(this).data('to') + more;
-			postData(to, {}, update, function () {
+			var to   = $(this).data('to') + more,
+				data = {'Activity[belong_to]': $(this).data('belongTo')};
+
+			postData(to, data, update, function () {
 					more = more + 1;
 				});
 			
