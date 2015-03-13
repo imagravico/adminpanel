@@ -59,12 +59,17 @@ var Action = function() {
 			edit   = $('.notes-list .btn-edit-note'),
 			del    = $('.notes-list .btn-del-note'),
 			url    = '/notes/create',
+			viewMore  = $('.notes-list .view-more'),
+			more   = 2,
 			wrap   = $('#wrap-form-note');
 
 		body.on('click', edit.selector, function (e) {
 			url     = $(this).data('to');
 			loadUrl = $(this).data('load');
-			data    = {'area': $(this).data('area')};
+			data    = {'Note[type_area]': $(this).data('area'), 'Note[belong_to]': $(this).data('belongTo')};
+			
+			console.log($(this).data('area'));
+			console.log(data);
 
 			postData(loadUrl, data, wrap, function () {
 				$('#form-note .textarea-editor').wysihtml5();
@@ -80,7 +85,7 @@ var Action = function() {
 		body.on('click', del.selector, function (e) 
 		{
 			e.preventDefault();
-			data = {'area': $(this).data('area')};
+			data    = {'Note[type_area]': $(this).data('area'), 'Note[belong_to]': $(this).data('belongTo')};
 
 			if (confirm('Are you sure to delete it?')) 
 			{
@@ -89,7 +94,18 @@ var Action = function() {
 			}
 		});
 
-		body.on('submit', '#form-note', function (e) {
+		body.on('click', viewMore.selector, function (e) {
+			e.preventDefault();
+			var to = $(this).data('to') + more,
+				data = {'Note[type_area]': $(this).data('area'), 'Note[belong_to]': $(this).data('belongTo')};
+			postData(to, data, update, function () {
+					more = more + 1;
+				});
+			
+		});
+
+
+		body.on('submit', form.selector, function (e) {
 			e.preventDefault();
 			form = $('#form-note');
 			postData(url, form.serializeArray(), update, function () {
@@ -126,7 +142,7 @@ var Action = function() {
 		body.on('click', viewMore.selector, function (e) {
 			e.preventDefault();
 			var to = $(this).data('to') + more;
-			postData(to, form.serializeArray(), update, function () {
+			postData(to, {}, update, function () {
 					more = more + 1;
 				});
 			

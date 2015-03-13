@@ -22,6 +22,7 @@ $config = [
             'enablePrettyUrl' => true,
             'rules' => array(
                 'activities/more/<page:\d+>'             => 'activities/more',
+                'notes/more/<page:\d+>'                  => 'notes/more',
                 '<controller:\w+>/<id:\d+>'              => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>'          => '<controller>/<action>',

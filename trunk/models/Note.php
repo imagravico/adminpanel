@@ -50,7 +50,7 @@ class Note extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['content'], 'required'],
             [['users_id'], 'integer'],
-            [['created_at', 'updated_at', 'type_area'], 'safe']
+            [['created_at', 'updated_at', 'type_area', 'belong_to'], 'safe']
         ];
     }
 

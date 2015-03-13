@@ -1,10 +1,5 @@
 <?php
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-use app\models\Group;
-use kartik\file\FileInput;
-use yii\helpers\Url;
 use app\models\User;
 use app\components\widgets\NotesWidget;
 use app\components\widgets\MSettingsWidget;
@@ -66,4 +61,10 @@ use app\components\widgets\CSettingsWidget;
 
 <?= CSettingsWidget::widget(['belong_to' => 1]); ?>
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(['area' => 0]); ?>
+<?php
+    $client_id = \Yii::$app->request->get('id');
+    if ($client_id) 
+        echo NotesWidget::widget(['area' => 0, 'belong_to' => $client_id]); 
+?>
+
+

@@ -69,4 +69,8 @@ use app\components\widgets\CSchedulesWidget;
 ?>
 
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(['area' => 3]); ?>
+<?php 
+    $checklist_id = \Yii::$app->request->get('id');
+    if ($checklist_id)
+        echo NotesWidget::widget(['area' => 3, 'belong_to' => $checklist_id]); 
+?>

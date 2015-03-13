@@ -68,4 +68,8 @@ use app\components\widgets\CSettingsWidget;
 <?= MSettingsWidget::widget(['belong_to' => 2]); ?>
 
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(['area' => 1]); ?>
+<?php 
+    $website_id = \Yii::$app->request->get('id');
+    if ($website_id)
+        echo NotesWidget::widget(['area' => 1, 'belong_to' => $website_id]); 
+?>

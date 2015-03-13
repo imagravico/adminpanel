@@ -9,51 +9,59 @@ use yii\web\NotFoundHttpException;
 
 class NotesController extends \yii\web\Controller
 {
+    public $data_post;
+    /**
+     * @inhericdoc
+     */
+    public function beforeAction($action) 
+    {
+        $post = Yii::$app->request->post('Note');
+        
+        if ($post) {
+            $this->data_post = [
+                'area' => $post['type_area'],
+                'belong_to' => $post['belong_to']
+            ];
+        }
+        return parent::beforeAction($action);
+    }
 
-    public function actionCreate() {
-
+    public function actionCreate() 
+    {
     	$note = new Note();
         Yii::$app->response->format = 'json';
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
             
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                        'area' => Yii::$app->request->post('Note')['type_area']
-                    ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
             ];
 
         }
         else {
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                        'area' => Yii::$app->request->post('Note')['type_area']
-                    ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
             ];
         }
     }
 
-    public function actionEdit($id) {
-
+    public function actionEdit($id) 
+    {
     	$note = $this->findModel($id);
         Yii::$app->response->format = 'json';
 
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                        'area' => Yii::$app->request->post('Note')['type_area']
-                    ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
             ];
 
         }
         else {
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                        'area' => Yii::$app->request->post('Note')['type_area']
-                    ])
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
             ];
         }
 
@@ -63,14 +71,42 @@ class NotesController extends \yii\web\Controller
     {
         $note = $this->findModel($id);
         Yii::$app->response->format = 'json';
+        $res_data = array_merge($this->data_post, ['note' => $note]);
 
         return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_form', [
-                    'note' => $note,
-                    'area' => Yii::$app->request->post('area')
-                ])
+                'data'   => $this->renderPartial('@widget/views/notes/_form', 
+                       $res_data
+                    )
             ];
+    }
+
+    public function actionMore($page = 1)
+    {
+        $notes = Note::find()
+            ->orderBy('id DESC')
+            ->limit(5)
+            ->offset(($page - 1) * 5)
+            ->all();
+
+        $offset = ($page - 1) * 5;
+        $res_data = array_merge($this->data_post, ['offset' => $offset]);
+
+        Yii::$app->response->format = 'json';
+
+        if (!empty($notes)) {
+            
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
+            ];
+        }
+        else {
+            return [
+                'errors' => '',
+                'data'   => "<p class='no-more'>No activity is available</p>"
+            ];
+        }
     }
 
     /**
@@ -86,9 +122,7 @@ class NotesController extends \yii\web\Controller
         
         return [
             'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/notes/_list', [
-                'area'  => Yii::$app->request->post('area'),
-            ])
+            'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
         ];
     }
 

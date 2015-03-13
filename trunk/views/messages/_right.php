@@ -70,4 +70,8 @@ use app\components\widgets\MschedulesWidget;
     }
 ?>
 <!-- Notes widget -->
-<?php echo NotesWidget::widget(['area' => 2]); ?>
+<?php 
+    $message_id = \Yii::$app->request->get('id');
+    if ($message_id)
+        echo NotesWidget::widget(['area' => 2, 'belong_to' => $message_id]); 
+?>

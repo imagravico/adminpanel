@@ -19,7 +19,7 @@ use app\models\Note;
 		.media-list .media:hover .link-hover a {display:initial;}
 	</style>
     <div class="notes-list">
-        <?php echo $this->render('_list', ['area' => $area]) ?>
+        <?php echo $this->render('_list', ['area' => $area, 'belong_to' => $belong_to]) ?>
     </div>
     <!-- END Notes Content -->
 </div>
@@ -36,8 +36,9 @@ use app\models\Note;
             <!-- Modal Body -->
             <div class="modal-body" id="wrap-form-note">
                 <?php echo $this->render('_form', [
-                        'note' => new Note(),
-                        'area' => $area
+                        'note'      => new Note(),
+                        'area'      => $area,
+                        'belong_to' => $belong_to
                 ]) ?>
              </div>
         <!-- END Modal Body -->

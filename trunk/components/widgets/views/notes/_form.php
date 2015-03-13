@@ -4,7 +4,7 @@ use yii\bootstrap\ActiveForm;
 use yii\helpers\Html;
 ?>
 
-<?php 
+<?php
     $form = ActiveForm::begin([
         'id'      => 'form-note',
         'action' => '#',
@@ -30,6 +30,11 @@ use yii\helpers\Html;
 <?php
     echo Html::activeHiddenInput($note, 'type_area', [
                 'value' => $area
+        ]);
+?>
+<?php
+    echo Html::activeHiddenInput($note, 'belong_to', [
+                'value' => $belong_to
         ]);
 ?>
 

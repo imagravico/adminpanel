@@ -10,6 +10,7 @@ use app\models\Note;
 class NotesWidget extends Widget
 {
 	public $area;
+	public $belong_to;
 
 	public function init() 
 	{
@@ -18,7 +19,8 @@ class NotesWidget extends Widget
 	
 	public function run() {
 		return $this->render('notes/index', [
-				'area'  => $this->area
+				'area'  => $this->area,
+				'belong_to' => $this->belong_to
 			]);
 	}
 }
