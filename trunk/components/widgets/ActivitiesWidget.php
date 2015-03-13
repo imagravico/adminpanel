@@ -9,6 +9,8 @@ use app\models\Activity;
 
 class ActivitiesWidget extends Widget
 {
+	public $belong_to;
+
 	public function init() 
 	{
 		parent::init();
@@ -17,13 +19,15 @@ class ActivitiesWidget extends Widget
 	public function run() {
 
 		$activities = Activity::find()
+			->where(['belong_to' => $this->belong_to])
     		->orderBy('id DESC')
     		->limit(5)
 			->offset(0)
     		->all();
 
 		return $this->render('activities/index', [
-				'activities' => $activities
+				'activities' => $activities,
+				'belong_to' => $this->belong_to
 			]);
 	}
 }

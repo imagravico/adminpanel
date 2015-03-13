@@ -1,8 +1,11 @@
+<?php
+use app\models\Activity;
+?>
 <div class="block">
     <!-- Activity Title -->
    <div class="block-title">
         <div class="block-options pull-right">
-			<a class="btn btn-sm btn-alt btn-default" data-toggle="modal" href="#modal-activity-edit">Add Activity <i class="fa fa-plus"></i></a>
+			<a class="btn btn-sm btn-alt btn-default btn-add-activity" data-toggle="modal" href="#modal-activity-edit">Add Activity <i class="fa fa-plus"></i></a>
         </div>
 	   <h2><i class="fa fa-clock-o"></i> Activity</h2>
     </div>
@@ -20,8 +23,10 @@
 		</style>
 		
         <div id="activities-list">
-            <?= $this->render('_list', ['activities' => $activities]) ?>
+            <?= $this->render('_list', ['activities' => $activities, 'belong_to' => $belong_to]) ?>
         </div>
     </div>
     <!-- END Timeline Style Content -->
 </div>
+
+

@@ -20,7 +20,6 @@ use app\components\widgets\ActivitiesWidget;
 				'client' => $client,
 				'groups' => $groups
 		]); ?>
-		<?= ActivitiesWidget::widget();?>
 	</div> 
 	<!-- END col-lg-8 -->
 	
@@ -31,6 +30,4 @@ use app\components\widgets\ActivitiesWidget;
 		]); ?>
 	</div>
 </div>
-<!-- Load some popup -->
 
-<?= $this->render('@widget/views/activities/_form');?>

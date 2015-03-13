@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 use Yii;
@@ -9,6 +8,22 @@ use yii\web\NotFoundHttpException;
 
 class ActivitiesController extends \yii\web\Controller
 {
+    public $data_post;
+    /**
+     * @inhericdoc
+     */
+    public function beforeAction($action) 
+    {
+        $post = Yii::$app->request->post('Activity');
+        
+        if ($post) {
+            $this->data_post = [
+                'belong_to' => $post['belong_to']
+            ];
+        }
+        return parent::beforeAction($action);
+    }
+
     public function actionCreate()
     {
     	$activity   =  new Activity();
@@ -20,16 +35,14 @@ class ActivitiesController extends \yii\web\Controller
                 ->limit(5)
                 ->offset(0)
                 ->all();
-
             Yii::$app->response->format = 'json';
+            $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/activities/_list', [
-                        'activities' => $activities
-                    ])
+                'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
             ];
     	}
-    	
     }
 
     public function actionMore($page = 1)
@@ -59,6 +72,43 @@ class ActivitiesController extends \yii\web\Controller
 		}
     }
     
+    public function actionLoad($id)
+    {
+        $activity = $this->findModel($id);
+        Yii::$app->response->format = 'json';
+
+        return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/notes/_form', 
+                        ['activity' => $activity]
+                    )
+            ];
+    }
+
+    /**
+     * Deletes an existing Activity model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        $this->findModel($id)->delete();
+        Yii::$app->response->format = 'json';
+
+        $activities = Activity::find()
+                ->where(['belong_to' => $this->data_post['belong_to']])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->offset(0)
+                ->all();
+        $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+        
+        return [
+            'errors' => '',
+            'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
+        ];
+    }
+
     /**
      * Finds the Activity model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
@@ -68,7 +118,7 @@ class ActivitiesController extends \yii\web\Controller
      */
     protected function findModel($id)
     {
-        if (($model = Client::findOne($id)) !== null) {
+        if (($model = Activity::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

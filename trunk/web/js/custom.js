@@ -68,9 +68,6 @@ var Action = function() {
 			loadUrl = $(this).data('load');
 			data    = {'Note[type_area]': $(this).data('area'), 'Note[belong_to]': $(this).data('belongTo')};
 			
-			console.log($(this).data('area'));
-			console.log(data);
-
 			postData(loadUrl, data, wrap, function () {
 				$('#form-note .textarea-editor').wysihtml5();
 			})
@@ -104,7 +101,6 @@ var Action = function() {
 			
 		});
 
-
 		body.on('submit', form.selector, function (e) {
 			e.preventDefault();
 			form = $('#form-note');
@@ -127,10 +123,41 @@ var Action = function() {
 			update       = $(form.data('update')),
 			activityList = $('#activities-list'), 
 			viewMore     = $('#activities-list .view-more'),
+			edit         = $('#activities-list .btn-edit-activity'),
+			del          = $('#activities-list .btn-del-activity'),
+			add          = $('#activities-list .btn-add-activity'),
 			more         = 2;
+
+		body.on('click', edit.selector, function (e) {
+			url     = $(this).data('to');
+			loadUrl = $(this).data('load');
+			data    = {'Activity[belong_to]': $(this).data('belongTo')};
+			postData(loadUrl, data, wrap, function () {
+				$('#form-add-activities .textarea-editor').wysihtml5();
+			})
+		});
+
+		// add 
+		add.click(function () {
+			url = '/activities/create';
+		});
+
+		// delete
+		body.on('click', del.selector, function (e) 
+		{
+			e.preventDefault();
+			data    = {'Activity[belong_to]': $(this).data('belongTo')};
+			
+			if (confirm('Are you sure to delete it?')) 
+			{
+				postData($(this).data('to'), data, update, function () {
+				});
+			}
+		});
 
 		form.submit(function (e) {
 			e.preventDefault();
+			e.stopImmediatePropagation();
 			postData(to, form.serializeArray(), update, function () {
 					addWrap();
 					form.find('.btn-close').trigger('click');

@@ -1,15 +1,8 @@
 <?php
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-use app\models\Group;
-use kartik\file\FileInput;
-use yii\helpers\Url;
-use app\models\User;
+use app\models\Activity;
 use app\components\widgets\ActivitiesWidget;
 use app\components\widgets\ChecklistsWidget;
-
-
 ?>
 
 <div class="content-header">
@@ -23,7 +16,9 @@ use app\components\widgets\ChecklistsWidget;
 				'client' => $client,
 				'groups' => $groups
 		]); ?>
-		<?= ActivitiesWidget::widget();?>
+		<?php
+			echo ActivitiesWidget::widget(['belong_to' => \Yii::$app->request->get('id')]);
+		?>
 		<?= ChecklistsWidget::widget(['belong_to' => 1]);?>
 	</div>
 
@@ -35,7 +30,26 @@ use app\components\widgets\ChecklistsWidget;
 </div>
 
 <!-- Load some popup -->
+<div id="modal-activity-edit" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header text-center themed-background">
+                <h2 class="modal-title gi-white"><i class="fa fa-clock-o"></i> Activity</h2>
+            </div>
+            <!-- END Modal Header -->
 
-<?= $this->render('@widget/views/activities/_form');?>
+            <!-- Modal Body -->
+            <div class="modal-body">
+				<?= $this->render('@widget/views/activities/_form', [
+						'model' => new Activity(),
+						'belong_to' => \Yii::$app->request->get('id')
+					]);
+				?>
+			</div>	
+		</div>
+	</div>
+</div>
+
 <?= $this->render('@widget/views/checklists/_sendmail_modal_form');?>
 

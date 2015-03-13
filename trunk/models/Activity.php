@@ -54,7 +54,7 @@ class Activity extends \yii\db\ActiveRecord
             [['content'], 'string'],
             [['users_id', 'reminder'], 'integer'],
             [['title', 'content', 'come_date'], 'required'],
-            [['come_date', 'come_time', 'created_at', 'updated_at'], 'safe'],
+            [['come_date', 'come_time', 'created_at', 'updated_at', 'belong_to'], 'safe'],
             [['title'], 'string', 'max' => 255]
         ];
     }
