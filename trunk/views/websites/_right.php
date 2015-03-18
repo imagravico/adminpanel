@@ -55,7 +55,7 @@ use app\components\widgets\CSettingsWidget;
                 if (!$website->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <a href="/websites/delete/<?= $website->id?>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> Delete</a>
+                        <a href="/websites/delete/<?= $website->id?>" class="btn btn-sm btn-danger del" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>
                     </div>
             <?php } ?>
     </div>
