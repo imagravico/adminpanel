@@ -6,11 +6,10 @@ use app\models\Note;
 <ul class="media-list">
     <?php
 
-        if (isset($offset) && $offset) {
+        if (isset($page) && $page) {
             $notes = Note::find()
                 ->where(['type_area' => $area, 'belong_to' => $belong_to])
-                ->limit(5)
-                ->offset($offset)
+                ->limit($page * 5)
                 ->orderBy('id DESC')
                 ->all();
         }
@@ -22,6 +21,9 @@ use app\models\Note;
                 ->all();
         }
 
+        if (!isset($disViewMore)) 
+            $disViewMore = false;
+        
         if (!empty($notes)):
             foreach ($notes as $key => $note):
     ?>
@@ -48,9 +50,11 @@ use app\models\Note;
                     </div>
                 </li>
     <?php endforeach; ?>
-    <li class="media text-center">
-        <a class="btn btn-xs btn-default push view-more" data-to="/notes/more/" href="javascript:void(0)" data-area=<?= $area ?> data-belong-to=<?= $belong_to; ?> >View more..</a>
-    </li>
+            <?php if (isset($disViewMore) && !$disViewMore) {?>
+            <li class="media text-center">
+                <a class="btn btn-xs btn-default push view-more" data-to="/notes/more/" href="javascript:void(0)" data-area=<?= $area ?> data-belong-to=<?= $belong_to; ?> >View more..</a>
+            </li>
+            <?php } ?>
     <?php 
         else: 
             echo "No note is available";

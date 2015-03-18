@@ -121,7 +121,7 @@ AppAsset::register($this);
                 <!-- Sidebar Content -->
                 <div class="sidebar-content">
                     <!-- Brand -->
-                    <a href="index.php" class="sidebar-brand">
+                    <a href="/dashboard" class="sidebar-brand">
                         <i class="gi gi-flash"></i>
                         <span class="sidebar-nav-mini-hide"><strong>Admin</strong>Panel</span>
                     </a>

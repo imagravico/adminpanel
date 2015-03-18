@@ -83,14 +83,20 @@ class NotesController extends \yii\web\Controller
 
     public function actionMore($page = 1)
     {
+        // this is fag using show view more button or not
+        $disViewMore = false;
         $notes = Note::find()
             ->orderBy('id DESC')
-            ->limit(5)
-            ->offset(($page - 1) * 5)
+            ->limit($page * 5)
             ->all();
 
-        $offset = ($page - 1) * 5;
-        $res_data = array_merge($this->data_post, ['offset' => $offset]);
+        $allNotes = Note::find()->all();
+        if (count($allNotes) == count($notes)) 
+        {
+            $disViewMore = true;
+        }
+
+        $res_data = array_merge($this->data_post, ['page' => $page, 'disViewMore' => $disViewMore]);
 
         Yii::$app->response->format = 'json';
 

@@ -22,7 +22,7 @@
     <div class="row">
 		<div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="panel_client.php" class="widget widget-hover-effect1">
+            <a href="/clients" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-spring animation-fadeIn">
                         <i class="fa fa-user"></i>
@@ -37,7 +37,7 @@
 		
 		<div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="page_comp_gallery.php" class="widget widget-hover-effect1">
+            <a href="/websites" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-amethyst animation-fadeIn">
                         <i class="fa fa-globe"></i>
@@ -52,7 +52,7 @@
 		
         <div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="panel_settings_checklists.php" class="widget widget-hover-effect1">
+            <a href="/checklists" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-autumn animation-fadeIn">
                         <i class="fa fa-file-text"></i>
@@ -67,7 +67,7 @@
         
         <div class="col-sm-6 col-lg-3">
             <!-- Widget -->
-            <a href="panel_settings_messages.php" class="widget widget-hover-effect1">
+            <a href="/messages" class="widget widget-hover-effect1">
                 <div class="widget-simple">
                     <div class="widget-icon pull-left themed-background-fire animation-fadeIn">
                         <i class="gi gi-envelope"></i>
