@@ -18,9 +18,20 @@ class NotesWidget extends Widget
 	}
 	
 	public function run() {
+		$disViewMore = false;
+		$notes = Note::find()
+                ->where(['type_area' => $this->area, 'belong_to' => $this->belong_to])
+                ->orderBy('id DESC')
+                ->all();
+        if (count($notes) <= 5)
+        {
+        	$disViewMore = true;
+        }
+
 		return $this->render('notes/index', [
-				'area'  => $this->area,
-				'belong_to' => $this->belong_to
+				'area'        => $this->area,
+				'belong_to'   => $this->belong_to,
+				'disViewMore' => $disViewMore
 			]);
 	}
 }

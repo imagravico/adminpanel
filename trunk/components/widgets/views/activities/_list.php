@@ -3,9 +3,6 @@
         if (!isset($disViewMore)) {
             $disViewMore = false;
         } 
-        if (count($activities) <= 5) {
-            $disViewMore = true;
-        }
         
         $i = 1;
         if (!empty($activities)) {

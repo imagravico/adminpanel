@@ -85,34 +85,47 @@ class NotesController extends \yii\web\Controller
     {
         // this is fag using show view more button or not
         $disViewMore = false;
-        $notes = Note::find()
-            ->orderBy('id DESC')
-            ->limit($page * 5)
-            ->all();
+        $post = Yii::$app->request->post('Note');
 
-        $allNotes = Note::find()->all();
-        if (count($allNotes) == count($notes)) 
+        if ($post)
         {
-            $disViewMore = true;
-        }
+            $belong_to = $post['belong_to'];
+            $type_area = $post['type_area'];
 
-        $res_data = array_merge($this->data_post, ['page' => $page, 'disViewMore' => $disViewMore]);
+            $notes = Note::find()
+                ->where(['belong_to' => $belong_to, 'type_area' => $type_area])
+                ->orderBy('id DESC')
+                ->limit($page * 5)
+                ->all();
 
-        Yii::$app->response->format = 'json';
+            $allNotes = Note::find()
+                ->where(['belong_to' => $belong_to, 'type_area' => $type_area])
+                ->all();
+            // compare and then re-assign 
+            if (count($allNotes) == count($notes)) 
+            {
+                $disViewMore = true;
+            }
 
-        if (!empty($notes)) {
-            
-            return [
-                'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
-            ];
+            $res_data = array_merge($this->data_post, ['page' => $page, 'disViewMore' => $disViewMore]);
+
+            Yii::$app->response->format = 'json';
+
+            if (!empty($notes)) {
+                
+                return [
+                    'errors' => '',
+                    'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
+                ];
+            }
+            else {
+                return [
+                    'errors' => '',
+                    'data'   => "<p class='no-more'>No activity is available</p>"
+                ];
+            }
         }
-        else {
-            return [
-                'errors' => '',
-                'data'   => "<p class='no-more'>No activity is available</p>"
-            ];
-        }
+        
     }
 
     /**

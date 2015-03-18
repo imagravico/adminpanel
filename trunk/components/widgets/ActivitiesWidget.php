@@ -16,8 +16,9 @@ class ActivitiesWidget extends Widget
 		parent::init();
 	}
 	
-	public function run() {
-
+	public function run() 
+	{
+		$disViewMore = false;
 		$activities = Activity::find()
 			->where(['belong_to' => $this->belong_to])
     		->orderBy('id DESC')
@@ -25,9 +26,18 @@ class ActivitiesWidget extends Widget
 			->offset(0)
     		->all();
 
+    	$allActivities = Activity::find()
+			->where(['belong_to' => $this->belong_to])
+    		->orderBy('id DESC')
+    		->all();
+
+    	if (count($allActivities) <= 5)
+    		$disViewMore = true;
+
 		return $this->render('activities/index', [
 				'activities' => $activities,
-				'belong_to' => $this->belong_to
+				'belong_to' => $this->belong_to,
+				'disViewMore' => $disViewMore
 			]);
 	}
 }

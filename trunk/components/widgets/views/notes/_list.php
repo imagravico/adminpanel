@@ -24,6 +24,7 @@ use app\models\Note;
         if (!isset($disViewMore)) 
             $disViewMore = false;
         
+
         if (!empty($notes)):
             foreach ($notes as $key => $note):
     ?>

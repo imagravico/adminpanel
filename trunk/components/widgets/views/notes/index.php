@@ -19,7 +19,7 @@ use app\models\Note;
 		.media-list .media:hover .link-hover a {display:initial;}
 	</style>
     <div class="notes-list">
-        <?php echo $this->render('_list', ['area' => $area, 'belong_to' => $belong_to]) ?>
+        <?php echo $this->render('_list', ['area' => $area, 'belong_to' => $belong_to, 'disViewMore' => $disViewMore]) ?>
     </div>
     <!-- END Notes Content -->
 </div>
