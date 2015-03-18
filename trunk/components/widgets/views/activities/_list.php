@@ -1,5 +1,8 @@
 <ul class="timeline-list media-list">
-    <?php 
+    <?php
+        if (!isset($disViewMore)) 
+            $disViewMore = false;
+        
         $i = 1;
         if (!empty($activities)) {
             foreach ($activities as $key => $activity) {
@@ -27,7 +30,11 @@
         }
     }
     ?>
-	<li class="media text-center">
-		<a class="btn btn-xs btn-default push view-more" data-to="/activities/more/" href="javascript:void(0)" data-belong-to="<?= $belong_to ?>">View more..</a>
-	</li>
+    <?php if (isset($disViewMore) && !$disViewMore) {?>
+            <li class="media text-center">
+                <a class="btn btn-xs btn-default push view-more" data-to="/activities/more/" href="javascript:void(0)" data-belong-to="<?= $belong_to ?>">View more..</a>
+            </li>
+    <?php } ?>
+
+	
 </ul>

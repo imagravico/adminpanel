@@ -57,6 +57,7 @@ class ActivitiesController extends \yii\web\Controller
                 ->limit(5)
                 ->offset(0)
                 ->all();
+
             $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
 
             return [
@@ -76,12 +77,20 @@ class ActivitiesController extends \yii\web\Controller
 
     public function actionMore($page = 1)
     {
+        $disViewMore = false;
+
     	$activities = Activity::find()
 			->orderBy('id DESC')
-			->limit(5)
-			->offset(($page - 1) * 5)
+			->limit($page * 5)
 			->all();
-        $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+
+        $allActivities = Activity::find()->all();
+        if (count($allActivities) == count($activities)) 
+        {
+            $disViewMore = true;
+        }
+
+        $this->data_post = array_merge($this->data_post, ['activities' => $activities, 'disViewMore' => $disViewMore]);
         Yii::$app->response->format = 'json';
 
 		if (!empty($activities)) {
