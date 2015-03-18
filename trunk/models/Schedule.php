@@ -97,7 +97,7 @@ class Schedule extends \yii\db\ActiveRecord
                     break;
             }
         }
-        else if ($this->type == 1) {
+        elseif ($this->type == 1) {
             // merge at_time from at_hour and at_minute
             $this->at_time = $this->at_hour . ':' . $this->at_minute;
         }
@@ -106,8 +106,8 @@ class Schedule extends \yii\db\ActiveRecord
     }   
 
     /**
-     * this function only apply for Periodically (corresponding to type == 2)
-     * @return [type] [description]
+     * This function only apply for Periodically (corresponding to type == 2)
+     * @return array 
      */
     public function parseTime() 
     {

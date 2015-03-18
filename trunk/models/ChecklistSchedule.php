@@ -42,7 +42,7 @@ class ChecklistSchedule extends Schedule
             [['event', 'sendon'], 'required', 'when' => function ($model) {
                 return $model->type == 1;
             }],
-            [['checklists_id'], 'safe'],
+            [['checklists_id', 'at_hour', 'at_minute'], 'safe'],
             [['message'], 'string'],
             [['relation', 'type', 'event', 'sendon', 'checklists_id', 'active'], 'integer'],
             [['subject', 'type_periodically', 'time_periodically'], 'string', 'max' => 255]

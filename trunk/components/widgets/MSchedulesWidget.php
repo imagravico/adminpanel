@@ -8,7 +8,7 @@ use app\models\MessageSchedule;
 use app\models\Message;
 
 
-class MSchedulesWidget extends Widget
+class MschedulesWidget extends Widget
 {
 	public $message_id;
 	public function init() 
