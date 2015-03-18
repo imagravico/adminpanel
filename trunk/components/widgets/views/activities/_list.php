@@ -1,7 +1,11 @@
 <ul class="timeline-list media-list">
     <?php
-        if (!isset($disViewMore)) 
+        if (!isset($disViewMore)) {
             $disViewMore = false;
+        } 
+        if (count($activities) <= 5) {
+            $disViewMore = true;
+        }
         
         $i = 1;
         if (!empty($activities)) {

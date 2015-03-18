@@ -78,34 +78,46 @@ class ActivitiesController extends \yii\web\Controller
     public function actionMore($page = 1)
     {
         $disViewMore = false;
+        $belong_to = 0;
 
-    	$activities = Activity::find()
-			->orderBy('id DESC')
-			->limit($page * 5)
-			->all();
+        $post = Yii::$app->request->post('Activity');
 
-        $allActivities = Activity::find()->all();
-        if (count($allActivities) == count($activities)) 
+        if ($post) 
         {
-            $disViewMore = true;
+            $belong_to = $post['belong_to'];
+            $activities = Activity::find()
+                ->where(['belong_to' => $belong_to])
+                ->orderBy('id DESC')
+                ->limit($page * 5)
+                ->all();
+
+            $allActivities = Activity::find()
+                ->where(['belong_to' => $belong_to])
+                ->all();
+                
+            if (count($allActivities) == count($activities)) 
+            {
+                $disViewMore = true;
+            }
+
+            $this->data_post = array_merge($this->data_post, ['activities' => $activities, 'disViewMore' => $disViewMore]);
+            Yii::$app->response->format = 'json';
+
+            if (!empty($activities)) 
+            {
+                return [
+                    'errors' => '',
+                    'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
+                ];
+            }
+            else 
+            {
+                return [
+                    'errors' => '',
+                    'data'   => "<p class='no-more'>No activity is available</p>"
+                ];
+            }
         }
-
-        $this->data_post = array_merge($this->data_post, ['activities' => $activities, 'disViewMore' => $disViewMore]);
-        Yii::$app->response->format = 'json';
-
-		if (!empty($activities)) {
-			
-            return [
-                'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/activities/_list', $this->data_post)
-            ];
-		}
-		else {
-            return [
-                'errors' => '',
-                'data'   => "<p class='no-more'>No activity is available</p>"
-            ];
-		}
     }
     
     public function actionLoad($id)
