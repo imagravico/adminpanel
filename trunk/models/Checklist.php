@@ -154,6 +154,10 @@ class Checklist extends \yii\db\ActiveRecord
         return $pdf->render();
     }
 
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'users_id']);
+    }
 
     public function getCschedule() 
     {
@@ -172,4 +176,6 @@ class Checklist extends \yii\db\ActiveRecord
             
         return $checklists;
     }
+
+
 }

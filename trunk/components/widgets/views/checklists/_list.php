@@ -18,7 +18,7 @@ use app\models\Checklist;
 				<?= $checklist->title; ?><br>
 				<small>
 					<span class="badge"><i class="fa fa-clock-o"></i> Created: <?= date('j. F Y', strtotime($checklist->created_at)) ?></span>
-					<span class="badge"><i class="fa fa-user"></i> By: User First Last</span>
+					<span class="badge"><i class="fa fa-user"></i> By: <?php echo $checklist->user->fullname; ?></span>
 					<span class="badge"><i class="fa fa-envelope"></i> E-Mail: 12. December 2012</span>
 				</small>
             </td>

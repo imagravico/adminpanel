@@ -12,7 +12,7 @@
             <div class="modal-body">
                 <div class="checklist-content form-horizontal form-bordered">
                     
-                    <div class="form-group control">
+                    <!-- <div class="form-group control">
                         <a href="javascript:void(0)" id="cl-title" class="btn btn-alt btn-default"><i class="fa fa-header"></i> Title</a>
                         <a href="javascript:void(0)" id="cl-subtitle" class="btn btn-alt btn-default"><i class="fa fa-header"></i> Subtitle</a>
                         <a href="javascript:void(0)" id="cl-text" class="btn btn-alt btn-default"><i class="fa fa-code-fork  themed-color-dark"></i> Text</a>
@@ -20,7 +20,7 @@
                         <a href="javascript:void(0)" id="cl-checkbox" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Checkbox</a>
                         <a href="javascript:void(0)" id="cl-switch" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Switch</a>
                         <a href="javascript:void(0)" id="cl-rating" class="btn btn-alt btn-default"><i class="fa fa-code-fork themed-color-dark"></i> Rating</a>
-                    </div>
+                    </div> -->
                     <div class="form-group">
                         <div id="InputsWrapper">
                             

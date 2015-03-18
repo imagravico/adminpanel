@@ -130,7 +130,7 @@ $(document).ready(function () {
 			type: 'POST',
 			data: {'checklist_content' : preCls},
 			success: function (res) {
-				alert('Checklist was made! Please click "Update" button.')
+				// alert('Checklist was made! Please click "Update" button.')
 			},
 			error: function (res) {
 				alert('Opp oh! Something is wrong. Try again..')
