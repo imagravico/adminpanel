@@ -90,7 +90,7 @@ class Csetting extends MCSetting
     public function afterFind()
     {
         // get information that will be sent to client or website
-        $this->infor_send = $this->getInforSend();       
+        // $this->infor_send = $this->getInforSend();       
     }
 
     public function getInforSend()

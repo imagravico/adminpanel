@@ -10,6 +10,7 @@ use app\models\Website;
 use app\models\SendmailForm;
 use yii\web\NotFoundHttpException;
 use app\models\ChecklistsTimeSent;
+use app\models\ChecklistsCow;
 
 
 class ChecklistsController extends \yii\web\Controller
@@ -29,7 +30,10 @@ class ChecklistsController extends \yii\web\Controller
         
         return parent::beforeAction($action);
     }
-
+    /**
+     * for list page
+     * @return mix
+     */
     public function actionIndex()
     {
     	$checklists = Checklist::find()
@@ -38,7 +42,10 @@ class ChecklistsController extends \yii\web\Controller
         return $this->render('index', ['checklists' => $checklists]);
     }
 
-
+    /**
+     * for creating page
+     * @return mix
+     */
     public function actionCreate()
     {
     	$checklist = new Checklist();
@@ -193,11 +200,31 @@ class ChecklistsController extends \yii\web\Controller
      */
     public function actionGetcontent() 
     {
-        $id = Yii::$app->request->post('id');
-        if ($id) {
-            $checklist = Checklist::findOne($id);
+        $post      = Yii::$app->request->post();
+        $id        = $post['id'];
+        $belong_to = $post['belong_to'];
+        $cowid     = $post['cowid'];
+
+        if ($id
+            && $belong_to
+            && $cowid 
+            ) 
+        {
+            // if this checklist have been made for this client then using content of making 
+            // checklist else using template of the checklist
+            $checklistCow = ChecklistsCow::find()
+                ->where([
+                        'checklists_id'      => $id,
+                        'belong_to'          => $belong_to,
+                        'clients_or_webs_id' => $cowid
+                    ])
+                ->one();
+
+            if (!$checklistCow) 
+                $checklistCow = Checklist::findOne($id);
+
             Yii::$app->response->format = 'json';
-            return  ['errors' => '', 'data' => $checklist->content];
+            return  ['errors' => '', 'data' => $checklistCow->content];
         }
     }
 
@@ -207,16 +234,44 @@ class ChecklistsController extends \yii\web\Controller
      */
     public function actionSavecontent() 
     {
-        $id = Yii::$app->request->post('id');
-        $content = Yii::$app->request->post('content');
+        $post      = Yii::$app->request->post();
+        $id        = $post['id'];
+        $cowid     = $post['cowid'];
+        $content   = $post['content'];
+        $belong_to = $post['belong_to'];
 
-        if ($id) {
-            $checklist = Checklist::findOne($id);
-            $checklist->content = $content;
+        if ($id
+            && $cowid
+            && $content
+            && $belong_to
+            ) 
+        {
 
-            if ($checklist->save()) {
+            $checklistCow = ChecklistsCow::find()
+                    ->where([
+                            'checklists_id' => $id,
+                            'clients_or_webs_id' => $cowid,
+                            'belong_to' => $belong_to
+                        ])
+                    ->one();
+
+            if (!$checklistCow)
+            {
+                $checklistCow = new ChecklistsCow();
+                $checklistCow->checklists_id = $id;
+                $checklistCow->belong_to = $belong_to;
+                $checklistCow->content = $content;
+                $checklistCow->clients_or_webs_id = $cowid;
+            }
+            else
+            {
+                $checklistCow->content = $content;
+            }
+
+            // save whole change to db
+            if ($checklistCow->save()) {
                 Yii::$app->response->format = 'json';
-                return  ['errors' => '', 'data' => $checklist->content];
+                return  ['errors' => '', 'data' => $checklistCow->content];
             }
         }
         return;

@@ -87,13 +87,13 @@ class Checklist extends \yii\db\ActiveRecord
         }
 
         // remove old file
-        if ($this->file_name)
-            unlink(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name);
+        // if ($this->file_name)
+            // unlink(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name);
 
-        $this->file_name = md5(time()) . '.pdf';
+        // $this->file_name = md5(time()) . '.pdf';
         // make a pdf file
-        if ($this->content)
-            $this->makePdf($this->file_name);
+        // if ($this->content)
+        //     $this->makePdf($this->file_name);
 
         // assigning id of current user to users_id field
         $this->users_id = Yii::$app->user->id;
@@ -120,40 +120,6 @@ class Checklist extends \yii\db\ActiveRecord
         parent::afterFind();    
     }
 
-    public function makePdf($name)
-    {
-        $content = $this->content;
-        
-        // setup kartik\mpdf\Pdf component
-        $pdf = new Pdf([
-            'filename' => Yii::$app->basePath . '/web/upload/pdf/' . $name,
-            // set to use core fonts only
-            'mode' => Pdf::MODE_CORE, 
-            // A4 paper format
-            'format' => Pdf::FORMAT_A4, 
-            // portrait orientation
-            'orientation' => Pdf::ORIENT_PORTRAIT, 
-            // stream to browser inline
-            'destination' => Pdf::DEST_FILE, 
-            // your html content input
-            'content' => $content,  
-            // format content from your own css file if needed or use the
-            // enhanced bootstrap css built by Krajee for mPDF formatting 
-            'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
-            // any css to be embedded if required
-            'cssInline' => '.kv-heading-1{font-size:18px}', 
-             // set mPDF properties on the fly
-            'options' => ['title' => ''],
-             // call mPDF methods on the fly
-            'methods' => [ 
-                'SetHeader'=>[''], 
-                'SetFooter'=>['{PAGENO}'],
-            ]
-        ]);
-        
-        // return the pdf output as per the destination setting
-        return $pdf->render();
-    }
     /**
      * establish relationship with user model
      * @return mix

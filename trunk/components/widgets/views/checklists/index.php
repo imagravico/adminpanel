@@ -50,7 +50,7 @@ $this->registerJsFile('/web/js/editable-checklist.js', ['depends' => [\app\asset
         <?= $this->render('_list', ['belong_to' => $belong_to]);?>
     </div>
 </div>
-<?= $this->render('_edit_checklist_modal') ?>
+<?= $this->render('_edit_checklist_modal', ['belong_to' => $belong_to]) ?>
 
 
 

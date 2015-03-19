@@ -361,8 +361,11 @@ var Action = function() {
 		// edit
 		body.on('click', '#checklist .btn-edit-checklist, #choose-checklists .btn-edit-checklist', function (e) 
 		{
-			id       = $(this).data('checklistId');
-			var data = {'id': id};
+			var belongTo = $(this).data('belongTo'),
+				cowid = $(this).data('cowid');
+
+				id = $(this).data('checklistId');
+			var data = {'id': id, 'belong_to': belongTo, 'cowid': cowid};
 				
 			postData(get, data, update, function () {
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
@@ -410,8 +413,13 @@ var Action = function() {
 		})
 
 		saveChange.click(function () {
-			var data = {'id': id, 'content': update.html()};
-
+			update.find('.editable-popup').remove();
+			var data = {
+					'id': id, 
+					'content': update.html(), 
+					'belong_to': $(this).data('belongTo'),
+					'cowid': $(this).data('cowid')
+				};
 			postData(post, data, '', function () {
 				$('.btn-cl-close').trigger('click');
 			});
