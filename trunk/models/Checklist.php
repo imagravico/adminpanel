@@ -154,17 +154,28 @@ class Checklist extends \yii\db\ActiveRecord
         // return the pdf output as per the destination setting
         return $pdf->render();
     }
-
+    /**
+     * establish relationship with user model
+     * @return mix
+     */
     public function getUser()
     {
         return $this->hasOne(User::className(), ['id' => 'users_id']);
     }
 
+    /**
+     * establish relation with Cschedule model
+     * @return mix
+     */
     public function getCschedule() 
     {
         return $this->hasMany(ChecklistSchedule::className(), ['checklists_id' => 'id']);
     }
-
+    /**
+     * find all checklist belonging to corresponding website or client
+     * @param $relation
+     * @return mix
+     */
     public static function getChecklistBelong($relation)
     {
         $checklists = self::find()
@@ -177,7 +188,12 @@ class Checklist extends \yii\db\ActiveRecord
             
         return $checklists;
     }
-
+    /**
+     * get latest time sending of checklist for client or website
+     * @param integer $belong_to 
+     * @param integer $cowid
+     * @return mix
+     */
     public function getTimeSent($belong_to, $cowid)
     {
         return ChecklistsTimeSent::find()
