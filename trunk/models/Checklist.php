@@ -6,6 +6,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use kartik\mpdf\Pdf;
+use app\models\ChecklistsTimeSent;
 
 /**
  * This is the model class for table "checklists".
@@ -177,5 +178,14 @@ class Checklist extends \yii\db\ActiveRecord
         return $checklists;
     }
 
-
+    public function getTimeSent($belong_to, $cowid)
+    {
+        return ChecklistsTimeSent::find()
+            ->where([
+                    'belong_to' => $belong_to, 
+                    'clients_or_webs_id' => $cowid, 
+                    'checklists_id' => $this->id 
+                ])
+            ->one();
+    }
 }

@@ -9,6 +9,7 @@ use app\models\Client;
 use app\models\Website;
 use app\models\SendmailForm;
 use yii\web\NotFoundHttpException;
+use app\models\ChecklistsTimeSent;
 
 
 class ChecklistsController extends \yii\web\Controller
@@ -91,7 +92,10 @@ class ChecklistsController extends \yii\web\Controller
             ])
         ];
     }
-    
+    /**
+     * send a email to client with checklist attached
+     * @return void
+     */
     public function actionSendmail() 
     {
         $post = Yii::$app->request->post('SendmailForm');
@@ -106,8 +110,31 @@ class ChecklistsController extends \yii\web\Controller
             elseif ($post['belong_to'] == 2) {
                 $cow = Website::findOne($post['cowid']);
             }
+
             $checklist = Checklist::findOne($post['checklists_id']);
-            // send mail
+            
+            // save time sending
+            // checking if time sending is exist then only update else create new one
+            $timeSent = ChecklistsTimeSent::find()
+                ->where([
+                        'belong_to' => $post['belong_to'],
+                        'checklists_id' => $checklist->id,
+                        'clients_or_webs_id' => $post['cowid']
+                    ])
+                ->one();
+
+            if (!isset($timeSent))
+            {
+                $timeSent =  new ChecklistsTimeSent();
+            }
+            
+            $timeSent->checklists_id      = $checklist->id;
+            $timeSent->clients_or_webs_id = $post['cowid'];
+            $timeSent->belong_to          = $post['belong_to'];
+            $timeSent->time_sent = date('Y-m-d H:i:s');
+            $timeSent->save();
+
+            // if everything is ok, then send mail. go ahead!!!
             Yii::$app->mailer->compose()
                 ->setFrom('admin@panel.com')
                 ->setTo($cow->email)
@@ -122,7 +149,11 @@ class ChecklistsController extends \yii\web\Controller
             return ['errors' => 'Something is wrong.'];
         }
     }
-
+    /**
+     * downloading a checklist into machine with corresponding id
+     * @param  integer $id of checklist
+     * @return void
+     */
     public function actionDownload($id)
     {
         $checklist = $this->findModel($id);
@@ -139,6 +170,13 @@ class ChecklistsController extends \yii\web\Controller
 
     }
 
+    /**
+     * creating a checklist by this method then save its content (template) (in the html format)
+     * to a session variable and save it along with some information of checklist via saveContent
+     * method below
+     * to db
+     * @return nothing
+     */
     public function actionPrechecklist()
     {
         $session = Yii::$app->session;
@@ -149,6 +187,10 @@ class ChecklistsController extends \yii\web\Controller
         }
     }
 
+    /**
+     * get template of checklist for each client or website
+     * @return json content of template 
+     */
     public function actionGetcontent() 
     {
         $id = Yii::$app->request->post('id');
@@ -159,6 +201,10 @@ class ChecklistsController extends \yii\web\Controller
         }
     }
 
+    /**
+     * save template of checklist along with some information to db
+     * @return json content checklist
+     */
     public function actionSavecontent() 
     {
         $id = Yii::$app->request->post('id');

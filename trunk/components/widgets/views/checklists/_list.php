@@ -19,7 +19,17 @@ use app\models\Checklist;
 				<small>
 					<span class="badge"><i class="fa fa-clock-o"></i> Created: <?= date('j. F Y', strtotime($checklist->created_at)) ?></span>
 					<span class="badge"><i class="fa fa-user"></i> By: <?php echo $checklist->user->fullname; ?></span>
-					<span class="badge"><i class="fa fa-envelope"></i> E-Mail: 12. December 2012</span>
+                    <?php 
+                        $cowid = Yii::$app->request->get('id');
+                        $timeSent = $checklist->getTimeSent($belong_to, $cowid);
+                        if ($timeSent) 
+                        {
+                    ?>
+                            <span class="badge"><i class="fa fa-envelope"></i> E-Mail: <?= date('j. F Y', strtotime($timeSent->time_sent)) ?></span>
+                    <?php
+                        }
+                    ?>
+					
 				</small>
             </td>
             <td class="text-right">
