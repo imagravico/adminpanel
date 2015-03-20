@@ -377,12 +377,13 @@ var Action = function() {
 		body.on('click', '#checklist .btn-del-checklist', function (e) 
 		{
 			var update   = $('#cl-list'),
-				belongTo = $(this).data('belongTo');
+				belongTo = $(this).data('belongTo'),
+				cowid = $(this).data('cowid');
 
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
-				postData($(this).data('to'), {'belong_to': belongTo}, update, function () {
+				postData($(this).data('to'), {'belong_to': belongTo, 'cowid': cowid}, update, function () {
 				});
 			}
 		});

@@ -87,7 +87,17 @@ class ChecklistsController extends \yii\web\Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $post = Yii::$app->request->post();
+
+        ChecklistsCow::find()
+                ->where([
+                        'checklists_id'      => $id,
+                        'belong_to'          => $post['belong_to'],
+                        'clients_or_webs_id' => $post['cowid']
+                    ])
+                ->one()
+                ->delete();
+
         Yii::$app->response->format = 'json';
         $checklists = Checklist::find()->orderBy('id DESC')->all();
 
@@ -95,7 +105,7 @@ class ChecklistsController extends \yii\web\Controller
             'errors' => '',
             'data'   => $this->renderPartial('@widget/views/checklists/_list', [
                 'checklists'  => $checklists,
-                'belong_to'   => Yii::$app->request->post('belong_to')
+                'belong_to'   => $post['belong_to']
             ])
         ];
     }
