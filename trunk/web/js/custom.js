@@ -422,6 +422,7 @@ var Action = function() {
 				};
 			postData(post, data, '', function () {
 				$('.btn-cl-close').trigger('click');
+				location.reload();
 			});
 		})
 	}

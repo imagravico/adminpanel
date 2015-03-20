@@ -118,14 +118,20 @@ class ChecklistsController extends \yii\web\Controller
                 $cow = Website::findOne($post['cowid']);
             }
 
-            $checklist = Checklist::findOne($post['checklists_id']);
-            
+            $checklistCow = ChecklistsCow::find()
+                    ->where([
+                            'belong_to'          => $post['belong_to'],
+                            'checklists_id'      => $post['checklists_id'],
+                            'clients_or_webs_id' => $post['cowid']
+                        ])
+                    ->one();
+
             // save time sending
             // checking if time sending is exist then only update else create new one
             $timeSent = ChecklistsTimeSent::find()
                 ->where([
-                        'belong_to' => $post['belong_to'],
-                        'checklists_id' => $checklist->id,
+                        'belong_to'          => $post['belong_to'],
+                        'checklists_id'      => $post['checklists_id'],
                         'clients_or_webs_id' => $post['cowid']
                     ])
                 ->one();
@@ -135,7 +141,7 @@ class ChecklistsController extends \yii\web\Controller
                 $timeSent =  new ChecklistsTimeSent();
             }
             
-            $timeSent->checklists_id      = $checklist->id;
+            $timeSent->checklists_id      = $post['checklists_id'];
             $timeSent->clients_or_webs_id = $post['cowid'];
             $timeSent->belong_to          = $post['belong_to'];
             $timeSent->time_sent = date('Y-m-d H:i:s');
@@ -147,7 +153,7 @@ class ChecklistsController extends \yii\web\Controller
                 ->setTo($cow->email)
                 ->setSubject($post['subject'])
                 ->setTextBody($post['content'])
-                ->attach(Yii::$app->basePath . '/web/upload/pdf/' . $checklist->file_name)
+                ->attach(Yii::$app->basePath . '/web/upload/pdf/' . $checklistCow->file_name)
                 ->send();
 
             return ['errors' => ''];
@@ -161,20 +167,32 @@ class ChecklistsController extends \yii\web\Controller
      * @param  integer $id of checklist
      * @return void
      */
-    public function actionDownload($id)
+    public function actionDownload($id, $belong_to, $cowid)
     {
-        $checklist = $this->findModel($id);
-        $path_file = Yii::$app->basePath . '/web/upload/pdf/' . $checklist->file_name;
+        $checklistCow = ChecklistsCow::find()
+                ->where([
+                        'checklists_id'      => $id,
+                        'belong_to'          => $belong_to,
+                        'clients_or_webs_id' => $cowid
+                    ])
+                ->one();
+        if ($checklistCow)
+        {
+            $path_file = Yii::$app->basePath . '/web/upload/pdf/' . $checklistCow->file_name;
 
-        // We'll be outputting a PDF
-        header('Content-Type: application/pdf');
+            // We'll be outputting a PDF
+            header('Content-Type: application/pdf');
 
-        // It will be called downloaded.pdf
-        header('Content-Disposition: attachment; filename="' . $checklist->file_name . '"');
+            // It will be called downloaded.pdf
+            header('Content-Disposition: attachment; filename="' . $checklistCow->file_name . '"');
 
-        // The PDF source is in original.pdf
-        readfile($path_file);
-
+            // The PDF source is in original.pdf
+            readfile($path_file);
+        }
+        else
+        {
+            throw new NotFoundHttpException('PDF Checklist not found.');
+        }
     }
 
     /**
