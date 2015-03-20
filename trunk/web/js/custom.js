@@ -297,12 +297,13 @@ var Action = function() {
 
 				if (res.errors == '')
 					sCallback(res);
+
 			},
 			error: function (res) {
 				alert('Opp oh! There are something wrong. Try again..')
 			}
 		});
-	}
+	}	
 
 	var actionMCSwitch = function (options) {
 		var switchButton = options.button,
@@ -317,8 +318,7 @@ var Action = function() {
 			else if (dataOf == 'checklists') {
 				data = {'Csetting[checklists_id]': $(this).data('checklistsId'), 'Csetting[belong_to]': $(this).data('belongTo')};
 			}
-			
-			console.log(data);
+		
 			if ($(this).is(':checked')) {
 				postData(toAdd, data, '', function () {});
 			}
@@ -355,6 +355,7 @@ var Action = function() {
 			update     = $('#InputsWrapper'),
 			saveChange = $('.save-checklist'),
 			post       = '/checklists/savecontent',
+			sendMail   = $('#sendmail-form'),
 			id;
 
 
@@ -387,31 +388,32 @@ var Action = function() {
 		});
 
 		// send email
-		$('.btn-send-email').click(function () {
-			var form = $('#modal-send-email-edit #sendmail-form'),
-				// id of checklist
-				idCls   = $(this).data('checklistId');
+		body.on('click', '.btn-send-email', function (e) 
+		{
+			var idCls   = $(this).data('checklistId'),
 				belongTo = $(this).data('belongTo');
 
 			// assign idCls to cowid
-			form.find('#checklists_id').val(idCls);
-			form.find('#belong_to').val(belongTo);
+			sendMail.find('#checklists_id').val(idCls);
+			sendMail.find('#belong_to').val(belongTo);
 
-			// send
-			form.submit(function (e) {
-				e.preventDefault();
-				e.stopImmediatePropagation();
-				// re-assign post url
-				post = '/checklists/sendmail';
-				data = form.serializeArray();
-				postData(post, data, '', function () {
-					$('.btn-cl-close').trigger('click');
-					form.trigger("reset");
-					form.yiiActiveForm('resetForm');
-				});
-			})
-		})
+		});
+		// send email to client
+		sendMail.submit(function (e) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
 
+			// re-assign post url
+			post = '/checklists/sendmail';
+			data = sendMail.serializeArray();
+			postData(post, data, '', function () {
+				$('.btn-cl-close').trigger('click');
+				sendMail.trigger("reset");
+				sendMail.yiiActiveForm('resetForm');
+				// location.reload();
+			});
+		});
+		// save alteration of checklist
 		saveChange.click(function () {
 			update.find('.editable-popup').remove();
 			var data = {

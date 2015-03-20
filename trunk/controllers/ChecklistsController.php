@@ -113,9 +113,11 @@ class ChecklistsController extends \yii\web\Controller
 
             if ($post['belong_to'] == 1) {
                 $cow = Client::findOne($post['cowid']);
+                $email = $cow->email;
             }
             elseif ($post['belong_to'] == 2) {
                 $cow = Website::findOne($post['cowid']);
+                $email = $cow->client->email;
             }
 
             $checklistCow = ChecklistsCow::find()
@@ -150,7 +152,7 @@ class ChecklistsController extends \yii\web\Controller
             // if everything is ok, then send mail. go ahead!!!
             Yii::$app->mailer->compose()
                 ->setFrom('admin@panel.com')
-                ->setTo($cow->email)
+                ->setTo($email)
                 ->setSubject($post['subject'])
                 ->setTextBody($post['content'])
                 ->attach(Yii::$app->basePath . '/web/upload/pdf/' . $checklistCow->file_name)
@@ -264,7 +266,6 @@ class ChecklistsController extends \yii\web\Controller
             && $belong_to
             ) 
         {
-
             $checklistCow = ChecklistsCow::find()
                     ->where([
                             'checklists_id' => $id,

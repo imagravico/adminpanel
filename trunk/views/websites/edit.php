@@ -32,3 +32,5 @@ use app\components\widgets\ChecklistsWidget;
 		]); ?>
 	</div>
 </div>
+<?= $this->render('@widget/views/checklists/_sendmail_modal_form');?>
+
