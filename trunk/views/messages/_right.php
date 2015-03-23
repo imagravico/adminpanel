@@ -49,7 +49,7 @@ use app\components\widgets\MschedulesWidget;
                 <i class="fa fa-floppy-o"></i> 
                 <?php echo ($message->isNewRecord) ? "Create" : "Update";?>
             </button>
-			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/messages"><i class="fa fa-times"></i> Cancel</button>
+            <a href="/messages" class="btn btn-sm btn-primary cancel" ><i class="fa fa-times"></i> Cancel</a>
         </div>
         <?php 
                 if (!$message->isNewRecord) {

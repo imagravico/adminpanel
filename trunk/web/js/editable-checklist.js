@@ -49,7 +49,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<h2 class="cl-subtitle" data-type="text">Subtitle</h2>');
+			$(InputsWrapper).append('<fieldset><h2 class="cl-subtitle" data-type="text">Subtitle</h2></fieldset><a href="#" class="cl-remove-element">x</a>');
 			returnAccess();
 			
 			clSubtitleCount++;
@@ -82,7 +82,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div>');
+			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div>	');
 			returnAccess();
 			
 			clTextareaCount++;
@@ -108,6 +108,7 @@ $(document).ready(function () {
 
 		if(confirm('Really remove this element?'))
 		{
+			console.log($(this).closest('fieldset'));
 			$(this).closest('fieldset').remove();
 			MaxInputsCount--;
 		}

@@ -42,4 +42,7 @@ use app\components\widgets\EditableChecklistsWidget;
 </div>
 </div>
 
-<?= EditableChecklistsWidget::widget(['checklist' => $checklist]); ?>
+<?php 
+if (!$checklist->isNewRecord)
+    echo EditableChecklistsWidget::widget(['checklist' => $checklist]); 
+?>

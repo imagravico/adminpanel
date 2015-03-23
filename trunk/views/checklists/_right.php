@@ -49,7 +49,7 @@ use app\components\widgets\CSchedulesWidget;
                 <i class="fa fa-floppy-o"></i> 
                 <?php echo ($checklist->isNewRecord) ? "Create" : "Update";?>
             </button>
-			<button type="reset" class="btn btn-sm btn-primary cancel" data-redirect="/checklists"><i class="fa fa-times"></i> Cancel</button>
+            <a href="/checklists" class="btn btn-sm btn-primary cancel" ><i class="fa fa-times"></i> Cancel</a>
         </div>
         <?php 
                 if (!$checklist->isNewRecord) {

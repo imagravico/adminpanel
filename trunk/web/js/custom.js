@@ -358,7 +358,6 @@ var Action = function() {
 			sendMail   = $('#sendmail-form'),
 			id;
 
-
 		// edit
 		body.on('click', '#checklist .btn-edit-checklist, #choose-checklists .btn-edit-checklist', function (e) 
 		{

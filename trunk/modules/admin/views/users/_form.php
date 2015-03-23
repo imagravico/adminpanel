@@ -4,10 +4,10 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use kartik\file\FileInput;
 
-
 /* @var $this yii\web\View */
 /* @var $model app\models\User */
 /* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <div class="user-form">
@@ -67,6 +67,8 @@ use kartik\file\FileInput;
     <?= $form->field($model, 'email')->textInput(['maxlength' => 255]) ?>
 
     <?= $form->field($model, 'password')->passwordInput(['maxlength' => 255]) ?>
+    
+    <?= $form->field($model, 'repassword')->passwordInput(['maxlength' => 255]) ?>
     
     <?= $form->field($model, 'active')->checkbox([]) ?>
     
