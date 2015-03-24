@@ -5,25 +5,16 @@ use app\models\Note;
 ?>
 <ul class="media-list">
     <?php
+        // by default value of disViewMore is false
+        $disViewMore = false;
+        $allNotes = Note::find()
+                ->where(['type_area' => $type_area, 'belong_to' => $belong_to])
+                ->orderBy('id DESC')
+                ->all();
 
-        // if (isset($page) && $page) {
-        //     $notes = Note::find()
-        //         ->where(['type_area' => $area, 'belong_to' => $belong_to])
-        //         ->limit($page * 5)
-        //         ->orderBy('id DESC')
-        //         ->all();
-        // }
-        // else {
-        //     $notes = Note::find()
-        //         ->where(['type_area' => $area, 'belong_to' => $belong_to])
-        //         ->limit(5)
-        //         ->orderBy('id DESC')
-        //         ->all();
-        // }
-
-        // if (!isset($disViewMore)) 
-        //     $disViewMore = false;
-        
+        if (count($allNotes) <= count($notes)) {
+            $disViewMore = true;
+        }
 
         if (!empty($notes)):
             foreach ($notes as $key => $note):

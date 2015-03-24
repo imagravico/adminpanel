@@ -40,7 +40,6 @@ class ActivitiesController extends \yii\web\Controller
 
             $this->data_post = array_merge($this->data_post, [
                         'activities' => $activities,
-                        'disViewMore' => false
                     ]);
 
             return [
@@ -54,7 +53,9 @@ class ActivitiesController extends \yii\web\Controller
     {
         $activity = $this->findModel($id);
 
-        if ($activity->load(Yii::$app->request->post()) && $activity->save()) {
+        if ($activity->load(Yii::$app->request->post()) 
+            && $activity->save()) {
+            
             $activities = Activity::find()
                 ->where(['belong_to' => $this->data_post['belong_to']])
                 ->orderBy('id DESC')
@@ -64,7 +65,6 @@ class ActivitiesController extends \yii\web\Controller
 
             $this->data_post = array_merge($this->data_post, [
                         'activities' => $activities,
-                        'disViewMore' => false
                     ]);
 
             return [
@@ -85,9 +85,8 @@ class ActivitiesController extends \yii\web\Controller
     public function actionMore($page = 1)
     {
         $disViewMore = false;
-        $belong_to = 0;
-
-        $post = Yii::$app->request->post('Activity');
+        $belong_to   = 0;
+        $post        = Yii::$app->request->post('Activity');
 
         if ($post) 
         {
@@ -98,19 +97,8 @@ class ActivitiesController extends \yii\web\Controller
                 ->limit($page * 5)
                 ->all();
 
-            $allActivities = Activity::find()
-                ->where(['belong_to' => $belong_to])
-                ->orderBy('id DESC')
-                ->all();
-                
-            if (count($allActivities) == count($activities)) 
-            {
-                $disViewMore = true;
-            }
-
             $this->data_post = array_merge($this->data_post, [
                         'activities' => $activities, 
-                        'disViewMore' => $disViewMore
                     ]);
 
             if (!empty($activities)) 

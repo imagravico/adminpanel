@@ -447,7 +447,7 @@ var Action = function() {
 	}
 
 	var resetForm =  function ($form) {
-		$form.find('textarea').data("wysihtml5").editor.setValue('');
+		$form.find('textarea').data("wysihtml5").editor.setValue('');	
 	    $form.find('input:text, input:password, input:file, select, textarea').val('');
 	    $form.find('input:radio, input:checkbox')
 	         .removeAttr('checked').removeAttr('selected');

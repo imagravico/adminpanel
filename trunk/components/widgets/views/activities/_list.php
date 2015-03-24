@@ -1,9 +1,23 @@
+<?php
+use app\models\Activity;
+?>
 <ul class="timeline-list media-list">
     <?php
-        if (!isset($disViewMore)) {
+        $disViewMore = false;
+
+        $allActivities = Activity::find()
+                ->where(['belong_to' => $belong_to])
+                ->all();
+                
+        // set value of $disViewMore
+        if (count($allActivities) > count($activities)) {
             $disViewMore = false;
-        } 
-        
+        }
+        else {
+            $disViewMore = true;
+
+        }
+
         $i = 1;
         if (!empty($activities)) {
             foreach ($activities as $key => $activity) {
