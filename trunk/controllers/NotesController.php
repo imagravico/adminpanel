@@ -10,7 +10,6 @@ use app\behaviors\LoadMoreBehavior;
 class NotesController extends \yii\web\Controller
 {
     public $data_post;
-    public $disViewMore = false;
 
     /**
      * @inhericdoc
@@ -182,12 +181,12 @@ class NotesController extends \yii\web\Controller
             // compare and then re-assign 
             if (count($allNotes) == count($notes)) 
             {
-                $this->disViewMore = true;
+                $disViewMore = true;
             }
 
             $res_data = array_merge($this->data_post, [
                     'page' => $page, 
-                    'disViewMore' => $this->disViewMore,
+                    'disViewMore' => $disViewMore,
                     'notes' => $notes
                 ]);
 

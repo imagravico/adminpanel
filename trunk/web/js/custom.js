@@ -112,10 +112,6 @@ var Action = function() {
 		});
 	}
 
-	/**
-	 * control all behaviours of activity
-	 * @return mixed
-	 */
 	var actionActivity = function () {
 
 		var form         = $('#form-add-activities'),

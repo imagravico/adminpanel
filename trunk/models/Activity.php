@@ -22,6 +22,7 @@ use yii\db\Expression;
 class Activity extends \yii\db\ActiveRecord
 {
     public $come_time;
+
     /**
      * @inheritdoc
      */

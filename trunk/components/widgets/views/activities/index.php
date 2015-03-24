@@ -23,7 +23,11 @@ use app\models\Activity;
 		</style>
 		
         <div id="activities-list">
-            <?= $this->render('_list', ['activities' => $activities, 'belong_to' => $belong_to, 'disViewMore' => $disViewMore]) ?>
+            <?= $this->render('_list', [
+                        'activities'  => $activities, 
+                        'belong_to'   => $belong_to, 
+                        'disViewMore' => $disViewMore
+                    ]) ?>
         </div>
     </div>
     <!-- END Timeline Style Content -->

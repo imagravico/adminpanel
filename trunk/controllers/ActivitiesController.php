@@ -15,6 +15,7 @@ class ActivitiesController extends \yii\web\Controller
     public function beforeAction($action) 
     {
         $post = Yii::$app->request->post('Activity');
+        Yii::$app->response->format = 'json';
         
         if ($post) {
             $this->data_post = [
@@ -31,12 +32,16 @@ class ActivitiesController extends \yii\web\Controller
     	if ($activity->load(Yii::$app->request->post()) && $activity->save()) {
 
             $activities = Activity::find()
-                ->orderBy('id DESC')
-                ->limit(5)
-                ->offset(0)
-                ->all();
-            Yii::$app->response->format = 'json';
-            $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+                    ->where(['belong_to' => $this->data_post['belong_to']])
+                    ->orderBy('id DESC')
+                    ->limit(5)
+                    ->offset(0)
+                    ->all();
+
+            $this->data_post = array_merge($this->data_post, [
+                        'activities' => $activities,
+                        'disViewMore' => false
+                    ]);
 
             return [
                 'errors' => '',
@@ -48,7 +53,6 @@ class ActivitiesController extends \yii\web\Controller
     public function actionEdit($id) 
     {
         $activity = $this->findModel($id);
-        Yii::$app->response->format = 'json';
 
         if ($activity->load(Yii::$app->request->post()) && $activity->save()) {
             $activities = Activity::find()
@@ -58,7 +62,10 @@ class ActivitiesController extends \yii\web\Controller
                 ->offset(0)
                 ->all();
 
-            $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
+            $this->data_post = array_merge($this->data_post, [
+                        'activities' => $activities,
+                        'disViewMore' => false
+                    ]);
 
             return [
                 'errors' => '',
@@ -93,6 +100,7 @@ class ActivitiesController extends \yii\web\Controller
 
             $allActivities = Activity::find()
                 ->where(['belong_to' => $belong_to])
+                ->orderBy('id DESC')
                 ->all();
                 
             if (count($allActivities) == count($activities)) 
@@ -100,8 +108,10 @@ class ActivitiesController extends \yii\web\Controller
                 $disViewMore = true;
             }
 
-            $this->data_post = array_merge($this->data_post, ['activities' => $activities, 'disViewMore' => $disViewMore]);
-            Yii::$app->response->format = 'json';
+            $this->data_post = array_merge($this->data_post, [
+                        'activities' => $activities, 
+                        'disViewMore' => $disViewMore
+                    ]);
 
             if (!empty($activities)) 
             {
@@ -123,7 +133,6 @@ class ActivitiesController extends \yii\web\Controller
     public function actionLoad($id)
     {
         $activity = $this->findModel($id);
-        Yii::$app->response->format = 'json';
         $this->data_post = array_merge($this->data_post, ['model' => $activity]);
 
         return [
@@ -141,7 +150,6 @@ class ActivitiesController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->response->format = 'json';
 
         $activities = Activity::find()
                 ->where(['belong_to' => $this->data_post['belong_to']])
@@ -149,6 +157,7 @@ class ActivitiesController extends \yii\web\Controller
                 ->limit(5)
                 ->offset(0)
                 ->all();
+
         $this->data_post = array_merge($this->data_post, ['activities' => $activities]);
         
         return [
