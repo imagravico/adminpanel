@@ -5,43 +5,92 @@ namespace app\controllers;
 use Yii;
 use app\models\Note;
 use yii\web\NotFoundHttpException;
-
+use app\behaviors\LoadMoreBehavior;
 
 class NotesController extends \yii\web\Controller
 {
     public $data_post;
+    public $disViewMore = false;
+
+    /**
+     * @inhericdoc
+     */
+    public function behaviors()
+    {
+        return [
+            [
+                'class' => LoadMoreBehavior::className(),
+            ],
+        ];
+    }
+
     /**
      * @inhericdoc
      */
     public function beforeAction($action) 
     {
         $post = Yii::$app->request->post('Note');
-        
-        if ($post) {
+        // set response format
+        Yii::$app->response->format = 'json';
+
+        if ($post) 
+        {
             $this->data_post = [
-                'area' => $post['type_area'],
+                'type_area' => $post['type_area'],
                 'belong_to' => $post['belong_to']
             ];
         }
+
         return parent::beforeAction($action);
     }
 
     public function actionCreate() 
     {
     	$note = new Note();
-        Yii::$app->response->format = 'json';
-        if ($note->load(Yii::$app->request->post()) && $note->save()) {
-            
+        
+        if ($note->load(Yii::$app->request->post()) 
+            && $note->save()) {
+
+            // get 5 latest notes
+            $notes = Note::find()
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->all();
+            // merge returned data
+            $res_data = array_merge($this->data_post, [
+                    'notes' => $notes,
+                    'disViewMore' => false
+                ]);
+
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
             ];
 
         }
         else {
+             // get 5 latest notes
+            $notes = Note::find()
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->all();
+            // merge returned data
+            $res_data = array_merge($this->data_post, [
+                    'notes' => $notes,
+                    'disViewMore' => false
+                ]);
+
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
             ];
         }
     }
@@ -49,28 +98,56 @@ class NotesController extends \yii\web\Controller
     public function actionEdit($id) 
     {
     	$note = $this->findModel($id);
-        Yii::$app->response->format = 'json';
 
         if ($note->load(Yii::$app->request->post()) && $note->save()) {
+
+             // get 5 latest notes
+            $notes = Note::find()
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->all();
+            // merge returned data
+            $res_data = array_merge($this->data_post, [
+                    'notes' => $notes,
+                    'disViewMore' => false
+                ]);
+
             return [
                 'errors' => '',
-                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
             ];
 
         }
         else {
+             // get 5 latest notes
+            $notes = Note::find()
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
+                ->orderBy('id DESC')
+                ->limit(5)
+                ->all();
+            // merge returned data
+            $res_data = array_merge($this->data_post, [
+                    'notes' => $notes,
+                    'disViewMore' => false
+                ]);
+
             return [
                 'errors' => $note->getErrors(),
-                'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
+                'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
             ];
         }
-
     }
 
     public function actionLoad($id)
     {
         $note = $this->findModel($id);
-        Yii::$app->response->format = 'json';
         $res_data = array_merge($this->data_post, ['note' => $note]);
 
         return [
@@ -84,32 +161,35 @@ class NotesController extends \yii\web\Controller
     public function actionMore($page = 1)
     {
         // this is fag using show view more button or not
-        $disViewMore = false;
-        $post = Yii::$app->request->post('Note');
-
-        if ($post)
+        if ($this->data_post)
         {
-            $belong_to = $post['belong_to'];
-            $type_area = $post['type_area'];
-
             $notes = Note::find()
-                ->where(['belong_to' => $belong_to, 'type_area' => $type_area])
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
                 ->orderBy('id DESC')
                 ->limit($page * 5)
                 ->all();
 
             $allNotes = Note::find()
-                ->where(['belong_to' => $belong_to, 'type_area' => $type_area])
+                ->where([
+                        'belong_to' => $this->data_post['belong_to'], 
+                        'type_area' => $this->data_post['type_area']
+                    ])
                 ->all();
+
             // compare and then re-assign 
             if (count($allNotes) == count($notes)) 
             {
-                $disViewMore = true;
+                $this->disViewMore = true;
             }
 
-            $res_data = array_merge($this->data_post, ['page' => $page, 'disViewMore' => $disViewMore]);
-
-            Yii::$app->response->format = 'json';
+            $res_data = array_merge($this->data_post, [
+                    'page' => $page, 
+                    'disViewMore' => $this->disViewMore,
+                    'notes' => $notes
+                ]);
 
             if (!empty($notes)) {
                 
@@ -137,11 +217,24 @@ class NotesController extends \yii\web\Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
-        Yii::$app->response->format = 'json';
-        
+         // get 5 latest notes
+        $notes = Note::find()
+            ->where([
+                    'belong_to' => $this->data_post['belong_to'], 
+                    'type_area' => $this->data_post['type_area']
+                ])
+            ->orderBy('id DESC')
+            ->limit(5)
+            ->all();
+        // merge returned data
+        $res_data = array_merge($this->data_post, [
+                'notes' => $notes,
+                'disViewMore' => false
+            ]);
+            
         return [
             'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/notes/_list', $this->data_post)
+            'data'   => $this->renderPartial('@widget/views/notes/_list', $res_data)
         ];
     }
 

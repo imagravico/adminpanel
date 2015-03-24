@@ -6,23 +6,23 @@ use app\models\Note;
 <ul class="media-list">
     <?php
 
-        if (isset($page) && $page) {
-            $notes = Note::find()
-                ->where(['type_area' => $area, 'belong_to' => $belong_to])
-                ->limit($page * 5)
-                ->orderBy('id DESC')
-                ->all();
-        }
-        else {
-            $notes = Note::find()
-                ->where(['type_area' => $area, 'belong_to' => $belong_to])
-                ->limit(5)
-                ->orderBy('id DESC')
-                ->all();
-        }
+        // if (isset($page) && $page) {
+        //     $notes = Note::find()
+        //         ->where(['type_area' => $area, 'belong_to' => $belong_to])
+        //         ->limit($page * 5)
+        //         ->orderBy('id DESC')
+        //         ->all();
+        // }
+        // else {
+        //     $notes = Note::find()
+        //         ->where(['type_area' => $area, 'belong_to' => $belong_to])
+        //         ->limit(5)
+        //         ->orderBy('id DESC')
+        //         ->all();
+        // }
 
-        if (!isset($disViewMore)) 
-            $disViewMore = false;
+        // if (!isset($disViewMore)) 
+        //     $disViewMore = false;
         
 
         if (!empty($notes)):
@@ -41,8 +41,8 @@ use app\models\Note;
                                 <em><?= $note->timeAgo(strtotime($note->created_at)) ?></em>
                                 <?php } ?>
                             </small><br>
-                            <a data-toggle="modal" href="#modal-note-edit" class="btn btn-xs btn-default btn-edit-note" data-to="/notes/edit/<?= $note->id ?>" data-load="/notes/load/<?= $note->id ?>" data-area=<?= $area ?> data-belong-to=<?= $note->belong_to; ?> ><i class="fa fa-edit"></i> Edit</a>
-                            <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" data-area=<?= $area ?> data-belong-to=<?= $belong_to; ?>><i class="fa fa-times" ></i> Delete</a>
+                            <a data-toggle="modal" href="#modal-note-edit" class="btn btn-xs btn-default btn-edit-note" data-to="/notes/edit/<?= $note->id ?>" data-load="/notes/load/<?= $note->id ?>" data-area=<?= $type_area ?> data-belong-to=<?= $note->belong_to; ?> ><i class="fa fa-edit"></i> Edit</a>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" data-area=<?= $type_area ?> data-belong-to=<?= $belong_to; ?>><i class="fa fa-times" ></i> Delete</a>
                         </span>
                         <a href="#">
                             <strong>n<?= $note->user->fullname; ?></strong>
@@ -53,7 +53,7 @@ use app\models\Note;
     <?php endforeach; ?>
             <?php if (isset($disViewMore) && !$disViewMore) {?>
             <li class="media text-center">
-                <a class="btn btn-xs btn-default push view-more" data-to="/notes/more/" href="javascript:void(0)" data-area=<?= $area ?> data-belong-to=<?= $belong_to; ?> >View more..</a>
+                <a class="btn btn-xs btn-default push view-more" data-to="/notes/more/" href="javascript:void(0)" data-area=<?= $type_area ?> data-belong-to=<?= $belong_to; ?> >View more..</a>
             </li>
             <?php } ?>
     <?php 

@@ -9,7 +9,7 @@ use app\models\Note;
 
 class NotesWidget extends Widget
 {
-	public $area;
+	public $type_area;
 	public $belong_to;
 
 	public function init() 
@@ -17,21 +17,30 @@ class NotesWidget extends Widget
 		parent::init();
 	}
 	
-	public function run() {
+	public function run() 
+	{
 		$disViewMore = false;
 		$notes = Note::find()
-                ->where(['type_area' => $this->area, 'belong_to' => $this->belong_to])
-                ->orderBy('id DESC')
-                ->all();
-        if (count($notes) <= 5)
+                ->where(['type_area' => $this->type_area, 'belong_to' => $this->belong_to])
+                ->orderBy('id DESC');
+
+        if (count($notes->all()) <= 5)
         {
+        	$notes = $notes->all();
         	$disViewMore = true;
         }
-
+        else
+        {
+        	$notes = $notes
+        				->limit(5)
+        				->all();
+        }
+        
 		return $this->render('notes/index', [
-				'area'        => $this->area,
+				'type_area'   => $this->type_area,
 				'belong_to'   => $this->belong_to,
-				'disViewMore' => $disViewMore
+				'disViewMore' => $disViewMore,
+				'notes'       => $notes
 			]);
 	}
 }

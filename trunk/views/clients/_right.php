@@ -64,7 +64,7 @@ use app\components\widgets\CSettingsWidget;
 <?php
     $client_id = \Yii::$app->request->get('id');
     if ($client_id) 
-        echo NotesWidget::widget(['area' => 0, 'belong_to' => $client_id]); 
+        echo NotesWidget::widget(['type_area' => 0, 'belong_to' => $client_id]); 
 ?>
 
 

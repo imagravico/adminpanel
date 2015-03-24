@@ -73,5 +73,5 @@ use app\components\widgets\MschedulesWidget;
 <?php 
     $message_id = \Yii::$app->request->get('id');
     if ($message_id)
-        echo NotesWidget::widget(['area' => 2, 'belong_to' => $message_id]); 
+        echo NotesWidget::widget(['type_area' => 2, 'belong_to' => $message_id]); 
 ?>

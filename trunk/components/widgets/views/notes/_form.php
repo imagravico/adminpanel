@@ -29,7 +29,7 @@ use yii\helpers\Html;
 ?>
 <?php
     echo Html::activeHiddenInput($note, 'type_area', [
-                'value' => $area
+                'value' => $type_area
         ]);
 ?>
 <?php
