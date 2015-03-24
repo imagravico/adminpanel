@@ -15,7 +15,7 @@
                         <?php if ($activity->reminder) { ?>
                             <i class="fa fa-bell"></i>
                         <?php } ?>
-                        <?= date('j. F Y', strtotime($activity->come_date));?><br>
+                        <?= date('j. F Y', strtotime($activity->created_at));?><br>
                         <small>by <?= $activity->user->fullname ?></small>
                     </div>
                     <div class="timeline-content">

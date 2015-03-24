@@ -54,7 +54,7 @@ class Activity extends \yii\db\ActiveRecord
         return [
             [['content'], 'string'],
             [['users_id', 'reminder'], 'integer'],
-            [['title', 'content', 'come_date'], 'required'],
+            [['title', 'content'], 'required'],
             [['come_date', 'come_time', 'created_at', 'updated_at', 'belong_to'], 'safe'],
             [['title'], 'string', 'max' => 255]
         ];
@@ -84,7 +84,6 @@ class Activity extends \yii\db\ActiveRecord
         $this->users_id = Yii::$app->user->id;
         // merge time
         if ($this->come_date && $this->come_time) {
-
             $come_date       = \DateTime::createFromFormat('d/m/Y', $this->come_date);
             $this->come_date = $come_date->format('Y-m-d');
             $this->come_date = $this->come_date . ' ' . $this->come_time;  
@@ -96,13 +95,14 @@ class Activity extends \yii\db\ActiveRecord
 
     public function afterFind()
     {
-        $arr = explode(' ', $this->come_date);
-        $this->come_date = $arr[0];
-        $come_date       = \DateTime::createFromFormat('Y-m-d', $this->come_date);
-        $this->come_date = $come_date->format('d/m/Y');
-        
-        $this->come_time = $arr[1];
-
+        if ($this->come_date) {
+            $arr = explode(' ', $this->come_date);
+            $this->come_date = $arr[0];
+            $come_date       = \DateTime::createFromFormat('Y-m-d', $this->come_date);
+            $this->come_date = $come_date->format('d/m/Y');
+            
+            $this->come_time = $arr[1];
+        }
         return parent::afterFind();
     }
 

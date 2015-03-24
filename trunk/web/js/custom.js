@@ -76,6 +76,7 @@ var Action = function() {
 		// add 
 		add.click(function () {
 			url = '/notes/create';
+			resetForm($('#form-note'));
 		});
 
 		// delete
@@ -121,7 +122,7 @@ var Action = function() {
 			viewMore     = $('#activities-list .view-more'),
 			edit         = $('#activities-list .btn-edit-activity'),
 			del          = $('#activities-list .btn-del-activity'),
-			add          = $('#activities-list .btn-add-activity'),
+			add          = $('.btn-add-activity'),
 			wrap         = $('#wrap-form-activity'),
 			more         = 2;
 
@@ -145,6 +146,7 @@ var Action = function() {
 		// add 
 		add.click(function () {
 			to = '/activities/create';
+			resetForm($('#form-add-activities'));
 		});
 
 		// delete
@@ -442,6 +444,13 @@ var Action = function() {
 			return false;
 		})
 
+	}
+
+	var resetForm =  function ($form) {
+		$form.find('textarea').data("wysihtml5").editor.setValue('');
+	    $form.find('input:text, input:password, input:file, select, textarea').val('');
+	    $form.find('input:radio, input:checkbox')
+	         .removeAttr('checked').removeAttr('selected');
 	}
 
 	return {
