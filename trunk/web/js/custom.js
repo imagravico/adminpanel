@@ -22,6 +22,8 @@ var Action = function() {
 			update = $(group.data('update')),
 			edit   = group.find('.form-actions .edit'),
 			add    = group.find('.form-actions .add'),
+			close  = group.find('.btn-close'),
+			filter = $('.filter-group'),
 			del    = group.find('.form-actions .del');
 
 		// add new 
@@ -30,12 +32,15 @@ var Action = function() {
 			postData(add.data('to'), $('#form-add-group').serializeArray(), update, function () {
 				});	
 		});
+		
+		filter.click(function (e) {
+
+		})
 
 		// edit, in this case it is only for editting group
 		body.on('click', edit.selector, function (e) {
 			e.preventDefault();
 			var name = $($(this).data('input')).val();
-
 			postData($(this).data('to'), {'name' : name}, update, function () {
 				});
 
@@ -49,6 +54,10 @@ var Action = function() {
 				postData($(this).data('to'), {}, update, function () {
 				});
 			}
+		});
+
+		body.on('click', close.selector, function (e) {
+			location.reload();
 		});
 	}
 
@@ -431,9 +440,11 @@ var Action = function() {
 		var to = '/filters',
 			filter = $('#filter').find('a'),
 			update = '',
+			filterGroup = $('.filter-group');
 			data = {};
 
 		filter.click(function () {
+			to = '/filters';
 			filter.removeClass('active');
 			update = $($(this).data('update'));
 			data = {'model': $(this).data('model'), 'keyword': $(this).data('keyword')};
@@ -442,7 +453,17 @@ var Action = function() {
 			});
 			$(this).addClass('active');
 			return false;
-		})
+		});
+
+		filterGroup.click(function () {
+			to = '/filters/group';
+			data = {'name': $(this).data('name')};
+			update = $($(this).data('update'));
+
+			postData(to, data, update, function () {
+
+			});
+		});
 
 	}
 

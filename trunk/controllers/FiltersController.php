@@ -1,5 +1,4 @@
-<?php
-namespace app\controllers;
+<?php namespace app\controllers;
 
 use Yii;
 use yii\web\Session;
@@ -7,6 +6,8 @@ use app\models\Client;
 use app\models\Checklist;
 use app\models\Message;
 use app\models\Website;
+use app\models\Group;
+use app\models\GroupClient;
 
 
 class FiltersController extends \yii\web\Controller
@@ -75,4 +76,35 @@ class FiltersController extends \yii\web\Controller
 			
 		}
 	}
+
+
+	public function actionGroup()
+    {
+        $fil = Yii::$app->request->post()['name'];
+		Yii::$app->response->format = 'json';
+
+        if ($fil) {
+
+        	$group = Group::find()
+        		->where(['name' => trim($fil)])
+        		->one();
+
+        	if ($group) {
+        		if (!empty($group->groupsClients)) {
+        			$clients = [];
+        			foreach ($group->groupsClients as $key => $gc) {
+        				array_push($clients , $gc->client);
+        			}
+        			return [
+						'errors' => '',
+						'data'   => $this->renderPartial('_clients', ['results' => $clients])
+					];
+        		}
+        	}
+        	return [
+				'errors' => '',
+				'data'   => ''
+			];
+        }   
+    }
 }

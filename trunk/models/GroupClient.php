@@ -48,4 +48,11 @@ class GroupClient extends \yii\db\ActiveRecord
         // GroupClient has_one Group via Group.id -> groups_id
         return $this->hasOne(Group::className(), ['id' => 'groups_id']);
     }
+
+    public function getClient()
+    {
+        // GroupClient has_one Group via Group.id -> groups_id
+        return $this->hasOne(Client::className(), ['id' => 'clients_id']);
+    }
+
 }

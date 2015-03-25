@@ -71,7 +71,7 @@ use yii\bootstrap\ActiveForm;
 
     <div class="form-group form-actions">
         <div class="text-right">
-            <button type="button" class="btn btn-sm btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-sm btn-default btn-close" data-dismiss="modal">Close</button>
         </div>
     </div>
     

@@ -21,7 +21,7 @@ use yii\bootstrap\ActiveForm;
         <li><hr></li>
         <?php foreach ($total as $key => $value) : ?>
             <li>
-                <a href="javascript:void(0)">
+                <a href="javascript:void(0)" class="filter-group" data-name="<?= $key ?>" data-update="#clients-list">
                     <span class="badge pull-right"><?= $value ?></span><?= $key ?>
                 </a>
             </li>
