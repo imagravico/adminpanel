@@ -36,7 +36,7 @@ use app\models\Note;
                             <a href="javascript:void(0)" class="btn btn-xs btn-default btn-del-note" data-to="/notes/delete/<?= $note->id ?>" data-update=".notes-list" data-area=<?= $type_area ?> data-belong-to=<?= $belong_to; ?>><i class="fa fa-times" ></i> Delete</a>
                         </span>
                         <a href="#">
-                            <strong>n<?= $note->user->fullname; ?></strong>
+                            <strong><?= $note->user->fullname; ?></strong>
                         </a>
                         <p><?= $note->content ?></p>
                     </div>

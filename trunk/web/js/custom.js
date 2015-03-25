@@ -464,7 +464,6 @@ var Action = function() {
 
 			});
 		});
-
 	}
 
 	var resetForm =  function ($form) {
