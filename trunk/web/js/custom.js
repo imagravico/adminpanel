@@ -27,7 +27,7 @@ var Action = function() {
 		// add new 
 		body.on('click', add.selector, function (e) {
 			e.preventDefault();
-			postData(add.data('to'), group.serializeArray(), update, function () {
+			postData(add.data('to'), $('#form-add-group').serializeArray(), update, function () {
 				});	
 		});
 
