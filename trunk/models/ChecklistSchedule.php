@@ -23,7 +23,6 @@ use app\models\Csetting;
  */
 class ChecklistSchedule extends Schedule
 {
-
     /**
      * @inheritdoc
      */
@@ -55,17 +54,18 @@ class ChecklistSchedule extends Schedule
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'subject' => 'Subject',
-            'message' => 'Message',
-            'relation' => 'Relation',
-            'type' => 'Type',
-            'event' => 'Event',
-            'sendon' => 'Sendon',
+            'id'                => 'ID',
+            'subject'           => 'Subject',
+            'message'           => 'Message',
+            'relation'          => 'Relation',
+            'type'              => 'Type',
+            'event'             => 'Event',
+            'sendon'            => 'Send on',
             'type_periodically' => 'Type Periodically',
             'time_periodically' => 'Time Periodically',
-            'checklists_id' => 'Checklists ID',
-            'active' => 'Active',
+            'checklists_id'     => 'Checklists ID',
+            'active'            => 'Active',
+            
         ];
     }
 
@@ -75,10 +75,11 @@ class ChecklistSchedule extends Schedule
     public function beforeSave($insert)
     {
         if ($this->type == 1) {
-            $this->type_periodically = $this->time_periodically  =NULL;
+            $this->type_periodically = $this->time_periodically = NULL;
         }
-        else {
-            $this->event = $this->sendon  =NULL;
+        elseif ($this->type == 2) {
+            $this->at_time = NULL;
+            $this->event = $this->sendon = NULL;
         }
         
         return parent::beforeSave($insert);

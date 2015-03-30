@@ -71,6 +71,7 @@ class MessageSchedule extends Schedule
             $this->type_periodically = $this->time_periodically  = NULL;
         }
         else {
+            $this->at_time = NULL;
             $this->event = $this->sendon = NULL;
         }
         

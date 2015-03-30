@@ -73,7 +73,7 @@ class Schedule extends \yii\db\ActiveRecord
         {
 
             $this->type_periodically = Yii::$app->request->post('cron-period');
-            $mins  = Yii::$app->request->post('cron-mins');
+            $mins  = Yii::$app->request->post('cron-time-min');
             $hours = Yii::$app->request->post('cron-time-hour');
             $month = Yii::$app->request->post('cron-month');
             $dow   = Yii::$app->request->post('cron-dow');

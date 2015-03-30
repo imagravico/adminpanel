@@ -4,15 +4,12 @@ use app\models\ChecklistSchedule;
 
 ?>
 
-
  <table class="table table-striped table-vcenter">
     <tbody>
     <?php 
         $cschedules = ChecklistSchedule::find()
             ->where(['checklists_id' => $checklists_id])
             ->orderBy('id DESC')
-            // ->limit(5)
-            // ->offset(0)
             ->all();
 
         if (!empty($cschedules)) {
@@ -26,7 +23,7 @@ use app\models\ChecklistSchedule;
                     <?= $cschedules->subject ?>
                 </td>
                 <td class="text-right" style="width:140px;">
-                    <a data-toggle="modal" href="#modal-schedules-checklist-edit" class="btn btn-xs btn-default btn-edit-cschedules" data-to="/cschedules/edit/<?= $cschedules->id ?>"><i class="fa fa-pencil"></i> Edit</a>
+                    <a data-toggle="modal" href="#modal-schedules-checklist-edit" class="btn btn-xs btn-default btn-edit-cschedules" data-to="/cschedules/edit/<?= $cschedules->id ?>" data-load="/cschedules/load/<?= $cschedules->id ?>" data-update="#mschedule-form"><i class="fa fa-pencil"></i> Edit</a>
                     <a data-toggle="modal" href="#modal-website-edit" class="btn btn-xs btn-default btn-del-cschedules" data-to="/cschedules/delete/<?= $cschedules->id ?>"><i class="fa fa-times"></i> Remove</a>
                 </td>
             </tr>

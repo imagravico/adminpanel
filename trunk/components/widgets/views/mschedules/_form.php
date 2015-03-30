@@ -12,6 +12,8 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
 
 <?php 
     $model = isset($model) ? $model : new MessageSchedule();
+    $tableActive = isset($model->type) ? $model->type : 1;
+
     $form = ActiveForm::begin([
         'id' => 'form-add-message-schedule',
         'enableClientValidation' => true,
@@ -52,22 +54,22 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
 ?>
 <?php
     echo Html::activeHiddenInput($model, 'type', [
-                'value' => 1,
+                'value' => $tableActive,
                 'id' => 'schedule-type'
         ]);
 ?>
 	<div class="form-group">
 		<div class="col-xs-3">
 			<ul class="nav nav-tabs tabs-left">
-			  <li class="active"><a href="#tab-event-based" data-toggle="tab">Event based</a></li>
-			  <li><a href="#tab-periodically" data-toggle="tab">Periodically</a></li>
+			  <li class="<?php if ($tableActive == 1) echo 'active'; ?>"><a href="#tab-event-based" data-toggle="tab">Event based</a></li>
+			  <li class="<?php if ($tableActive == 2) echo 'active'; ?>"><a href="#tab-periodically" data-toggle="tab">Periodically</a></li>
 			</ul>
 		</div>
 
 		<div class="col-xs-9">
 			<!-- Tab panes -->
 			<div class="tab-content">
-				<div class="tab-pane active" id="tab-event-based">
+				<div class="tab-pane <?php if ($tableActive == 1) echo 'active'; ?>" id="tab-event-based">
                     <?php
                         echo $form->field($model, 'event', [
                                 'selectors' => ['input' => '#which-event']
@@ -94,25 +96,17 @@ $this->registerJsFile('/web/js/switch_schedules.js', ['depends' => [app\assets\A
                             ]);
                     ?>
                     
-                    <?php 
-                        echo $form->field($model, 'at_hour', [
-                                'template' => "<div class='col-md-3'>{label}</div><div class='col-md-6'>{input}</div>\n{hint}\n{error}",
-                            ])
-                            ->dropDownList(
-                                $model->hour_list   
-                            );
-                    ?>
-                    <?php 
-                        echo $form->field($model, 'at_minute', [
-                                'template' => "<div class='col-md-3'>{label}</div><div class='col-md-6'>{input}</div>\n{hint}\n{error}",
-                            ])
-                            ->dropDownList(
-                                $model->minute_list        
-                            );
-                    ?>
+                    <div class="form-group field-checklistschedule-at_time">
+                        <label class="control-label" for="checklistschedule-at_time">At</label>
+                        <?= Html::activeDropDownList($model, 'at_hour',
+                                $model->hour_list) ?>
+
+                        <?= Html::activeDropDownList($model, 'at_minute',
+                                $model->minute_list) ?>
+                    </div>
 
 				</div>
-				<div class="tab-pane" id="tab-periodically">
+				<div class="tab-pane <?php if ($tableActive == 2) echo 'active'; ?>" id="tab-periodically">
 					<div class="cron-select"></div>
 				</div>
 			</div>

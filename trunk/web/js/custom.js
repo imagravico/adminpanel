@@ -226,17 +226,65 @@ var Action = function() {
 
 		body.on('click', '#list-mschedules .btn-edit-mschedule', function (e) {
 			to = $(this).data('to');
+			// load former data
+			update = $($(this).data('update'));
+			postData($(this).data('load'), '', update, function () {
+					$('#which-event').depdrop({
+						url: '/messages/getevent',
+						depends: ['relation']
+					});
+					$('#send-on').depdrop({
+						url: '/messages/getsendtype',
+						depends: ['which-event']
+					});
+
+					/* cron select */
+					$('.cron-select').cron({
+						initial: "00 00 * * *",
+					});
+					
+					/* chained select */
+					// $("#series").chained("#mark");
+					$("#model").chained("#series");
+					
+					/*------------------------------------------------
+					 Tab
+					 -------------------------------------------------*/
+
+					$("[href=#tab-periodically]").click(function () {
+						$('#which-event').attr('disabled', 'disabled');
+						$('#send-on').attr('disabled', 'disabled');
+						$('#schedule-type').val(2);
+					});
+
+					$("[href=#tab-event-based]").click(function () {
+						$('#relation').trigger('change');
+						$('#schedule-type').val(1);
+					});
+				});
+		});
+		
+		// add
+		body.on('click', '.btn-add-mschedule', function (e) {
+			to    = '/mschedules/create';
+			form = $('#form-add-message-schedule');
+
+		    form.find('input:text, input:password, input:file, select').val('');
+		    form.find('input:radio, input:checkbox')
+		         .removeAttr('checked').removeAttr('selected');
+		    form.find('select#messageschedule-at_hour').val('00');
+		    form.find('select#messageschedule-at_minute').val('00');
+		    form.find('.cron-select select').val('day');
+		    form.find('select.cron-time-hour').val('00');
+		    form.find('select.cron-time-min').val('00');
 		});
 
-		add.click(function () {
-			to = '/mschedules/create';
-		})
 		// delete
 		body.on('click', '#list-mschedules .btn-del-mschedule', function (e) {
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
-				postData($(this).data('to'), {}, update, function () {
+				postData($(this).data('to'), {}, $('#list-mschedules'), function () {
 				});
 			}
 		});
@@ -245,9 +293,10 @@ var Action = function() {
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			form = $('#form-add-message-schedule');
+			update = $(form.data('update'));
+
 			postData(to, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
-					form.trigger("reset");
 					form.yiiActiveForm('resetForm');
 				});
 		});
@@ -258,8 +307,65 @@ var Action = function() {
 			update = $(form.data('update')),
 			to    = '/cschedules/create';
 
+		// edit
 		body.on('click', '#list-cschedules .btn-edit-cschedules', function (e) {
 			to = $(this).data('to');
+
+			// load former data
+			update = $($(this).data('update'));
+			postData($(this).data('load'), '', update, function () {
+					$('#which-event').depdrop({
+						url: '/messages/getevent',
+						depends: ['relation']
+					});
+					$('#send-on').depdrop({
+						url: '/messages/getsendtype',
+						depends: ['which-event']
+					});
+
+					$('#form-add-checklists-schedule .textarea-editor').wysihtml5();
+
+					// 
+					/* cron select */
+					$('.cron-select').cron({
+						initial: "00 00 * * *",
+					});
+					
+					/* chained select */
+					// $("#series").chained("#mark");
+					$("#model").chained("#series");
+					
+					/*------------------------------------------------
+					 Tab
+					 -------------------------------------------------*/
+
+					$("[href=#tab-periodically]").click(function () {
+						$('#which-event').attr('disabled', 'disabled');
+						$('#send-on').attr('disabled', 'disabled');
+						$('#schedule-type').val(2);
+					});
+
+					$("[href=#tab-event-based]").click(function () {
+						$('#relation').trigger('change');
+						$('#schedule-type').val(1);
+					});
+				});
+		});
+		
+		// add
+		body.on('click', '#add-cschedule-btn', function (e) {
+			to    = '/cschedules/create';
+			form = $('#form-add-checklists-schedule');
+
+			form.find('textarea').data("wysihtml5").editor.setValue('');	
+		    form.find('input:text, input:password, input:file, select').val('');
+		    form.find('input:radio, input:checkbox')
+		         .removeAttr('checked').removeAttr('selected');
+		    form.find('select#checklistschedule-at_hour').val('00');
+		    form.find('select#checklistschedule-at_minute').val('00');
+		    form.find('.cron-select select').val('day');
+		    form.find('select.cron-time-hour').val('00');
+		    form.find('select.cron-time-min').val('00');
 		});
 
 		// delete
@@ -267,17 +373,18 @@ var Action = function() {
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
-				postData($(this).data('to'), {}, update, function () {
+				postData($(this).data('to'), {}, $('#list-cschedules'), function () {
 				});
 			}
 		});
 
-		form.submit(function (e) {
+		body.on('submit', form.selector, function (e) {
+			var form = $('#form-add-checklists-schedule'),
+			update = $(form.data('update'));
 			e.preventDefault();
 			e.stopImmediatePropagation();
 			postData(to, form.serializeArray(), update, function () {
 					form.find('.btn-close').trigger('click');
-					form.trigger("reset");
 					form.yiiActiveForm('resetForm');
 				});
 		});
