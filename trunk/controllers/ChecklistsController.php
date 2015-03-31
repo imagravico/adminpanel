@@ -38,7 +38,6 @@ class ChecklistsController extends \yii\web\Controller
     {
     	$checklists = Checklist::find()
     				->all();
-
         return $this->render('index', ['checklists' => $checklists]);
     }
 

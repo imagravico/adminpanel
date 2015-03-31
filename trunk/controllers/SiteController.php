@@ -13,6 +13,18 @@ class SiteController extends Controller
 {
     public $layout = 'login';
 
+    /**
+     * inhericdoc
+     */
+    public function actions()
+    {
+        return [
+            'error' => [
+                'class' => 'yii\web\ErrorAction',
+            ],
+        ];
+    }
+
     public function actionIndex()
     {
         if (!Yii::$app->user->isGuest) {
@@ -23,6 +35,9 @@ class SiteController extends Controller
 
     public function actionLogin()
     {
+        // reassign layout for login action
+        $this->layout = 'login';
+
         if (!\Yii::$app->user->isGuest) {
             return $this->redirect(['/dashboard']);
         }
@@ -43,10 +58,4 @@ class SiteController extends Controller
         Yii::$app->user->logout();
         return $this->redirect(['/site/login']);
     }
-
-    public function actionError()
-    {
-
-    }
-    
 }
