@@ -41,9 +41,7 @@ class MCSettingsController extends \yii\web\Controller
 			array_push($settings, Yii::$app->request->post($model));
 
 		$session->set($session_name, $settings);
-
-
-
+		echo "<pre>"; var_dump($session->get('csetting')); echo "<br/>"; die('123');
 	}
 
 	/**
@@ -72,7 +70,8 @@ class MCSettingsController extends \yii\web\Controller
 			$csetting_session = $this->array_recursive_diff($csetting_session, $csetting_post, $field);
 			$session->set($session_name, $csetting_session);
 		}
-
+		echo "<pre>"; var_dump($session->get('csetting')); echo "<br/>"; die('123');
+		
 	}
 
 	public function array_recursive_diff($arr_1, $arr_2, $offset) 

@@ -137,7 +137,7 @@ class Client extends \yii\db\ActiveRecord
         // MCSetting::saveSettingsChanged($csetting_session, new Csetting, $this->id);
         
         $csetting = new Csetting();
-        $msetting->saveSettingsChanged($msetting_session, $csetting, $this->id);
+        $csetting->saveSettingsChanged($csetting_session, $csetting, $this->id);
 
         
         // remove session of message settings after saving to db
