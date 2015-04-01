@@ -4,6 +4,7 @@ use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
 use kartik\mpdf\Pdf;
+use app\models\ChecklistsTimeSent;
 
 /**
  * This is the model class for table "checklists_cow".
@@ -76,9 +77,10 @@ class ChecklistsCow extends \yii\db\ActiveRecord
      */
     public function beforeSave($insert) 
     {
-        // remove old file
-        if ($this->file_name
-            && file_exists(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name)
+        // remove old file in the case it isn't new one..
+        if (!$this->isNewRecord
+                && $this->file_name
+                && file_exists(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name)
             )
         {
             unlink(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name);
@@ -89,7 +91,19 @@ class ChecklistsCow extends \yii\db\ActiveRecord
         if ($this->content)
             $this->makePdf($this->file_name);
 
+        // assign users_id field to current user
+        $this->users_id = Yii::$app->user->id;
+
         return parent::beforeSave($insert);
+    }
+
+    /**
+     * establish 1-n relationship between this model and checklist model
+     * @return [type] [description]
+     */
+    public function getChecklist()
+    {
+        return $this->hasOne(Checklist::className(), ['id' => 'checklists_id']);
     }
 
     /**
@@ -130,4 +144,26 @@ class ChecklistsCow extends \yii\db\ActiveRecord
         return $pdf->render();
     }
 
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'users_id']);
+    }
+
+    /**
+     * get latest time sending of checklist for client or website
+     * @param integer $belong_to 
+     * @param integer $cowid
+     * @return mix
+     */
+    public function getTimeSent($belong_to, $cowid)
+    {
+        return ChecklistsTimeSent::find()
+            ->where([
+                    'belong_to'          => $belong_to, 
+                    'clients_or_webs_id' => $cowid, 
+                    'checklists_id'      => $this->id 
+                ])
+            ->one();
+    }
+    
 }

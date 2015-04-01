@@ -7,7 +7,7 @@ class m150319_044114_move_file_name_in_checklist_table_to_checklists_cow extends
 {
     public function up()
     {
-    	//$this->dropColumn('checklists', 'file_name');
+    	$this->dropColumn('checklists', 'file_name');
     	$this->addColumn('checklists_cow', 'file_name', Schema::TYPE_STRING);
     }
 

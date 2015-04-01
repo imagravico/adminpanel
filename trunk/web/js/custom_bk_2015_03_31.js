@@ -464,77 +464,39 @@ var Action = function() {
 
 	var actionChecklist = function () {
 		// define
-		var editBtn       = $('.btn-edit-checklist'),
-			getTemplate  = '/checklists/get-template',
-			getContentCl = '/checklists/getcontent',
+		var edit       = $('.btn-edit-checklist'),
+			get        = '/checklists/getcontent',
 			update     = $('#InputsWrapper'),
-			editChange = $('.save-checklist'),
+			saveChange = $('.save-checklist'),
 			post       = '/checklists/savecontent',
 			sendMail   = $('#sendmail-form'),
-			addBtn     = $('#choose-checklists .btn-pop-add-checklist'),
-			addForm    = $('.btn-add-checklist'),
-			ajaxCreate = '/checklists/ajax-create',
-			idClCow,
-			// checklist id
 			id;
 
-		// make a new checklist based on existing template in items checklist section
-		addBtn.click(function (e) 
+		// edit
+		body.on('click', '#checklist .btn-edit-checklist, #choose-checklists .btn-edit-checklist', function (e) 
 		{
-			id = $(this).data('checklistId');
-			var data = {'id': id};
+			var belongTo = $(this).data('belongTo'),
+				cowid = $(this).data('cowid');
+
+				id = $(this).data('checklistId');
+			var data = {'id': id, 'belong_to': belongTo, 'cowid': cowid};
 				
-			postData(getTemplate, data, $('#InputsWrapperAdd'), function () {
+			postData(get, data, update, function () {
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 			});
 		});
 
-		addForm.click(function () {
-			var data = {
-				'id': id, 
-				'belong_to': $(this).data('belongTo'), 
-				'cowid': $(this).data('cowid'),
-				'content': $('#InputsWrapperAdd').html()
-			}
-
-			postData(ajaxCreate, data, '', function () {
-				location.reload();
-			})
-
-		});
-
-		// edit a checklist 
-		editBtn.click(function () {
-			idClCow = $(this).data('clcowId');
-			var data = {'id': idClCow};
-				
-			postData(getContentCl, data, $('#InputsWrapperEdit'), function () {
-				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
-			});
-		});
-
-		// save alteration of checklist
-		editChange.click(function () {
-			$('#InputsWrapperEdit').find('.editable-popup').remove();
-			var data = {
-					'id': idClCow, 
-					'content': $('#InputsWrapperEdit').html(), 
-				};
-
-			postData(post, data, '', function () {
-				$('.btn-cl-close').trigger('click');
-				location.reload();
-			});
-		})
-
-		// delete a checklist item 
+		// delete
 		body.on('click', '#checklist .btn-del-checklist', function (e) 
 		{
+			var update   = $('#cl-list'),
+				belongTo = $(this).data('belongTo'),
+				cowid = $(this).data('cowid');
+
 			e.preventDefault();
 			if (confirm('Are you sure to delete it?')) 
 			{
-				postData($(this).data('to'), {}, '', function () {
-					location.reload();
+				postData($(this).data('to'), {'belong_to': belongTo, 'cowid': cowid}, update, function () {
 				});
 			}
 		});
@@ -550,7 +512,6 @@ var Action = function() {
 			sendMail.find('#belong_to').val(belongTo);
 
 		});
-
 		// send email to client
 		sendMail.submit(function (e) {
 			e.preventDefault();
@@ -566,8 +527,20 @@ var Action = function() {
 				// location.reload();
 			});
 		});
-
-		
+		// save alteration of checklist
+		saveChange.click(function () {
+			update.find('.editable-popup').remove();
+			var data = {
+					'id': id, 
+					'content': update.html(), 
+					'belong_to': $(this).data('belongTo'),
+					'cowid': $(this).data('cowid')
+				};
+			postData(post, data, '', function () {
+				$('.btn-cl-close').trigger('click');
+				location.reload();
+			});
+		})
 	}
 
 	var actionFilter = function () {

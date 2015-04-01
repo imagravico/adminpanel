@@ -5,8 +5,6 @@ namespace app\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\Expression;
-use kartik\mpdf\Pdf;
-use app\models\ChecklistsTimeSent;
 
 /**
  * This is the model class for table "checklists".
@@ -86,15 +84,6 @@ class Checklist extends \yii\db\ActiveRecord
             $this->content = $session->get('checklists_content');
         }
 
-        // remove old file
-        // if ($this->file_name)
-            // unlink(Yii::$app->basePath . '/web/upload/pdf/' . $this->file_name);
-
-        // $this->file_name = md5(time()) . '.pdf';
-        // make a pdf file
-        // if ($this->content)
-        //     $this->makePdf($this->file_name);
-
         // assigning id of current user to users_id field
         $this->users_id = Yii::$app->user->id;
         
@@ -154,20 +143,5 @@ class Checklist extends \yii\db\ActiveRecord
             
         return $checklists;
     }
-    /**
-     * get latest time sending of checklist for client or website
-     * @param integer $belong_to 
-     * @param integer $cowid
-     * @return mix
-     */
-    public function getTimeSent($belong_to, $cowid)
-    {
-        return ChecklistsTimeSent::find()
-            ->where([
-                    'belong_to' => $belong_to, 
-                    'clients_or_webs_id' => $cowid, 
-                    'checklists_id' => $this->id 
-                ])
-            ->one();
-    }
+    
 }

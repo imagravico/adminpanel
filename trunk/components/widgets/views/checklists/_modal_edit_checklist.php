@@ -13,14 +13,14 @@
                 <div class="checklist-content form-horizontal form-bordered">
                     
                     <div class="form-group">
-                        <div id="InputsWrapper">
+                        <div id="InputsWrapperEdit">
                             
                         </div>
                     </div>  
                     <div class="form-group form-actions">
                         <div class="col-xs-12 text-right">
                             <button type="button" class="btn btn-sm btn-default btn-cl-close" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-sm btn-primary save-checklist" data-belong-to="<?php echo $belong_to; ?>" data-cowid="<?php echo \Yii::$app->request->get('id'); ?>">Save Changes</button>
+                            <button type="button" class="btn btn-sm btn-primary save-checklist" >Save Changes</button>
                         </div>
                     </div>
                 </div>

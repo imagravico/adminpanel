@@ -86,26 +86,12 @@ class ChecklistsController extends \yii\web\Controller
      */
     public function actionDelete($id)
     {
-        $post = Yii::$app->request->post();
-
-        ChecklistsCow::find()
-                ->where([
-                        'checklists_id'      => $id,
-                        'belong_to'          => $post['belong_to'],
-                        'clients_or_webs_id' => $post['cowid']
-                    ])
-                ->one()
-                ->delete();
+        ChecklistsCow::findOne($id)->delete();
 
         Yii::$app->response->format = 'json';
-        $checklists = Checklist::find()->orderBy('id DESC')->all();
-
         return [
-            'errors' => '',
-            'data'   => $this->renderPartial('@widget/views/checklists/_list', [
-                'checklists'  => $checklists,
-                'belong_to'   => $post['belong_to']
-            ])
+                'errors' => '',
+                'data'   => ''
         ];
     }
     /**
@@ -223,34 +209,31 @@ class ChecklistsController extends \yii\web\Controller
         }
     }
 
+    public function actionGetTemplate()
+    {
+        $id = Yii::$app->request->post('id');
+
+        if ($id)
+        {
+            $checklist = Checklist::findOne($id);
+            
+            Yii::$app->response->format = 'json';
+            return  ['errors' => '', 'data' => $checklist->content];
+        }
+    }
+
     /**
      * get template of checklist for each client or website
      * @return json content of template 
      */
     public function actionGetcontent() 
     {
-        $post      = Yii::$app->request->post();
-        $id        = $post['id'];
-        $belong_to = $post['belong_to'];
-        $cowid     = $post['cowid'];
+        $post = Yii::$app->request->post();
+        $id   = $post['id'];
 
-        if ($id
-            && $belong_to
-            && $cowid 
-            ) 
+        if ($id) 
         {
-            // if this checklist have been made for this client then using content of making 
-            // checklist else using template of the checklist
-            $checklistCow = ChecklistsCow::find()
-                ->where([
-                        'checklists_id'      => $id,
-                        'belong_to'          => $belong_to,
-                        'clients_or_webs_id' => $cowid
-                    ])
-                ->one();
-
-            if (!$checklistCow) 
-                $checklistCow = Checklist::findOne($id);
+            $checklistCow = ChecklistsCow::findOne($id);
 
             Yii::$app->response->format = 'json';
             return  ['errors' => '', 'data' => $checklistCow->content];
@@ -258,12 +241,13 @@ class ChecklistsController extends \yii\web\Controller
     }
 
     /**
-     * save template of checklist along with some information to db
-     * @return json content checklist
+     * using in the ajax submiting case, when click on a checklist in checklists dropdown
+     * then a popup will be shown and then click on "Save Changes" button this function 
+     * will be called
      */
-    public function actionSavecontent() 
+    public function actionAjaxCreate()
     {
-        $post      = Yii::$app->request->post();
+        $post = Yii::$app->request->post();
         $id        = $post['id'];
         $cowid     = $post['cowid'];
         $content   = $post['content'];
@@ -275,31 +259,38 @@ class ChecklistsController extends \yii\web\Controller
             && $belong_to
             ) 
         {
-            $checklistCow = ChecklistsCow::find()
-                    ->where([
-                            'checklists_id' => $id,
-                            'clients_or_webs_id' => $cowid,
-                            'belong_to' => $belong_to
-                        ])
-                    ->one();
+            $checklistCow                     = new ChecklistsCow();
+            $checklistCow->content            = $content;
+            $checklistCow->checklists_id      = $id;
+            $checklistCow->belong_to          = $belong_to;
+            $checklistCow->clients_or_webs_id = $cowid;
 
-            if (!$checklistCow)
-            {
-                $checklistCow = new ChecklistsCow();
-                $checklistCow->checklists_id = $id;
-                $checklistCow->belong_to = $belong_to;
-                $checklistCow->content = $content;
-                $checklistCow->clients_or_webs_id = $cowid;
-            }
-            else
-            {
-                $checklistCow->content = $content;
-            }
+            $checklistCow->save();
+            
+            Yii::$app->response->format = 'json';
+            return  ['errors' => '', 'data' => ''];
+        }
+    }
+    
+    /**
+     * save template of checklist along with some information to db
+     * @return json content checklist
+     */
+    public function actionSavecontent() 
+    {
+        $post      = Yii::$app->request->post();
+        $id        = $post['id'];
+        $content   = $post['content'];
+
+        if ($id && $content) 
+        {
+            $checklistCow = ChecklistsCow::findOne($id);
+            $checklistCow->content = $content;
 
             // save whole change to db
             if ($checklistCow->save()) {
                 Yii::$app->response->format = 'json';
-                return  ['errors' => '', 'data' => $checklistCow->content];
+                return  ['errors' => '', 'data' => ''];
             }
         }
         return;
