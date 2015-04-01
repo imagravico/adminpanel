@@ -18,18 +18,18 @@ class MCSetting extends \yii\db\ActiveRecord
             $one_time = FALSE;
             foreach ($settings as $key => $value) {
             	if (isset($value['checklists_id'])) {
-            		$setting              = new Csetting;
+            		$setting = new Csetting;
                 	$setting->checklists_id = $value['checklists_id'];
             	}
             	elseif (isset($value['messages_id'])) {
-            		$setting             = new Msetting;
+            		$setting = new Msetting;
                 	$setting->messages_id = $value['messages_id'];
             	}
                 
                 $setting->belong_to   = $value['belong_to'];
                 $setting->clients_or_webs_id = $id;
 
-                // remove all current settingss only one time by $one_time flag
+                // remove all current settings only one time by $one_time flag
                 if (!$one_time)
                     $model->deleteAll(['clients_or_webs_id' => $setting->clients_or_webs_id, 'belong_to' => $setting->belong_to]);
 

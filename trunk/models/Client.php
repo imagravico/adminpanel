@@ -170,7 +170,7 @@ class Client extends \yii\db\ActiveRecord
         $id_param = Yii::$app->request->get('id');
         if (isset($id_param)) {
             Msetting::getCurrentMSettings(1, $this->id);
-            // Csetting::getCurrentCSettings(1, $this->id);
+            Csetting::getCurrentCSettings(1, $this->id);
         }
         
         // get filter_field

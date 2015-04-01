@@ -59,12 +59,16 @@ class Csetting extends MCSetting
         $session = Yii::$app->session;
 
         $csettings = self::find()
-                    ->where(['belong_to' => $belong_to, 'clients_or_webs_id' => $id])
-                    ->all();
+                ->where(['belong_to' => $belong_to, 'clients_or_webs_id' => $id])
+                ->all();
+
         $csetting_default = $session->get('csetting_default');
-        if (!empty($csettings) && empty($csetting_default)) {
+        
+        if (!empty($csettings) && empty($csetting_default)) 
+        {
             $tmp = [];
-            foreach ($csettings as $key => $csetting) {
+            foreach ($csettings as $key => $csetting) 
+            {
                 array_push($tmp, ['checklists_id' => $csetting->checklists_id, 'belong_to' => $csetting->belong_to]);
             }
             // remove session of message settings after assigning a new one

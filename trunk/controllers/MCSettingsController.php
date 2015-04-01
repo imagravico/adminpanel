@@ -37,11 +37,14 @@ class MCSettingsController extends \yii\web\Controller
 		
 		$csetting_post = Yii::$app->request->post($model);
 
-		if (!empty($csetting_post) && !$this->in_array_r($csetting_post[$field], $settings)) 
+		if (!empty($csetting_post) 
+				&& !$this->in_array_r($csetting_post[$field], $settings)
+			)
+		{
 			array_push($settings, Yii::$app->request->post($model));
-
+		} 
+			
 		$session->set($session_name, $settings);
-		echo "<pre>"; var_dump($session->get('csetting')); echo "<br/>"; die('123');
 	}
 
 	/**
@@ -66,12 +69,14 @@ class MCSettingsController extends \yii\web\Controller
 		$csetting_post    = Yii::$app->request->post($model);
 		$csetting_session = $session->get($session_name);
 
-		if (!empty($csetting_post) && !empty($csetting_session) && $this->in_array_r($csetting_post[$field], $csetting_session)) {
+		if (!empty($csetting_post) 
+				&& !empty($csetting_session) 
+				&& $this->in_array_r($csetting_post[$field], $csetting_session)
+			) 
+		{
 			$csetting_session = $this->array_recursive_diff($csetting_session, $csetting_post, $field);
 			$session->set($session_name, $csetting_session);
 		}
-		echo "<pre>"; var_dump($session->get('csetting')); echo "<br/>"; die('123');
-		
 	}
 
 	public function array_recursive_diff($arr_1, $arr_2, $offset) 
@@ -88,8 +93,13 @@ class MCSettingsController extends \yii\web\Controller
 
 	public function in_array_r($needle, $haystack, $strict = false) 
 	{
-		foreach ($haystack as $item) {
-	        if (($strict ? $item === $needle : $item == $needle) || (is_array($item) && $this->in_array_r($needle, $item, $strict))) {
+		foreach ($haystack as $item) 
+		{
+	        if (($strict ? $item === $needle : $item == $needle) 
+	        		|| (is_array($item) 
+	        		&& $this->in_array_r($needle, $item, $strict))
+	        	) 
+	        {
 	            return true;
 	        }
 	    }
