@@ -155,15 +155,9 @@ class ChecklistsCow extends \yii\db\ActiveRecord
      * @param integer $cowid
      * @return mix
      */
-    public function getTimeSent($belong_to, $cowid)
+    public function getTimesent()
     {
-        return ChecklistsTimeSent::find()
-            ->where([
-                    'belong_to'          => $belong_to, 
-                    'clients_or_webs_id' => $cowid, 
-                    'checklists_id'      => $this->id 
-                ])
-            ->one();
+        return $this->hasOne(ChecklistsTimeSent::className(), ['checklists_cow_id' => 'id']);
     }
     
 }

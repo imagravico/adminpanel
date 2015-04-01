@@ -102,34 +102,29 @@ class ChecklistsController extends \yii\web\Controller
     {
         $post = Yii::$app->request->post('SendmailForm');
         Yii::$app->response->format = 'json';
+
         $sm_form = new SendmailForm();
 
         if ($sm_form->load(Yii::$app->request->post()) && $sm_form->validate()) {
 
-            if ($post['belong_to'] == 1) {
-                $cow = Client::findOne($post['cowid']);
+            $checklistCow = ChecklistsCow::findOne($post['checklists_cow_id']);
+
+            if ($checklistCow->belong_to == 1) {
+                $cow = Client::findOne($checklistCow->clients_or_webs_id);
                 $email = $cow->email;
             }
-            elseif ($post['belong_to'] == 2) {
-                $cow = Website::findOne($post['cowid']);
+            elseif ($checklistCow->belong_to == 2) {
+                $cow = Website::findOne($checklistCow->clients_or_webs_id);
                 $email = $cow->client->email;
             }
 
-            $checklistCow = ChecklistsCow::find()
-                    ->where([
-                            'belong_to'          => $post['belong_to'],
-                            'checklists_id'      => $post['checklists_id'],
-                            'clients_or_webs_id' => $post['cowid']
-                        ])
-                    ->one();
+            
 
             // save time sending
             // checking if time sending is exist then only update else create new one
             $timeSent = ChecklistsTimeSent::find()
                 ->where([
-                        'belong_to'          => $post['belong_to'],
-                        'checklists_id'      => $post['checklists_id'],
-                        'clients_or_webs_id' => $post['cowid']
+                        'checklists_cow_id' => $post['checklists_cow_id']
                     ])
                 ->one();
 
@@ -138,9 +133,7 @@ class ChecklistsController extends \yii\web\Controller
                 $timeSent =  new ChecklistsTimeSent();
             }
             
-            $timeSent->checklists_id      = $post['checklists_id'];
-            $timeSent->clients_or_webs_id = $post['cowid'];
-            $timeSent->belong_to          = $post['belong_to'];
+            $timeSent->checklists_cow_id = $post['checklists_cow_id'];
             $timeSent->time_sent = date('Y-m-d H:i:s');
             $timeSent->save();
 
@@ -164,15 +157,9 @@ class ChecklistsController extends \yii\web\Controller
      * @param  integer $id of checklist
      * @return void
      */
-    public function actionDownload($id, $belong_to, $cowid)
+    public function actionDownload($id)
     {
-        $checklistCow = ChecklistsCow::find()
-                ->where([
-                        'checklists_id'      => $id,
-                        'belong_to'          => $belong_to,
-                        'clients_or_webs_id' => $cowid
-                    ])
-                ->one();
+        $checklistCow = ChecklistsCow::findOne($id);
         if ($checklistCow)
         {
             $path_file = Yii::$app->basePath . '/web/upload/pdf/' . $checklistCow->file_name;

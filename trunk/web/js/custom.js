@@ -542,13 +542,8 @@ var Action = function() {
 		// send email
 		body.on('click', '.btn-send-email', function (e) 
 		{
-			var idCls   = $(this).data('checklistId'),
-				belongTo = $(this).data('belongTo');
-
-			// assign idCls to cowid
-			sendMail.find('#checklists_id').val(idCls);
-			sendMail.find('#belong_to').val(belongTo);
-
+			idClCow = $(this).data('clcowId');
+			sendMail.find('#checklists_cow_id').val(idClCow);
 		});
 
 		// send email to client
@@ -563,11 +558,9 @@ var Action = function() {
 				$('.btn-cl-close').trigger('click');
 				sendMail.trigger("reset");
 				sendMail.yiiActiveForm('resetForm');
-				// location.reload();
+				location.reload();
 			});
 		});
-
-		
 	}
 
 	var actionFilter = function () {

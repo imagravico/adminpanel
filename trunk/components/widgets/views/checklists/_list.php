@@ -26,11 +26,10 @@ use app\models\ChecklistsCow;
                     <span class="badge"><i class="fa fa-clock-o"></i> Created: <?= date('j. F Y', strtotime($clcow->created_at)) ?></span>
                     <span class="badge"><i class="fa fa-user"></i> By: <?php echo $clcow->user->fullname; ?></span>
                     <?php 
-                        $timeSent = $clcow->getTimeSent($belong_to, $cowid);
-                        if ($timeSent) 
+                        if ($clcow->timesent) 
                         {
                     ?>
-                            <span class="badge"><i class="fa fa-envelope"></i> E-Mail: <?= date('j. F Y', strtotime($timeSent->time_sent)) ?></span>
+                            <span class="badge"><i class="fa fa-envelope"></i> E-Mail: <?= date('j. F Y', strtotime($clcow->timesent->time_sent)) ?></span>
                     <?php
                         }
                     ?>
@@ -40,8 +39,8 @@ use app\models\ChecklistsCow;
            
             <td class="text-right">
 				<div class="checklist-buttons">
-                    <a data-toggle="modal" href="#modal-send-email-edit" class="btn btn-xs btn-default btn-send-email" data-belong-to=<?= $belong_to ?>><i class="fa fa-mail-forward"></i> Send to Client</a>
-                    <a href="/checklists/download" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
+                    <a data-toggle="modal" href="#modal-send-email-edit" class="btn btn-xs btn-default btn-send-email" data-clcow-id="<?php echo $clcow->id ?>"><i class="fa fa-mail-forward"></i> Send to Client</a>
+                    <a href="/checklists/download/<?php echo $clcow->id ?>" class="btn btn-xs btn-default"><i class="fa fa-download"></i> Download</a>
                     <a data-toggle="modal" href="javascript:void(0)" class="btn btn-xs btn-default btn-del-checklist" data-to="/checklists/delete/<?php echo $clcow->id?>"><i class="fa fa-times"></i> Delete</a>                   
 					<a data-toggle="modal" href="#modal-checklist-edit" class="btn btn-xs btn-default btn-edit-checklist" data-clcow-id="<?php echo $clcow->id ?>"  data-belong-to=<?= $belong_to ?> data-cowid="<?php echo  \Yii::$app->request->get('id'); ?>"><i class="fa fa-pencil"></i> Edit</a>
 				</div>

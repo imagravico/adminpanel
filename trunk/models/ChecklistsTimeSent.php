@@ -29,8 +29,8 @@ class ChecklistsTimeSent extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['checklists_id', 'belong_to', 'clients_or_webs_id'], 'integer'],
-            [['time_sent', 'checklists_id', 'belong_to', 'clients_or_webs_id'], 'safe']
+            [['checklists_cow_id'], 'integer'],
+            [['time_sent', 'checklists_cow_id',], 'safe']
         ];
     }
 
@@ -41,9 +41,7 @@ class ChecklistsTimeSent extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'checklists_id' => 'Checklists ID',
-            'belong_to' => 'Belong To',
-            'clients_or_webs_id' => 'Clients Or Webs ID',
+            'checklists_cow_id' => 'Checklists ID',
             'time_sent' => 'Time Sent',
         ];
     }

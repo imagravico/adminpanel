@@ -11,9 +11,7 @@ class SendmailForm extends Model
 {
     public $subject;
     public $content;
-    public $checklists_id;
-    public $cowid;
-    public $belong_to;
+    public $checklists_cow_id;
     /**
      * @return array the validation rules.
      */

@@ -50,23 +50,12 @@ use yii\helpers\Html;
                             ->textArea(['rows' => '6', 'class' => 'form-control textarea-editor', 'id' => 'textarea-wysiwyg'])
                         ?>
                         <?php
-                            echo Html::activeHiddenInput($model, 'checklists_id', [
+                            echo Html::activeHiddenInput($model, 'checklists_cow_id', [
                                         'value' => 0,
-                                        'id'    => 'checklists_id'
+                                        'id'    => 'checklists_cow_id'
                                 ]);
                         ?>
-                        <?php
-                            echo Html::activeHiddenInput($model, 'belong_to', [
-                                        'value' => 0,
-                                        'id'    => 'belong_to'
-                                ]);
-                        ?>
-                        <?php
-                            echo Html::activeHiddenInput($model, 'cowid', [
-                                        'value' => $cowid,
-                                        'id'    => 'cowid'
-                                ]);
-                        ?>
+                        
                             <div class="form-group form-actions">
                                 <div class="col-xs-12 text-right">
                                     <button type="button" class="btn btn-sm btn-default btn-cl-close" data-dismiss="modal">Close</button>
