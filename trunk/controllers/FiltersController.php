@@ -77,22 +77,28 @@ class FiltersController extends \yii\web\Controller
 		}
 	}
 
-
+	/**
+	 * filter for group
+	 * @return array json
+	 */
 	public function actionGroup()
     {
         $fil = Yii::$app->request->post()['name'];
 		Yii::$app->response->format = 'json';
 
-        if ($fil) {
-
+        if ($fil && $fil !== 'all') 
+        {
         	$group = Group::find()
         		->where(['name' => trim($fil)])
         		->one();
 
-        	if ($group) {
-        		if (!empty($group->groupsClients)) {
+        	if ($group) 
+        	{
+        		if (!empty($group->groupsClients)) 
+        		{
         			$clients = [];
-        			foreach ($group->groupsClients as $key => $gc) {
+        			foreach ($group->groupsClients as $key => $gc) 
+        			{
         				array_push($clients , $gc->client);
         			}
         			return [
@@ -105,6 +111,15 @@ class FiltersController extends \yii\web\Controller
 				'errors' => '',
 				'data'   => ''
 			];
+        }
+        elseif ($fil && $fil === 'all')
+        {
+        	return [
+					'errors' => '',
+					'data'   => $this->renderPartial('_clients', [
+							'results' => Client::find()->all(),
+						])
+				];
         }   
     }
 }

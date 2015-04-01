@@ -13,7 +13,7 @@ use yii\bootstrap\ActiveForm;
     </div>
     <ul class="nav nav-pills nav-stacked">
         <li class="active">
-            <a href="javascript:void(0)">
+            <a href="javascript:void(0)" class="filter-group" data-name="all" data-update="#clients-list">
             <span class="badge pull-right">
                 <?= array_sum($total);?>
             </span>All</a>
