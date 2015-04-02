@@ -3,6 +3,9 @@ $(document).ready(function () {
 	var MaxInputs = 100; //Maximum input boxes allowed
 				
 	var InputsWrapper = $("#InputsWrapper"); //Input box wrapper ID
+	var InputsWrapperAdd = $("#InputsWrapperAdd"); //Input box wrapper ID
+	var InputsWrapperEdit = $("#InputsWrapperEdit"); //Input box wrapper ID
+
 	var MaxInputsCount = InputsWrapper.length; //Initial field count
                 
 	/*------------------
@@ -20,10 +23,33 @@ $(document).ready(function () {
 	var clTextarea = $('#cl-textarea');
 	var clTextareaCount = 0;
 
+	var clCheckbox = $('#cl-checkbox');
+	var clCheckboxCount = 0;
+
+	var clSwitch = $('#cl-switch');
+	var clSwitchCount = 0;
+
+	var clRating = $('#cl-rating');
+	var clRatingCount = 0;
+
 	var saveCl = $('.save-cl');
 
 	$(InputsWrapper).sortable();  		// to make added fields sortable
-				
+	
+	$(document.body).on('change', '#InputsWrapperAdd input[type=checkbox]', function () {
+		if ($(this).is(':checked'))
+			$(this).attr('checked', 'checked');
+		else
+			$(this).removeAttr('checked');
+	});	
+
+	$(document.body).on('change', '#InputsWrapperEdit input[type=checkbox]', function () {
+		if ($(this).is(':checked'))
+			$(this).attr('checked', 'checked');
+		else
+			$(this).removeAttr('checked');
+	});	
+
 	/*------------------------------------------------
 	Add Title field 
 	-------------------------------------------------*/
@@ -91,12 +117,53 @@ $(document).ready(function () {
 		return false;
 	});
 
+	/*------------------------------------------------
+	Add Checkbox 
+	-------------------------------------------------*/
+	$(clSwitch).click(function () {
+		if(MaxInputsCount <= MaxInputs)
+		{
+			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><label class="switch switch-primary"><input type="checkbox" name=""><span></span></label></div>');
+			returnAccess();
+			
+			clSwitchCount++;
+			MaxInputsCount++;
+		}
+		return false;
+	});
+
+	/*------------------------------------------------
+	Add Rating 
+	-------------------------------------------------*/
+	$(clRating).click(function () {
+		if(MaxInputsCount <= MaxInputs)
+		{
+			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</a></div>');
+			
+			returnAccess();
+			
+			clRatingCount++;
+			MaxInputsCount++;
+		}
+		return false;
+	});
+
 	function returnAccess()
 	{
 		$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
+	    $('.select').editable({
+	        value: 2,    
+	        source: [
+	              {value: 1, text: '1'},
+	              {value: 2, text: '2'},
+	              {value: 3, text: '3'},
+	              {value: 3, text: '4'},
+	              {value: 3, text: '5'}
+	           ]
+	    });
 	}
     
-    // trigger function in the beginning
+    // trigger function at the beginning
     returnAccess();
 
 	/*------------------------------------------------
@@ -139,4 +206,6 @@ $(document).ready(function () {
 
 		})
 	}
+
+
 })

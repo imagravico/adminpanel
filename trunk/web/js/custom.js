@@ -486,6 +486,16 @@ var Action = function() {
 				
 			postData(getTemplate, data, $('#InputsWrapperAdd'), function () {
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
+				$('.select').editable({
+			        value: 2,    
+			        source: [
+			              {value: 1, text: '1'},
+			              {value: 2, text: '2'},
+			              {value: 3, text: '3'},
+			              {value: 3, text: '4'},
+			              {value: 3, text: '5'}
+			           ]
+			    });
 			});
 		});
 
@@ -510,6 +520,16 @@ var Action = function() {
 				
 			postData(getContentCl, data, $('#InputsWrapperEdit'), function () {
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
+				$('.select').editable({
+			        value: 2,    
+			        source: [
+			              {value: 1, text: '1'},
+			              {value: 2, text: '2'},
+			              {value: 3, text: '3'},
+			              {value: 3, text: '4'},
+			              {value: 3, text: '5'}
+			           ]
+			    });
 			});
 		});
 

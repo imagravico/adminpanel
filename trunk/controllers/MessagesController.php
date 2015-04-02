@@ -86,8 +86,7 @@ class MessagesController extends Controller
         $this->findModel($id)->delete();
         MessageSchedule::deleteAll(['messages_id' => $id]);
 
-        echo json_encode(['errors' => '']);
-        exit();
+        return $this->redirect(['/messages']);
     }
 
     public function actionGetevent() 

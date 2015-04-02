@@ -78,6 +78,11 @@ class ChecklistsController extends \yii\web\Controller
         }
     }
 
+    public function actionDeletechecklist($id)
+    {
+        $this->findModel($id)->delete();
+        return $this->redirect(['/checklists']);
+    }
     /**
      * Deletes an existing Message model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
