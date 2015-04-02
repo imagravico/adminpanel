@@ -57,7 +57,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<h1 class="cl-title" data-type="text">Title</h1>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><h1 class="cl-title" data-type="text">Title</h1></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTitleCount++;
@@ -75,7 +75,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<fieldset><h2 class="cl-subtitle" data-type="text">Subtitle</h2></fieldset><a href="#" class="cl-remove-element">x</a>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><fieldset><h2 class="cl-subtitle" data-type="text">Subtitle</h2></fieldset></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clSubtitleCount++;
@@ -92,7 +92,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="text" data-type="text">Type here</a></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="text" data-type="text">Type here</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextCount++;
@@ -108,7 +108,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div>	');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextareaCount++;
@@ -123,7 +123,7 @@ $(document).ready(function () {
 	$(clSwitch).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><label class="switch switch-primary"><input type="checkbox" name=""><span></span></label></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><label class="switch switch-primary"><input type="checkbox" name=""><span></span></label></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clSwitchCount++;
@@ -138,7 +138,7 @@ $(document).ready(function () {
 	$(clRating).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</a></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			
 			returnAccess();
 			
@@ -147,6 +147,23 @@ $(document).ready(function () {
 		}
 		return false;
 	});
+
+	/*------------------------------------------------
+	Add Rating 
+	-------------------------------------------------*/
+	$(clCheckbox).click(function () {
+		if(MaxInputsCount <= MaxInputs)
+		{
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="btn-add-item-checklist">Add checkbox</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			
+			returnAccess();
+			
+			clCheckboxCount++;
+			MaxInputsCount++;
+		}
+		return false;
+	});
+
 
 	function returnAccess()
 	{
@@ -175,8 +192,8 @@ $(document).ready(function () {
 
 		if(confirm('Really remove this element?'))
 		{
-			console.log($(this).closest('fieldset'));
-			$(this).closest('fieldset').remove();
+			console.log();
+			$(this).closest('div.form-group').remove();
 			MaxInputsCount--;
 		}
 
