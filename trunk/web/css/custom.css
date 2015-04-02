@@ -67,3 +67,7 @@ body.loading .modal-loading {
 .help-block {
   padding-bottom: 10px;
 }
+
+.cl-title, .cl-subtitle, .cl-label, .text, .textarea, .select {
+  cursor: pointer;
+}

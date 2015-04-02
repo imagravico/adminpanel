@@ -483,8 +483,16 @@ var Action = function() {
 		{
 			id = $(this).data('checklistId');
 			var data = {'id': id};
-				
 			postData(getTemplate, data, $('#InputsWrapperAdd'), function () {
+				$('#InputsWrapperAdd').find('.cl-remove-element').remove();
+
+				$('.btn-add-item-checklist').click(function () {
+					$( "<div class='col-md-12'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label></div>" ).insertAfter(this);
+
+					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
+
+				});
+
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 				$('.select').editable({
 			        value: 2,    
@@ -500,6 +508,7 @@ var Action = function() {
 		});
 
 		addForm.click(function () {
+			
 			var data = {
 				'id': id, 
 				'belong_to': $(this).data('belongTo'), 
@@ -508,6 +517,7 @@ var Action = function() {
 			}
 
 			postData(ajaxCreate, data, '', function () {
+				$('#InputsWrapperAdd').find('.editable-popup').remove();
 				location.reload();
 			})
 
@@ -519,6 +529,7 @@ var Action = function() {
 			var data = {'id': idClCow};
 				
 			postData(getContentCl, data, $('#InputsWrapperEdit'), function () {
+				// $('#InputsWrapperEdit').find('.cl-remove-element').remove();
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 				$('.select').editable({
 			        value: 2,    
@@ -530,12 +541,21 @@ var Action = function() {
 			              {value: 5, text: '5'}
 			           ]
 			    });
+
+			    $('.btn-add-item-checklist').click(function () {
+					$( "<div class='col-md-12'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label></div>" ).insertAfter(this);
+
+					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
+					
+				});
+				
 			});
 		});
 
 		// save alteration of checklist
 		editChange.click(function () {
 			$('#InputsWrapperEdit').find('.editable-popup').remove();
+			// $('#InputsWrapperEdit').find('.cl-remove-element').remove();
 			var data = {
 					'id': idClCow, 
 					'content': $('#InputsWrapperEdit').html(), 

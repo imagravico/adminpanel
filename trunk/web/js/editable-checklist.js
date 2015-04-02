@@ -92,7 +92,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="text" data-type="text">Type here</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" class="text" data-type="text">Type here</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextCount++;
@@ -108,7 +108,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="textarea" data-type="textarea">Type here</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" class="textarea" data-type="textarea">Type here</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextareaCount++;
@@ -138,7 +138,7 @@ $(document).ready(function () {
 	$(clRating).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			
 			returnAccess();
 			
@@ -209,6 +209,7 @@ $(document).ready(function () {
 
 	function preCl()
 	{
+		// $(InputsWrapper).find('.cl-remove-element').remove();
 		var preCls = $(InputsWrapper).html();
 		$.ajax({
 			url: '/checklists/prechecklist',
