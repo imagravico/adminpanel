@@ -113,6 +113,9 @@ class ChecklistsCow extends \yii\db\ActiveRecord
      */
     public function makePdf($name)
     {
+        // remove some unnecessary tag in html content
+        $content = $this->_filter($this->content);
+
         // setup kartik\mpdf\Pdf component
         $pdf = new Pdf([
             'filename' => Yii::$app->basePath . '/web/upload/pdf/' . $name,
@@ -125,7 +128,7 @@ class ChecklistsCow extends \yii\db\ActiveRecord
             // stream to browser inline
             'destination' => Pdf::DEST_FILE, 
             // your html content input
-            'content' => $this->content,  
+            'content' => $content,  
             // format content from your own css file if needed or use the
             // enhanced bootstrap css built by Krajee for mPDF formatting 
             //'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.css',
@@ -143,6 +146,14 @@ class ChecklistsCow extends \yii\db\ActiveRecord
         
         // return the pdf output as per the destination setting
         return $pdf->render();
+    }
+
+    private function _filter($html)
+    {
+        $html = preg_replace('/<a href="#" class="btn-add-item-checklist">(.*?)<\/a>/', '', $html);
+        $html = preg_replace('/<span style="margin-left:20px;cursor:pointer;" class="rm-item-checkbox-option">(.*?)<\/span>/', '', $html);
+
+        return $html;
     }
 
     public function getUser()

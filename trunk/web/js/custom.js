@@ -462,6 +462,8 @@ var Action = function() {
 		actionMCSwitch({button : button, toAdd: urlAdd, toRe: urlRe, dataOf: dataOf});
 	}
 
+	
+
 	var actionChecklist = function () {
 		// define
 		var editBtn       = $('.btn-edit-checklist'),
@@ -487,7 +489,7 @@ var Action = function() {
 				$('#InputsWrapperAdd').find('.cl-remove-element').remove();
 
 				$('.btn-add-item-checklist').click(function () {
-					$( "<div class='col-md-12'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label></div>" ).insertAfter(this);
+					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
 
 					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 
@@ -504,6 +506,11 @@ var Action = function() {
 			              {value: 5, text: '5'}
 			           ]
 			    });
+
+			    body.on('click', '.item-checkbox-option .rm-item-checkbox-option', function () {
+					$(this).closest('.item-checkbox-option').remove();
+				});
+
 			});
 		});
 
@@ -522,12 +529,12 @@ var Action = function() {
 			})
 
 		});
-
+		
 		// edit a checklist 
 		editBtn.click(function () {
 			idClCow = $(this).data('clcowId');
 			var data = {'id': idClCow};
-				
+			
 			postData(getContentCl, data, $('#InputsWrapperEdit'), function () {
 				// $('#InputsWrapperEdit').find('.cl-remove-element').remove();
 				$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
@@ -541,12 +548,16 @@ var Action = function() {
 			              {value: 5, text: '5'}
 			           ]
 			    });
-
+			    
 			    $('.btn-add-item-checklist').click(function () {
-					$( "<div class='col-md-12'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label></div>" ).insertAfter(this);
+					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
 
 					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 					
+				});
+
+				body.on('click', '.item-checkbox-option .rm-item-checkbox-option', function () {
+					$(this).closest('.item-checkbox-option').remove();
 				});
 				
 			});
