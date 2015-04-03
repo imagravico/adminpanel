@@ -1,34 +1,40 @@
-.switch {
-  margin: 1px 0;
-  position: relative;
-  cursor: pointer;
-  display: inline-block;
-  vertical-align: middle;
-  background-color: red!important;
-  
-}
+@media print {
+  h1  {
+    color: #FF0000!important;
+  }
+  .switch {
+   /* margin: 1px 0;
+    position: relative;
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;*/
+    background-color: #FF0000!important;
+    width: 100px;
+    height: 100px;
+  }
+  .switch input {
+    position: absolute;
+    opacity: 0;
+  }
 
-.switch input {
-  position: absolute;
-  opacity: 0;
-}
+  input[type="checkbox"] {
+    margin: 4px 0 0;
+    line-height: normal;
+  }
 
-input[type="checkbox"] {
-  margin: 4px 0 0;
-  line-height: normal;
-}
+  .switch span {
+    position: relative;
+    display: inline-block;
+    width: 54px;
+    height: 28px;
+    border-radius: 28px;
+    background-color: #f9f9f9;
+    border: 1px solid #dddddd;
+    -webkit-transition: background-color 0.35s;
+    transition: background-color 0.35s;
+  }
+  .switch-primary input:checked + span {
+    background-color: red!important;
+  }
 
-.switch span {
-  position: relative;
-  display: inline-block;
-  width: 54px;
-  height: 28px;
-  border-radius: 28px;
-  background-color: #f9f9f9;
-  border: 1px solid #dddddd;
-  -webkit-transition: background-color 0.35s;
-  transition: background-color 0.35s;
-}
-.switch-primary input:checked + span {
-	background-color: red!important;
 }
