@@ -130,8 +130,16 @@ AppAsset::register($this);
                     <!-- User Info -->
                     <div class="sidebar-section sidebar-user clearfix sidebar-nav-mini-hide">
                         <div class="sidebar-user-avatar">
-                            <a href="page_ready_user_profile.php">
-                                <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                            <a href="#">
+                                <?php 
+                                    if (\Yii::$app->user->id && \Yii::$app->user->identity->avatar) :
+                                ?>
+                                        <img src="/web/upload/avatar/<?= \Yii::$app->user->identity->avatar ?>" alt="avatar">
+                                <?php
+                                    else :
+                                ?>
+                                        <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar">
+                               <?php endif; ?>
                             </a>
                         </div>
                         <div class="sidebar-user-name"><?=  User::getRealName();?></div>
@@ -215,7 +223,15 @@ AppAsset::register($this);
                     <!-- User Dropdown -->
                     <li class="dropdown">
                         <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar"> <i class="fa fa-angle-down"></i>
+                        <?php 
+                            if (\Yii::$app->user->id && \Yii::$app->user->identity->avatar) :
+                        ?>
+                                <img src="/web/upload/avatar/<?= \Yii::$app->user->identity->avatar ?>" alt="avatar"><i class="fa fa-angle-down"></i>
+                        <?php
+                            else :
+                        ?>
+                                <img src="/web/backend/img/placeholders/avatars/avatar2.jpg" alt="avatar"><i class="fa fa-angle-down"></i>
+                       <?php endif; ?>
                         </a>
                         <ul class="dropdown-menu dropdown-custom dropdown-menu-right">
                             <li>
