@@ -489,7 +489,7 @@ var Action = function() {
 				$('#InputsWrapperAdd').find('.cl-remove-element').remove();
 
 				$('.btn-add-item-checklist').click(function () {
-					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
+					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <span class='cl-label' data-type='text' style='margin-left:20px;display: inline-block;'>Type here</span><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
 
 					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 
@@ -550,7 +550,7 @@ var Action = function() {
 			    });
 			    
 			    $('.btn-add-item-checklist').click(function () {
-					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <label class='cl-label' data-type='text' style='margin-left:20px;'>Type here</label><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
+					$( "<div class='col-md-12 item-checkbox-option'><input type='checkbox' /> <span class='cl-label' data-type='text' style='margin-left:20px;display:inline-block;'>Type here</span><span style='margin-left:20px;cursor:pointer;' class='rm-item-checkbox-option'>x</span></div>" ).insertAfter(this);
 
 					$('.cl-title, .cl-subtitle, .cl-label, .text, .textarea').editable();
 					

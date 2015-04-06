@@ -92,7 +92,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" class="text" data-type="text">Type here</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><p class="cl-label" data-type="text" style="margin-right:20px;display: inline-block;">Text</p><p href="#" style="display: inline-block;" class="text" data-type="text">Type here</p></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextCount++;
@@ -108,7 +108,7 @@ $(document).ready(function () {
 	{
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" class="textarea" data-type="textarea">Type here</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><p class="cl-label" data-type="text" style="margin-right:20px;display: inline-block;">Text</p><p href="#" class="textarea" data-type="textarea" style="display: inline-block;">Type here</p></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clTextareaCount++;
@@ -123,7 +123,7 @@ $(document).ready(function () {
 	$(clSwitch).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><label class="switch switch-primary"><input type="checkbox" name=""><span></span></label></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9 switch-box"><p class="cl-label" data-type="text" style="margin-right:20px;display: inline-block;">Text</p><label class="switch switch-primary"><input type="checkbox" name=""><span></span></label></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			returnAccess();
 			
 			clSwitchCount++;
@@ -138,7 +138,7 @@ $(document).ready(function () {
 	$(clRating).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><span href="#" data-type="select" data-title="Select Rating" class="select">Select Rating</span></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><p class="cl-label" data-type="text" style="margin-right:20px;display: inline-block">Text</p><p href="#" data-type="select" data-title="Select Rating" class="select" style="display: inline-block;">Select Rating</p></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			
 			returnAccess();
 			
@@ -154,7 +154,7 @@ $(document).ready(function () {
 	$(clCheckbox).click(function () {
 		if(MaxInputsCount <= MaxInputs)
 		{
-			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><label class="cl-label" data-type="text" style="margin-right:20px;">Text</label><a href="#" class="btn-add-item-checklist">Add checkbox</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
+			$(InputsWrapper).append('<div class="form-group"><div class="col-md-9"><p class="cl-label" data-type="text" style="margin-right:20px;display: inline-block;">Text</p><a href="#" class="btn-add-item-checklist">Add checkbox</a></div><div class="col-md-3"><a href="#" class="cl-remove-element">x</a></div></div>');
 			
 			returnAccess();
 			
