@@ -17,7 +17,7 @@ class AutoSendController extends \yii\web\Controller
 	public $cur_schedule;
 
 	/**
-	 * this action will trigger every minute
+	 * This action will trigger every 15 minute
 	 * @return avoid
 	 */
 	public function actionIndex()
