@@ -7,7 +7,7 @@
 #
 # Host: localhost (MySQL 5.5.34)
 # Database: adminpanel
-# Generation Time: 2015-02-27 10:24:19 +0000
+# Generation Time: 2016-02-17 07:30:57 +0000
 # ************************************************************
 
 
@@ -31,6 +31,7 @@ CREATE TABLE `activities` (
   `content` text,
   `users_id` int(11) DEFAULT NULL,
   `reminder` smallint(6) DEFAULT NULL,
+  `belong_to` int(11) DEFAULT NULL,
   `come_date` datetime DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
@@ -40,18 +41,17 @@ CREATE TABLE `activities` (
 LOCK TABLES `activities` WRITE;
 /*!40000 ALTER TABLE `activities` DISABLE KEYS */;
 
-INSERT INTO `activities` (`id`, `title`, `content`, `users_id`, `reminder`, `come_date`, `created_at`, `updated_at`)
+INSERT INTO `activities` (`id`, `title`, `content`, `users_id`, `reminder`, `belong_to`, `come_date`, `created_at`, `updated_at`)
 VALUES
-	(18,'Meeting woooo','drink up!!! Ha ha',1,1,'2015-02-28 15:04:00','2015-02-05 15:05:30','2015-02-05 15:05:30'),
-	(19,'Meeting woooo','drink up!!! Ha ha',1,1,'2015-02-28 15:04:00','2015-02-05 15:05:30','2015-02-05 15:05:30'),
-	(20,'zooo','zooooooozozoozoz',1,1,'2015-02-20 15:06:30','2015-02-05 15:06:36','2015-02-05 15:06:36'),
-	(21,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
-	(22,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
-	(23,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
-	(24,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
-	(25,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
-	(31,'Opp oh!!!','what\'s the hell?',1,0,'2015-02-11 16:38:15','2015-02-05 16:38:37','2015-02-05 16:38:37'),
-	(32,'adfs','aa',1,1,'2015-02-25 15:23:30','2015-02-12 15:24:05','2015-02-12 15:24:05');
+	(19,'Meeting woooo','drink up!!! Ha ha',1,1,13,'2015-02-28 15:04:00','2015-02-05 15:05:30','2015-02-05 15:05:30'),
+	(21,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,13,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
+	(22,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,13,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
+	(23,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,13,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
+	(24,'woa.z.z.z','<span>essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</span>',1,0,13,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-02-05 15:09:11'),
+	(25,'111123','essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',1,1,12,'2015-02-25 15:14:45','2015-02-05 15:09:11','2015-04-07 09:00:01'),
+	(31,'Opp oh!!!','what\'s the hell?????????????',1,0,1,'2015-02-11 16:38:15','2015-02-05 16:38:37','2015-04-01 15:21:51'),
+	(40,'komamska','jannxn ladfjajpw&nbsp;',1,1,13,'2015-03-15 16:10:00','2015-03-13 16:16:37','2015-03-13 16:16:37'),
+	(41,'adsfads','fsafs',1,1,13,'2015-03-25 16:47:30','2015-03-13 16:47:26','2015-03-13 16:47:26');
 
 /*!40000 ALTER TABLE `activities` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -160,11 +160,13 @@ VALUES
 	('/admin/rule/index',2,NULL,NULL,NULL,1422346008,1422346008),
 	('/admin/rule/update',2,NULL,NULL,NULL,1422346008,1422346008),
 	('/admin/rule/view',2,NULL,NULL,NULL,1422346008,1422346008),
+	('/auto-send/*',2,NULL,NULL,NULL,1425437304,1425437304),
 	('/checklists/*',2,NULL,NULL,NULL,1424835269,1424835269),
 	('/clients/*',2,NULL,NULL,NULL,1422607156,1422607156),
 	('/cschedules/*',2,NULL,NULL,NULL,1424847779,1424847779),
 	('/csettings/*',2,NULL,NULL,NULL,1424917586,1424917586),
 	('/dashboard/*',2,NULL,NULL,NULL,1422590546,1422590546),
+	('/filters/*',2,NULL,NULL,NULL,1425291513,1425291513),
 	('/gii/*',2,NULL,NULL,NULL,1422346008,1422346008),
 	('/gii/default/*',2,NULL,NULL,NULL,1422346008,1422346008),
 	('/gii/default/action',2,NULL,NULL,NULL,1422346008,1422346008),
@@ -177,6 +179,7 @@ VALUES
 	('/mschedules/*',2,NULL,NULL,NULL,1423552502,1423552502),
 	('/msettings/*',2,NULL,NULL,NULL,1424057591,1424057591),
 	('/notes/*',2,NULL,NULL,NULL,1423037804,1423037804),
+	('/search/*',2,NULL,NULL,NULL,1425876254,1425876254),
 	('/settings/*',2,NULL,NULL,NULL,1423207836,1423207836),
 	('/site/*',2,NULL,NULL,NULL,1422346011,1422346011),
 	('/site/captcha',2,NULL,NULL,NULL,1422346008,1422346008),
@@ -213,17 +216,20 @@ VALUES
 	('User','/activities/*'),
 	('Admin','/admin/*'),
 	('Admin','/admin/assignment/*'),
+	('User','/auto-send/*'),
 	('User','/checklists/*'),
 	('User','/clients/*'),
 	('User','/cschedules/*'),
 	('User','/csettings/*'),
 	('User','/dashboard/*'),
+	('User','/filters/*'),
 	('Admin','/gii/*'),
 	('User','/groups/*'),
 	('User','/messages/*'),
 	('User','/mschedules/*'),
 	('User','/msettings/*'),
 	('User','/notes/*'),
+	('User','/search/*'),
 	('User','/settings/*'),
 	('Admin','/site/*'),
 	('User','/site/logout'),
@@ -265,18 +271,17 @@ CREATE TABLE `checklist_schedules` (
   `time_periodically` varchar(255) DEFAULT NULL,
   `checklists_id` int(11) DEFAULT NULL,
   `active` smallint(6) DEFAULT NULL,
+  `at_time` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `checklist_schedules` WRITE;
 /*!40000 ALTER TABLE `checklist_schedules` DISABLE KEYS */;
 
-INSERT INTO `checklist_schedules` (`id`, `subject`, `message`, `relation`, `type`, `event`, `sendon`, `type_periodically`, `time_periodically`, `checklists_id`, `active`)
+INSERT INTO `checklist_schedules` (`id`, `subject`, `message`, `relation`, `type`, `event`, `sendon`, `type_periodically`, `time_periodically`, `checklists_id`, `active`, `at_time`)
 VALUES
-	(9,'aaaaaa','aaa',1,2,NULL,NULL,'minute','0-0',7,1),
-	(10,'schedules1 for checklist2','kekekkeke',1,1,5,1,NULL,NULL,8,1),
-	(11,'schedule2 for checklist2 websiet','adfad',2,1,5,2,NULL,NULL,8,1),
-	(12,'123132131','123131',1,1,2,2,NULL,NULL,9,1);
+	(25,'schedule CL1 F Client','Remember that ?',1,1,1,2,NULL,NULL,16,1,'02:00'),
+	(26,'adasdf','asdfas',1,2,NULL,NULL,'month','2 02:30',16,1,NULL);
 
 /*!40000 ALTER TABLE `checklist_schedules` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -304,11 +309,53 @@ LOCK TABLES `checklists` WRITE;
 
 INSERT INTO `checklists` (`id`, `title`, `subtitle`, `content`, `active`, `created_at`, `updated_at`, `users_id`)
 VALUES
-	(9,'1111','1111','\n		\n		\n				\n	<h1 class=\"cl-title editable editable-click editable-unsaved editable-bg-transition ui-sortable-handle\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">1232</h1>		\n			\n	<h2 class=\"cl-subtitle editable editable-click editable-unsaved editable-bg-transition\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">kakaka</h2><div class=\"form-group\"><label class=\"cl-label editable editable-click editable-unsaved editable-bg-transition\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">123123</label><a href=\"#\" class=\"text editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">1232132</a></div>',1,'2015-02-27 11:02:13','2015-02-27 16:49:17',1),
-	(10,'2222','2222','\n		\n				\n	<h1 class=\"cl-title editable editable-click editable-unsaved ui-sortable-handle\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">1231111</h1>		\n	',1,'2015-02-27 13:51:47','2015-02-27 16:10:39',1);
+	(16,'checklist1','checklist1','\n				\n				\n				\n				\n				\n				\n						\n					\n					\n					\n					\n					\n			<div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><h1 class=\"cl-title editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Daily Report</h1></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div><div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><fieldset><h2 class=\"cl-subtitle editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Author</h2></fieldset></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div><div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><fieldset><h2 class=\"cl-subtitle editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Date</h2></fieldset></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div><div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><p class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; display: inline-block; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">daily working</p><p href=\"#\" style=\"display: inline-block;\" class=\"text editable editable-click\" data-type=\"text\">Type here</p></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div><div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><p class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; display: inline-block; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Related issue</p><a href=\"#\" class=\"btn-add-item-checklist\">Add checkbox</a></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div><div class=\"form-group ui-sortable-handle\"><div class=\"col-md-9\"><p class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; display: inline-block; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Rating yourself</p><p href=\"#\" data-type=\"select\" data-title=\"Select Rating\" class=\"select editable editable-click\" style=\"display: inline-block;\">Select Rating</p></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div>		\n			<div class=\"form-group\"><div class=\"col-md-9\"><p class=\"cl-label editable editable-click\" data-type=\"text\" style=\"margin-right:20px;display: inline-block;\">Text</p><label class=\"switch switch-primary\"><input type=\"checkbox\" name=\"\"><span></span></label></div><div class=\"col-md-3\"><a href=\"#\" class=\"cl-remove-element\">x</a></div></div>',1,'2015-04-02 15:53:17','2015-04-03 16:29:49',1);
 
 /*!40000 ALTER TABLE `checklists` ENABLE KEYS */;
 UNLOCK TABLES;
+
+
+# Dump of table checklists_cow
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `checklists_cow`;
+
+CREATE TABLE `checklists_cow` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `checklists_id` int(11) DEFAULT NULL,
+  `content` text,
+  `belong_to` smallint(6) DEFAULT NULL,
+  `clients_or_webs_id` int(11) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL,
+  `file_name` varchar(255) DEFAULT NULL,
+  `users_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+LOCK TABLES `checklists_cow` WRITE;
+/*!40000 ALTER TABLE `checklists_cow` DISABLE KEYS */;
+
+INSERT INTO `checklists_cow` (`id`, `checklists_id`, `content`, `belong_to`, `clients_or_webs_id`, `created_at`, `updated_at`, `file_name`, `users_id`)
+VALUES
+	(27,16,'\n				\n				\n				\n						\n					\n					\n					\n			<div class=\"form-group\"><div class=\"col-md-9\"><h1 class=\"cl-title editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Daily Report</h1></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><fieldset><h2 class=\"cl-subtitle editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Author: Hoang Nguyen</h2></fieldset></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><fieldset><h2 class=\"cl-subtitle editable editable-click editable-unsaved\" data-type=\"text\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">Date: 2015/04/02</h2></fieldset></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Daily work</label><span href=\"#\" class=\"textarea editable editable-pre-wrapped editable-click editable-unsaved\" data-type=\"textarea\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">fix bugs</span></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Rating yourself</label><span href=\"#\" data-type=\"select\" data-title=\"Select Rating\" class=\"select editable editable-click editable-unsaved\" data-original-title=\"\" title=\"\" style=\"background-color: rgba(0, 0, 0, 0);\">5</span></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Related Tasks</label><a href=\"#\" class=\"btn-add-item-checklist\">Add checkbox</a><div class=\"col-md-12 item-checkbox-option\"><input type=\"checkbox\" checked=\"checked\"> <label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-left: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">adas</label><span style=\"margin-left:20px;cursor:pointer;\" class=\"rm-item-checkbox-option\">x</span></div><div class=\"col-md-12 item-checkbox-option\"><input type=\"checkbox\" checked=\"checked\"> <label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-left: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">11111</label><span style=\"margin-left:20px;cursor:pointer;\" class=\"rm-item-checkbox-option\">x</span></div></div><div class=\"col-md-3\"></div></div><div class=\"form-group\"><div class=\"col-md-9\"><label class=\"cl-label editable editable-click editable-unsaved\" data-type=\"text\" style=\"margin-right: 20px; background-color: rgba(0, 0, 0, 0);\" data-original-title=\"\" title=\"\">Finished?</label><label class=\"switch switch-primary\"><input type=\"checkbox\" name=\"\" checked=\"checked\"><span></span></label></div><div class=\"col-md-3\"></div></div>',1,12,'2015-04-03 10:23:54','2015-04-03 11:20:38','8b0f9ae163bc588ba7932ae688e501d5.pdf',1);
+
+/*!40000 ALTER TABLE `checklists_cow` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table checklists_time_sent
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `checklists_time_sent`;
+
+CREATE TABLE `checklists_time_sent` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time_sent` datetime DEFAULT NULL,
+  `checklists_cow_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 # Dump of table clients
@@ -335,14 +382,9 @@ LOCK TABLES `clients` WRITE;
 
 INSERT INTO `clients` (`id`, `company`, `firstname`, `lastname`, `email`, `birthday`, `avatar`, `active`, `created_at`, `updated_at`)
 VALUES
-	(1,'Barrows Ltd','Irwin','Yost','molly16@hotmail.com','1977-06-07','',0,'0000-00-00 00:00:00','2015-02-25 09:25:26'),
-	(9,'Conroy-Lakin','Noble','Barton','larue.pfeffer@raynoradams.info','1995-12-11','',1,'0000-00-00 00:00:00','2015-02-25 09:12:36'),
-	(12,'abc','duong','duong','duong@gmail.com','2015-07-02','dixeSmGVF57HzRps8p3ZAVuE6W0piJba.jpg',1,'0000-00-00 00:00:00','2015-02-27 15:18:06'),
-	(13,'aca','hoang','nguyen','hoangnguyen@gmail.com','2015-06-02','pG_MpakzSOGgat1ckVBdWmMQNOZ1t77L.jpg',1,'0000-00-00 00:00:00','2015-02-25 09:26:13'),
-	(14,'abc0911','eco91','9oo1','eco91@supcoka.com','2016-08-02','',1,'0000-00-00 00:00:00','2015-02-24 15:18:46'),
-	(15,'abachu','ah','cmm','cmm@gmail.com','2016-02-02','',1,'2015-02-25 09:13:14','2015-02-25 09:13:14'),
-	(16,'gietchetno','haha','keke','gcmnd@gmail.com','2016-08-02','',0,'0000-00-00 00:00:00','2015-02-25 09:46:55'),
-	(17,'chme','ala','chandan','adjola@gmail.com','2016-08-02','',1,'2015-02-26 09:59:59','2015-02-26 09:59:59');
+	(1,'Barrows Ltd','Irwin','Yost','softdevelop.kt1@gmail.com','1977-06-07','',0,'0000-00-00 00:00:00','2015-04-01 15:23:37'),
+	(9,'Conroy-Lakin','Noble','Barton','softdevelop.kt@gmail.com','1995-12-11','',1,'0000-00-00 00:00:00','2015-04-03 09:29:10'),
+	(12,'abc','duong','duong','pscdtesting@gmail.com','2015-03-09','dixeSmGVF57HzRps8p3ZAVuE6W0piJba.jpg',1,'0000-00-00 00:00:00','2015-04-02 16:43:49');
 
 /*!40000 ALTER TABLE `clients` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -366,10 +408,9 @@ LOCK TABLES `csettings` WRITE;
 
 INSERT INTO `csettings` (`id`, `checklists_id`, `belong_to`, `clients_or_webs_id`)
 VALUES
-	(6,8,2,97),
-	(12,8,2,90),
-	(15,7,1,12),
-	(16,8,1,12);
+	(28,11,1,12),
+	(29,12,1,12),
+	(30,16,1,12);
 
 /*!40000 ALTER TABLE `csettings` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -417,28 +458,12 @@ LOCK TABLES `groups_clients` WRITE;
 
 INSERT INTO `groups_clients` (`id`, `clients_id`, `groups_id`)
 VALUES
-	(2,2,1),
-	(4,4,1),
-	(5,5,1),
-	(6,6,1),
-	(7,7,1),
-	(8,8,1),
-	(185,10,1),
-	(186,10,2),
-	(187,10,3),
-	(188,3,1),
-	(250,14,1),
-	(251,14,2),
-	(330,9,1),
-	(331,9,3),
-	(332,15,1),
-	(333,15,2),
-	(338,1,1),
-	(341,13,1),
-	(349,16,2),
-	(354,17,3),
-	(377,12,1),
-	(378,12,2);
+	(480,1,1),
+	(481,1,2),
+	(484,12,1),
+	(485,12,2),
+	(486,9,1),
+	(487,9,2);
 
 /*!40000 ALTER TABLE `groups_clients` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -459,17 +484,16 @@ CREATE TABLE `message_schedules` (
   `type_periodically` varchar(255) DEFAULT NULL,
   `time_periodically` varchar(255) DEFAULT NULL,
   `messages_id` int(11) DEFAULT NULL,
+  `at_time` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `message_schedules` WRITE;
 /*!40000 ALTER TABLE `message_schedules` DISABLE KEYS */;
 
-INSERT INTO `message_schedules` (`id`, `descriptions`, `relation`, `type`, `event`, `sendon`, `type_periodically`, `time_periodically`, `messages_id`)
+INSERT INTO `message_schedules` (`id`, `descriptions`, `relation`, `type`, `event`, `sendon`, `type_periodically`, `time_periodically`, `messages_id`, `at_time`)
 VALUES
-	(1,'Happy Birthday',2,1,4,2,NULL,NULL,2),
-	(2,'Happy New Year',1,2,NULL,NULL,'month','10-9-9',2),
-	(3,'hhe',1,1,2,2,NULL,NULL,3);
+	(42,'sda1231',1,1,2,1,NULL,NULL,3,'05:30');
 
 /*!40000 ALTER TABLE `message_schedules` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -498,7 +522,7 @@ LOCK TABLES `messages` WRITE;
 INSERT INTO `messages` (`id`, `subject`, `from_name`, `from_email`, `content`, `active`, `created_at`, `updated_at`)
 VALUES
 	(2,'Happy Birthday','Duong','duong@gmail.com','congratulate!!!',1,'2015-02-09 15:00:14','2015-02-09 15:00:14'),
-	(3,'Nho do nghe!!!','nakw','nakw@gmail.com','a1231',1,'2015-02-13 10:41:47','2015-02-13 10:41:47');
+	(3,'Nho do nghe!!!','nakw','nakw@gmail.com','a1231',1,'2015-02-13 10:41:47','2015-03-04 10:34:02');
 
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -542,7 +566,16 @@ VALUES
 	('m150225_032619_create_table_checklist',1424834962),
 	('m150225_042228_checklist_schedules_table',1424838823),
 	('m150225_100059_csettings_table',1424858501),
-	('m150227_064721_add_users_id_field_to_checklists_table',1425019772);
+	('m150227_064721_add_users_id_field_to_checklists_table',1425019772),
+	('m150228_084552_add_file_name_field_to_checklists_table',1425113205),
+	('m150306_020634_add_at_time_field_in_schedule',1425607855),
+	('m150313_022756_add_belong_to_notes_table',1426214049),
+	('m150313_073504_add_belong_to_field_activities_table',1426232305),
+	('m150319_020118_create_table_checklists_time_sent',1426731668),
+	('m150319_043123_create_checklists_cow',1426739707),
+	('m150319_044114_move_file_name_in_checklist_table_to_checklists_cow',1426740234),
+	('m150401_025418_add_users_id_field_checklists_cow',1427857029),
+	('m150401_043112_remove_unnecessary_field_time_sent',1427862804);
 
 /*!40000 ALTER TABLE `migration` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -566,14 +599,13 @@ LOCK TABLES `msettings` WRITE;
 
 INSERT INTO `msettings` (`id`, `messages_id`, `belong_to`, `clients_or_webs_id`)
 VALUES
-	(14,3,1,14),
-	(70,2,1,9),
-	(71,3,1,9),
-	(72,2,1,15),
-	(77,2,1,1),
-	(84,3,1,16),
-	(91,2,1,17),
-	(116,3,1,12);
+	(172,3,1,12),
+	(173,3,1,12),
+	(208,3,1,1),
+	(209,3,1,9),
+	(210,3,1,9),
+	(211,3,1,9),
+	(212,3,1,9);
 
 /*!40000 ALTER TABLE `msettings` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -589,6 +621,7 @@ CREATE TABLE `notes` (
   `content` text,
   `users_id` int(11) DEFAULT NULL,
   `type_area` int(11) DEFAULT NULL,
+  `belong_to` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -597,19 +630,24 @@ CREATE TABLE `notes` (
 LOCK TABLES `notes` WRITE;
 /*!40000 ALTER TABLE `notes` DISABLE KEYS */;
 
-INSERT INTO `notes` (`id`, `content`, `users_id`, `type_area`, `created_at`, `updated_at`)
+INSERT INTO `notes` (`id`, `content`, `users_id`, `type_area`, `belong_to`, `created_at`, `updated_at`)
 VALUES
-	(12,'123',1,1,'2015-02-05 09:40:21','2015-02-12 16:59:48'),
-	(16,'adfsd',1,1,'2015-02-13 10:08:51','2015-02-13 10:08:51'),
-	(17,'aaaa',1,2,'2015-02-13 10:09:29','2015-02-13 10:09:29'),
-	(18,'haha<br><br>',1,0,'2015-02-13 10:14:27','2015-02-13 10:14:27'),
-	(23,'123123',1,0,'2015-02-13 10:21:20','2015-02-13 10:21:54'),
-	(24,'333',1,1,'2015-02-13 10:22:32','2015-02-13 10:22:41'),
-	(25,'bbb',1,2,'2015-02-13 10:22:53','2015-02-13 10:22:53'),
-	(26,'aaa',1,0,'2015-02-24 14:29:50','2015-02-24 14:29:50'),
-	(27,'adfasd',1,1,'2015-02-25 10:11:26','2015-02-25 10:11:26'),
-	(28,'ấdfs',1,2,'2015-02-25 10:11:49','2015-02-25 10:11:49'),
-	(29,'ahdu',1,3,'2015-02-25 10:46:56','2015-02-25 10:46:56');
+	(42,'note 111',1,0,1,'2015-03-13 09:56:46','2015-03-13 10:01:37'),
+	(48,'for website having id is 82',1,1,12,'2015-03-13 10:45:20','2015-03-13 10:45:20'),
+	(52,'for client having id is viewmore edit test1',1,0,12,'2015-03-13 10:57:58','2015-03-24 15:11:03'),
+	(53,'for client having id is 1232132131',1,0,12,'2015-03-13 10:58:05','2015-03-13 10:58:05'),
+	(54,'for client having id is 123dfafa',1,0,12,'2015-03-13 10:58:13','2015-03-13 10:58:13'),
+	(55,'dfasdf',1,3,12,'2015-03-23 17:01:17','2015-03-23 17:01:17'),
+	(56,'adfsdf',1,3,12,'2015-03-23 17:13:26','2015-03-23 17:13:26'),
+	(64,'aadsfdsfd',1,3,11,'2015-03-30 14:38:25','2015-03-30 14:38:25'),
+	(66,'ádfsf',1,0,1,'2015-04-01 14:24:57','2015-04-01 14:24:57'),
+	(67,'ádf',1,0,1,'2015-04-01 14:25:01','2015-04-01 14:25:01'),
+	(68,'adsfdsfs',1,0,1,'2015-04-01 14:25:04','2015-04-01 14:25:04'),
+	(69,'fadsafsa',1,0,1,'2015-04-01 14:25:07','2015-04-01 14:25:07'),
+	(70,'adfsdf',1,0,1,'2015-04-01 14:25:10','2015-04-01 14:25:10'),
+	(71,'cai gi the nay???',1,3,10,'2015-04-01 15:39:50','2015-04-01 15:39:50'),
+	(72,'I made this report',1,3,16,'2015-04-03 09:19:40','2015-04-03 09:19:40'),
+	(73,'hehe<br><br>',1,2,2,'2016-02-17 13:55:27','2016-02-17 13:55:27');
 
 /*!40000 ALTER TABLE `notes` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -666,7 +704,7 @@ LOCK TABLES `users` WRITE;
 
 INSERT INTO `users` (`id`, `username`, `lastname`, `firstname`, `email`, `password`, `token`, `auth_key`, `email_notification`, `avatar`, `active`, `created_at`, `updated_at`)
 VALUES
-	(1,'jaqueline.kuhn','Prohaska','Twila','mcclure.whitney@larson.bizz1','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','ohyR11oHIq95kAlVvVS_c5bFUQ06RxQh','ZOnwgc11lkD25YYYfU1ta06ruNyPF9U_',0,'ED1TiJ3HKi2m4l9duARLEGH0DmfsOrnr.jpg',0,NULL,'2015-02-11 15:53:21'),
+	(1,'jaqueline.kuhn','Prohaska','Twila','mcclure.whitney@larson.bizz1','$2y$13$H2M/usbMF5XJX0qb6imND.T3XNes1gWAnHmN0Ou2r1QE/8dQtUhvW','f4oGsEwCw8YrlH4C5M5TaF-AG2mjh8y7','PxpwGUG6yRueW0e59BKVFrIzhvB1Kc5r',0,'ED1TiJ3HKi2m4l9duARLEGH0DmfsOrnr.jpg',1,NULL,'2015-03-20 17:19:31'),
 	(2,'rex91','Cartwright','Kim','radams@yahoo.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','lHqiAMOEhPqX5tx0u-m11f6gJtPOpfi5','wg-jbe41IMJa0rOS8NL0cePSHeqt4l4y',0,NULL,0,NULL,NULL),
 	(3,'kris.sallie','Fadel','Oswaldo','joanne28@gmail.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','mExNf77mhYiIV2js9VaA5u0cTeVw8u1H','P0EK9_f32_a3pHVZYRDlSRXACOZHvaSr',0,NULL,0,NULL,NULL),
 	(4,'mercedes82','Anderson','Brendan','powlowski.enid@hotmail.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','CXOQOoQxiC13oSSMIdtmNv-pgViJxpkR','cuJ7-yvSIgii9dzf6JSeWMNlJ0a_SZSh',0,NULL,0,NULL,NULL),
@@ -675,7 +713,8 @@ VALUES
 	(7,'stamm.kariane','Connelly','Tad','lwolff@fritsch.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','E-HXnFSCfRxncgefiyBz90oDiXxMVt6X','7GZHSHm8Gao6Ynm-rqOrQIAGvXjT0YE2',0,NULL,1,NULL,NULL),
 	(8,'ethel93','Keebler','Fabian','murl94@gmail.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','UZ4Ba7aEe57mI2oA86Ie2BNyVD_yvoGJ','glkoF8UFkmtkzBoccnDyETM1FvG4c3Yt',0,NULL,1,NULL,NULL),
 	(9,'joaquin28','Kassulke','Merle','scormier@hotmail.com','$2y$13$djseGQlCMk1rHXoRs3gnPubMQ6N9Tl0iZMf3uMXyGyoRKlLtDg2gy','M9e3FfjAcqRsj--zkLTRanFJJIiibp6m','FkAfLvS_4w7BkJx-RIRtm2C8Uh8p1oly',0,NULL,0,NULL,NULL),
-	(10,'adfs','11111','adfa','jaqueline.kuhn111@gmail.com','$2y$13$oJLOO4ze4spewWhC85v/oOhpyCuKs1QdtjGrskvIX/YTEVWVyY75a','CPSNzGBzYsh8fDjlsQth8lF1dO9vI-SU','EODtzY0z6pA9RpNb141cyOwDERBFor-U',0,'ED1TiJ3HKi2m4l9duARLEGH0DmfsOrnr.jpg',1,'2015-02-05 09:30:02','2015-02-05 09:30:02');
+	(10,'adfs','11111','adfa','jaqueline.kuhn111@gmail.com','$2y$13$oJLOO4ze4spewWhC85v/oOhpyCuKs1QdtjGrskvIX/YTEVWVyY75a','CPSNzGBzYsh8fDjlsQth8lF1dO9vI-SU','EODtzY0z6pA9RpNb141cyOwDERBFor-U',0,'ED1TiJ3HKi2m4l9duARLEGH0DmfsOrnr.jpg',1,'2015-02-05 09:30:02','2015-02-05 09:30:02'),
+	(11,'adfs','11111','adfa','jaqueline.kuhn111@gmail.com','$2y$13$oJLOO4ze4spewWhC85v/oOhpyCuKs1QdtjGrskvIX/YTEVWVyY75a','CPSNzGBzYsh8fDjlsQth8lF1dO9vI-SU','EODtzY0z6pA9RpNb141cyOwDERBFor-U',0,'ED1TiJ3HKi2m4l9duARLEGH0DmfsOrnr.jpg',1,'2015-02-05 09:30:02','2015-02-05 09:30:02');
 
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -702,30 +741,20 @@ LOCK TABLES `websites` WRITE;
 
 INSERT INTO `websites` (`id`, `domain`, `online_date`, `active`, `created_at`, `updated_at`, `clients_id`)
 VALUES
-	(1,'jacobs.com','1990-10-10',1,'2015-01-29 03:32:22',NULL,9),
-	(6,'eichmann.com','1981-07-28',0,'2015-01-29 03:32:22',NULL,1),
 	(10,'hansenvon.net','1982-03-18',0,'2015-01-29 03:32:22',NULL,1),
 	(13,'veum.com','1997-07-27',0,'2015-01-29 03:32:22',NULL,1),
 	(18,'cormierbuckridge.com','1995-04-13',1,'2015-01-29 03:32:22',NULL,9),
-	(20,'mertz.com','1983-11-27',0,'2015-01-29 03:32:22',NULL,9),
+	(20,'mertz.com','1985-11-03',0,'2015-01-29 03:32:22','2015-03-20 11:28:29',12),
 	(25,'lang.info','1991-08-09',0,'2015-01-29 03:32:22',NULL,9),
 	(27,'mohr.biz','1972-10-30',0,'2015-01-29 03:32:22',NULL,1),
 	(36,'johnszieme.com','2002-01-23',1,'2015-01-29 03:32:22',NULL,9),
-	(38,'haagbayer.org','2009-12-11',0,'2015-01-29 03:32:22',NULL,1),
 	(40,'starkdoyle.com','1974-10-04',0,'2015-01-29 03:32:22',NULL,9),
-	(49,'maggio.info','1972-12-14',1,'2015-01-29 03:32:22',NULL,1),
 	(50,'roweklocko.org','2013-09-25',0,'2015-01-29 03:32:22',NULL,1),
 	(58,'klocko.biz','1991-05-29',0,'2015-01-29 03:32:22',NULL,1),
 	(60,'littel.info','2009-06-14',0,'2015-01-29 03:32:22',NULL,1),
-	(63,'blockmurphy.com','1989-12-12',0,'2015-01-29 03:32:22',NULL,1),
-	(65,'wolf.com','2001-09-25',0,'2015-01-29 03:32:22',NULL,9),
-	(69,'hudson.com','1973-07-07',1,'2015-01-29 03:32:22',NULL,1),
-	(72,'okon.com','2012-10-13',1,'2015-01-29 03:32:22',NULL,9),
-	(80,'fadel.biz','2013-09-29',1,'2015-01-29 03:32:22',NULL,1),
-	(82,'willmsebert.info','1987-05-01',0,'2015-01-29 03:32:22','2015-02-26 10:08:39',1),
-	(90,'nikolaus.org','1974-05-12',0,'2015-01-29 03:32:22','2015-02-26 11:07:26',9),
-	(96,'ryan.com','1979-04-05',0,'2015-01-29 03:32:22',NULL,1),
-	(97,'facke.com','2016-02-02',0,'2015-02-26 10:09:02','2015-02-26 10:09:02',16);
+	(63,'blockmurphy.com','1989-12-12',0,'2015-01-29 03:32:22','2015-03-31 14:20:16',1),
+	(82,'willmsebert.info','1987-05-01',0,'2015-01-29 03:32:22','2016-02-17 13:54:55',1),
+	(90,'nikolaus.org','1974-05-12',0,'2015-01-29 03:32:22','2015-04-01 14:29:45',9);
 
 /*!40000 ALTER TABLE `websites` ENABLE KEYS */;
 UNLOCK TABLES;
