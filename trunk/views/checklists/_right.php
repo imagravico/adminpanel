@@ -55,7 +55,7 @@ use app\components\widgets\CSchedulesWidget;
                 if (!$checklist->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <a href="/checklists/deletechecklist/<?= $checklist->id ?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>
+                        <button type="reset" class="btn btn-sm btn-danger del" data-redirect="/checklists" data-to="/checklists/delete/<?= $checklist->id?>" 'data-method'='post' onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</button>
                     </div>
             <?php } ?>
     </div>

@@ -10,7 +10,6 @@ use app\models\ChecklistSchedule;
 
 class AutoSendController extends \yii\web\Controller 
 {
-	
 	public $cur_setting;
 	public $event;
 	public $type_time;
@@ -83,7 +82,7 @@ class AutoSendController extends \yii\web\Controller
 	private function _send($infor)
 	{
 		$mailer = Yii::$app->mailer->compose()
-	                ->setFrom('softdevelop.kt@gmail.com')
+	                ->setFrom(Yii::$app->params['adminEmail'])
 	                ->setTo($infor['email'])
 	                ->setSubject($infor['subject'])
 	                ->setTextBody($infor['content']);
@@ -92,16 +91,5 @@ class AutoSendController extends \yii\web\Controller
 	        $mailer->attach($infor['attach']);
 
 	    $mailer->send();
-	}
-
-	public function actionSendMail()
-	{
-		Yii::$app->mailer->compose()
-		    ->setFrom('softdevelop.hn@gmail.com')
-		    ->setTo('softdevelop.kt@gmail.com')
-		    ->setSubject('Message subject')
-		    ->setTextBody('Plain text content')
-		    ->setHtmlBody('<b>HTML content</b>')
-		    ->send();
 	}
 }

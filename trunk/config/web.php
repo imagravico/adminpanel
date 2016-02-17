@@ -140,7 +140,7 @@ $config = [
             'site/contact',
             'admin/auth/login',
             'gii/*',
-            'debug/*'
+            'debug/*',
         ]
     ],
     'params' => $params,

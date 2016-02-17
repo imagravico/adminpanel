@@ -6,7 +6,7 @@ use app\components\widgets\FilterWidget;
 <!-- Forms General Header -->
 <div class="content-header">
     <div class="header-section">
-        <h1><i class="fa fa-globe" style="margin:-14px 0 0 0;"></i>Checklists</h1>
+        <h1><i class="fa fa-list" style="margin:-14px 0 0 0;"></i>Checklists</h1>
     </div>
 </div>
 <!-- END Forms General Header -->

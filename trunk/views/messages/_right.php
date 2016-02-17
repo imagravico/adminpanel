@@ -55,10 +55,8 @@ use app\components\widgets\MschedulesWidget;
                 if (!$message->isNewRecord) {
             ?>
                     <div class="col-md-6 text-right">
-                        <a href="/messages/delete/<?= $message->id?>" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure?')"><i class="fa fa-trash"></i> Delete</a>
+                        <button type="reset" class="btn btn-sm btn-danger del" data-redirect="/messages" data-to="/messages/delete/<?= $message->id?>" 'data-method'='post' ><i class="fa fa-trash" onclick="return confirm('Are you sure?')"></i> Delete</button>
                     </div>
-
-                   
             <?php } ?>
     </div>
     <?php ActiveForm::end(); ?>

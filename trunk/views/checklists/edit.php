@@ -1,6 +1,6 @@
 <div class="content-header">
     <div class="header-section">
-        <h1><i class="fa fa-envelope" style="margin:-14px 0 0 0;"></i>Edit Checklist</h1>
+        <h1><i class="fa fa-list" style="margin:-14px 0 0 0;"></i>Edit Checklist</h1>
     </div>
 </div>
 <div class="row">

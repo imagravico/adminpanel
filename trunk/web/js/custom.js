@@ -289,6 +289,13 @@ var Action = function() {
 			}
 		});
 
+		// view 
+		body.on('click', '#list-mschedules .btn-view-mschedules', function (e) {
+
+			postData($(this).data('to'), {}, $('.message-view'), function () {
+				});
+		});
+
 		body.on('submit', '#form-add-message-schedule', function (e) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
@@ -376,6 +383,13 @@ var Action = function() {
 				postData($(this).data('to'), {}, $('#list-cschedules'), function () {
 				});
 			}
+		});
+
+		// view 
+		body.on('click', '#list-cschedules .btn-view-cschedules', function (e) {
+
+			postData($(this).data('to'), {}, $('.checklist-view'), function () {
+				});
 		});
 
 		body.on('submit', form.selector, function (e) {

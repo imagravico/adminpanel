@@ -5,7 +5,7 @@ use app\components\widgets\FilterWidget;
 <!-- Forms General Header -->
 <div class="content-header">
     <div class="header-section">
-        <h1><i class="fa fa-globe" style="margin:-14px 0 0 0;"></i>Messages</h1>
+        <h1><i class="fa fa-envelope" style="margin:-14px 0 0 0;"></i>Messages</h1>
     </div>
 </div>
 <!-- END Forms General Header -->
@@ -65,7 +65,7 @@ use app\components\widgets\FilterWidget;
                                     <!-- Widget Main -->
                                     <div class="widget-main ">
                                         <a href="/messages/edit/<?= $message->id ?>" class="widget-image-container animation-fadeIn">
-                                            <span class="widget-icon <?= $class_icons[$i] ?>"><i class="fa fa-globe"></i></span>
+                                            <span class="widget-icon <?= $class_icons[$i] ?>"><i class="fa fa-envelope"></i></span>
                                         </a>
                                     </div>
                                     <!-- END Widget Main -->

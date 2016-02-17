@@ -87,6 +87,20 @@ class MschedulesController extends \yii\web\Controller
         
     }
 
+    public function actionView($id)
+    {
+        if ($id) {
+            $model = $this->findModel($id);
+            Yii::$app->response->format = 'json';
+
+            return [
+                'errors' => '',
+                'data'   => $this->renderPartial('@widget/views/mschedules/_view', [
+                        'model' => $model,
+                    ])
+            ];
+        }
+    }
 
     public function actionLoad($id)
     {

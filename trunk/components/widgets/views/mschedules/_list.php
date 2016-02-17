@@ -22,6 +22,7 @@ use app\models\MessageSchedule;
                     <?= $mschedule->descriptions ?>
                 </td>
                 <td class="text-right" style="width:140px;">
+                    <a data-toggle="modal" href="#modal-mchedules-message-view" class="btn btn-xs btn-default btn-view-mschedules" data-to="/mschedules/view/<?= $mschedule->id ?>" data-update="#message-view"><i class="fa fa-eye"></i>View</a>
                     <a data-toggle="modal" href="#modal-schedules-edit" class="btn btn-xs btn-default btn-edit-mschedule" data-to="/mschedules/edit/<?= $mschedule->id ?>" data-load="/mschedules/load/<?= $mschedule->id ?>" data-message-id="<?= $message_id ?>" data-update="#form-add-message-schedule"><i class="fa fa-pencil"></i> Edit</a>
                     <a data-toggle="modal" href="#modal-website-edit" class="btn btn-xs btn-default btn-del-mschedule" data-to="/mschedules/delete/<?= $mschedule->id ?>"><i class="fa fa-times"></i> Remove</a>
                 </td>

@@ -44,34 +44,31 @@ use yii\helpers\Html;
 	?>
 
 	<div class="form-group">
-		<?= $form->field($model, 'come_date', [
-          		'template' => "<div class='col-md-3'>{label}</div><div class='col-md-5'>{input}</div>\n{hint}\n{error}"
-        	])->textInput([
-					'class'            => 'form-control input-datepicker',
-					'id'               => 'example-datepicker',
-					'data-date-format' => 'dd/mm/yyyy',
-					'placeholder'      => 'dd/mm/yyyy'
-
-        		]); 
+        <label class="col-md-3 control-label" for="event">Select Date</label>
+        <div class="col-md-5">
+        <?php
+            echo Html::activeTextInput($model, 'come_date', [
+          		'class'            => 'form-control input-datepicker',
+                'id'               => 'example-datepicker',
+                'data-date-format' => 'dd/mm/yyyy',
+                'placeholder'      => 'dd/mm/yyyy'
+        	]); 
         ?>
-
-        <?= $form->field($model, 'come_time', [
-          		'template' => "
-          			<div class='col-md-4'>
-              			<div class='input-group bootstrap-timepicker'>
-              				{input}
-              				<span class='input-group-btn'>
-								<a href='javascript:void(0)' class='btn btn-primary'><i class='fa fa-clock-o'></i></a>
-							</span>
-						</div>
-					</div>\n{hint}\n{error}"
-        	])->textInput([
-					'class'            => 'form-control input-timepicker24',
-					'id'               => 'example-datepicker',
-
-        		]); 
-        ?>
-	</div>
+        </div>
+        <div class="col-md-4">
+            <div class='input-group bootstrap-timepicker'>
+                <?php
+                    echo Html::activeTextInput($model, 'come_time', [
+                  		'class'            => 'form-control input-timepicker24',
+                        'id'               => 'example-datepicker',	
+                    ]); 
+                ?>
+                <span class='input-group-btn'>
+                    <a href='javascript:void(0)' class='btn btn-primary'><i class='fa fa-clock-o'></i></a>
+                </span>
+            </div>
+	   </div>
+    </div>
 	<?php
 	    echo Html::activeHiddenInput($model, 'belong_to', [
 	                'value' => $belong_to
