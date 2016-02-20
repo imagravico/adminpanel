@@ -72,4 +72,7 @@ body.loading .modal-loading {
   cursor: pointer;
 }
 
-  
+/* MODAL */
+.modal-dialog {
+  z-index: 1055;
+}
