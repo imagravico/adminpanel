@@ -51,7 +51,7 @@ class CschedulesController extends \yii\web\Controller
                     ];
 	    	}
     	}
-    	
+    	return false;
     }
 
     public function actionEdit($id)
