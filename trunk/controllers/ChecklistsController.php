@@ -195,10 +195,11 @@ class ChecklistsController extends \yii\web\Controller
     {
         $session = Yii::$app->session;
         $post = Yii::$app->request->post('checklist_content');
-        echo "<pre>"; var_dump($post); echo "<br/>"; die('123');
         if ($post) {
             $session->set('checklists_content', $post);
+            echo "<pre>"; var_dump($session); echo "<br/>"; die('123');
         }
+        echo "<pre>"; var_dump('1234'); echo "<br/>"; die('123');
     }
 
     public function actionGetTemplate()
