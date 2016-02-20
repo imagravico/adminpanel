@@ -19,7 +19,6 @@ class CschedulesController extends \yii\web\Controller
     {
     	$cschedule = new ChecklistSchedule();
         $type = isset(Yii::$app->request->post('ChecklistSchedule')['type']) ? Yii::$app->request->post('ChecklistSchedule')['type'] : NULL;
-        die('123');
     	if (null !== $type  && $type == 2)
     	{
             $post                     = Yii::$app->request->post('ChecklistSchedule');
