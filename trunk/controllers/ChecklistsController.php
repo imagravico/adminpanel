@@ -195,7 +195,7 @@ class ChecklistsController extends \yii\web\Controller
     {
         $session = Yii::$app->session;
         $post = Yii::$app->request->post('checklist_content');
-
+        echo "<pre>"; var_dump($post); echo "<br/>"; die('123');
         if ($post) {
             $session->set('checklists_content', $post);
         }
